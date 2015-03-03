@@ -10,5 +10,6 @@ import Foundation
 
 struct UPacketReceptionConfirmation
 {
-    
+    var envelope:UPacketEnvelope
+    var recievedPacketLenghtAndChecksum:UInt64  // from the packet this confirmation is about
 }

@@ -8,8 +8,12 @@
 import Foundation
 
 
-// This is random adoptable lenght identifier for each node of the network
-//
+/*
+This is random identifier for each node of the network.
+Lenght is 64 - 256 bits.
+First 65535 64-bit ids are reserved for protocol.
+*/
+
 
 class UNodeID {
     

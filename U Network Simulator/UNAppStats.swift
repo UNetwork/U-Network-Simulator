@@ -6,4 +6,8 @@
 
 //
 
+/*
+This is an example of "internal" app. This kind of apps can be hooked more to the node than regular api for apps.
+*/
+
 import Foundation

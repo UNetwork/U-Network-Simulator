@@ -8,13 +8,14 @@
 import Foundation
 
 
-// Runtime - to be eliminated
+// Parameters - to be eliminated
 
 let uIDlengh:Int=2
 
+typealias CurrentRouter = URouter_BruteForceRouting
 
 
-// Space constants
+
 
 
 

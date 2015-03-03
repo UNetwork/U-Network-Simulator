@@ -25,7 +25,7 @@ The Longitude dimentions is wraped, latitude and altitude is not.
 The beggining of coordinate system is:
 latitude = 0 for 0°0'00''
 longitude = 0 for 0°0'0''
-altitude at sea level is 1048576 (2^20)
+altitude at sea level is 100 000
 
 */
 
@@ -103,14 +103,7 @@ struct UNodeAddress
         let highAltBits = self.high64Bits >> 48
         let result = lowerAltBits | (highAltBits << 16)
         return (result)
-  
     }
-    
-    
-    
-    
-    
-    
 }
 
 

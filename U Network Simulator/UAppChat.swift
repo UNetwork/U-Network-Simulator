@@ -6,4 +6,20 @@
 
 //
 
+/*
+This is an example of app for U Network
+*/
+
 import Foundation
+
+class UAppChat: UAppProtocol {
+    
+    var appID:UInt64 = 0
+    func start(){}
+    func getPacket(from:UNodeID, data:[UInt64]){}
+    
+    
+    
+    
+    
+}

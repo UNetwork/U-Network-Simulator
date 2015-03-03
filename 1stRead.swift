@@ -37,7 +37,6 @@ Extending network range of Home Stations is possible due to U routers. They just
 
 Third family are not devices at all. This is the software you can install on already owned devices to gain access to the U network and your U Home Station.
 
-to be continued…
-
+Read code from UNode.swift.
 */
 

@@ -11,26 +11,26 @@ import Foundation
 struct USimulationRealLocation
 {
     
- private    var privateLatitude:UInt64
-private    var privateLongitude:UInt64
-private     var privateAltitude:UInt64
+    private    var privateLatitude:UInt64
+    private    var privateLongitude:UInt64
+    private    var privateAltitude:UInt64
     
     init(inputLatitude:UInt64, inputLongitude:UInt64, inputAltitude:UInt64)
     {
         
         
-            privateLatitude=inputLatitude
-            privateLongitude=inputLongitude
-            privateAltitude=inputAltitude
-            
-            
-            log(0, "A URealLocation has been created with three UInt64s as argument. The data is:  \(self.privateLatitude) \(self.privateLongitude) \(self.privateAltitude)")
+        privateLatitude=inputLatitude
+        privateLongitude=inputLongitude
+        privateAltitude=inputAltitude
+        
+        
+        log(0, "A URealLocation has been created with three UInt64s as argument. The data is:  \(self.privateLatitude) \(self.privateLongitude) \(self.privateAltitude)")
         
         if(!(inputLatitude < 1 << 48 && inputLongitude < 1 << 48 && inputAltitude < 1 << 32))
-
+            
         {
             log(7,"URealLocation tree UInt64s init data correction occured")
-
+            
             if(inputLatitude >= 1 << 48)
             {
                 privateLatitude=UInt64((1 << 48) - 1)
@@ -44,7 +44,7 @@ private     var privateAltitude:UInt64
                 privateAltitude=UInt64(( 1 << 32) - 1)
             }
         }
-
+        
     }
     
     mutating func moveBy(moveLatitude:Int64, moveLongitude: Int64, moveAltitude: Int64)
@@ -65,7 +65,7 @@ private     var privateAltitude:UInt64
             self.privateLatitude = self.privateLatitude + UInt64(moveLatitude)
             if(self.privateLatitude >= 1 >> 48)
             {
-            self.privateLatitude = (1 << 48) - 1
+                self.privateLatitude = (1 << 48) - 1
             }
         }
         
@@ -87,7 +87,7 @@ private     var privateAltitude:UInt64
             {
                 self.privateLongitude = self.privateLongitude % (1 << 48)
             }
-
+            
         }
         
         
