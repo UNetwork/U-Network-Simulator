@@ -7,10 +7,105 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE22CDC71AA246F200082D01 /* UPacketAddressForIdStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketAddressForIdStore.swift */; };
+		FE22CDC81AA246F200082D01 /* UPacketAddressForIdStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketAddressForIdStore.swift */; };
+		FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
+		FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E40E1A8A031200A459E6 /* UNodeID.swift */; };
+		FE45B7E21A93492200B82E5E /* Helper Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */; };
+		FE45B7E31A93492200B82E5E /* USimulationRealLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */; };
+		FE45B7E41A93492200B82E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */; };
+		FE45B7E51A934A0200B82E5E /* U_Network_SimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4001A89E05B00A459E6 /* U_Network_SimulatorTests.swift */; };
+		FE45B7E71A939A5600B82E5E /* U Coordinate System Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */; };
+		FE4D6A861AA59083008B3B4E /* UAppChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A851AA59083008B3B4E /* UAppChat.swift */; };
+		FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A851AA59083008B3B4E /* UAppChat.swift */; };
+		FE4D6A8A1AA591D6008B3B4E /* UNAppStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A891AA591D6008B3B4E /* UNAppStats.swift */; };
+		FE4D6A8B1AA591D6008B3B4E /* UNAppStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A891AA591D6008B3B4E /* UNAppStats.swift */; };
+		FE4D6A8D1AA59223008B3B4E /* UAppProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */; };
+		FE4D6A8E1AA59223008B3B4E /* UAppProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */; };
+		FE5BC8101A971D5C0040F7BD /* USimulationRealLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */; };
+		FE5BC8121A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */; };
+		FE5BC8131A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */; };
+		FE5BC8151A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
+		FE5BC8161A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
+		FE6E57B51A94B5A200F8F0D5 /* U Coordinate System Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */; };
+		FE6E57BA1A94B6A100F8F0D5 /* U Coordinate System Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */; };
+		FE6E57BB1A94B6A100F8F0D5 /* U Coordinate System Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */; };
+		FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */; };
+		FEA007261A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */; };
+		FEA007271A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */; };
+		FEA007291A9D97F20047E3B5 /* MediumProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */; };
+		FEA0072A1A9D97F20047E3B5 /* MediumProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */; };
+		FEA0072C1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */; };
+		FEA0072D1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */; };
+		FEA80C361A95EDE90061CEA3 /* UNodeAddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA80C351A95EDE90061CEA3 /* UNodeAddressTests.swift */; };
+		FEA80C381A96673D0061CEA3 /* UNodeIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA80C371A96673D0061CEA3 /* UNodeIDTests.swift */; };
+		FEA80C3A1A966C5C0061CEA3 /* UNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA80C391A966C5C0061CEA3 /* UNode.swift */; };
+		FEA80C3B1A966C5C0061CEA3 /* UNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA80C391A966C5C0061CEA3 /* UNode.swift */; };
+		FEACA9A91AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEACA9A81AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift */; };
+		FEACA9AA1AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEACA9A81AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift */; };
+		FEACA9B21AA06E24001524FB /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEACA9B11AA06E24001524FB /* Simulator.swift */; };
+		FEACA9B31AA06E24001524FB /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEACA9B11AA06E24001524FB /* Simulator.swift */; };
 		FEB5E3F01A89E05B00A459E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */; };
 		FEB5E3F21A89E05B00A459E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB5E3F11A89E05B00A459E6 /* Images.xcassets */; };
 		FEB5E3F51A89E05B00A459E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */; };
-		FEB5E4011A89E05B00A459E6 /* U_Network_SimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4001A89E05B00A459E6 /* U_Network_SimulatorTests.swift */; };
+		FEB5E40F1A8A031200A459E6 /* UNodeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E40E1A8A031200A459E6 /* UNodeID.swift */; };
+		FEB5E4121A8A15B000A459E6 /* Helper Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */; };
+		FEB5E4151A8A987C00A459E6 /* USimulationRealLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */; };
+		FEB5E4181A8A98F900A459E6 /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
+		FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
+		FEE8995E1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
+		FEE899601A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */; };
+		FEE899611A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */; };
+		FEE899631A9879100057ACD7 /* UPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899621A9879100057ACD7 /* UPacket.swift */; };
+		FEE899641A9879100057ACD7 /* UPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899621A9879100057ACD7 /* UPacket.swift */; };
+		FEE899661A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */; };
+		FEE899671A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */; };
+		FEE8996C1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */; };
+		FEE8996D1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */; };
+		FEE8996F1A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */; };
+		FEE899701A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */; };
+		FEE899721A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */; };
+		FEE899731A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */; };
+		FEE899761A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */; };
+		FEE899771A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */; };
+		FEE8997A1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */; };
+		FEE8997B1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */; };
+		FEE8997D1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */; };
+		FEE8997E1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */; };
+		FEE899811A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899801A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift */; };
+		FEE899821A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899801A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift */; };
+		FEE899841A99F1F90057ACD7 /* UNode Perment Memory Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899831A99F1F90057ACD7 /* UNode Perment Memory Structures.swift */; };
+		FEE899851A99F1F90057ACD7 /* UNode Perment Memory Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899831A99F1F90057ACD7 /* UNode Perment Memory Structures.swift */; };
+		FEED381B1AA2497800BB3C26 /* UPacketIdForNameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380D1AA2497800BB3C26 /* UPacketIdForNameStore.swift */; };
+		FEED381C1AA2497800BB3C26 /* UPacketIdForNameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380D1AA2497800BB3C26 /* UPacketIdForNameStore.swift */; };
+		FEED381D1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift */; };
+		FEED381E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift */; };
+		FEED381F1AA2497800BB3C26 /* UPacketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380F1AA2497800BB3C26 /* UPacketData.swift */; };
+		FEED38201AA2497800BB3C26 /* UPacketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED380F1AA2497800BB3C26 /* UPacketData.swift */; };
+		FEED38211AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38101AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift */; };
+		FEED38221AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38101AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift */; };
+		FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38111AA2497800BB3C26 /* UPacketSearchAddressForID.swift */; };
+		FEED38241AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38111AA2497800BB3C26 /* UPacketSearchAddressForID.swift */; };
+		FEED38251AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38121AA2497800BB3C26 /* UPacketReplyForIdSearch.swift */; };
+		FEED38261AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38121AA2497800BB3C26 /* UPacketReplyForIdSearch.swift */; };
+		FEED38271AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38131AA2497800BB3C26 /* UPacketSearchIdForName.swift */; };
+		FEED38281AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38131AA2497800BB3C26 /* UPacketSearchIdForName.swift */; };
+		FEED38291AA2497800BB3C26 /* UPacketPong.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38141AA2497800BB3C26 /* UPacketPong.swift */; };
+		FEED382A1AA2497800BB3C26 /* UPacketPong.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38141AA2497800BB3C26 /* UPacketPong.swift */; };
+		FEED382B1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38151AA2497800BB3C26 /* UPacketReceptionConfirmation.swift */; };
+		FEED382C1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38151AA2497800BB3C26 /* UPacketReceptionConfirmation.swift */; };
+		FEED382D1AA2497800BB3C26 /* UPacketPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38161AA2497800BB3C26 /* UPacketPing.swift */; };
+		FEED382E1AA2497800BB3C26 /* UPacketPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38161AA2497800BB3C26 /* UPacketPing.swift */; };
+		FEED382F1AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38171AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift */; };
+		FEED38301AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38171AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift */; };
+		FEED38311AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38181AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift */; };
+		FEED38321AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38181AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift */; };
+		FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38191AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift */; };
+		FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38191AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift */; };
+		FEED38351AA2497800BB3C26 /* Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED381A1AA2497800BB3C26 /* Global Objects.swift */; };
+		FEED38361AA2497800BB3C26 /* Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED381A1AA2497800BB3C26 /* Global Objects.swift */; };
+		FEED38391AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */; };
+		FEED383A1AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +119,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE22CDC61AA246F200082D01 /* UPacketAddressForIdStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketAddressForIdStore.swift; path = "U Network Simulator/UPacketAddressForIdStore.swift"; sourceTree = "<group>"; };
+		FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Structures.swift"; path = "U Network Simulator/U Coordinate System Structures.swift"; sourceTree = SOURCE_ROOT; };
+		FE4D6A841AA58922008B3B4E /* 1stRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1stRead.swift; sourceTree = "<group>"; };
+		FE4D6A851AA59083008B3B4E /* UAppChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UAppChat.swift; path = "U Network Simulator/UAppChat.swift"; sourceTree = "<group>"; };
+		FE4D6A891AA591D6008B3B4E /* UNAppStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppStats.swift; path = "U Network Simulator/UNAppStats.swift"; sourceTree = "<group>"; };
+		FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UAppProtocol.swift; path = "U Network Simulator/UAppProtocol.swift"; sourceTree = "<group>"; };
+		FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USimulationRealLocationTests.swift; sourceTree = "<group>"; };
+		FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAPIForApps.swift; path = "U Network Simulator/UNodeAPIForApps.swift"; sourceTree = "<group>"; };
+		FE5BC8141A9739650040F7BD /* Constants Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Constants Definitions.swift"; path = "U Network Simulator/Constants Definitions.swift"; sourceTree = "<group>"; };
+		FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Functions.swift"; path = "U Network Simulator/U Coordinate System Functions.swift"; sourceTree = "<group>"; };
+		FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U_Coordinate_SystemTests.swift; sourceTree = "<group>"; };
+		FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorForWireless.swift; sourceTree = "<group>"; };
+		FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumProtocol.swift; sourceTree = "<group>"; };
+		FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorForInternet.swift; sourceTree = "<group>"; };
+		FEA80C351A95EDE90061CEA3 /* UNodeAddressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNodeAddressTests.swift; sourceTree = "<group>"; };
+		FEA80C371A96673D0061CEA3 /* UNodeIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNodeIDTests.swift; sourceTree = "<group>"; };
+		FEA80C391A966C5C0061CEA3 /* UNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNode.swift; path = "U Network Simulator/UNode.swift"; sourceTree = "<group>"; };
+		FEACA9A81AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorArbitraryGroup.swift; sourceTree = "<group>"; };
+		FEACA9B11AA06E24001524FB /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
 		FEB5E3EA1A89E05B00A459E6 /* U Network Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "U Network Simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB5E3EE1A89E05B00A459E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +146,37 @@
 		FEB5E3FA1A89E05B00A459E6 /* U Network SimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "U Network SimulatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB5E3FF1A89E05B00A459E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEB5E4001A89E05B00A459E6 /* U_Network_SimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = U_Network_SimulatorTests.swift; sourceTree = "<group>"; };
+		FEB5E40E1A8A031200A459E6 /* UNodeID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeID.swift; path = "U Network Simulator/UNodeID.swift"; sourceTree = SOURCE_ROOT; };
+		FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Functions.swift"; path = "U Network Simulator/Helper Functions.swift"; sourceTree = SOURCE_ROOT; };
+		FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = USimulationRealLocation.swift; path = "U Network Simulator/USimulationRealLocation.swift"; sourceTree = SOURCE_ROOT; };
+		FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAddress.swift; path = "U Network Simulator/UNodeAddress.swift"; sourceTree = SOURCE_ROOT; };
+		FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketHeader.swift; path = "U Network Simulator/UPacketHeader.swift"; sourceTree = "<group>"; };
+		FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryBroadcast.swift; path = "U Network Simulator/UPacketDiscoveryBroadcast.swift"; sourceTree = "<group>"; };
+		FEE899621A9879100057ACD7 /* UPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacket.swift; path = "U Network Simulator/UPacket.swift"; sourceTree = "<group>"; };
+		FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryReply.swift; path = "U Network Simulator/UPacketDiscoveryReply.swift"; sourceTree = "<group>"; };
+		FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalStatistics.swift; sourceTree = "<group>"; };
+		FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Traffic Generator.swift"; sourceTree = "<group>"; };
+		FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationWireless.swift; path = "U Network Simulator/UNetworkInterface_SimulationWireless.swift"; sourceTree = "<group>"; };
+		FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouter_BruteForce.swift; path = "U Network Simulator/URouter_BruteForce.swift"; sourceTree = "<group>"; };
+		FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Simulation Constants and Global Objects.swift"; sourceTree = "<group>"; };
+		FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URouting Protocol.swift"; path = "U Network Simulator/URouting Protocol.swift"; sourceTree = "<group>"; };
+		FEE899801A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterfaceProtocol.swift; path = "U Network Simulator/UNetworkInterfaceProtocol.swift"; sourceTree = "<group>"; };
+		FEE899831A99F1F90057ACD7 /* UNode Perment Memory Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UNode Perment Memory Structures.swift"; path = "U Network Simulator/UNode Perment Memory Structures.swift"; sourceTree = "<group>"; };
+		FEED380D1AA2497800BB3C26 /* UPacketIdForNameStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketIdForNameStore.swift; path = "U Network Simulator/UPacketIdForNameStore.swift"; sourceTree = "<group>"; };
+		FEED380E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDataDeliveryConfirmation.swift; path = "U Network Simulator/UPacketDataDeliveryConfirmation.swift"; sourceTree = "<group>"; };
+		FEED380F1AA2497800BB3C26 /* UPacketData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketData.swift; path = "U Network Simulator/UPacketData.swift"; sourceTree = "<group>"; };
+		FEED38101AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReplyForAddressSearch.swift; path = "U Network Simulator/UPacketReplyForAddressSearch.swift"; sourceTree = "<group>"; };
+		FEED38111AA2497800BB3C26 /* UPacketSearchAddressForID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketSearchAddressForID.swift; path = "U Network Simulator/UPacketSearchAddressForID.swift"; sourceTree = "<group>"; };
+		FEED38121AA2497800BB3C26 /* UPacketReplyForIdSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReplyForIdSearch.swift; path = "U Network Simulator/UPacketReplyForIdSearch.swift"; sourceTree = "<group>"; };
+		FEED38131AA2497800BB3C26 /* UPacketSearchIdForName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketSearchIdForName.swift; path = "U Network Simulator/UPacketSearchIdForName.swift"; sourceTree = "<group>"; };
+		FEED38141AA2497800BB3C26 /* UPacketPong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketPong.swift; path = "U Network Simulator/UPacketPong.swift"; sourceTree = "<group>"; };
+		FEED38151AA2497800BB3C26 /* UPacketReceptionConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReceptionConfirmation.swift; path = "U Network Simulator/UPacketReceptionConfirmation.swift"; sourceTree = "<group>"; };
+		FEED38161AA2497800BB3C26 /* UPacketPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketPing.swift; path = "U Network Simulator/UPacketPing.swift"; sourceTree = "<group>"; };
+		FEED38171AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationBridge.swift; path = "U Network Simulator/UNetworkInterface_SimulationBridge.swift"; sourceTree = "<group>"; };
+		FEED38181AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationEthernet.swift; path = "U Network Simulator/UNetworkInterface_SimulationEthernet.swift"; sourceTree = "<group>"; };
+		FEED38191AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationInternet.swift; path = "U Network Simulator/UNetworkInterface_SimulationInternet.swift"; sourceTree = "<group>"; };
+		FEED381A1AA2497800BB3C26 /* Global Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Global Objects.swift"; path = "U Network Simulator/Global Objects.swift"; sourceTree = "<group>"; };
+		FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReplyForNetworkLookupRequest.swift; path = "U Network Simulator/UPacketReplyForNetworkLookupRequest.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +197,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE45B7DC1A9342E400B82E5E /* U Node APIs */ = {
+			isa = PBXGroup;
+			children = (
+				FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */,
+				FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */,
+			);
+			name = "U Node APIs";
+			sourceTree = "<group>";
+		};
+		FE45B7DD1A9343A700B82E5E /* U Core Objects */ = {
+			isa = PBXGroup;
+			children = (
+				FEA80C391A966C5C0061CEA3 /* UNode.swift */,
+				FEE899831A99F1F90057ACD7 /* UNode Perment Memory Structures.swift */,
+				FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */,
+				FEB5E40E1A8A031200A459E6 /* UNodeID.swift */,
+				FEE8997F1A99E50F0057ACD7 /* UPackets */,
+			);
+			name = "U Core Objects";
+			sourceTree = "<group>";
+		};
+		FE45B7DE1A93445C00B82E5E /* Simulation Objects */ = {
+			isa = PBXGroup;
+			children = (
+				FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */,
+				FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */,
+				FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */,
+				FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */,
+				FEACA9A81AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift */,
+				FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */,
+				FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */,
+				FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */,
+			);
+			name = "Simulation Objects";
+			sourceTree = "<group>";
+		};
+		FE45B7DF1A93448C00B82E5E /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */,
+				FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */,
+				FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		FE4D6A881AA590FC008B3B4E /* U Node Apps */ = {
+			isa = PBXGroup;
+			children = (
+				FE4D6A891AA591D6008B3B4E /* UNAppStats.swift */,
+			);
+			name = "U Node Apps";
+			sourceTree = "<group>";
+		};
 		FEB5E3E11A89E05B00A459E6 = {
 			isa = PBXGroup;
 			children = (
+				FE4D6A841AA58922008B3B4E /* 1stRead.swift */,
+				FE5BC8141A9739650040F7BD /* Constants Definitions.swift */,
+				FEED381A1AA2497800BB3C26 /* Global Objects.swift */,
+				FEE899781A98D1C60057ACD7 /* U Routing */,
+				FE45B7DD1A9343A700B82E5E /* U Core Objects */,
+				FEE899741A98D0E10057ACD7 /* U Network Interfaces */,
+				FE45B7DC1A9342E400B82E5E /* U Node APIs */,
+				FE4D6A881AA590FC008B3B4E /* U Node Apps */,
+				FEED38371AA24CDF00BB3C26 /* U User Apps */,
 				FEB5E3EC1A89E05B00A459E6 /* U Network Simulator */,
+				FE45B7DF1A93448C00B82E5E /* Misc */,
 				FEB5E3FD1A89E05B00A459E6 /* U Network SimulatorTests */,
 				FEB5E3EB1A89E05B00A459E6 /* Products */,
 			);
@@ -73,6 +282,8 @@
 		FEB5E3EC1A89E05B00A459E6 /* U Network Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				FEACA9B11AA06E24001524FB /* Simulator.swift */,
+				FE45B7DE1A93445C00B82E5E /* Simulation Objects */,
 				FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */,
 				FEB5E3F11A89E05B00A459E6 /* Images.xcassets */,
 				FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */,
@@ -92,7 +303,11 @@
 		FEB5E3FD1A89E05B00A459E6 /* U Network SimulatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				FEA80C371A96673D0061CEA3 /* UNodeIDTests.swift */,
+				FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */,
+				FEA80C351A95EDE90061CEA3 /* UNodeAddressTests.swift */,
 				FEB5E4001A89E05B00A459E6 /* U_Network_SimulatorTests.swift */,
+				FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */,
 				FEB5E3FE1A89E05B00A459E6 /* Supporting Files */,
 			);
 			path = "U Network SimulatorTests";
@@ -104,6 +319,58 @@
 				FEB5E3FF1A89E05B00A459E6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FEE899741A98D0E10057ACD7 /* U Network Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				FEE899801A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift */,
+				FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */,
+				FEED38191AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift */,
+				FEED38181AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift */,
+				FEED38171AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift */,
+			);
+			name = "U Network Interfaces";
+			sourceTree = "<group>";
+		};
+		FEE899781A98D1C60057ACD7 /* U Routing */ = {
+			isa = PBXGroup;
+			children = (
+				FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */,
+				FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */,
+			);
+			name = "U Routing";
+			sourceTree = "<group>";
+		};
+		FEE8997F1A99E50F0057ACD7 /* UPackets */ = {
+			isa = PBXGroup;
+			children = (
+				FEE899621A9879100057ACD7 /* UPacket.swift */,
+				FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */,
+				FEED38151AA2497800BB3C26 /* UPacketReceptionConfirmation.swift */,
+				FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */,
+				FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */,
+				FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */,
+				FEED38131AA2497800BB3C26 /* UPacketSearchIdForName.swift */,
+				FEED38121AA2497800BB3C26 /* UPacketReplyForIdSearch.swift */,
+				FEED380D1AA2497800BB3C26 /* UPacketIdForNameStore.swift */,
+				FEED38111AA2497800BB3C26 /* UPacketSearchAddressForID.swift */,
+				FEED38101AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift */,
+				FE22CDC61AA246F200082D01 /* UPacketAddressForIdStore.swift */,
+				FEED38161AA2497800BB3C26 /* UPacketPing.swift */,
+				FEED38141AA2497800BB3C26 /* UPacketPong.swift */,
+				FEED380F1AA2497800BB3C26 /* UPacketData.swift */,
+				FEED380E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift */,
+			);
+			name = UPackets;
+			sourceTree = "<group>";
+		};
+		FEED38371AA24CDF00BB3C26 /* U User Apps */ = {
+			isa = PBXGroup;
+			children = (
+				FE4D6A851AA59083008B3B4E /* UAppChat.swift */,
+			);
+			name = "U User Apps";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +472,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEACA9A91AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */,
+				FEE899631A9879100057ACD7 /* UPacket.swift in Sources */,
 				FEB5E3F01A89E05B00A459E6 /* AppDelegate.swift in Sources */,
+				FEED381D1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */,
+				FEA80C3A1A966C5C0061CEA3 /* UNode.swift in Sources */,
+				FEE899721A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */,
+				FEED38311AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift in Sources */,
+				FEE899811A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift in Sources */,
+				FEA0072C1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */,
+				FE4D6A8D1AA59223008B3B4E /* UAppProtocol.swift in Sources */,
+				FEED382F1AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
+				FEED381F1AA2497800BB3C26 /* UPacketData.swift in Sources */,
+				FEE899601A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */,
+				FEED382B1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */,
+				FEED38391AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
+				FEED38251AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */,
+				FE4D6A861AA59083008B3B4E /* UAppChat.swift in Sources */,
+				FEED381B1AA2497800BB3C26 /* UPacketIdForNameStore.swift in Sources */,
+				FE6E57B51A94B5A200F8F0D5 /* U Coordinate System Functions.swift in Sources */,
+				FEED38351AA2497800BB3C26 /* Global Objects.swift in Sources */,
+				FEED38211AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */,
+				FEED38271AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
+				FE45B7E71A939A5600B82E5E /* U Coordinate System Structures.swift in Sources */,
+				FEE899761A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */,
+				FEED382D1AA2497800BB3C26 /* UPacketPing.swift in Sources */,
+				FE4D6A8A1AA591D6008B3B4E /* UNAppStats.swift in Sources */,
+				FEB5E40F1A8A031200A459E6 /* UNodeID.swift in Sources */,
+				FEE8997D1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */,
+				FEE8996F1A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */,
+				FEA007261A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */,
+				FEB5E4121A8A15B000A459E6 /* Helper Functions.swift in Sources */,
+				FEE899841A99F1F90057ACD7 /* UNode Perment Memory Structures.swift in Sources */,
+				FE5BC8121A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */,
+				FEB5E4151A8A987C00A459E6 /* USimulationRealLocation.swift in Sources */,
+				FEA007291A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
+				FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */,
+				FEE8997A1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
+				FEE899661A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */,
+				FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
+				FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
+				FE22CDC71AA246F200082D01 /* UPacketAddressForIdStore.swift in Sources */,
+				FEACA9B21AA06E24001524FB /* Simulator.swift in Sources */,
+				FEB5E4181A8A98F900A459E6 /* UNodeAddress.swift in Sources */,
+				FEE8996C1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */,
+				FE5BC8151A9739650040F7BD /* Constants Definitions.swift in Sources */,
+				FEED38291AA2497800BB3C26 /* UPacketPong.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +525,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEB5E4011A89E05B00A459E6 /* U_Network_SimulatorTests.swift in Sources */,
+				FEE899771A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */,
+				FEE8997B1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
+				FE6E57BA1A94B6A100F8F0D5 /* U Coordinate System Structures.swift in Sources */,
+				FE22CDC81AA246F200082D01 /* UPacketAddressForIdStore.swift in Sources */,
+				FEA80C3B1A966C5C0061CEA3 /* UNode.swift in Sources */,
+				FE4D6A8E1AA59223008B3B4E /* UAppProtocol.swift in Sources */,
+				FEE899611A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */,
+				FE6E57BB1A94B6A100F8F0D5 /* U Coordinate System Functions.swift in Sources */,
+				FEE899851A99F1F90057ACD7 /* UNode Perment Memory Structures.swift in Sources */,
+				FEED38321AA2497800BB3C26 /* UNetworkInterface_SimulationEthernet.swift in Sources */,
+				FE4D6A8B1AA591D6008B3B4E /* UNAppStats.swift in Sources */,
+				FEE899641A9879100057ACD7 /* UPacket.swift in Sources */,
+				FEA007271A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */,
+				FE45B7E51A934A0200B82E5E /* U_Network_SimulatorTests.swift in Sources */,
+				FE5BC8161A9739650040F7BD /* Constants Definitions.swift in Sources */,
+				FEE899731A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */,
+				FEED382E1AA2497800BB3C26 /* UPacketPing.swift in Sources */,
+				FEA80C381A96673D0061CEA3 /* UNodeIDTests.swift in Sources */,
+				FEACA9B31AA06E24001524FB /* Simulator.swift in Sources */,
+				FEA0072A1A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
+				FEED382A1AA2497800BB3C26 /* UPacketPong.swift in Sources */,
+				FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */,
+				FE5BC8101A971D5C0040F7BD /* USimulationRealLocationTests.swift in Sources */,
+				FEACA9AA1AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */,
+				FEED38261AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */,
+				FEED382C1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */,
+				FEE899671A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */,
+				FEED38241AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
+				FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */,
+				FE5BC8131A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */,
+				FEE8996D1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */,
+				FEED38221AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */,
+				FEED381E1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */,
+				FEE899701A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */,
+				FEED38201AA2497800BB3C26 /* UPacketData.swift in Sources */,
+				FEED383A1AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
+				FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
+				FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */,
+				FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */,
+				FEA0072D1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */,
+				FEA80C361A95EDE90061CEA3 /* UNodeAddressTests.swift in Sources */,
+				FEED381C1AA2497800BB3C26 /* UPacketIdForNameStore.swift in Sources */,
+				FEE8995E1A9742240057ACD7 /* UPacketHeader.swift in Sources */,
+				FE45B7E21A93492200B82E5E /* Helper Functions.swift in Sources */,
+				FEE8997E1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */,
+				FEE899821A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift in Sources */,
+				FE45B7E31A93492200B82E5E /* USimulationRealLocation.swift in Sources */,
+				FEED38361AA2497800BB3C26 /* Global Objects.swift in Sources */,
+				FEED38281AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
+				FEED38301AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
+				FE45B7E41A93492200B82E5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +755,7 @@
 				FEB5E4061A89E05B00A459E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FEB5E4071A89E05B00A459E6 /* Build configuration list for PBXNativeTarget "U Network SimulatorTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +764,7 @@
 				FEB5E4091A89E05B00A459E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
