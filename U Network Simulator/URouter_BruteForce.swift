@@ -12,6 +12,11 @@ class URouter_BruteForceRouting:URouterProtocol {
     var node:UNode
     var packetStack=[BruteForcePacketStackRecord]()
 
+    func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
     func   getPacketToRouteFromNode(packet:UPacket)
     {
      // get peer list from node

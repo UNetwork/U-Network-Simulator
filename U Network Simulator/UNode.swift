@@ -22,7 +22,7 @@ class UNode {
     
     var interfaces=[UNetworkInterfaceProtocol]()    // Array of network interfaces
     var router:URouterProtocol!                     // Handler for router
-    var peers = [UPeerDataRecord]()                 // Currently available connected peers
+    var peers = [UPeerDataRecord]()                 // Currently available connected nodes
     var knownAddresses = [UMemoryIdAddressRecord]() // Memory of search for address service
     var knownNames  = [UMemoryNameIdRecord]()       // Memory of search for name service
     
@@ -38,24 +38,135 @@ class UNode {
  
     func getPacketFromInterface(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        
-        // decode type of packet
-        
-        
-        
-        // for me?
-        
-        
-        // broadcast?
-        self.router.getPacketToRouteFromNode(packet)
+        if(packet.header.transmitedToUID.isBroadcast())
+        {
+            processBroadcastPacket(interface, packet: packet)
+        }
+        else
+        {
+            processRegularPacket(interface, packet: packet)
+        }
     }
     
 
     
+    func processBroadcastPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        switch packet.packetCargo
+        {
+        case .DiscoveryBroadcast(let _): processDiscoveryBroadcast(interface, packet: packet)
+        case .SearchIdForName(let _): processSearchIdForName(interface, packet: packet)
+        case .StoreIdForName(let _): processStoreIdForName(interface, packet: packet)
+        case .SearchAddressForID(let _): processSearchAddressForID(interface, packet: packet)
+        case .StoreAddressForId(let _): processStoreAddressForId(interface, packet:packet)
+        default: errorInPacketProcessing("Wrong broadcast packet type", packet: packet)
+        }
+    }
+    
+    func processRegularPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        switch packet.packetCargo
+        {
+        case .ReceptionConfirmation(let receptionConfirmationCargo) where receptionConfirmationCargo.envelope.destinationUID.isEqual(self.id): router.getReply(interface, packet: packet) // this is router staff
+        case .DiscoveryBroadcastReplay(let discoveryBroadcastCargo) where discoveryBroadcastCargo.envelope.destinationUID.isEqual(self.id): processDiscoveryBroadcastReplay(interface, packet: packet)
+        case .ReplyForNetworkLookupRequest(let replayForNLRCargo) where replayForNLRCargo.envelope.destinationUID.isEqual(self.id): router.getReply(interface, packet: packet) // router staff
+        case .ReplyForIdSearch(let replayForIdSearchCargo) where replayForIdSearchCargo.envelope.destinationUID.isEqual(self.id): processIdSearchResults(packet)
+        case .ReplyForAddressSearch(let replayForAddressSearchCargo) where replayForAddressSearchCargo.envelope.destinationUID.isEqual(self.id): processAddressSearchResults(packet)
+        case .Ping(let pingCargo) where pingCargo.envelope.destinationUID.isEqual(self.id): processPing(packet)
+        case .Pong(let pongCargo) where pongCargo.envelope.destinationUID.isEqual(self.id): processPong(packet)
+        case .Data(let dataCargo) where dataCargo.envelope.destinationUID.isEqual(self.id): processData(packet)
+        case .DataDeliveryConfirmation(let dataDeliveryConfirmationCargo) where dataDeliveryConfirmationCargo.envelope.destinationUID.isEqual(self.id): processDataDeliveryConfirmation(packet)
+            
+            
+            
+        default: processTrespassingPacket(interface, packet:packet)
+            
+        }
+    }
+    
+    // Broadcast packet processing
+    
+    func processDiscoveryBroadcast(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
+    func processSearchIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
+    func processStoreIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
     
     
+    func processSearchAddressForID(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
+    func processStoreAddressForId(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
+    // Regular packet processing
+    
+    func processDiscoveryBroadcastReplay(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        
+    }
+    
+    func processIdSearchResults(packet:UPacket)
+    {
+        
+    }
+    
+    func processAddressSearchResults(packet:UPacket)
+    {
+        
+    }
+    
+    func processPing(packet:UPacket)
+    {
+        
+    }
+    
+    func processPong(packet:UPacket)
+    {
+        
+    }
+    
+    func processData(packet:UPacket)
+    {
+        
+    }
+    
+    func processDataDeliveryConfirmation(packet:UPacket)
+    {
+        
+    }
     
     
+
+
+    // Trespassing packet processing
+    
+    func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        router.getPacketToRouteFromNode(packet)
+    }
+    
+    
+    // Error handling
+    func errorInPacketProcessing (message:String, packet:UPacket)
+    {
+     
+        log(7,message)
+        
+    }
     
     
     

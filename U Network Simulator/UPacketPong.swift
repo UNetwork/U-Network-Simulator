@@ -9,5 +9,7 @@
 import Foundation
 
 struct UPacketPong {
+    var envelope:UPacketEnvelope
+
     
 }

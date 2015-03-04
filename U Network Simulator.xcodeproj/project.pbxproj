@@ -130,7 +130,7 @@
 		FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USimulationRealLocationTests.swift; sourceTree = "<group>"; };
 		FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAPIForApps.swift; path = "U Network Simulator/UNodeAPIForApps.swift"; sourceTree = "<group>"; };
 		FE5BC8141A9739650040F7BD /* Constants Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Constants Definitions.swift"; path = "U Network Simulator/Constants Definitions.swift"; sourceTree = "<group>"; };
-		FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Functions.swift"; path = "U Network Simulator/U Coordinate System Functions.swift"; sourceTree = "<group>"; };
+		FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Coordinate System Functions.swift"; sourceTree = "<group>"; };
 		FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U_Coordinate_SystemTests.swift; sourceTree = "<group>"; };
 		FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorForWireless.swift; sourceTree = "<group>"; };
 		FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumProtocol.swift; sourceTree = "<group>"; };
@@ -229,6 +229,7 @@
 				FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */,
 				FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */,
 				FEACA9A81AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift */,
+				FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */,
 				FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */,
 				FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */,
 				FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */,
@@ -240,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */,
-				FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */,
 				FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */,
 			);
 			name = Misc;

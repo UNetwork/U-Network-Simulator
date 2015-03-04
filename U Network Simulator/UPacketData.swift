@@ -9,5 +9,6 @@
 import Foundation
 
 struct UPacketData {
-    
+    var envelope:UPacketEnvelope
+    var load = [UInt64]()
 }

@@ -19,5 +19,7 @@ protocol URouterProtocol
 {
     var node:UNode {get}
     
+    func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
+
     func   getPacketToRouteFromNode(packet:UPacket)
 }

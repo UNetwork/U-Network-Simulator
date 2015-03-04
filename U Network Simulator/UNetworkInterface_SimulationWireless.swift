@@ -28,9 +28,15 @@ class UNetworkInterfaceSimulationWireless:UNetworkInterfaceProtocol
         
     {
         // check packet integrity
-        // header check for broadcast and target?
+        
+        if(incomingPacket.header.transmitedToUID.isEqual(node.id) || incomingPacket.header.transmitedToUID.isBroadcast()){
         
         node.getPacketFromInterface(self, packet: incomingPacket)
+        }
+        else
+        {
+            // drop packet add hook to stats app
+        }
     }
     
     

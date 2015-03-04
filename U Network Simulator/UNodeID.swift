@@ -11,9 +11,8 @@ import Foundation
 /*
 This is random identifier for each node of the network.
 Lenght is 64 - 256 bits.
-First 65535 64-bit ids are reserved for protocol.
+The 64-bit id with zero value is broadcast  id
 */
-
 
 class UNodeID {
     
@@ -21,7 +20,7 @@ class UNodeID {
     
     init (lenght:Int)
     {
-        if(lenght >= 2 && lenght <= 4)
+        if(lenght >= 1 && lenght <= 4)
         {
             self.data=[UInt64]()
             for _ in 0..<lenght
@@ -32,45 +31,17 @@ class UNodeID {
         else
         {
             var random=random64()
-            while random <  65535
-            {
-            
-            random=random64()
-
-            }
             self.data.append(random)
-            
-            
             // Shortest id if wrong data
         }
-        
     }
     
-    
-    init (uID:UNodeID)
+    init ()     // Broadcast packet if in transmitedToUID in packet header
     {
-        self.data=uID.data
-    }
-   
-    
-    
-    
-    
-    
-    init (specialType:SpecialUNodeIDS)
-    {
-        
-        
-        
-        
-       self.data.append(specialType.rawValue)
-        
-        
-        
+       self.data.append(0)
     }
     
     
-
     func isEqual(to:UNodeID) -> Bool
     {
         if (to.data.count != self.data.count)
@@ -89,19 +60,17 @@ class UNodeID {
         }
         return true
     }
+    
+    
+    func isBroadcast() -> Bool
+    {
+        if(self.data.count == 1 && self.data[0] == 0)
+        {
+            return true
+        }
+        return false
+    }
 }
 
 
 
-// Special uIDS - 0x00 - broadcast - lets reserve 65536 special brodcast ids
-
-
-
-enum SpecialUNodeIDS : UInt64 {
-    
-    case Broadcast = 0
-    case NU
-    case ND
-    case EU
-    
-}

@@ -18,7 +18,7 @@ class UNodeIDTests: XCTestCase {
         var testVariable1=UNodeID(lenght: 1)
         var testVariable1a=UNodeID(lenght: 1)
         var testVariable1c=testVariable1
-
+        
         var testVariable2=UNodeID(lenght: 2)
         var testVariable2a=UNodeID(lenght: 2)
         var testVariable2c=testVariable2
@@ -28,7 +28,7 @@ class UNodeIDTests: XCTestCase {
         var testVariable3a=UNodeID(lenght: 3)
         var testVariable3c=testVariable3
         
-//FALSE
+        //FALSE
         XCTAssert(!testVariable1.isEqual(testVariable1a), "Equal function error")
         XCTAssert(!testVariable2.isEqual(testVariable2a), "Equal function error")
         XCTAssert(!testVariable3.isEqual(testVariable3a), "Equal function error")
@@ -37,15 +37,23 @@ class UNodeIDTests: XCTestCase {
         XCTAssert(!testVariable3.isEqual(testVariable1), "Equal function error")
         
         
-//TRUE
+        //TRUE
         XCTAssert(testVariable1.isEqual(testVariable1c), "Equal function error")
         XCTAssert(testVariable2.isEqual(testVariable2c), "Equal function error")
         XCTAssert(testVariable3.isEqual(testVariable3c), "Equal function error")
+        
+        // broadcast id testing
+        var broadcatPacketId=UNodeID()
 
-
-
-
+        XCTAssert(broadcatPacketId.isBroadcast(), "Broadcast not detected")
+        XCTAssert(!testVariable1.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable1a.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable1c.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable2.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable2a.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable2c.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable3.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable3a.isBroadcast(), "Broadcast false positive")
+        XCTAssert(!testVariable3c.isBroadcast(), "Broadcast false positive")
     }
-    
-
 }

@@ -9,5 +9,7 @@
 import Foundation
 
 struct UPacketDataDeliveryConfirmation {
+    var envelope:UPacketEnvelope
+
     
 }
