@@ -9,6 +9,6 @@
 import Foundation
 
 struct UPacketReplyForIdSearch {
-    var envelope:UPacketEnvelope
+
     
 }

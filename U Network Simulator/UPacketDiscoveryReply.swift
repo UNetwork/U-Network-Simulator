@@ -10,7 +10,7 @@ import Foundation
 struct UPacketDiscoveryReply
 {
    
-        var envelope:UPacketEnvelope
+    
         var levelAndFlags:UPacketDiscoveryBroadcastReplyCounterAndFlags
         var key=[UInt64]()
     

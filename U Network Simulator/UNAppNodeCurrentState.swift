@@ -12,3 +12,10 @@ This Node App is designed to get the current ststus of the node. This will be us
 
 
 import Foundation
+
+
+class UNAppNodeCurrentState {
+    
+    
+    
+}

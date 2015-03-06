@@ -10,6 +10,6 @@ import Foundation
 
 struct UPacketReplyForAddressSearch {
  
-    var envelope:UPacketEnvelope
+
 
 }

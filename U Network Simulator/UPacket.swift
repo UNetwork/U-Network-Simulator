@@ -16,6 +16,7 @@ import Foundation
 struct UPacket {
     var header:UPacketHeader
     var lookUpRequest:UNetworkLookUpRequest?
+    var envelope:UPacketEnvelope
     var packetCargo:UPacketType
 }
 
@@ -24,15 +25,15 @@ enum UPacketType {
     
     
     case ReceptionConfirmation (UPacketReceptionConfirmation)                   // confirmation of delivery of every packet between directly connected nodes (peer)
-    case DiscoveryBroadcast (UPacketDiscoveryBroadcast)                         //b broadcast packet for obtaining or refresing peers
+    case DiscoveryBroadcast (UPacketDiscoveryBroadcast)                         // broadcast packet for obtaining or refresing peers
     case DiscoveryBroadcastReplay (UPacketDiscoveryReply)                       // replay for discovery request
     case ReplyForNetworkLookupRequest (UPacketReplyForNetworkLookupRequest)     // replay for attached to packet lookUpRequest
-    case SearchIdForName (UPacketSearchIdForName)                               //b request for search for id given name
+    case SearchIdForName (UPacketSearchIdForName)                               // request for search for id given name
     case ReplyForIdSearch (UPacketReplyForIdSearch)                             // replay for search for id given name
-    case StoreIdForName (UPacketStoreIdForName)                                 //b store name request
-    case SearchAddressForID (UPacketSearchAddressForID)                         //b request for search for address given id
+    case StoreIdForName (UPacketStoreIdForName)                                 // store name request
+    case SearchAddressForID (UPacketSearchAddressForID)                         // request for search for address given id
     case ReplyForAddressSearch (UPacketReplyForAddressSearch)                   // replay for search for address given id
-    case StoreAddressForId (UPacketStoreAddressForId)                           //b store address request
+    case StoreAddressForId (UPacketStoreAddressForId)                           // store address request
     case Ping (UPacketPing)                                                     // ping packet
     case Pong (UPacketPong)                                                     // replay for ping
     case Data (UPacketData)                                                     // workmule of the network transfer

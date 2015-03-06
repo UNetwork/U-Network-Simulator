@@ -9,5 +9,5 @@
 import Foundation
 
 struct UPacketReplyForNetworkLookupRequest {
-    var envelope:UPacketEnvelope
+
 }

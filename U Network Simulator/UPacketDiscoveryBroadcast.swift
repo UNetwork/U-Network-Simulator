@@ -9,7 +9,7 @@ import Foundation
 
 struct UPacketDiscoveryBroadcast
 {
-    var envelope:UPacketEnvelope
+
     var levelAndFlags:UPacketDiscoveryBroadcastCounterAndFlags
 }
 
