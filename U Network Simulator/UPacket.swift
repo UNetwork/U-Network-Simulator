@@ -18,6 +18,18 @@ struct UPacket {
     var lookUpRequest:UNetworkLookUpRequest?
     var envelope:UPacketEnvelope
     var packetCargo:UPacketType
+    
+    init(inputHeader:UPacketHeader, inputEnvelope:UPacketEnvelope, inputCargo:UPacketType)
+    {
+        self.header=inputHeader
+        self.envelope=inputEnvelope
+        self.packetCargo=inputCargo
+    
+    }
+   mutating func addLookupRequest (request:UNetworkLookUpRequest)
+    {
+        self.lookUpRequest = request
+    }
 }
 
 enum UPacketType {
@@ -26,7 +38,7 @@ enum UPacketType {
     
     case ReceptionConfirmation (UPacketReceptionConfirmation)                   // confirmation of delivery of every packet between directly connected nodes (peer)
     case DiscoveryBroadcast (UPacketDiscoveryBroadcast)                         // broadcast packet for obtaining or refresing peers
-    case DiscoveryBroadcastReplay (UPacketDiscoveryReply)                       // replay for discovery request
+    case ReplyForDiscovery (UPacketyReplyForDiscovery)                          // replay for discovery request
     case ReplyForNetworkLookupRequest (UPacketReplyForNetworkLookupRequest)     // replay for attached to packet lookUpRequest
     case SearchIdForName (UPacketSearchIdForName)                               // request for search for id given name
     case ReplyForIdSearch (UPacketReplyForIdSearch)                             // replay for search for id given name

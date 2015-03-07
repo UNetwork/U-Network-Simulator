@@ -10,6 +10,5 @@ import Foundation
 
 struct UPacketReceptionConfirmation
 {
-
-    var recievedPacketLenghtAndChecksum:UInt64  // from the packet this confirmation is about
+    var serial:UInt64  // from the packet this confirmation is about
 }

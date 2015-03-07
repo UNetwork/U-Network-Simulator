@@ -13,6 +13,17 @@ struct UPacketHeader
     var transmitedToUID:UNodeID
     var transmitedByUID:UNodeID
     var lifeCounterAndFlags:UPacketHeaderLifeCounterAndFlags
+    
+    
+    init (from:UNodeID, to: UNodeID, lifeTime:UInt32)
+    {
+        
+        transmitedToUID = to
+        transmitedByUID = from
+        lenghtAndChecksum = UPacketHeaderLenghtAndChecksum(fromId: from, toId: to)
+        lifeCounterAndFlags = UPacketHeaderLifeCounterAndFlags(lifeCounter: lifeTime)
+        
+    }
 }
 
 struct UNetworkLookUpRequest
@@ -48,13 +59,41 @@ struct UPacketEnvelope {
     var originAddress:UNodeAddress
     var destinationAddress:UNodeAddress
     var serial:UInt64
+    
+    init(fromId:UNodeID, fromAddress:UNodeAddress, toId:UNodeID, toAddress:UNodeAddress)
+    {
+        self.orginatedByUID=fromId
+        self.originAddress=fromAddress
+        self.destinationUID=toId
+        self.destinationAddress=toAddress
+        self.serial=random64()
+        self.lenghtAndChecksum=UPacketEnvelopeLenghtAndChecksum(fromId: orginatedByUID, toId: destinationUID)
+    }
+    
 
-
+    func replayEnvelope() -> UPacketEnvelope
+    {
+        var result=UPacketEnvelope(fromId: self.destinationUID, fromAddress: destinationAddress, toId: orginatedByUID, toAddress: originAddress)
+        
+        
+               return result
+    }
 
 }
+
+
 struct UPacketEnvelopeLenghtAndChecksum {
     
     var data:UInt64
+    
+    init (fromId:UNodeID, toId:UNodeID){
+    
+    data = UInt64((fromId.lenght - 1) + (toId.lenght - 1) * 4)
+        
+    
+    
+    }
+    
     /*
     
     2 bits TransmitedToUID lenght (1-4)
@@ -80,6 +119,13 @@ struct UPacketHeaderLenghtAndChecksum {
     60 bit for checksum of following header bytes
     
     */
+    init (fromId:UNodeID, toId:UNodeID){
+        
+        data = UInt64((fromId.lenght - 1) + (toId.lenght - 1) * 4)
+        
+        
+        
+    }
     
     
 }
@@ -100,23 +146,30 @@ struct UPacketHeaderLifeCounterAndFlags {
     
     */
     
+    init(lifeCounter:UInt32)
+    {
+        self.data=UInt64(lifeCounter)
+    }
+    
     
     func lifeCounter() -> UInt64
     {
         return (self.data & 0x00000000FFFFFFFF)
     }
     
-    mutating  func increaseLifeCounter()
+    mutating  func decreaseLifeCounter()
     {
-        if(self.data & 0x00000000FFFFFFFF <  0x00000000FFFFFFFF)
+        if(self.data & 0x00000000FFFFFFFF >  0)
         {
-            self.data++
+            self.data--
         }
     }
     
-    func isLookUpRequestAttachedFlag () -> Bool
+
+    
+    func isLookUpRequestAttached () -> Bool
     {
-        if (self.data & uPacketHeaderLookUpRequestBitMask > 0)
+        if (self.data & uPacketHeaderLookUpRequestBitmask > 0)
         {
             return true
         }
@@ -131,14 +184,40 @@ struct UPacketHeaderLifeCounterAndFlags {
     {
         if(to == true)
         {
-            self.data = self.data | uPacketHeaderLookUpRequestBitMask
+            self.data = self.data | uPacketHeaderLookUpRequestBitmask
         }
         else
         {
-            self.data = self.data & (~uPacketHeaderLookUpRequestBitMask)
+            self.data = self.data & (~uPacketHeaderLookUpRequestBitmask)
         }
     
     
+    }
+    
+    var isGiveUp: Bool
+    {
+        if(self.data & uPacketHeaderGiveUpFlagBitmask > 0)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    mutating func setGiveUpFlag (to:Bool)
+    {
+        
+        if(to == true)
+        {
+            self.data = self.data | uPacketHeaderGiveUpFlagBitmask
+        }
+        else
+        {
+            self.data = self.data & (~uPacketHeaderGiveUpFlagBitmask)
+        }
+
     }
     
     
@@ -147,7 +226,8 @@ struct UPacketHeaderLifeCounterAndFlags {
 }
 
 
-let uPacketHeaderLookUpRequestBitMask:UInt64 = 1<<63
+let uPacketHeaderLookUpRequestBitmask:UInt64 = 1 << 63
+let uPacketHeaderGiveUpFlagBitmask:UInt64 = 1 << 62
 
 
 

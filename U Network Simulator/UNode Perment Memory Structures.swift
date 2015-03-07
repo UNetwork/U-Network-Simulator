@@ -16,6 +16,13 @@ struct UPeerDataRecord
     var id:UNodeID
     var address:UNodeAddress
     var interface:UNetworkInterfaceProtocol
+    
+    init(nodeId:UNodeID, address:UNodeAddress, interface:UNetworkInterfaceProtocol)
+    {
+        self.id=nodeId
+        self.address=address
+        self.interface=interface
+    }
 }
 
 struct UMemoryIdAddressRecord

@@ -11,11 +11,22 @@ struct UPacketDiscoveryBroadcast
 {
 
     var levelAndFlags:UPacketDiscoveryBroadcastCounterAndFlags
+    
+    init()
+    {
+        levelAndFlags=UPacketDiscoveryBroadcastCounterAndFlags()
+    }
 }
 
 struct UPacketDiscoveryBroadcastCounterAndFlags {
     
     var data:UInt64
+    
+    
+    init()
+    {
+        data=0
+    }
     
     /*
     

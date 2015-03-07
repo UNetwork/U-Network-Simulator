@@ -21,5 +21,5 @@ protocol URouterProtocol
     
     func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
 
-    func   getPacketToRouteFromNode(packet:UPacket)
+    func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
 }

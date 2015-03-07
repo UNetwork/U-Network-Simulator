@@ -70,6 +70,11 @@ class UNodeID {
         }
         return false
     }
+    
+    var lenght: Int
+    {
+        return self.data.count
+    }
 }
 
 

@@ -25,7 +25,7 @@ class UNAppNodeStats {
 enum StatsEvents:Int{
     
     
-    case    TressPassingPacketProcessedByNode = 0,
+    case    TrespassingPacketProcessedByNode = 0,
             PacketDroppedAtInterface,
             DiscoveryBroadcastPacketProcessed,
             SearchIdForNameProcessed,

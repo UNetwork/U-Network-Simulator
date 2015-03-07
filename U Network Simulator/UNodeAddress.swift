@@ -74,6 +74,13 @@ struct UNodeAddress
 
     }
     
+    init ()  // unknown address
+    {
+        low64Bits=0
+        high64Bits=0
+        
+    }
+    
     init(address:UNodeAddress)
     {
         self.low64Bits=address.low64Bits

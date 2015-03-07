@@ -60,8 +60,8 @@
 		FEE899611A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */; };
 		FEE899631A9879100057ACD7 /* UPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899621A9879100057ACD7 /* UPacket.swift */; };
 		FEE899641A9879100057ACD7 /* UPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899621A9879100057ACD7 /* UPacket.swift */; };
-		FEE899661A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */; };
-		FEE899671A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */; };
+		FEE899661A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketyReplyForDiscovery.swift */; };
+		FEE899671A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899651A9880610057ACD7 /* UPacketyReplyForDiscovery.swift */; };
 		FEE8996C1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */; };
 		FEE8996D1A98C49A0057ACD7 /* GlobalStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */; };
 		FEE8996F1A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */; };
@@ -156,7 +156,7 @@
 		FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketHeader.swift; path = "U Network Simulator/UPacketHeader.swift"; sourceTree = "<group>"; };
 		FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryBroadcast.swift; path = "U Network Simulator/UPacketDiscoveryBroadcast.swift"; sourceTree = "<group>"; };
 		FEE899621A9879100057ACD7 /* UPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacket.swift; path = "U Network Simulator/UPacket.swift"; sourceTree = "<group>"; };
-		FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryReply.swift; path = "U Network Simulator/UPacketDiscoveryReply.swift"; sourceTree = "<group>"; };
+		FEE899651A9880610057ACD7 /* UPacketyReplyForDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketyReplyForDiscovery.swift; path = "U Network Simulator/UPacketyReplyForDiscovery.swift"; sourceTree = "<group>"; };
 		FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalStatistics.swift; sourceTree = "<group>"; };
 		FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Traffic Generator.swift"; sourceTree = "<group>"; };
 		FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationWireless.swift; path = "U Network Simulator/UNetworkInterface_SimulationWireless.swift"; sourceTree = "<group>"; };
@@ -353,8 +353,8 @@
 				FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */,
 				FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */,
 				FEED38151AA2497800BB3C26 /* UPacketReceptionConfirmation.swift */,
+				FEE899651A9880610057ACD7 /* UPacketyReplyForDiscovery.swift */,
 				FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */,
-				FEE899651A9880610057ACD7 /* UPacketDiscoveryReply.swift */,
 				FEED38131AA2497800BB3C26 /* UPacketSearchIdForName.swift */,
 				FEED38121AA2497800BB3C26 /* UPacketReplyForIdSearch.swift */,
 				FEED380D1AA2497800BB3C26 /* UPacketStoreIdForName.swift */,
@@ -514,7 +514,7 @@
 				FEA007291A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
 				FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */,
 				FEE8997A1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
-				FEE899661A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */,
+				FEE899661A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */,
 				FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
 				FE22CDC71AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */,
@@ -556,7 +556,7 @@
 				FEACA9AA1AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */,
 				FEED38261AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */,
 				FEED382C1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */,
-				FEE899671A9880610057ACD7 /* UPacketDiscoveryReply.swift in Sources */,
+				FEE899671A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */,
 				FEED38241AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
 				FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */,
 				FE5BC8131A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */,

@@ -17,8 +17,8 @@ class UNode {
     
     
     let id:UNodeID                                  // Unique Id
-    var address:UNodeAddress?                       // Current Address - geographical position
-    var userName:String?                            // User name of node if defined
+    var address:UNodeAddress                       // Current Address - geographical position
+    var userName:String                            // User name of node if defined
     var time:UInt64=0                               // Local "time"
     
     var interfaces=[UNetworkInterfaceProtocol]()    // Network interfaces
@@ -41,6 +41,8 @@ class UNode {
     init ()
     {
         id=UNodeID(lenght: uIDlengh)
+        userName = randomUserName(32)
+        address = unknownNodeAddress
         router = CurrentRouter(node:self)
     }
     
@@ -57,7 +59,7 @@ class UNode {
                 switch packet.packetCargo
                 {
                 case .ReceptionConfirmation(let _): router.getReply(interface, packet: packet) // this is router staff
-                case .DiscoveryBroadcastReplay(let _): processDiscoveryBroadcastReplay(interface, packet: packet)
+                case .ReplyForDiscovery(let _): processDiscoveryBroadcastReplay(interface, packet: packet)
                 case .ReplyForNetworkLookupRequest(let _): router.getReply(interface, packet: packet) // router staff
                 case .SearchIdForName(let _): processSearchIdForName(interface, packet: packet)
                 case .StoreIdForName(let _): processStoreIdForName(interface, packet: packet)
@@ -84,7 +86,8 @@ class UNode {
     
     func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        router.getPacketToRouteFromNode(packet)
+        router.getPacketToRouteFromNode(interface, packet:packet)
+        nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)
     }
     
     
@@ -94,11 +97,44 @@ class UNode {
     func processDiscoveryBroadcast(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         // replay
+        
+        let replayPacketHeader = UPacketHeader(from: self.id, to: packet.envelope.orginatedByUID, lifeTime: standardPacketLifeTime)
+        var replayEnvelope = packet.envelope.replayEnvelope()
+        replayEnvelope.originAddress = self.address         
+        var replayForDiscovery=UPacketyReplyForDiscovery()
+        var replayCargo = UPacketType.ReplyForDiscovery(replayForDiscovery)
+        var replayPacket=UPacket(inputHeader: replayPacketHeader, inputEnvelope: replayEnvelope, inputCargo: replayCargo)
+        
+        router.getPacketToRouteFromNode(nil, packet:replayPacket)
+        nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
+        
+        
+        
         // if packet couter > 0 resend to all nodes. If packet counter>discovery limit >>> drop mtfker
         // check on peers list, add if needed
         
         
     }
+    
+    func processDiscoveryBroadcastReplay(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        // check if replayer is already on peers list, add if not
+
+        if let peerIndex = findInPeers(packet.header.transmitedByUID)
+        {
+            // update data
+        }
+        else
+        {
+            let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
+            self.peers.append(newPeerRecord)
+            
+        }
+        
+    }
+    
+    
+    
     
     func processSearchIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
@@ -124,11 +160,7 @@ class UNode {
     }
     
     
-    func processDiscoveryBroadcastReplay(interface:UNetworkInterfaceProtocol, packet:UPacket)
-    {
-        
-    }
-    
+
     func processIdSearchResults(packet:UPacket)
     {
         
@@ -161,32 +193,56 @@ class UNode {
     
     
 
+// creating packets
 
 
+    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    func refreshPeers()
-    {
-        // assemble packet and deliver to all interfaces
-    }
     
     func ping(uID:UNodeID, address:UNodeAddress)
     {
         
     }
     
+ // Other API
+    func refreshPeers()
+    {
+         // assemble packet and
+        let discoveryBroadcastPacketHeader = UPacketHeader(from: self.id, to: broadcastNodeId, lifeTime: standardPacketLifeTime)
+        let discoveryBroadcastPacketEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: broadcastNodeId, toAddress: self.address)
+        let broadcastDiscovery=UPacketDiscoveryBroadcast()
+        let broadcastDiscovetyCargo=UPacketType.DiscoveryBroadcast(broadcastDiscovery)
+        let broadcastDiscoveryPacket=UPacket(inputHeader: discoveryBroadcastPacketHeader, inputEnvelope: discoveryBroadcastPacketEnvelope, inputCargo: broadcastDiscovetyCargo)
  
+        
+        //deliver to all interfaces
+        
+        for(_, interface) in enumerate(self.interfaces)
+        {
+            interface.sendPacketToNetwork(broadcastDiscoveryPacket)
+        }
+        
+    }
     
+    
+    // Processing functions
+    
+    func findInPeers(nodeId:UNodeID) -> Int?
+    {
+        var result:Int?
+        for(i, peerRecord) in enumerate(self.peers)
+        {
+            if(peerRecord.id.isEqual(nodeId))
+            {
+            result = i
+            }
+        }
+        return result
+    }
     
     
     
 }
+
 
 

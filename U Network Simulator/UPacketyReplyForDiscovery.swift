@@ -7,18 +7,30 @@
 
 import Foundation
 
-struct UPacketDiscoveryReply
+struct UPacketyReplyForDiscovery
 {
    
     
         var levelAndFlags:UPacketDiscoveryBroadcastReplyCounterAndFlags
-        var key=[UInt64]()
+    
+    init()
+    {
+        self.levelAndFlags=UPacketDiscoveryBroadcastReplyCounterAndFlags()
+    }
     
 }
 
 struct UPacketDiscoveryBroadcastReplyCounterAndFlags {
     
     var data:UInt64
+    
+    init()
+    {
+    
+    data=0
+    
+    
+    }
     
     /*
     

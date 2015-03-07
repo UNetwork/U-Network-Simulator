@@ -12,6 +12,17 @@ import Foundation
 
 let uIDlengh:Int=2
 
+let standardPacketLifeTime:UInt32 = 1024
+
+let maxDiscoveryBroadcastDeepth:Int = 5
+
+
+// aliases
+
+let broadcastNodeId=UNodeID()
+
+let unknownNodeAddress = UNodeAddress()
+
 typealias CurrentRouter = URouter_BruteForceRouting
 
 
