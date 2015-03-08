@@ -11,7 +11,13 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     var node:UNode
     var packetStack=[BruteForcePacketStackRecord]()
-
+    
+    init(node:UNode)
+    {
+        self.node=node
+    }
+    
+    
     func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         
@@ -19,70 +25,63 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
     {
-    
+        
         if let packetIndex = searchForSerialOnStack(packet.envelope.serial)
         {
             if(packet.header.lifeCounterAndFlags.isGiveUp)
             {
                 // returning, new peer must be selected
+                var peersIndexes = selectPeersExcluding(packetStack[packetIndex].sentToNodes)
+                if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersIndexes)
+                {
+                    packetStack[packetIndex].sentToNodes.append(node.peers[peerToSendPacketIndex].id)
+                    forwardPacketToPeer(interface, packet: packet, peerIndex: peerToSendPacketIndex)
+                }
+                else
+                {
+                    // send back to the origin
+                    
+                    var originIndex = searchForIdInNodePeers(packetStack[packetIndex].recievedFrom)
+                    var updatedPacket=packet
+                    updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
+                    
+                    if(originIndex != nil)
+                    {
+                        forwardPacketToPeer(interface, packet: updatedPacket, peerIndex: originIndex!)
+                    }
+                }
             }
             else
             {
                 if(interface != nil)
                 {
-                   // packet already processed negative packet delivery
-                    
-                    sendNegativePacketDelivery(interface!, packet: packet)
-                    
+                    // packet already processed negative packet delivery
+                    sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:true)
                 }
             }
-            
-            
-            
         }
         else
         {
             // select peer
             if let peerToSendPacketIndex = selectPeerForAddressFromAllPeers(packet.envelope.destinationAddress)
             {
-            // add to packet to stack
-            
+                // add to packet to stack
+                
                 var transmitedToPeers=[UNodeID]()
-      
-                    transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
-                
-            let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers)
-            
-            
-            // send positive reception confirmation
-                
-                if(interface != nil)
-                {
-                    sendPositivePacketDelivery(interface!, packet: packet)
-
-                }
-            // puch to the interface
-                
-                var updatedPacket=packet
-                updatedPacket.header.transmitedByUID=node.id
-                updatedPacket.header.transmitedToUID=node.peers[peerToSendPacketIndex].id
-                
-                node.peers[peerToSendPacketIndex].interface.sendPacketToNetwork(updatedPacket)
+                transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
+                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers)
+                forwardPacketToPeer(interface!, packet:packet, peerIndex:peerToSendPacketIndex)
             }
             else
             {
-                // no peer to send return to sender with give up sign
+                log(7, " no peer to send error ")
+                // no peer to send error -
             }
+            
         }
-        
- 
-        
     }
     
-    init(node:UNode)
-    {
-        self.node=node
-    }
+    
     
     
     
@@ -124,13 +123,8 @@ class URouter_BruteForceRouting:URouterProtocol {
             {
                 result.append(peerIndexInNodeArray)
             }
-            
-            
-            
         }
-
         return result
-        
     }
     
     func selectPeerForAddressFromAllPeers(address:UNodeAddress) -> Int?
@@ -147,6 +141,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         return result
     }
     
+    
     func selectPeerFromIndexListAfterExclusions(addresss:UNodeAddress, peerIndexes:[Int]) -> Int?
     {
         var result:Int?
@@ -158,19 +153,58 @@ class URouter_BruteForceRouting:URouterProtocol {
         return result
     }
     
+    
+    func searchForIdInNodePeers(id:UNodeID) -> Int?
+    {
+        var result:Int?
+        
+        for (index, peer) in enumerate(node.peers)
+        {
+            if (peer.id.isEqual(id))
+            {
+                result=index
+                break
+            }
+        }
+        return result
+    }
+    
     // communication functions
     
-    func sendPositivePacketDelivery(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func sendPacketDeliveryConfirmation (interface:UNetworkInterfaceProtocol, packet:UPacket, rejected:Bool)
     {
+        var header=UPacketHeader(from: node.id, to: packet.header.transmitedToUID, lifeTime: 16)
+        header.lifeCounterAndFlags.setConfirmationType(rejected)
+        let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: packet.header.transmitedToUID, toAddress: unknownNodeAddress)
+        let receptionConfirmation=UPacketReceptionConfirmation(serial: packet.envelope.serial)
+        let receptionConfirmationCargo=UPacketType.ReceptionConfirmation(receptionConfirmation)
+        
+        let confirmationReceptionPacket=UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: receptionConfirmationCargo)
+        
+        
+        interface.sendPacketToNetwork(confirmationReceptionPacket)
         
     }
     
-    func sendNegativePacketDelivery(interface:UNetworkInterfaceProtocol, packet:UPacket)
-    {
-        
-    }
-
     
+    func forwardPacketToPeer(interface:UNetworkInterfaceProtocol?, packet:UPacket, peerIndex:Int)
+    {
+        // send  reception confirmation
+        
+        if(interface != nil)
+        {
+            sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:false)
+            
+        }
+        // puch to the interface
+        
+        var updatedPacket=packet
+        updatedPacket.header.transmitedByUID=node.id
+        updatedPacket.header.transmitedToUID=node.peers[peerIndex].id
+        updatedPacket.header.lifeCounterAndFlags.decreaseLifeCounter()
+        
+        node.peers[peerIndex].interface.sendPacketToNetwork(updatedPacket)
+    }
     
     
     

@@ -24,6 +24,8 @@ struct UPacketHeader
         lifeCounterAndFlags = UPacketHeaderLifeCounterAndFlags(lifeCounter: lifeTime)
         
     }
+    
+    
 }
 
 struct UNetworkLookUpRequest
@@ -220,6 +222,32 @@ struct UPacketHeaderLifeCounterAndFlags {
 
     }
     
+    var replayConfirmationType:Bool
+        {
+            if(self.data & uPacketHeaderConfirmationDeliveryBitmask > 0)
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
+
+    }
+    
+    mutating func setConfirmationType (to:Bool)
+    {
+        if(to == true)
+        {
+            self.data = self.data | uPacketHeaderConfirmationDeliveryBitmask
+        }
+        else
+        {
+            self.data = self.data & (~uPacketHeaderConfirmationDeliveryBitmask)
+        }
+
+    }
+    
     
     
 
@@ -228,6 +256,7 @@ struct UPacketHeaderLifeCounterAndFlags {
 
 let uPacketHeaderLookUpRequestBitmask:UInt64 = 1 << 63
 let uPacketHeaderGiveUpFlagBitmask:UInt64 = 1 << 62
+let uPacketHeaderConfirmationDeliveryBitmask:UInt64 = 1 << 61   // positive delivery if true
 
 
 
