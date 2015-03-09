@@ -118,7 +118,7 @@ class UNode {
     func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         router.getPacketToRouteFromNode(interface, packet:packet)
-        nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)
+        nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)  // STATS
     }
     
     
@@ -138,7 +138,7 @@ class UNode {
         
         interface.sendPacketToNetwork(replayPacket)
         
-     //   router.getPacketToRouteFromNode(nil, packet:replayPacket) - we cannot do it here becouse the sender may be not on our peer list yet
+     //   router.getPacketToRouteFromNode(nil, packet:replayPacket) // - we cannot do it here becouse the sender may be not on our peer list yet
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
         
         
@@ -174,67 +174,65 @@ class UNode {
         // check memory
         // replay if found
         // if not forward to peer
+        nodeStats.addNodeStatsEvent(StatsEvents.SearchIdForNameProcessed)
     }
     
     func processStoreIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.StoreIdForNameProcessed)
     }
     
     
     func processSearchAddressForID(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.SearchAddressForIdProcessed)
     }
     
     func processStoreAddressForId(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.StoreAddressForIdProcessed)
     }
     
     
 
     func processIdSearchResults(packet:UPacket)
     {
-        
+     nodeStats.addNodeStatsEvent(StatsEvents.IdSearchResultRecieved)
     }
     
     func processAddressSearchResults(packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultRecieved)
     }
     
     func processPing(packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.PingRecieved)
     }
     
     func processPong(packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.PongRevieved)
     }
     
     func processData(packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.DataRecieved)
     }
     
     func processDataDeliveryConfirmation(packet:UPacket)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.DataConfirmationRecieved)
     }
     
     
 
 // creating packets
 
-
-    
-
     
     func ping(uID:UNodeID, address:UNodeAddress)
     {
-        
+        nodeStats.addNodeStatsEvent(StatsEvents.PingSent)
     }
     
     

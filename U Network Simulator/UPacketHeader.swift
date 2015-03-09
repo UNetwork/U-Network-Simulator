@@ -25,6 +25,11 @@ struct UPacketHeader
         
     }
     
+    func replayHeader() -> UPacketHeader
+    {
+        return UPacketHeader(from: transmitedToUID, to: transmitedByUID, lifeTime: standardPacketLifeTime)
+    }
+    
     
 }
 

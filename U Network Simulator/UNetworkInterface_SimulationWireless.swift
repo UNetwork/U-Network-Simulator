@@ -39,7 +39,8 @@ class UNetworkInterfaceSimulationWireless:UNetworkInterfaceProtocol
         }
         else
         {
-            // drop packet add hook to stats app
+            // drop packet 
+            node.nodeStats.addNodeStatsEvent(StatsEvents.PacketDroppedAtInterface)  // STATS
         }
     }
     

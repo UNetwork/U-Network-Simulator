@@ -14,40 +14,39 @@ import Foundation
 
 class UNAppNodeStats {
     
+    var nodeStats = Array(count: 64, repeatedValue: 0)
+    
     func addNodeStatsEvent(event:StatsEvents)
     {
-    
+    nodeStats[event.rawValue]++
     }
     
 }
 
 
-enum StatsEvents:Int{
-    
-    
-    case    TrespassingPacketProcessedByNode = 0,
-            PacketDroppedAtInterface,
-            DiscoveryBroadcastPacketProcessed,
+enum StatsEvents:Int
+{
+    case    TrespassingPacketProcessedByNode = 0,   //OK
+            PacketDroppedAtInterface,               //OK
+            PacketRejected,
+            PacketWithGiveUpFlagSent,
+            PacketWithGiveUpFlagRecieved,
+            DiscoveryBroadcastPacketProcessed,      //OK
             SearchIdForNameProcessed,
             StoreIdForNameProcessed,
             SearchAddressForIdProcessed,
             StoreAddressForIdProcessed,
             IdSearchResultRecieved,
-            AddressSearchResultRevieved,
+            AddressSearchResultRecieved,
             PingRecieved,
             PingSent,
             PongRevieved,
             PongSent,
             DataSent,
+            DataRecieved,
+            DataConfirmationSent,
             DataConfirmationRecieved,
             LookupRequestsAdded,
-            LookupReguestProcessed
-    
-    
-    
-    
-    
-    
-    
-    
+            LookupRequestProcessed
+
 }

@@ -74,6 +74,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             if(packet.header.lifeCounterAndFlags.isGiveUp)
             {
                 // returning, new peer must be selected
+                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagRecieved)
                 var peersIndexes = selectPeersExcluding(packetStack[packetIndex].sentToNodes)
                 if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersIndexes)
                 {
@@ -83,7 +84,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 else
                 {
                     // send back to the origin
-                    
+                    node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
                     var originIndex = searchForIdInNodePeers(packetStack[packetIndex].recievedFrom)
                     var updatedPacket=packet
                     updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
@@ -99,6 +100,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 if(interface != nil)
                 {
                     // packet already processed, send negative packet delivery
+                    node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
                     sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:true)
                 }
             }
@@ -117,8 +119,19 @@ class URouter_BruteForceRouting:URouterProtocol {
             }
             else
             {
-                log(7, " no peer to send error ")
-                // no peer to send error -
+                // send back to the origin
+                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
+                var updatedPacket=packet
+                updatedPacket.header=packet.header.replayHeader()
+                updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
+                updatedPacket.envelope=packet.envelope.replayEnvelope()
+                
+                if(interface != nil){
+                
+                interface!.sendPacketToNetwork(updatedPacket)
+                }
+                
+            
             }
             
         }
@@ -242,7 +255,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         // here the networklookuprequest may be attached
         
         
-        // puch to the interface
+        // push to the interface
         
         var updatedPacket=packet
         updatedPacket.header.transmitedByUID=node.id

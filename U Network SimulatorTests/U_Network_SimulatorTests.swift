@@ -12,6 +12,8 @@ class U_Network_SimulatorTests:XCTestCase {
     
     func testWirelessNode()
     {
+        simulator=UNetworkSimulator() // reset world
+       
         
         // simple creation
         
