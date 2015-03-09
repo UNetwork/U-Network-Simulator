@@ -18,7 +18,50 @@ class URouter_BruteForceRouting:URouterProtocol {
     }
     
     
-    func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func maintenanceLoop()
+    {
+        // find not deliverd packets and resend
+        // delete some useless and old data from packetstack
+    }
+    
+    
+    
+    func getReceptionConfirmation(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    {
+        var returningPacketSerial:UInt64 = 0
+        
+        switch packet.packetCargo
+        {
+        case .ReceptionConfirmation(let recptionConfirmation): returningPacketSerial = recptionConfirmation.serial
+        default: log(7, "Packet type error in getReceptionConfirmation")
+        }
+        
+        
+        if let packetIndex=searchForSerialOnStack(returningPacketSerial)
+        {
+            if(packet.header.lifeCounterAndFlags.replayConfirmationType)
+            {
+                // this is rejected packet by peer
+                // resend to another peer
+                self.getPacketToRouteFromNode(nil, packet: packetStack[packetIndex].packet)
+            }
+            else
+            {
+                //confirmation ok
+                packetStack[packetIndex].status=BrutForcePacketStatus.Delivered
+            }
+        }
+        else
+        {
+            // rejected packet not found on packet stack
+
+        }
+        
+    }
+    
+
+    
+    func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         
     }
@@ -55,7 +98,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             {
                 if(interface != nil)
                 {
-                    // packet already processed negative packet delivery
+                    // packet already processed, send negative packet delivery
                     sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:true)
                 }
             }
@@ -69,7 +112,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 
                 var transmitedToPeers=[UNodeID]()
                 transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
-                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers)
+                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent)
                 forwardPacketToPeer(interface!, packet:packet, peerIndex:peerToSendPacketIndex)
             }
             else
@@ -196,6 +239,9 @@ class URouter_BruteForceRouting:URouterProtocol {
             sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:false)
             
         }
+        // here the networklookuprequest may be attached
+        
+        
         // puch to the interface
         
         var updatedPacket=packet
@@ -218,7 +264,15 @@ struct BruteForcePacketStackRecord {
     var packet:UPacket
     var recievedFrom:UNodeID
     var sentToNodes:[UNodeID]
-    
-    
+    var status:BrutForcePacketStatus
+}
+
+
+enum BrutForcePacketStatus:Int {
+    case WaitingForRoute
+    case Sent
+    case Delivered
     
 }
+
+

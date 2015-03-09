@@ -7,7 +7,6 @@
 
 import Foundation
 
-let range=UInt64(1000000)
 
 class MediumSimulatorForWireless:MediumProtocol
 {
@@ -74,7 +73,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         
         // the "distance" check function :)
-        if ((latitudeDelta + longitudeDelta + altitudeDelta) < range)
+        if ((latitudeDelta + longitudeDelta + altitudeDelta) < wirelessInterfaceRange )
         {
             return true
         }

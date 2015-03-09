@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE091B851AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */; };
 		FE22CDC71AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */; };
 		FE22CDC81AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */; };
 		FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
@@ -121,6 +122,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNodeCreationAndCommunicationTests.swift; sourceTree = "<group>"; };
 		FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketStoreAddressForId.swift; path = "U Network Simulator/UPacketStoreAddressForId.swift"; sourceTree = "<group>"; };
 		FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Structures.swift"; path = "U Network Simulator/U Coordinate System Structures.swift"; sourceTree = SOURCE_ROOT; };
 		FE4D6A841AA58922008B3B4E /* 1stRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1stRead.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				FEB5E4001A89E05B00A459E6 /* U_Network_SimulatorTests.swift */,
 				FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */,
 				FEB5E3FE1A89E05B00A459E6 /* Supporting Files */,
+				FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */,
 			);
 			path = "U Network SimulatorTests";
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				FEED38281AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
 				FEED38301AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
 				FE45B7E41A93492200B82E5E /* AppDelegate.swift in Sources */,
+				FE091B851AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

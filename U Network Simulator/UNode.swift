@@ -46,6 +46,37 @@ class UNode {
         router = CurrentRouter(node:self)
     }
     
+    func setupAndStart()
+    {
+        // find addres on interfaces
+        for (_, interface) in enumerate(self.interfaces)
+        {
+            if let interfacePosition=interface.location
+            {
+                self.address=interfacePosition
+                break
+                // we take first avaliable location form interface
+            }
+        }
+        refreshPeers()
+        
+        // if failed to find address in interfaces take the avarge address from peers
+
+        
+        if(self.address.isUnknown)
+        {
+            findAddressFromConnectedPeers()
+        }
+        
+        
+        
+        
+        
+        
+        
+        // set up node maintenance loop
+    }
+
     func getPacketFromInterface(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         if(packet.header.transmitedToUID.isBroadcast())
@@ -58,9 +89,9 @@ class UNode {
             {
                 switch packet.packetCargo
                 {
-                case .ReceptionConfirmation(let _): router.getReply(interface, packet: packet) // this is router staff
+                case .ReceptionConfirmation(let _): router.getReceptionConfirmation(interface, packet: packet) // this is router staff
                 case .ReplyForDiscovery(let _): processDiscoveryBroadcastReplay(interface, packet: packet)
-                case .ReplyForNetworkLookupRequest(let _): router.getReply(interface, packet: packet) // router staff
+                case .ReplyForNetworkLookupRequest(let _): router.getReplyForNetworkLookupRequest(interface, packet: packet) // router staff - future implementation for another sense of neighberhood
                 case .SearchIdForName(let _): processSearchIdForName(interface, packet: packet)
                 case .StoreIdForName(let _): processStoreIdForName(interface, packet: packet)
                 case .SearchAddressForID(let _): processSearchAddressForID(interface, packet: packet)
@@ -99,13 +130,15 @@ class UNode {
         // replay
         
         let replayPacketHeader = UPacketHeader(from: self.id, to: packet.envelope.orginatedByUID, lifeTime: standardPacketLifeTime)
-        var replayEnvelope = packet.envelope.replayEnvelope()
-        replayEnvelope.originAddress = self.address         
+        var replayEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
+  
         var replayForDiscovery=UPacketyReplyForDiscovery()
         var replayCargo = UPacketType.ReplyForDiscovery(replayForDiscovery)
         var replayPacket=UPacket(inputHeader: replayPacketHeader, inputEnvelope: replayEnvelope, inputCargo: replayCargo)
         
-        router.getPacketToRouteFromNode(nil, packet:replayPacket)
+        interface.sendPacketToNetwork(replayPacket)
+        
+     //   router.getPacketToRouteFromNode(nil, packet:replayPacket) - we cannot do it here becouse the sender may be not on our peer list yet
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
         
         
@@ -204,12 +237,13 @@ class UNode {
         
     }
     
+    
  // Other API
     func refreshPeers()
     {
          // assemble packet and
         let discoveryBroadcastPacketHeader = UPacketHeader(from: self.id, to: broadcastNodeId, lifeTime: standardPacketLifeTime)
-        let discoveryBroadcastPacketEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: broadcastNodeId, toAddress: self.address)
+        let discoveryBroadcastPacketEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: broadcastNodeId, toAddress: unknownNodeAddress)
         let broadcastDiscovery=UPacketDiscoveryBroadcast()
         let broadcastDiscovetyCargo=UPacketType.DiscoveryBroadcast(broadcastDiscovery)
         let broadcastDiscoveryPacket=UPacket(inputHeader: discoveryBroadcastPacketHeader, inputEnvelope: discoveryBroadcastPacketEnvelope, inputCargo: broadcastDiscovetyCargo)
@@ -238,6 +272,29 @@ class UNode {
             }
         }
         return result
+    }
+    
+    func findAddressFromConnectedPeers()
+    {
+        var latitudeSum:UInt64 = 0
+        var longitudeSum:UInt64 = 0
+        var altitudeSum:UInt64 = 0
+        
+        
+        for (_, peer) in enumerate(self.peers)
+        {
+            latitudeSum+=peer.address.latitude
+            longitudeSum+=peer.address.longitude
+            altitudeSum+=peer.address.altitude
+        }
+        
+        latitudeSum = latitudeSum / UInt64(peers.count)
+        longitudeSum = longitudeSum / UInt64(peers.count)
+        altitudeSum = altitudeSum / UInt64(peers.count)
+
+        self.address=UNodeAddress(inputLatitude: latitudeSum, inputLongitude: longitudeSum, inputAltitude: altitudeSum)
+        
+        
     }
     
     

@@ -14,6 +14,8 @@ import Foundation
 protocol UNetworkInterfaceProtocol
 {
     var node:UNode {get}
+    
+    var location:UNodeAddress? {get}
 
     func getPacketFromNetwork(incomingPacket:UPacket)
     

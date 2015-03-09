@@ -144,9 +144,13 @@ struct UPacketHeaderLifeCounterAndFlags {
     
     
    highest 16 bits for network signaling
-    1 bit - lookup request attached after header
     
     */
+    
+    let uPacketHeaderLookUpRequestBitmask:UInt64 = 1 << 63
+    let uPacketHeaderGiveUpFlagBitmask:UInt64 = 1 << 62
+    let uPacketHeaderConfirmationDeliveryBitmask:UInt64 = 1 << 61   // rejected delivery if true
+    // some link quality here???
     
     init(lifeCounter:UInt32)
     {
@@ -256,7 +260,7 @@ struct UPacketHeaderLifeCounterAndFlags {
 
 let uPacketHeaderLookUpRequestBitmask:UInt64 = 1 << 63
 let uPacketHeaderGiveUpFlagBitmask:UInt64 = 1 << 62
-let uPacketHeaderConfirmationDeliveryBitmask:UInt64 = 1 << 61   // positive delivery if true
+let uPacketHeaderConfirmationDeliveryBitmask:UInt64 = 1 << 61   // rejected delivery if true
 
 
 

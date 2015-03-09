@@ -11,6 +11,8 @@ class UNetworkInterfaceSimulationEthernet:UNetworkInterfaceProtocol {
     
     
     var node:UNode
+    var location:UNodeAddress?
+
     
     
     var hub:UInt

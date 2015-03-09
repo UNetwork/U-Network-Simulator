@@ -111,6 +111,15 @@ struct UNodeAddress
         let result = lowerAltBits | (highAltBits << 16)
         return (result)
     }
+    
+    var isUnknown:Bool
+    {
+            if(self.low64Bits == 0 && self.high64Bits == 0)
+            {
+                return true
+            }
+        return false
+    }
 }
 
 

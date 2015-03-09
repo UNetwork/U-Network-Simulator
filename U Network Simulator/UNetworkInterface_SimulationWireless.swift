@@ -11,6 +11,8 @@ class UNetworkInterfaceSimulationWireless:UNetworkInterfaceProtocol
 {
     // Protocol
     var node:UNode
+    var location:UNodeAddress?
+
 
     
     // Interface - specific
@@ -21,6 +23,7 @@ class UNetworkInterfaceSimulationWireless:UNetworkInterfaceProtocol
     {
         self.node=node
         self.realLocation = location
+        self.location = UNodeAddress(inputLatitude: location.latitude, inputLongitude: location.longitude, inputAltitude: location.altitude)
     }
     
     
@@ -29,6 +32,7 @@ class UNetworkInterfaceSimulationWireless:UNetworkInterfaceProtocol
     {
         // check packet integrity
         
+        // is it to me
         if(incomingPacket.header.transmitedToUID.isEqual(node.id) || incomingPacket.header.transmitedToUID.isBroadcast()){
         
         node.getPacketFromInterface(self, packet: incomingPacket)

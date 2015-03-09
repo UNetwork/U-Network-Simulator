@@ -17,6 +17,12 @@ let standardPacketLifeTime:UInt32 = 1024
 let maxDiscoveryBroadcastDeepth:Int = 5
 
 
+// Simulation - to be elimineted
+
+let wirelessInterfaceRange = UInt64(1000)
+
+
+
 // aliases
 
 let broadcastNodeId=UNodeID()

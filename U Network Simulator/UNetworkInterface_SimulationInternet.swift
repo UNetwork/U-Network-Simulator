@@ -11,6 +11,8 @@ class UNetworkInterfaceSimulationInternet:UNetworkInterfaceProtocol {
     
     
     var node:UNode
+    var location:UNodeAddress?
+
     
     
     var tCPAddress:UInt32

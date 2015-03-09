@@ -10,6 +10,8 @@ import Foundation
 class UNetworkInterfaceSimulationBridge: UNetworkInterfaceProtocol {
     
     var node:UNode
+    var location:UNodeAddress?
+
     
     
     var bridge:UInt

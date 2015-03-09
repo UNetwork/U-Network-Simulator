@@ -19,7 +19,12 @@ protocol URouterProtocol
 {
     var node:UNode {get}
     
-    func getReply(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func getReceptionConfirmation(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    
+    func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
 
-    func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
+    func getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
+    
+    func maintenanceLoop()
+    
 }
