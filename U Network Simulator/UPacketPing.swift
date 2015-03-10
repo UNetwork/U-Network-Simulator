@@ -10,6 +10,12 @@ import Foundation
 
 struct UPacketPing {
 
-
+    let serial:UInt64
+    
+    init()
+    {
+        serial=random64()
+    }
+    
 
 }

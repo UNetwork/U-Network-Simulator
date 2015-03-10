@@ -43,17 +43,22 @@ class URouter_BruteForceRouting:URouterProtocol {
             {
                 // this is rejected packet by peer
                 // resend to another peer
-                self.getPacketToRouteFromNode(nil, packet: packetStack[packetIndex].packet)
+                let packetFromStack = packetStack[packetIndex].packet
+                
+                self.getPacketToRouteFromNode(packetFromStack.envelope, cargo: packetFromStack.packetCargo)
             }
             else
             {
                 //confirmation ok
                 packetStack[packetIndex].status=BrutForcePacketStatus.Delivered
+                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketConfirmedOK)
             }
         }
         else
         {
             // rejected packet not found on packet stack
+            log(7,"rejected packet not found on packet stack")
+
 
         }
         
@@ -66,7 +71,25 @@ class URouter_BruteForceRouting:URouterProtocol {
         
     }
     
-    func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
+    
+    func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)
+    {
+        if let peerToSendIndex = selectPeerForAddressFromAllPeers(envelope.destinationAddress)
+        {
+        var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: standardPacketLifeTime)
+            let packet=UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: cargo)
+            getPacketToRouteFromNode(node.peers[peerToSendIndex].interface, packet: packet)
+        }
+        else
+        {
+            // must be lonely node
+            log(7,"Lonely node tried to send a packet")
+        }
+        
+    }
+    
+    
+    func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         
         if let packetIndex = searchForSerialOnStack(packet.envelope.serial)
@@ -79,7 +102,12 @@ class URouter_BruteForceRouting:URouterProtocol {
                 if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersIndexes)
                 {
                     packetStack[packetIndex].sentToNodes.append(node.peers[peerToSendPacketIndex].id)
-                    forwardPacketToPeer(interface, packet: packet, peerIndex: peerToSendPacketIndex)
+                    // put GiveUp flag dowm
+                    var updatedPacket=packet
+                    updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(false)
+                    updatedPacket.header.lifeCounterAndFlags.decreaseLifeCounter()
+                    
+                    forwardPacketToPeer(interface, packet: updatedPacket, peerIndex: peerToSendPacketIndex)
                 }
                 else
                 {
@@ -97,12 +125,11 @@ class URouter_BruteForceRouting:URouterProtocol {
             }
             else
             {
-                if(interface != nil)
-                {
+             
                     // packet already processed, send negative packet delivery
                     node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
-                    sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:true)
-                }
+                    sendPacketDeliveryConfirmation(interface, packet: packet, rejected:true)
+                
             }
         }
         else
@@ -115,7 +142,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 var transmitedToPeers=[UNodeID]()
                 transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
                 let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent)
-                forwardPacketToPeer(interface!, packet:packet, peerIndex:peerToSendPacketIndex)
+                forwardPacketToPeer(interface, packet:packet, peerIndex:peerToSendPacketIndex)
             }
             else
             {
@@ -126,10 +153,10 @@ class URouter_BruteForceRouting:URouterProtocol {
                 updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
                 updatedPacket.envelope=packet.envelope.replayEnvelope()
                 
-                if(interface != nil){
+               
                 
-                interface!.sendPacketToNetwork(updatedPacket)
-                }
+                interface.sendPacketToNetwork(updatedPacket)
+                
                 
             
             }

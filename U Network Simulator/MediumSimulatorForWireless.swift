@@ -25,7 +25,9 @@ class MediumSimulatorForWireless:MediumProtocol
         // deliver
         for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
         {
-            interfaceForDelivery.getPacketFromNetwork(packet)
+            dispatch_async(queueSerial, {
+                interfaceForDelivery.getPacketFromNetwork(packet)
+            })
         }
 
     }

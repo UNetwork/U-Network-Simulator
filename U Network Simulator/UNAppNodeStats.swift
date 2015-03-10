@@ -29,6 +29,7 @@ enum StatsEvents:Int
     case    TrespassingPacketProcessedByNode = 0,   //OK
             PacketDroppedAtInterface,               //OK
             PacketRejected,
+            PacketConfirmedOK,
             PacketWithGiveUpFlagSent,
             PacketWithGiveUpFlagRecieved,
             DiscoveryBroadcastPacketProcessed,      //OK
@@ -39,8 +40,10 @@ enum StatsEvents:Int
             IdSearchResultRecieved,
             AddressSearchResultRecieved,
             PingRecieved,
+            PingHadAPongWithProperSerial,
+            PongSerialError,
             PingSent,
-            PongRevieved,
+            PongRecieved,
             PongSent,
             DataSent,
             DataRecieved,

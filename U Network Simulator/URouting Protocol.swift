@@ -23,7 +23,9 @@ protocol URouterProtocol
     
     func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
 
-    func getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol?, packet:UPacket)
+    func getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    
+    func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)
     
     func maintenanceLoop()
     

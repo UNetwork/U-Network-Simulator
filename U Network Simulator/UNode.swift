@@ -31,6 +31,11 @@ class UNode {
     var apps = [UAppProtocol] ()                    // Handler for all "installed" apps
     
     
+    //Node apps required
+    
+ var pingApp:UNAppPing!
+    
+    
     // helper apps - node will work without them
     let nodeStats = UNAppNodeStats()
     let nodeCurrentState = UNAppNodeCurrentState()
@@ -43,11 +48,23 @@ class UNode {
         id=UNodeID(lenght: uIDlengh)
         userName = randomUserName(32)
         address = unknownNodeAddress
-        router = CurrentRouter(node:self)
+        
+        
+        // start node apps
+        
+  //      pingApp=UNAppPing(node:self)
+
+        
     }
     
     func setupAndStart()
     {
+        // setup router
+        router = CurrentRouter(node:self)
+        
+        //set up node apps
+        pingApp = UNAppPing(node: self)
+
         // find addres on interfaces
         for (_, interface) in enumerate(self.interfaces)
         {
@@ -67,6 +84,10 @@ class UNode {
         {
             findAddressFromConnectedPeers()
         }
+        
+        
+        
+        // start apps
         
         
         
@@ -208,11 +229,34 @@ class UNode {
     func processPing(packet:UPacket)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.PingRecieved)
+
+        let envelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
+        var pingSerial:UInt64 = 0
+        switch packet.packetCargo
+        {
+        case .Ping(let pingPacketCargo): pingSerial=pingPacketCargo.serial
+        default: log(7, "Ping packet is not PING!")
+        }
+        let pongCargo=UPacketPong(serialOfPing: pingSerial)
+        let pongPacketCargo=UPacketType.Pong(pongCargo)
+        nodeStats.addNodeStatsEvent(StatsEvents.PongSent)
+        router.getPacketToRouteFromNode(envelope, cargo: pongPacketCargo)
+        
+
     }
     
     func processPong(packet:UPacket)
     {
-        nodeStats.addNodeStatsEvent(StatsEvents.PongRevieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.PongRecieved)
+        var pingSerial:UInt64 = 0
+
+        switch packet.packetCargo
+        {
+        case .Pong(let pongPacketCargo): pingSerial=pongPacketCargo.serialOfPing
+        default: log(7, "Pong packet is not PoNG!")
+        }
+        
+        pingApp.recievedPong(pingSerial)
     }
     
     func processData(packet:UPacket)
@@ -227,14 +271,6 @@ class UNode {
     
     
 
-// creating packets
-
-    
-    func ping(uID:UNodeID, address:UNodeAddress)
-    {
-        nodeStats.addNodeStatsEvent(StatsEvents.PingSent)
-    }
-    
     
  // Other API
     func refreshPeers()

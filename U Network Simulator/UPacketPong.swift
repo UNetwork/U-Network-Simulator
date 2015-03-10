@@ -10,6 +10,11 @@ import Foundation
 
 struct UPacketPong {
 
-
+     let serialOfPing:UInt64
+    
+    init(serialOfPing:UInt64)
+    {
+        self.serialOfPing=serialOfPing
+    }
     
 }
