@@ -10,5 +10,6 @@ import Foundation
 
 struct UPacketSearchAddressForID {
 
+    var id:UNodeID
 
 }

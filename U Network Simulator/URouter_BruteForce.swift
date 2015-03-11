@@ -225,7 +225,7 @@ class URouter_BruteForceRouting:URouterProtocol {
     }
     
     
-    func selectPeerFromIndexListAfterExclusions(addresss:UNodeAddress, peerIndexes:[Int]) -> Int?
+    func selectPeerFromIndexListAfterExclusions(address:UNodeAddress, peerIndexes:[Int]) -> Int?
     {
         var result:Int?
         if(node.peers.count > 0)

@@ -17,7 +17,7 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
         let networkLat=UInt64(65365)
         let networkLong=UInt64(65365)
         let networkAlt=UInt64(65365)
-        let meshSize=UInt64(10)
+        let meshSize=UInt64(4)
         
         
         for var lat:UInt64 = networkLat; lat < networkLat+(meshSize * wirelessInterfaceRange); lat = lat + wirelessInterfaceRange - 100
@@ -39,7 +39,7 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
           
             
         }
-        
+         sleep(10)
         for (_, aNode) in enumerate(simulator.simulationNodes)
         {
             XCTAssert(aNode.node.peers.count > 0, "There are lonley peers")

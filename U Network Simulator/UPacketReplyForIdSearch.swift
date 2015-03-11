@@ -10,5 +10,7 @@ import Foundation
 
 struct UPacketReplyForIdSearch {
 
-    
+    var searchRequestSerial:UInt64
+    var foundId:UNodeID
+    var time:UInt64
 }

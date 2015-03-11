@@ -20,6 +20,37 @@ class UPingTests: XCTestCase {
         
     }
     
+    
+    func testPingSimple()
+    {
+        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: 2, inputLongitude: 3, inputAltitude: 4))
+        
+
+        
+        simulator.simulationNodes[0].node.setupAndStart()
+        
+        XCTAssert(simulator.simulationNodes[0].node.peers.count == 0, "single node cant have a peer")
+        
+        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: 200, inputLongitude: 300, inputAltitude: 400))
+        
+        simulator.simulationNodes[0].node.setupAndStart()
+        simulator.simulationNodes[1].node.setupAndStart()
+        
+        sleep(1)
+
+        
+        XCTAssert(simulator.simulationNodes[0].node.peers.count == 1, "one peer only")
+
+        XCTAssert(simulator.simulationNodes[1].node.peers.count == 1, "one peer only")
+
+        
+        let asdf=simulator.simulationNodes[0].node
+        let dsfs=simulator.simulationNodes[1].node
+
+        
+        
+    }
+    
     func testPing()
     {
      
@@ -49,17 +80,32 @@ class UPingTests: XCTestCase {
             
         }
         
+        sleep(15)
         
         simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[simulator.simulationNodes.count - 1].node.id, address: simulator.simulationNodes[simulator.simulationNodes.count-1].node.address)
-        sleep(125)
+        simulator.simulationNodes[simulator.simulationNodes.count - 1].node.pingApp.sendPing(simulator.simulationNodes[0].node.id, address: simulator.simulationNodes[0].node.address)
+        
+        sleep(30)
 
         
         
         XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
 
+        var globalStats=Array(count: 64, repeatedValue: 0)
         
+        for (_, simNode) in enumerate(simulator.simulationNodes)
+        {
+            for(i, value)in enumerate(simNode.node.nodeStats.nodeStats)
+            {
+            globalStats[i]+=value
+            }
+        }
         
-        
+        for(_, value) in enumerate(globalStats)
+        {
+            println(" \(value) ")
+            
+        }
     }
     
     

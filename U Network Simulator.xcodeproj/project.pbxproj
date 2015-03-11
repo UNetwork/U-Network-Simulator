@@ -56,6 +56,8 @@
 		FEBFCDC31AAEEC2C00E09666 /* UNAppPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */; };
 		FEBFCDC41AAEEC2C00E09666 /* UNAppPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */; };
 		FEBFCDC61AAF446700E09666 /* UPingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC51AAF446700E09666 /* UPingTests.swift */; };
+		FEBFCDC81AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */; };
+		FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */; };
 		FEC90F1C1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
 		FEC90F1D1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
 		FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
@@ -159,6 +161,7 @@
 		FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAddress.swift; path = "U Network Simulator/UNodeAddress.swift"; sourceTree = SOURCE_ROOT; };
 		FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppPing.swift; path = "U Network Simulator/UNAppPing.swift"; sourceTree = "<group>"; };
 		FEBFCDC51AAF446700E09666 /* UPingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPingTests.swift; sourceTree = "<group>"; };
+		FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouter_SimpleDirection.swift; path = "U Network Simulator/URouter_SimpleDirection.swift"; sourceTree = "<group>"; };
 		FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppNodeCurrentState.swift; path = "U Network Simulator/UNAppNodeCurrentState.swift"; sourceTree = "<group>"; };
 		FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketHeader.swift; path = "U Network Simulator/UPacketHeader.swift"; sourceTree = "<group>"; };
 		FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryBroadcast.swift; path = "U Network Simulator/UPacketDiscoveryBroadcast.swift"; sourceTree = "<group>"; };
@@ -352,6 +355,7 @@
 			children = (
 				FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */,
 				FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */,
+				FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */,
 			);
 			name = "U Routing";
 			sourceTree = "<group>";
@@ -526,6 +530,7 @@
 				FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */,
 				FEE8997A1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
 				FEE899661A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */,
+				FEBFCDC81AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
 				FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
 				FE22CDC71AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */,
@@ -581,6 +586,7 @@
 				FEED383A1AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
 				FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */,
+				FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
 				FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */,
 				FEA0072D1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */,
 				FEA80C361A95EDE90061CEA3 /* UNodeAddressTests.swift in Sources */,

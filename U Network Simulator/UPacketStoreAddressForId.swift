@@ -10,5 +10,8 @@ import Foundation
 
 struct UPacketStoreAddressForId {
 
-
+    var iD:UNodeID
+    var address:UNodeAddress
+    var time:UInt64
+    
 }

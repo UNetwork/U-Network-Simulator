@@ -29,7 +29,7 @@ let broadcastNodeId=UNodeID()
 
 let unknownNodeAddress = UNodeAddress()
 
-typealias CurrentRouter = URouter_BruteForceRouting
+typealias CurrentRouter = URouterSimpleDirection
 
 
 

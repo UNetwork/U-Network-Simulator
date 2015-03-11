@@ -10,6 +10,7 @@ import Foundation
 
 struct UPacketReplyForAddressSearch {
  
-
+    var iD:UNodeID
+    var address:UNodeAddress
 
 }

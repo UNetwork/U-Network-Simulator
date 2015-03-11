@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct UPacketDataDeliveryConfirmation {
-
-
+struct UPacketDataDeliveryConfirmation
+{
     
+    var deliveredPacketSerial:UInt64
 }

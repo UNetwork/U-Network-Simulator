@@ -10,6 +10,7 @@ import Foundation
 
 struct UPacketSearchIdForName {
     
-
+    var name:String
+    var time:UInt64
 
 }
