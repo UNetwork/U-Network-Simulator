@@ -43,6 +43,7 @@ enum UPacketType {
     case SearchIdForName (UPacketSearchIdForName)                               // request for search for id given name
     case ReplyForIdSearch (UPacketReplyForIdSearch)                             // replay for search for id given name
     case StoreIdForName (UPacketStoreIdForName)                                 // store name request
+    case StoreNameReplay (UPacketStoreNameReplay)                               // repaly for name store request
     case SearchAddressForID (UPacketSearchAddressForID)                         // request for search for address given id
     case ReplyForAddressSearch (UPacketReplyForAddressSearch)                   // replay for search for address given id
     case StoreAddressForId (UPacketStoreAddressForId)                           // store address request
@@ -50,5 +51,6 @@ enum UPacketType {
     case Pong (UPacketPong)                                                     // replay for ping
     case Data (UPacketData)                                                     // workmule of the network transfer
     case DataDeliveryConfirmation (UPacketDataDeliveryConfirmation)             // end point data packet sucessful transfer confirmation
+    case Dropped (UPacketDropped)                                               // information sent to the packet originator in case of not delivery and no route possibilities or lifttime expire
 
 }

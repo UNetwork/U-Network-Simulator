@@ -26,30 +26,39 @@ class UNAppNodeStats {
 
 enum StatsEvents:Int
 {
-    case    TrespassingPacketProcessedByNode = 0,   //OK
-            PacketDroppedAtInterface,               //OK
+    case
+    
+            PingSent = 0,
+            PingRecieved,
+            PongSent,
+            PongRecieved,
+            PingHadAPongWithProperSerial,
+            PongSerialError,
+
+            TrespassingPacketProcessedByNode,
+            DiscoveryBroadcastPacketProcessed,
+    
+            PacketDroppedAtInterface,
             PacketRejected,
             PacketConfirmedOK,
             PacketWithGiveUpFlagSent,
+    
             PacketWithGiveUpFlagRecieved,
-            DiscoveryBroadcastPacketProcessed,      //OK
             SearchIdForNameProcessed,
+    
+            SearchForNameSucess,
             StoreIdForNameProcessed,
             SearchAddressForIdProcessed,
             StoreAddressForIdProcessed,
             IdSearchResultRecieved,
             AddressSearchResultRecieved,
-            PingRecieved,
-            PingHadAPongWithProperSerial,
-            PongSerialError,
-            PingSent,
-            PongRecieved,
-            PongSent,
             DataSent,
             DataRecieved,
             DataConfirmationSent,
             DataConfirmationRecieved,
             LookupRequestsAdded,
-            LookupRequestProcessed
+    LookupRequestProcessed
+    
+    static let allValues = ["PingSent", "PingRecieved", "PongSent", "PongRecieved", "PingHadAPongWithProperSerial", "PongSerialError", "TrespassingPacketProcessedByNode", "DiscoveryBroadcastPacketProcessed", "PacketDroppedAtInterface", "PacketRejected", "PacketConfirmedOK", "PacketWithGiveUpFlagSent", "PacketWithGiveUpFlagRecieved", "SearchIdForNameProcessed", "SearchForNameSucess", "StoreIdForNameProcessed", "SearchAddressForIdProcessed", "StoreAddressForIdProcessed", "IdSearchResultRecieved", "AddressSearchResultRecieved", "DataSent", "DataRecieved", "DataConfirmationSent", "DataConfirmationRecieved", "LookupRequestsAdded", "LookupRequestProcessed"]
 
 }

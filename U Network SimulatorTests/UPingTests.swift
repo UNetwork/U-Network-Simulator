@@ -3,7 +3,6 @@
 //  U Network Simulator
 //
 //  Created by Andrzej Parszuto on 3/10/15.
-//  Copyright (c) 2015 U. All rights reserved.
 //
 
 import Cocoa
@@ -44,8 +43,7 @@ class UPingTests: XCTestCase {
         XCTAssert(simulator.simulationNodes[1].node.peers.count == 1, "one peer only")
 
         
-        let asdf=simulator.simulationNodes[0].node
-        let dsfs=simulator.simulationNodes[1].node
+     
 
         
         
@@ -85,7 +83,7 @@ class UPingTests: XCTestCase {
         simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[simulator.simulationNodes.count - 1].node.id, address: simulator.simulationNodes[simulator.simulationNodes.count-1].node.address)
         simulator.simulationNodes[simulator.simulationNodes.count - 1].node.pingApp.sendPing(simulator.simulationNodes[0].node.id, address: simulator.simulationNodes[0].node.address)
         
-        sleep(30)
+        sleep(10)
 
         
         

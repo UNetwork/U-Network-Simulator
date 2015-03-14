@@ -19,10 +19,12 @@ class UNode {
     let id:UNodeID                                  // Unique Id
     var address:UNodeAddress                       // Current Address - geographical position
     var userName:String                            // User name of node if defined
-    var time:UInt64=0                               // Local "time"
+    var timeCounter:UInt64=0                               // Local "time"
     
     var interfaces=[UNetworkInterfaceProtocol]()    // Network interfaces
-    var router:URouterProtocol!                     // Handler for router
+    var router:URouterProtocol!                     // Handler for packet router
+    var storeAndSearchRouter:UStoreAndSearchRoutingProtocol!
+                                                    // The search and store packets are routed differently
     var peers = [UPeerDataRecord]()                 // Currently available connected nodes
     var knownAddresses = [UMemoryIdAddressRecord]() // Memory of search for address service
     var knownNames  = [UMemoryNameIdRecord]()       // Memory of search for name service
@@ -33,7 +35,10 @@ class UNode {
     
     //Node apps required
     
- var pingApp:UNAppPing!
+    var pingApp:UNAppPing!
+    var searchApp:UNAppSearch!
+    var dataApp:UNAppDataTransfer!
+    
     
     
     // helper apps - node will work without them
@@ -46,7 +51,7 @@ class UNode {
     init ()
     {
         id=UNodeID(lenght: uIDlengh)
-        userName = randomUserName(32)
+        userName = randomUserName(16)
         address = unknownNodeAddress
         
         
@@ -61,11 +66,22 @@ class UNode {
     {
         // setup router
         router = CurrentRouter(node:self)
+        storeAndSearchRouter = UStoreAndSearchRouterSimple(node: self)
         
         //set up node apps
         pingApp = UNAppPing(node: self)
+        searchApp = UNAppSearch(node: self)
+        dataApp = UNAppDataTransfer(node: self)
+        
+        // add self data to search tables
+        let ownNameRecord=UMemoryNameIdRecord(name: self.userName, id: self.id, time: nodeTime)
+        knownNames.append(ownNameRecord)
+        
+        
+        
+        
 
-        // find addres on interfaces
+        // find addres from interfaces
         for (_, interface) in enumerate(self.interfaces)
         {
             if let interfacePosition=interface.location
@@ -76,6 +92,8 @@ class UNode {
             }
         }
         refreshPeers()
+
+
         
         // if failed to find address in interfaces take the avarge address from peers
 
@@ -85,7 +103,7 @@ class UNode {
             findAddressFromConnectedPeers()
         }
         
-        
+
         
         // start apps
         
@@ -97,6 +115,7 @@ class UNode {
         
         // set up node maintenance loop
     }
+    
 
     func getPacketFromInterface(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
@@ -111,18 +130,35 @@ class UNode {
                 switch packet.packetCargo
                 {
                 case .ReceptionConfirmation(let _): router.getReceptionConfirmation(interface, packet: packet) // this is router staff
+                
                 case .ReplyForDiscovery(let _): processDiscoveryBroadcastReplay(interface, packet: packet)
+                
                 case .ReplyForNetworkLookupRequest(let _): router.getReplyForNetworkLookupRequest(interface, packet: packet) // router staff - future implementation for another sense of neighberhood
-                case .SearchIdForName(let _): processSearchIdForName(interface, packet: packet)
-                case .StoreIdForName(let _): processStoreIdForName(interface, packet: packet)
+                
+                case .SearchIdForName(let searchForIdRequest): processSearchIdForName(packet.header, envelope:packet.envelope, request: searchForIdRequest)
+
+                case .StoreIdForName(let storeIdRequest): processStoreIdForName(packet.header, envelope:packet.envelope, request: storeIdRequest)
+                    
+                case .StoreNameReplay(let replayCargo): processStoreNameReplay(packet.envelope, replay:replayCargo)
+                
                 case .SearchAddressForID(let _): processSearchAddressForID(interface, packet: packet)
+                
                 case .StoreAddressForId(let _): processStoreAddressForId(interface, packet:packet)
-                case .ReplyForIdSearch(let _): processIdSearchResults(packet)
+                
+                case .ReplyForIdSearch(let searchForIdResultCargo): processIdSearchResults(packet.envelope,  searchResult: searchForIdResultCargo)
+                
                 case .ReplyForAddressSearch(let _) : processAddressSearchResults(packet)
-                case .Ping(let _): processPing(packet)
-                case .Pong(let _): processPong(packet)
+                
+                case .Ping(let pingCargo): processPing(packet.envelope, ping: pingCargo)
+                
+                case .Pong(let pongCargo): processPong(packet.envelope, pong: pongCargo)
+                
                 case .Data(let _): processData(packet)
+                
                 case .DataDeliveryConfirmation(let _): processDataDeliveryConfirmation(packet)
+                    
+                case .Dropped(let droppedCargo): processDrop(packet.envelope, tumbstone:droppedCargo)
+                
                 default: log(7, "Unknown packet type???")
                 }
             }
@@ -190,17 +226,122 @@ class UNode {
     
     
     
-    func processSearchIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func processSearchIdForName(header:UPacketHeader, envelope:UPacketEnvelope, request:UPacketSearchIdForName)
     {
-        // check memory
-        // replay if found
-        // if not forward to peer
         nodeStats.addNodeStatsEvent(StatsEvents.SearchIdForNameProcessed)
+        
+        if let foundId=findIdForName(request.name) where request.name != self.userName
+        {
+            
+            // name found replay data
+            
+            nodeStats.addNodeStatsEvent(StatsEvents.SearchForNameSucess)
+            
+            let newEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
+            
+            let searchReplayCargo = UPacketType.ReplyForIdSearch(UPacketReplyForIdSearch(id: foundId, serial: request.searchSerial))
+            
+            router.getPacketToRouteFromNode(newEnvelope, cargo: searchReplayCargo)
+            
+        }
+        else
+        {
+            if(envelope.orginatedByUID.isEqual(self.id))
+            {
+                // send 8 packets
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: UPacketType.SearchIdForName(request)))
+                var modifiedEnevelope=envelope
+                modifiedEnevelope.destinationAddress=aboveNorthPoleLeft
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=belowNorthPoleRight
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=belowNorthPoleLeft
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=aboveSouthPoleRight
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=aboveSouthPoleLeft
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=belowSouthPoleRight
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                modifiedEnevelope.destinationAddress=belowSouthPoleLeft
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.SearchIdForName(request)))
+                
+            }
+            else if(envelope.destinationUID.isBroadcast())
+            {
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: UPacketType.SearchIdForName(request)))
+            }
+            
+        }
+        
+        
+        
     }
     
-    func processStoreIdForName(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func processStoreIdForName(header:UPacketHeader, envelope:UPacketEnvelope, request:UPacketStoreIdForName)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.StoreIdForNameProcessed)
+
+        
+        
+        
+        if(envelope.orginatedByUID.isEqual(self.id))
+        {
+            // send 8 packets
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: UPacketType.StoreIdForName(request)))
+            var modifiedEnevelope=envelope
+            modifiedEnevelope.destinationAddress=aboveNorthPoleLeft
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=belowNorthPoleRight
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=belowNorthPoleLeft
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=aboveSouthPoleRight
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=aboveSouthPoleLeft
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=belowSouthPoleRight
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+            modifiedEnevelope.destinationAddress=belowSouthPoleLeft
+            storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: modifiedEnevelope, inputCargo: UPacketType.StoreIdForName(request)))
+
+        }
+        else
+        {
+            
+            if let id=findIdForName(request.name)
+            {
+                if(id.isEqual(request.id))
+                {
+                    // replay with positive anwser
+                }
+                else
+                {
+                    // replay with negative anwser
+                }
+            }
+            else
+            {
+                // add record
+                self.knownNames.append(UMemoryNameIdRecord(name: request.name, id: envelope.orginatedByUID, time: nodeTime))
+                
+            }
+            
+            // chceck the broadcast in envelope is set and
+            // forward packet to StoreAndSearch Routing
+            
+            if(envelope.destinationUID.isBroadcast())
+            {
+                storeAndSearchRouter.getStoreOrSearchPacket(UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: UPacketType.StoreIdForName(request)))
+            }
+            
+        }
+        
+    }
+    
+    func processStoreNameReplay(envelope:UPacketEnvelope, replay:UPacketStoreNameReplay)
+    {
+        
     }
     
     
@@ -216,9 +357,11 @@ class UNode {
     
     
 
-    func processIdSearchResults(packet:UPacket)
+    func processIdSearchResults(envelope:UPacketEnvelope, searchResult:UPacketReplyForIdSearch)
     {
      nodeStats.addNodeStatsEvent(StatsEvents.IdSearchResultRecieved)
+        self.searchApp.nameFound(searchResult)
+        
     }
     
     func processAddressSearchResults(packet:UPacket)
@@ -226,37 +369,27 @@ class UNode {
         nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultRecieved)
     }
     
-    func processPing(packet:UPacket)
+    func processPing(envelope:UPacketEnvelope, ping:UPacketPing)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.PingRecieved)
 
-        let envelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
-        var pingSerial:UInt64 = 0
-        switch packet.packetCargo
-        {
-        case .Ping(let pingPacketCargo): pingSerial=pingPacketCargo.serial
-        default: log(7, "Ping packet is not PING!")
-        }
-        let pongCargo=UPacketPong(serialOfPing: pingSerial)
-        let pongPacketCargo=UPacketType.Pong(pongCargo)
+        let newEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
+
+        let pongCargo=UPacketType.Pong(UPacketPong(serialOfPing: ping.serial))
+        
         nodeStats.addNodeStatsEvent(StatsEvents.PongSent)
-        router.getPacketToRouteFromNode(envelope, cargo: pongPacketCargo)
+        
+        router.getPacketToRouteFromNode(newEnvelope, cargo: pongCargo)
         
 
     }
     
-    func processPong(packet:UPacket)
+    func processPong(envelope:UPacketEnvelope, pong:UPacketPong)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.PongRecieved)
-        var pingSerial:UInt64 = 0
-
-        switch packet.packetCargo
-        {
-        case .Pong(let pongPacketCargo): pingSerial=pongPacketCargo.serialOfPing
-        default: log(7, "Pong packet is not PoNG!")
-        }
+   
         
-        pingApp.recievedPong(pingSerial)
+        pingApp.recievedPong(pong.serialOfPing)
     }
     
     func processData(packet:UPacket)
@@ -267,6 +400,11 @@ class UNode {
     func processDataDeliveryConfirmation(packet:UPacket)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.DataConfirmationRecieved)
+    }
+    
+    func processDrop(envelope:UPacketEnvelope, tumbstone:UPacketDropped)
+    {
+        
     }
     
     
@@ -308,6 +446,24 @@ class UNode {
         return result
     }
     
+    func findIdForName(nameToFind:String) -> UNodeID?
+    {
+        var result:UNodeID?
+        
+        for(_, nameRecord) in enumerate(self.knownNames)
+        {
+            if(nameRecord.name == nameToFind)
+            {
+                result = nameRecord.id
+            }
+        }
+        
+        
+        return result
+    }
+    
+    // Other Utility
+    
     func findAddressFromConnectedPeers()
     {
         var latitudeSum:UInt64 = 0
@@ -327,7 +483,13 @@ class UNode {
         altitudeSum = altitudeSum / UInt64(peers.count)
 
         self.address=UNodeAddress(inputLatitude: latitudeSum, inputLongitude: longitudeSum, inputAltitude: altitudeSum)
-        
+    }
+    
+    var nodeTime:UInt64
+    {
+        get {
+        return    ++self.timeCounter
+            }
         
     }
     

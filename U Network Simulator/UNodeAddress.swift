@@ -29,6 +29,10 @@ altitude at sea level is 100 000
 
 */
 
+let maxLatitude:UInt64 = 1<<48 - 1
+let maxLongitude:UInt64 = 1<<48 - 1
+let maxAltitude:UInt64 = 1<<32 - 1
+
 struct UNodeAddress
 {
     // Data
@@ -120,10 +124,39 @@ struct UNodeAddress
             }
         return false
     }
+    
+    func positionToAddress(address:UNodeAddress) -> (deltaLat:Int64, deltaLong:Int64, deltaAlt:Int64)
+    {
+        var deltaLat = positionDifference(self.latitude, to: address.latitude)
+        var deltaLong = positionDifference(self.longitude, to: address.longitude)
+        var deltaAlt:Int64 = positionDifference(self.altitude, to: address.altitude)
+        
+        return(deltaLat, deltaLong, deltaAlt)
+    }
+    
+    func positionDifference(from:UInt64, to:UInt64) -> Int64
+    {
+        var result:Int64
+        
+        if(from <= to)
+        {
+        result = Int64(to - from)
+        }
+        else
+        {
+            result = -(Int64(from - to))
+
+        }
+        
+        
+        return result
+    }
+    
 }
 
 
 let latitudeAndLongitudeBitMask:UInt64 = 0x0000ffffffffffff
+
 
 
 

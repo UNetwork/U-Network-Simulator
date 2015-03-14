@@ -37,6 +37,16 @@ struct UMemoryNameIdRecord
     var name:String
     var id:UNodeID
     var time:UInt64
+    
+    
+    init(name:String, id:UNodeID, time:UInt64)
+    {
+        self.name=name
+        self.id=id
+        self.time = time
+    }
+    
+    
 }
 
 struct UNodeContacts {

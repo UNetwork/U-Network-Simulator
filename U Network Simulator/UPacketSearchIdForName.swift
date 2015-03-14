@@ -11,6 +11,12 @@ import Foundation
 struct UPacketSearchIdForName {
     
     var name:String
-    var time:UInt64
+    var searchSerial:UInt64
+    
+    init(nameToSearch:String)
+    {
+        self.name=nameToSearch
+        self.searchSerial=random64() 
+    }
 
 }

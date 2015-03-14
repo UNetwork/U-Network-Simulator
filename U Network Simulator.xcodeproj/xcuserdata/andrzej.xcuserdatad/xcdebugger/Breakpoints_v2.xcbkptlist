@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "U Network SimulatorTests/UNameStoreAndSearchTest.swift"
+            timestampString = "448048935.512829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "testNameSearch()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_SimulatorTests.UNameStoreAndSearchTest.testNameSearch (U_Network_SimulatorTests.UNameStoreAndSearchTest)() -&gt; ()"
+                  moduleName = "U Network SimulatorTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20SimulatorTests/UNameStoreAndSearchTest.swift"
+                  timestampString = "448049343.258419"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "3426">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_SimulatorTests.UNameStoreAndSearchTest.(testNameSearch (U_Network_SimulatorTests.UNameStoreAndSearchTest) -&gt; () -&gt; ()).(implicit closure #1)"
+                  moduleName = "U Network SimulatorTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20SimulatorTests/UNameStoreAndSearchTest.swift"
+                  timestampString = "448049343.258634"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "35">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

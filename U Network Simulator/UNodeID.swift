@@ -36,7 +36,7 @@ class UNodeID {
         }
     }
     
-    init ()     // Broadcast packet if in transmitedToUID in packet header
+    init ()     // Broadcast packet if in transmitedToUID in packet header or distribute locally id in envelope of store packet
     {
        self.data.append(0)
     }

@@ -29,7 +29,7 @@ func strToUInt64(stringToConvert:String)->(UInt64)
 
 func log(level:Int, text:String)
 {
-    if (AppDelegate.sharedInstance.logLevel >= level)
+    if (AppDelegate.sharedInstance.logLevel <= level)
     {
         println(text)
         AppDelegate.sharedInstance.logText+=text+"\n"

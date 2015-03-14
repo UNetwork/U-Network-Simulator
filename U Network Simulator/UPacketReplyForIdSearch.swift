@@ -12,5 +12,12 @@ struct UPacketReplyForIdSearch {
 
     var searchRequestSerial:UInt64
     var foundId:UNodeID
-    var time:UInt64
+    
+    init(id:UNodeID, serial:UInt64)
+    {
+        
+        self.foundId=id
+        self.searchRequestSerial=serial
+        
+    }
 }

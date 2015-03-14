@@ -16,6 +16,8 @@ let standardPacketLifeTime:UInt32 = 1024
 
 let maxDiscoveryBroadcastDeepth:Int = 5
 
+var defaultStoreSearchDepth:UInt32 = 30
+
 
 // Simulation - to be elimineted
 
