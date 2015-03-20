@@ -28,11 +28,15 @@ class UNAppPing
         self.sentPingSerialTable.append(pingCargo.serial)
         node.nodeStats.addNodeStatsEvent(StatsEvents.PingSent)
         
+        log(4, "------------ New Ping From Ping App \(node.txt)")
+        
         node.router.getPacketToRouteFromNode(pingEnvelope, cargo: pingPacketCargo)
     }
     
     func recievedPong(serial:UInt64)
     {
+        log(4, "------------ Ping From Ping App gots PONG \(node.txt)")
+
         if(findSerialInSentPingTable(serial))
         {
             

@@ -16,7 +16,7 @@ class MediumSimulatorForWireless:MediumProtocol
    
     func getPacketFromInterface (interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        log(2, "AIR: \(packet.txt) from \(interface.node.txt)")
+        log(2, "AIR: from \(interface.node.txt) \(packet.txt) ")
         
         var wirelessInterface = interface as! UNetworkInterfaceSimulationWireless
         

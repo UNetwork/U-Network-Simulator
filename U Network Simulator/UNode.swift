@@ -174,8 +174,32 @@ class UNode {
     
     func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
+        if(packet.header.lifeCounterAndFlags.lifeCounter > 0)
+        {
         nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)  // STATS
+        
         router.getPacketToRouteFromNode(interface, packet:packet)
+        }
+        else
+        {
+            switch packet.packetCargo
+            {
+            case .Dropped(let _): log(5, "\(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification \(packet.txt)")
+            default: sendDropped(packet.envelope)
+            }
+            
+        }
+    }
+    
+    func sendDropped(envelope:UPacketEnvelope)
+    {
+       self.nodeStats.addNodeStatsEvent(StatsEvents.PacketDropped)
+        // create dropped packet and send to the originator (if dropped packet type is not dropped - to check ealier)
+        let dropCargo = UPacketDropped(serial: envelope.serial)
+        let drop=UPacketType.Dropped(dropCargo)
+        let dropEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
+        router.getPacketToRouteFromNode(dropEnvelope, cargo: drop)
+        
     }
     
     
@@ -498,7 +522,7 @@ class UNode {
     
     var txt:String
     {
-        return "NODE \(self.id.txt) "
+        return "NODE \(self.id.txt) PEERS: \(self.peers.count) "
     }
     
     

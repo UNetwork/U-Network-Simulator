@@ -10,4 +10,9 @@ import Foundation
 
 struct UPacketDropped {
     var serial:UInt64
+    
+    init(serial:UInt64)
+    {
+        self.serial=serial
+    }
 }

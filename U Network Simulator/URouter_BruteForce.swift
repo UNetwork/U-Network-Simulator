@@ -46,7 +46,8 @@ class URouter_BruteForceRouting:URouterProtocol {
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
                 let packetFromStack = packetStack[packetIndex].packet
                 
-                self.getPacketToRouteFromNode(packetFromStack.envelope, cargo: packetFromStack.packetCargo)
+               // self.getPacketToRouteFromNode(packetFromStack.envelope, cargo: packetFromStack.packetCargo)
+                self.getPacketToRouteFromStack(packetIndex)
             }
             else
             {
@@ -59,13 +60,13 @@ class URouter_BruteForceRouting:URouterProtocol {
         {
             // delivery confirmation packet serial not found on packet stack
             log(7,">>>>>>\(node.txt) delivery confirmation packet serial not found on packet stack \(packet.txt)")
-
-
+            
+            
         }
         
     }
     
-
+    
     
     func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
@@ -74,7 +75,33 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     func getPacketToRouteFromStack(packetIndex:Int)
     {
+        let stackRecord = packetStack[packetIndex]
         
+        if let peerToSendIndex = selectPeerFromIndexListAfterExclusions(stackRecord.packet.envelope.destinationAddress, peerIndexes:selectPeersExcluding(stackRecord.sentToNodes ))
+        {
+            packetStack[packetIndex].sentToNodes.append(node.peers[peerToSendIndex].id)
+            forwardPacketToPeer(nil, packet: stackRecord.packet, peerIndex: peerToSendIndex)
+        }
+        else
+        {
+            
+            var packetToResend=stackRecord.packet
+            var peerToSendId=stackRecord.recievedFrom
+            
+            //nobody to send - trying to find the original peer
+            if let returningToIndex = node.findInPeers(peerToSendId)
+            {
+                forwardPacketToPeer(nil, packet: stackRecord.packet, peerIndex: returningToIndex)
+            }
+            else
+            {
+                //drop
+                node.sendDropped(stackRecord.packet.envelope)
+            }
+            
+            
+            
+        }
     }
     
     
@@ -82,12 +109,12 @@ class URouter_BruteForceRouting:URouterProtocol {
     {
         if let peerToSendIndex = selectPeerForAddressFromAllPeers(envelope.destinationAddress)
         {
-        var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: standardPacketLifeTime)
+            var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: standardPacketLifeTime)
             
             let packet=UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: cargo)
             
             log(2,"Packet \(packet.txt) created from envelope and cargo by \(node.txt)")
-
+            
             getPacketToRouteFromNode(node.peers[peerToSendIndex].interface, packet: packet)
         }
         else
@@ -104,7 +131,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         
         if let packetIndex = searchForSerialOnStack(packet.envelope.serial)
         {
-            // counter in this place 
+            // counter in this place
             if(packet.header.lifeCounterAndFlags.isGiveUp)
             {
                 // returning, new peer must be selected
@@ -112,6 +139,8 @@ class URouter_BruteForceRouting:URouterProtocol {
                 
                 log(2, " \(packet.txt) is processed by \(node.txt) with givup flag")
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagRecieved)
+                
+                
                 var peersIndexes = selectPeersExcluding(packetStack[packetIndex].sentToNodes)
                 if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersIndexes)
                 {
@@ -120,7 +149,6 @@ class URouter_BruteForceRouting:URouterProtocol {
                     
                     var updatedPacket=packet
                     updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(false)
-                    updatedPacket.header.lifeCounterAndFlags.decreaseLifeCounter()
                     
                     forwardPacketToPeer(interface, packet: updatedPacket, peerIndex: peerToSendPacketIndex)
                 }
@@ -128,35 +156,45 @@ class URouter_BruteForceRouting:URouterProtocol {
                 {
                     // send back to the origin
                     
-                    
-                    node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
-                    var originIndex = searchForIdInNodePeers(packetStack[packetIndex].recievedFrom)
-                    var updatedPacket=packet
-                    
-                    updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
-                    
-                    
-                    
-                    if(originIndex != nil)
+                    if(packet.envelope.orginatedByUID.isEqual(node.id))
                     {
-                        log(2,"\(packet.txt) is returned to \(node.peers[originIndex!].id.txt) at \(node.peers[originIndex!].address.txt)")
-
-                        forwardPacketToPeer(interface, packet: updatedPacket, peerIndex: originIndex!)
+                        
+                        log(6,"\(node.txt) recieved back own packet and dont have any peer to forward it \(packet.txt)")
+                        
                     }
                     else
                     {
-                        log(7, "\(node.txt) cannot find a originator of the packet on own packet stack")
+                        
+                        node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
+                        var originIndex = searchForIdInNodePeers(packetStack[packetIndex].recievedFrom)
+                        var updatedPacket=packet
+                        
+                        updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
+                        
+                        log(2,"give up\n")
+                        
+                        if(originIndex != nil)
+                        {
+                            log(2,"\(packet.txt) is returned to \(node.peers[originIndex!].id.txt) at \(node.peers[originIndex!].address.txt)")
+                            
+                            forwardPacketToPeer(interface, packet: updatedPacket, peerIndex: originIndex!)
+                        }
+                        else
+                        {
+                            log(7, "\(node.txt) cannot find a originator of the packet on own packet stack \(packet.txt)")
+                        }
                     }
                 }
             }
             else
             {
-             
-                    // packet already processed, send negative packet delivery
+                
+                // packet already processed, send negative packet delivery
                 
                 log(2,"\(node.txt) rejected \(packet.txt) ")
-                    node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
-                    sendPacketDeliveryConfirmation(interface, packet: packet, rejected:true)
+                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
+                packetStack[packetIndex].sentToNodes.append(packet.header.transmitedByUID)
+                sendPacketDeliveryConfirmation(interface, packet: packet, rejected:true)
                 
             }
         }
@@ -164,15 +202,26 @@ class URouter_BruteForceRouting:URouterProtocol {
         {
             // select peer
             log(2,"\(node.txt) recieved NEW \(packet.txt)")
-
-             if let peerToSendPacketIndex = selectPeerForAddressFromAllPeers(packet.envelope.destinationAddress)
-            {
             
-                log(2,"\(node.txt) selected  \(node.peers[peerToSendPacketIndex].id.txt) at \(node.peers[peerToSendPacketIndex].address.txt)")
+            
+            var oneElementArray=[UNodeID]()
+            oneElementArray.append(packet.header.transmitedByUID)
+            
+            let peersOtherThanSender=selectPeersExcluding(oneElementArray)
+            
+            if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersOtherThanSender)
 
+                
+          //  if let peerToSendPacketIndex = selectPeerForAddressFromAllPeers(packet.envelope.destinationAddress)
+                
+            {
+                
+                log(2,"\(node.txt) selected  \(node.peers[peerToSendPacketIndex].id.txt) at \(node.peers[peerToSendPacketIndex].address.txt)")
+                
                 // add to packet to stack
                 
                 var transmitedToPeers=[UNodeID]()
+                
                 transmitedToPeers.append(packet.header.transmitedByUID)
                 transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
                 let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent)
@@ -190,12 +239,12 @@ class URouter_BruteForceRouting:URouterProtocol {
                 updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
                 updatedPacket.envelope=packet.envelope
                 
-               
+                
                 
                 interface.sendPacketToNetwork(updatedPacket)
                 
                 
-            
+                
             }
             
         }
@@ -308,12 +357,12 @@ class URouter_BruteForceRouting:URouterProtocol {
     }
     
     
-    func forwardPacketToPeer(interface:UNetworkInterfaceProtocol, packet:UPacket, peerIndex:Int)
+    func forwardPacketToPeer(interface:UNetworkInterfaceProtocol?, packet:UPacket, peerIndex:Int)
     {
         // send  reception confirmation
-        if(!packet.envelope.orginatedByUID.isEqual(node.id))
+        if(!packet.envelope.orginatedByUID.isEqual(node.id) && interface != nil)
         {
-        sendPacketDeliveryConfirmation(interface, packet: packet, rejected:false)
+            sendPacketDeliveryConfirmation(interface!, packet: packet, rejected:false)
         }
         
         // here the networklookuprequest may be attached

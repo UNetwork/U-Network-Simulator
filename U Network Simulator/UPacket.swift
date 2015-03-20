@@ -58,8 +58,8 @@ struct UPacket
         }
         
        // result += "packet by \(self.envelope.orginatedByUID.txt) \(self.envelope.originAddress.txt) to \(self.envelope.destinationUID.txt) \(self.envelope.destinationAddress.txt))"
-        result += "packet by \(self.envelope.orginatedByUID.txt) to \(self.envelope.destinationUID.txt)"
-
+        // result += "packet transmited by \(self.header.transmitedToUID.txt) from \(self.envelope.orginatedByUID.txt) to \(self.envelope.destinationUID.txt)"
+result += " H.FROM:\(self.header.transmitedByUID.txt) H.TO:\(self.header.transmitedToUID.txt) E.FROM: \(self.envelope.orginatedByUID.txt) E.TO: \(self.envelope.destinationUID.txt)"
         return result
     }
     

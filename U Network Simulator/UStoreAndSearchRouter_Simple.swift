@@ -96,7 +96,7 @@ class UStoreAndSearchRouterSimple:UStoreAndSearchRoutingProtocol {
             
             // send to selected peer with broadcast and old serial
             
-            if(updatedPacket.header.lifeCounterAndFlags.lifeCounter() > 0)
+            if(updatedPacket.header.lifeCounterAndFlags.lifeCounter > 0)
             {
                // node.peers[bestPeerIndex!].interface.sendPacketToNetwork(updatedPacket)
                 

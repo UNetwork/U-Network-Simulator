@@ -79,13 +79,13 @@ class UPingTests: XCTestCase {
         
         
         XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
-     //   XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+      //  XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
     }
     
     func testPingHard()
     {
         // network size
-        AppDelegate.sharedInstance.logLevel = 2
+        AppDelegate.sharedInstance.logLevel = 3
 
         
         let k:UInt32 = 10
@@ -94,7 +94,7 @@ class UPingTests: XCTestCase {
         
         // distance between nodes
         
-        let distance:UInt64=500
+        let distance:UInt64=600
         
         createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
         
@@ -105,10 +105,10 @@ class UPingTests: XCTestCase {
         let firstNode=simulator.simulationNodes[0].node
         let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
-        firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
-        lastNode.pingApp.sendPing(firstNode.id, address: firstNode.address)
+         firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
+         lastNode.pingApp.sendPing(firstNode.id, address: firstNode.address)
         
-        sleep(20) // this must be adjusted to pass test on brute force routing to about k*i*j/12
+        sleep(15) // this must be adjusted to pass test on brute force routing to about k*i*j/12
         
 
         XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")

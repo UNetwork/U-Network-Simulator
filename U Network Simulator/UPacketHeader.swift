@@ -27,7 +27,7 @@ struct UPacketHeader
     
     func replyHeader() -> UPacketHeader
     {
-        return UPacketHeader(from: transmitedToUID, to: transmitedByUID, lifeTime: standardPacketLifeTime)
+        return UPacketHeader(from: transmitedToUID, to: transmitedByUID, lifeTime: UInt32(lifeCounterAndFlags.lifeCounter))
     }
     
     
@@ -163,7 +163,7 @@ struct UPacketHeaderLifeCounterAndFlags {
     }
     
     
-    func lifeCounter() -> UInt64
+    var lifeCounter:UInt64
     {
         return (self.data & 0x00000000FFFFFFFF)
     }
