@@ -75,6 +75,11 @@ class UNodeID {
     {
         return self.data.count
     }
+    
+    var txt:String
+    {
+    return "id: \(self.data[0]%1000000)"
+    }
 }
 
 

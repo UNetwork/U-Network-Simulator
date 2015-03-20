@@ -15,4 +15,6 @@ protocol UStoreAndSearchRoutingProtocol
     func storeName(depth:UInt32)
     
     func storeAddress()
+    
+    func selectNodeForPacketForwarding(envelope:UPacketEnvelope) -> Int
 }

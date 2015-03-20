@@ -32,13 +32,17 @@ class UStoreAndSearchRouterSimple:UStoreAndSearchRoutingProtocol {
         
     }
     
+    func selectNodeForPacketForwarding(envelope:UPacketEnvelope) -> Int
+    {
+        return 0
+    }
     
     
     func getStoreOrSearchPacket(packet:UPacket)
     {
         // drop the forward bit
         var newPacket=packet
-        newPacket.envelope.destinationUID=packet.header.transmitedToUID    //just any id other then broadcast and self to avoid any confiusions
+        newPacket.envelope.destinationUID=packet.header.transmitedToUID    //just any id other then broadcast and self to avoid any confusions
         
         // new serial to avoid confiusion with the forwarding information packet
         newPacket.envelope.serial=random64()
@@ -94,7 +98,8 @@ class UStoreAndSearchRouterSimple:UStoreAndSearchRoutingProtocol {
             
             if(updatedPacket.header.lifeCounterAndFlags.lifeCounter() > 0)
             {
-                node.peers[bestPeerIndex!].interface.sendPacketToNetwork(updatedPacket)
+               // node.peers[bestPeerIndex!].interface.sendPacketToNetwork(updatedPacket)
+                
             }
             else
             {

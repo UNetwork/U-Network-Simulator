@@ -12,11 +12,15 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
     
     func  testNodeCreation()
     {
+      createNodeMesh(5, 5, 5, 900, UNodeAddress(inputLatitude: 65536, inputLongitude: 65536, inputAltitude: 65536), false)
+        
+            /*
         simulator=UNetworkSimulator()
+    
         let networkLat=UInt64(65365)
         let networkLong=UInt64(65365)
         let networkAlt=UInt64(65365)
-        let meshSize=UInt64(4)
+        let meshSize=UInt64(5)
         
         
         for var lat:UInt64 = networkLat; lat < networkLat+(meshSize * wirelessInterfaceRange); lat = lat + wirelessInterfaceRange - 100
@@ -44,11 +48,15 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
             XCTAssert(aNode.node.peers.count > 0, "There are lonley peers")
             
         }
+        */
+        simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[63].node.id, address: simulator.simulationNodes[63].node.address)
         
         
+        sleep(10)
+        XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
         
-        
-        
+        println(simulationStats())
+
         
         
     }

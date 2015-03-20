@@ -51,7 +51,7 @@ class UNode {
     init ()
     {
         id=UNodeID(lenght: uIDlengh)
-        userName = randomUserName(16)
+        userName = randomUserName(6)
         address = unknownNodeAddress
         
         
@@ -131,7 +131,7 @@ class UNode {
                 {
                 case .ReceptionConfirmation(let _): router.getReceptionConfirmation(interface, packet: packet) // this is router staff
                 
-                case .ReplyForDiscovery(let _): processDiscoveryBroadcastReplay(interface, packet: packet)
+                case .ReplyForDiscovery(let _): processDiscoveryBroadcastreply(interface, packet: packet)
                 
                 case .ReplyForNetworkLookupRequest(let _): router.getReplyForNetworkLookupRequest(interface, packet: packet) // router staff - future implementation for another sense of neighberhood
                 
@@ -139,7 +139,7 @@ class UNode {
 
                 case .StoreIdForName(let storeIdRequest): processStoreIdForName(packet.header, envelope:packet.envelope, request: storeIdRequest)
                     
-                case .StoreNameReplay(let replayCargo): processStoreNameReplay(packet.envelope, replay:replayCargo)
+                case .StoreNamereply(let replyCargo): processStoreNamereply(packet.envelope, reply:replyCargo)
                 
                 case .SearchAddressForID(let _): processSearchAddressForID(interface, packet: packet)
                 
@@ -157,7 +157,7 @@ class UNode {
                 
                 case .DataDeliveryConfirmation(let _): processDataDeliveryConfirmation(packet)
                     
-                case .Dropped(let droppedCargo): processDrop(packet.envelope, tumbstone:droppedCargo)
+                case .Dropped(let droppedCargo): processDrop(packet.envelope, droppedPacket:droppedCargo)
                 
                 default: log(7, "Unknown packet type???")
                 }
@@ -174,8 +174,8 @@ class UNode {
     
     func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        router.getPacketToRouteFromNode(interface, packet:packet)
         nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)  // STATS
+        router.getPacketToRouteFromNode(interface, packet:packet)
     }
     
     
@@ -184,19 +184,21 @@ class UNode {
     
     func processDiscoveryBroadcast(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        // replay
+        // reply
         
-        let replayPacketHeader = UPacketHeader(from: self.id, to: packet.envelope.orginatedByUID, lifeTime: standardPacketLifeTime)
-        var replayEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
+        let replyPacketHeader = UPacketHeader(from: self.id, to: packet.envelope.orginatedByUID, lifeTime: standardPacketLifeTime)
+        var replyEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
   
-        var replayForDiscovery=UPacketyReplyForDiscovery()
-        var replayCargo = UPacketType.ReplyForDiscovery(replayForDiscovery)
-        var replayPacket=UPacket(inputHeader: replayPacketHeader, inputEnvelope: replayEnvelope, inputCargo: replayCargo)
+        var replyForDiscovery=UPacketyReplyForDiscovery()
+        var replyCargo = UPacketType.ReplyForDiscovery(replyForDiscovery)
+        var replyPacket=UPacket(inputHeader: replyPacketHeader, inputEnvelope: replyEnvelope, inputCargo: replyCargo)
         
-        interface.sendPacketToNetwork(replayPacket)
-        
-     //   router.getPacketToRouteFromNode(nil, packet:replayPacket) // - we cannot do it here becouse the sender may be not on our peer list yet
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
+        log(2, "\(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
+        
+        interface.sendPacketToNetwork(replyPacket)
+        
+     //   router.getPacketToRouteFromNode(nil, packet:replyPacket) // - we cannot do it here becouse the sender may be not on our peer list yet
         
         
         
@@ -206,9 +208,9 @@ class UNode {
         
     }
     
-    func processDiscoveryBroadcastReplay(interface:UNetworkInterfaceProtocol, packet:UPacket)
+    func processDiscoveryBroadcastreply(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        // check if replayer is already on peers list, add if not
+        // check if replyer is already on peers list, add if not
 
         if let peerIndex = findInPeers(packet.header.transmitedByUID)
         {
@@ -233,15 +235,15 @@ class UNode {
         if let foundId=findIdForName(request.name) where request.name != self.userName
         {
             
-            // name found replay data
+            // name found reply data
             
             nodeStats.addNodeStatsEvent(StatsEvents.SearchForNameSucess)
             
             let newEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
             
-            let searchReplayCargo = UPacketType.ReplyForIdSearch(UPacketReplyForIdSearch(id: foundId, serial: request.searchSerial))
+            let searchreplyCargo = UPacketType.ReplyForIdSearch(UPacketReplyForIdSearch(id: foundId, serial: request.searchSerial))
             
-            router.getPacketToRouteFromNode(newEnvelope, cargo: searchReplayCargo)
+            router.getPacketToRouteFromNode(newEnvelope, cargo: searchreplyCargo)
             
         }
         else
@@ -313,11 +315,11 @@ class UNode {
             {
                 if(id.isEqual(request.id))
                 {
-                    // replay with positive anwser
+                    // reply with positive anwser
                 }
                 else
                 {
-                    // replay with negative anwser
+                    // reply with negative anwser
                 }
             }
             else
@@ -339,7 +341,7 @@ class UNode {
         
     }
     
-    func processStoreNameReplay(envelope:UPacketEnvelope, replay:UPacketStoreNameReplay)
+    func processStoreNamereply(envelope:UPacketEnvelope, reply:UPacketStoreNamereply)
     {
         
     }
@@ -402,7 +404,7 @@ class UNode {
         nodeStats.addNodeStatsEvent(StatsEvents.DataConfirmationRecieved)
     }
     
-    func processDrop(envelope:UPacketEnvelope, tumbstone:UPacketDropped)
+    func processDrop(envelope:UPacketEnvelope, droppedPacket:UPacketDropped)
     {
         
     }
@@ -425,6 +427,7 @@ class UNode {
         
         for(_, interface) in enumerate(self.interfaces)
         {
+            self.nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastSent)
             interface.sendPacketToNetwork(broadcastDiscoveryPacket)
         }
         
@@ -491,6 +494,11 @@ class UNode {
         return    ++self.timeCounter
             }
         
+    }
+    
+    var txt:String
+    {
+        return "NODE \(self.id.txt) "
     }
     
     

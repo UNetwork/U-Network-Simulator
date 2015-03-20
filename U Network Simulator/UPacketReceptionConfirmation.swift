@@ -10,7 +10,6 @@ import Foundation
 
 struct UPacketReceptionConfirmation
 {
-    var str="doge this"
     var serial:UInt64 // from the packet this confirmation is about
     
     init(serial:UInt64)

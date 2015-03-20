@@ -63,21 +63,7 @@ class UNameStoreAndSearchTest: XCTestCase {
         
      
         
-        var globalStats=Array(count: 64, repeatedValue: 0)
-        
-        for (_, simNode) in enumerate(simulator.simulationNodes)
-        {
-            for(i, value)in enumerate(simNode.node.nodeStats.nodeStats)
-            {
-                globalStats[i]+=value
-            }
-        }
-        
-        for index in  0..<StatsEvents.allValues.count
-        {
-            println("\(StatsEvents.allValues[index]) : \(globalStats[index]) ")
-            
-        }
+   
 
            XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] > 0, "Name not found")
     }

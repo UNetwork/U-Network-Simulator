@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var logText:String=""
     var logChanged=true
-    var logLevel:Int=3
+    var logLevel:Int=6
     
     @IBOutlet var logTextView: NSTextView!
     

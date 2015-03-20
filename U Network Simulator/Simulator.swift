@@ -68,7 +68,35 @@ class UNetworkSimulator {
         self.addNodes(configurations)
 
     }
+    // Some god options
     
+    func findNodeWithName(name:String) -> UNode?
+    {
+        var result:UNode?
+        
+        for (_, aNode) in enumerate(self.simulationNodes)
+        {
+            if(aNode.node.userName == name)
+            {
+                result = aNode.node
+                break
+            }
+        }
+        
+        return result
+    }
+    
+    func findNameForId(id:UNodeID) -> String
+    {
+        for (_, aNode) in enumerate(self.simulationNodes)
+        {
+            if(aNode.node.id.isEqual(id))
+            {
+                return aNode.node.userName
+            }
+        }
+        return "Unknown!"
+    }
     
 }
 

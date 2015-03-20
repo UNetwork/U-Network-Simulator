@@ -16,6 +16,7 @@ class MediumSimulatorForWireless:MediumProtocol
    
     func getPacketFromInterface (interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
+        log(2, "AIR: \(packet.txt) from \(interface.node.txt)")
         
         var wirelessInterface = interface as! UNetworkInterfaceSimulationWireless
         
@@ -75,7 +76,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         
         // the "distance" check function :)
-        if ((latitudeDelta + longitudeDelta + altitudeDelta) < wirelessInterfaceRange )
+        if ((latitudeDelta + longitudeDelta + altitudeDelta) <  wirelessInterfaceRange )
         {
             return true
         }

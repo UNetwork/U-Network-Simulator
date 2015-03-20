@@ -274,6 +274,8 @@ struct CoordinatesDDMMSSAndAltitude
     
 }
 
+
+
 struct CoordinatesFloatDegreesAndAltitude
 {
     var latitude:ULatitudeFloat
@@ -290,6 +292,15 @@ struct CoordinatesFloatDegreesAndAltitude
     
     
     }
+    
+    init (inputLatitude:Float64, inputLongitude:Float64, inputAltitude:Float64)
+    {
+        latitude = ULatitudeFloat   (input: inputLatitude)
+        longitude = ULongitudeFloat  (input: inputLongitude)
+        altitude = UAltitudeFloat( input: inputAltitude)
+        
+    }
+    
     
     
     init (coordinates:CoordinatesDDMMSSAndAltitude)

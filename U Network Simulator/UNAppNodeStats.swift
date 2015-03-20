@@ -14,7 +14,7 @@ import Foundation
 
 class UNAppNodeStats {
     
-    var nodeStats = Array(count: 64, repeatedValue: 0)
+    var nodeStats = Array(count: StatsEvents.allValues.count, repeatedValue: 0)
     
     func addNodeStatsEvent(event:StatsEvents)
     {
@@ -28,37 +28,40 @@ enum StatsEvents:Int
 {
     case
     
-            PingSent = 0,
-            PingRecieved,
-            PongSent,
-            PongRecieved,
-            PingHadAPongWithProperSerial,
-            PongSerialError,
-
-            TrespassingPacketProcessedByNode,
-            DiscoveryBroadcastPacketProcessed,
+    DiscoveryBroadcastSent = 0,
+    DiscoveryBroadcastPacketProcessed,
     
-            PacketDroppedAtInterface,
-            PacketRejected,
-            PacketConfirmedOK,
-            PacketWithGiveUpFlagSent,
+    PingSent,
+    PingRecieved,
     
-            PacketWithGiveUpFlagRecieved,
-            SearchIdForNameProcessed,
+    PongSent,
+    PongRecieved,
+    PingHadAPongWithProperSerial,
+    PongSerialError,
     
-            SearchForNameSucess,
-            StoreIdForNameProcessed,
-            SearchAddressForIdProcessed,
-            StoreAddressForIdProcessed,
-            IdSearchResultRecieved,
-            AddressSearchResultRecieved,
-            DataSent,
-            DataRecieved,
-            DataConfirmationSent,
-            DataConfirmationRecieved,
-            LookupRequestsAdded,
+    TrespassingPacketProcessedByNode,
+    
+    PacketDroppedAtInterface,
+    PacketRejected,
+    PacketConfirmedOK,
+    PacketWithGiveUpFlagSent,
+    PacketWithGiveUpFlagRecieved,
+    
+    SearchIdForNameProcessed,
+    SearchForNameSucess,
+    
+    StoreIdForNameProcessed,
+    SearchAddressForIdProcessed,
+    StoreAddressForIdProcessed,
+    IdSearchResultRecieved,
+    AddressSearchResultRecieved,
+    DataSent,
+    DataRecieved,
+    DataConfirmationSent,
+    DataConfirmationRecieved,
+    LookupRequestsAdded,
     LookupRequestProcessed
     
-    static let allValues = ["PingSent", "PingRecieved", "PongSent", "PongRecieved", "PingHadAPongWithProperSerial", "PongSerialError", "TrespassingPacketProcessedByNode", "DiscoveryBroadcastPacketProcessed", "PacketDroppedAtInterface", "PacketRejected", "PacketConfirmedOK", "PacketWithGiveUpFlagSent", "PacketWithGiveUpFlagRecieved", "SearchIdForNameProcessed", "SearchForNameSucess", "StoreIdForNameProcessed", "SearchAddressForIdProcessed", "StoreAddressForIdProcessed", "IdSearchResultRecieved", "AddressSearchResultRecieved", "DataSent", "DataRecieved", "DataConfirmationSent", "DataConfirmationRecieved", "LookupRequestsAdded", "LookupRequestProcessed"]
+    static let allValues = ["DiscoveryBroadcastSent", "DiscoveryBroadcastPacketProcessed", "PingSent", "PingRecieved", "PongSent", "PongRecieved", "PingHadAPongWithProperSerial", "PongSerialError", "TrespassingPacketProcessedByNode",  "PacketDroppedAtInterface", "PacketRejected", "PacketConfirmedOK", "PacketWithGiveUpFlagSent", "PacketWithGiveUpFlagRecieved", "SearchIdForNameProcessed", "SearchForNameSucess", "StoreIdForNameProcessed", "SearchAddressForIdProcessed", "StoreAddressForIdProcessed", "IdSearchResultRecieved", "AddressSearchResultRecieved", "DataSent", "DataRecieved", "DataConfirmationSent", "DataConfirmationRecieved", "LookupRequestsAdded", "LookupRequestProcessed"]
 
 }

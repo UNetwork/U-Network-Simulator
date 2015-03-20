@@ -31,7 +31,7 @@ func log(level:Int, text:String)
 {
     if (AppDelegate.sharedInstance.logLevel <= level)
     {
-        println(text)
+     //   println(text)
         AppDelegate.sharedInstance.logText+=text+"\n"
         AppDelegate.sharedInstance.logChanged=true
     }
@@ -61,7 +61,7 @@ func unsignedDifference(a:UInt64, b:UInt64)->(UInt64){
 
 func randomUserName (len : Int) -> String {
     
-    let letters : NSString = "aaaaaabbcccddddeeeeeffghhhiiiiiijjjkkkklllmmmnnnoooooopppqrrrrsssstttuuuuuvwwxyyzzz          "
+    let letters : NSString = "aaaaaabbbccccddddeeeeeffghhhiiiiiijjjkkkkklllmmmnnnooooopppqrrrrsssstttuuuuuvwwxyyzz"
     
     var randomString : NSMutableString = NSMutableString(capacity: len)
     

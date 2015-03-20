@@ -12,7 +12,7 @@ import Foundation
 
 let uIDlengh:Int=2
 
-let standardPacketLifeTime:UInt32 = 1024
+let standardPacketLifeTime:UInt32 = 1000000
 
 let maxDiscoveryBroadcastDeepth:Int = 5
 
@@ -31,7 +31,10 @@ let broadcastNodeId=UNodeID()
 
 let unknownNodeAddress = UNodeAddress()
 
-typealias CurrentRouter = URouterSimpleDirection
+ typealias CurrentRouter = URouterSimpleDirection
+
+// typealias CurrentRouter = URouter_BruteForceRouting
+
 
 
 

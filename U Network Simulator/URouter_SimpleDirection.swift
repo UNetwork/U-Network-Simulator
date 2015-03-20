@@ -37,7 +37,7 @@ class URouterSimpleDirection: URouter_BruteForceRouting
     override func selectPeerForAddressFromAllPeers(address:UNodeAddress) -> Int?
     {
         
-        // Here the brutality of brutal force takes place...
+        // simple least difference from peer to destination
         
         var result:Int?
         var smallestDifferenceToAddress:UInt64 = 1 << 63

@@ -25,7 +25,7 @@ struct UPacketHeader
         
     }
     
-    func replayHeader() -> UPacketHeader
+    func replyHeader() -> UPacketHeader
     {
         return UPacketHeader(from: transmitedToUID, to: transmitedByUID, lifeTime: standardPacketLifeTime)
     }
@@ -78,7 +78,7 @@ struct UPacketEnvelope {
     }
     
 
-    func replayEnvelope() -> UPacketEnvelope
+    func replyEnvelope() -> UPacketEnvelope
     {
         var result=UPacketEnvelope(fromId: self.destinationUID, fromAddress: destinationAddress, toId: orginatedByUID, toAddress: originAddress)
         
@@ -232,7 +232,7 @@ struct UPacketHeaderLifeCounterAndFlags {
 
     }
     
-    var replayConfirmationType:Bool
+    var replyConfirmationType:Bool
         {
             if(self.data & uPacketHeaderConfirmationDeliveryBitmask > 0)
             {

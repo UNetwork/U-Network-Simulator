@@ -10,101 +10,108 @@ import XCTest
 
 class UPingTests: XCTestCase {
     
-    override func setUp()
-    {
+    override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         
         simulator=UNetworkSimulator()
+        AppDelegate.sharedInstance.logClearText("")
+        AppDelegate.sharedInstance.logLevel = 6
         
     }
     
+    override func tearDown() {
+        super.tearDown()
+        
+        println(simulationStats())
+        println(AppDelegate.sharedInstance.logText)
+    }
     
     func testPingSimple()
     {
-        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: 2, inputLongitude: 3, inputAltitude: 4))
-        
+        AppDelegate.sharedInstance.logLevel = 2
 
+        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: exampleNodeAddress.latitude, inputLongitude: exampleNodeAddress.longitude, inputAltitude: exampleNodeAddress.altitude))
         
-        simulator.simulationNodes[0].node.setupAndStart()
-        
-        XCTAssert(simulator.simulationNodes[0].node.peers.count == 0, "single node cant have a peer")
-        
-        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: 200, inputLongitude: 300, inputAltitude: 400))
+        simulator.addWirelessNode(USimulationRealLocation(inputLatitude: closeToExampleNodeAddress.latitude, inputLongitude: closeToExampleNodeAddress.longitude, inputAltitude: closeToExampleNodeAddress.altitude))
         
         simulator.simulationNodes[0].node.setupAndStart()
         simulator.simulationNodes[1].node.setupAndStart()
         
         sleep(1)
+        let firstNode=simulator.simulationNodes[0].node
+        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
+        firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
+        sleep(1)
 
         
-        XCTAssert(simulator.simulationNodes[0].node.peers.count == 1, "one peer only")
+        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
 
-        XCTAssert(simulator.simulationNodes[1].node.peers.count == 1, "one peer only")
-
-        
-     
-
-        
-        
     }
     
-    func testPing()
+    func testPingMedium()
     {
-     
-        
-        let networkLat=UInt64(65365)
-        let networkLong=UInt64(65365)
-        let networkAlt=UInt64(65365)
-        let meshSize=UInt64(30)
-        
-        
-        for var lat:UInt64 = networkLat; lat < networkLat+(meshSize * wirelessInterfaceRange); lat = lat + wirelessInterfaceRange - 100
-        {
-            for var long:UInt64 = networkLong; long < networkLong+(meshSize * wirelessInterfaceRange); long = long + wirelessInterfaceRange - 100
-            {
-        
-                    simulator.addWirelessNode(USimulationRealLocation(inputLatitude: lat, inputLongitude: long, inputAltitude: networkAlt))
-                
-                
-            }
-        }
-        
-        for (_, aNode) in enumerate(simulator.simulationNodes)
-        {
-            
-            aNode.node.setupAndStart()
-            
-            
-        }
-        
-        sleep(15)
-        
-        simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[simulator.simulationNodes.count - 1].node.id, address: simulator.simulationNodes[simulator.simulationNodes.count-1].node.address)
-        simulator.simulationNodes[simulator.simulationNodes.count - 1].node.pingApp.sendPing(simulator.simulationNodes[0].node.id, address: simulator.simulationNodes[0].node.address)
-        
-        sleep(10)
+        AppDelegate.sharedInstance.logLevel = 2
 
         
+        // network size
         
-        XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
-
-        var globalStats=Array(count: 64, repeatedValue: 0)
+        let k:UInt32 = 4
+        let i:UInt32 = 1
+        let j:UInt32 = 1
         
-        for (_, simNode) in enumerate(simulator.simulationNodes)
-        {
-            for(i, value)in enumerate(simNode.node.nodeStats.nodeStats)
-            {
-            globalStats[i]+=value
-            }
-        }
+        // distance between nodes
         
-        for(_, value) in enumerate(globalStats)
-        {
-            println(" \(value) ")
-            
-        }
+        let distance:UInt64=570
+        
+        createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
+        
+        sleep(1)
+        
+        
+        
+        let firstNode=simulator.simulationNodes[0].node
+        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
+        
+        firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
+    //    lastNode.pingApp.sendPing(firstNode.id, address: firstNode.address)
+        
+        sleep(1) // this must be adjusted to pass test on brute force routing to about k*i*j/12
+        
+        
+        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+     //   XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
     }
     
-    
+    func testPingHard()
+    {
+        // network size
+        AppDelegate.sharedInstance.logLevel = 2
+
+        
+        let k:UInt32 = 10
+        let i:UInt32 = 10
+        let j:UInt32 = 5
+        
+        // distance between nodes
+        
+        let distance:UInt64=500
+        
+        createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
+        
+        sleep(k*i*j/50)
+        
+        
+        
+        let firstNode=simulator.simulationNodes[0].node
+        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
+        
+        firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
+        lastNode.pingApp.sendPing(firstNode.id, address: firstNode.address)
+        
+        sleep(20) // this must be adjusted to pass test on brute force routing to about k*i*j/12
+        
+
+        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+    }
 }
