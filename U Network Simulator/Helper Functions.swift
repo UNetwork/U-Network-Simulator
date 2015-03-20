@@ -31,7 +31,7 @@ func log(level:Int, text:String)
 {
     if (AppDelegate.sharedInstance.logLevel <= level)
     {
-     //   println(text)
+        println(text)
         AppDelegate.sharedInstance.logText+=text+"\n"
         AppDelegate.sharedInstance.logChanged=true
     }

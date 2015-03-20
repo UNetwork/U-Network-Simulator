@@ -59,7 +59,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         else
         {
             // delivery confirmation packet serial not found on packet stack
-            log(7,">>>>>>\(node.txt) delivery confirmation packet serial not found on packet stack \(packet.txt)")
+            log(7,">>>>>>\(node.txt) delivery confirmation packet serial: \(returningPacketSerial) not found on packet stack \(packet.txt)")
             
             
         }
@@ -84,22 +84,30 @@ class URouter_BruteForceRouting:URouterProtocol {
         }
         else
         {
-            
-            var packetToResend=stackRecord.packet
-            var peerToSendId=stackRecord.recievedFrom
-            
-            //nobody to send - trying to find the original peer
-            if let returningToIndex = node.findInPeers(peerToSendId)
+            if(stackRecord.recievedFrom.isEqual(node.id))
             {
-                forwardPacketToPeer(nil, packet: stackRecord.packet, peerIndex: returningToIndex)
+                log(5, "Packet returned after checking all possibilities")
             }
             else
             {
-                //drop
-                node.sendDropped(stackRecord.packet.envelope)
+                log(3, "resending packet from stack to the peer that sent it to node")
+                var packetToResend=stackRecord.packet
+                var peerToSendId=stackRecord.recievedFrom
+                
+                //nobody to send - trying to find the original peer
+                if let returningToIndex = node.findInPeers(peerToSendId)
+                {
+                    packetToResend.header.lifeCounterAndFlags.setGiveUpFlag(true)
+                    forwardPacketToPeer(nil, packet: packetToResend, peerIndex: returningToIndex)
+                }
+                else
+                {
+                    //drop
+                    log(6, "Packet lost - no geniue peer aveliable")
+                    node.sendDropped(stackRecord.packet.envelope)
+                }
+                
             }
-            
-            
             
         }
     }
@@ -115,7 +123,8 @@ class URouter_BruteForceRouting:URouterProtocol {
             
             log(2,"Packet \(packet.txt) created from envelope and cargo by \(node.txt)")
             
-            getPacketToRouteFromNode(node.peers[peerToSendIndex].interface, packet: packet)
+            
+            forwardPacketToPeer(nil, packet: packet, peerIndex: peerToSendIndex)
         }
         else
         {

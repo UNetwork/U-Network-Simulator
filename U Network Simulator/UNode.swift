@@ -64,6 +64,12 @@ class UNode {
     
     func setupAndStart()
     {
+        
+        //Avoid logging during initialisation
+        let geniueLogLevel = AppDelegate.sharedInstance.logLevel
+        AppDelegate.sharedInstance.logLevel=3
+
+        
         // setup router
         router = CurrentRouter(node:self)
         storeAndSearchRouter = UStoreAndSearchRouterSimple(node: self)
@@ -93,7 +99,7 @@ class UNode {
         }
         refreshPeers()
 
-
+        AppDelegate.sharedInstance.logLevel=geniueLogLevel
         
         // if failed to find address in interfaces take the avarge address from peers
 
