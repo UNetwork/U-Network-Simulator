@@ -190,7 +190,7 @@ class UNode {
         {
             switch packet.packetCargo
             {
-            case .Dropped(let _): log(5, "\(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification \(packet.txt)")
+            case .Dropped(let _): log(5, "N: \(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification \(packet.txt)")
             default: sendDropped(packet.envelope)
             }
             
@@ -224,16 +224,11 @@ class UNode {
         var replyPacket=UPacket(inputHeader: replyPacketHeader, inputEnvelope: replyEnvelope, inputCargo: replyCargo)
         
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
-        log(2, "\(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
+        log(2, "N: \(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
         
         interface.sendPacketToNetwork(replyPacket)
         
-     //   router.getPacketToRouteFromNode(nil, packet:replyPacket) // - we cannot do it here becouse the sender may be not on our peer list yet
-        
-        
-        
-        // if packet couter > 0 resend to all nodes. If packet counter>discovery limit >>> drop mtfker
-        // check on peers list, add if needed
+
         
         
     }
@@ -528,7 +523,7 @@ class UNode {
     
     var txt:String
     {
-        return "NODE \(self.id.txt) PEERS: \(self.peers.count) "
+        return "Node \(self.id.txt) "
     }
     
     

@@ -56,10 +56,8 @@ struct UPacket
         default: result += "UNKNOWN"
             
         }
-        
-       // result += "packet by \(self.envelope.orginatedByUID.txt) \(self.envelope.originAddress.txt) to \(self.envelope.destinationUID.txt) \(self.envelope.destinationAddress.txt))"
-        // result += "packet transmited by \(self.header.transmitedToUID.txt) from \(self.envelope.orginatedByUID.txt) to \(self.envelope.destinationUID.txt)"
-result += " H.FROM:\(self.header.transmitedByUID.txt) H.TO:\(self.header.transmitedToUID.txt) E.FROM: \(self.envelope.orginatedByUID.txt) E.TO: \(self.envelope.destinationUID.txt)"
+
+result += "\(self.header.transmitedByUID.txt) \n   H.TO:\(self.header.transmitedToUID.txt) E.FROM: \(self.envelope.orginatedByUID.txt) E.TO: \(self.envelope.destinationUID.txt)"
         return result
     }
     
@@ -75,7 +73,7 @@ enum UPacketType
     case SearchIdForName (UPacketSearchIdForName)                               // request for search for id given name
     case ReplyForIdSearch (UPacketReplyForIdSearch)                             // reply for search for id given name
     case StoreIdForName (UPacketStoreIdForName)                                 // store name request
-    case StoreNamereply (UPacketStoreNamereply)                               // repaly for name store request
+    case StoreNamereply (UPacketStoreNamereply)                                 // repaly for name store request
     case SearchAddressForID (UPacketSearchAddressForID)                         // request for search for address given id
     case ReplyForAddressSearch (UPacketReplyForAddressSearch)                   // reply for search for address given id
     case StoreAddressForId (UPacketStoreAddressForId)                           // store address request
