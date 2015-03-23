@@ -10,10 +10,12 @@ import Foundation
 
 class MediumSimulatorForWireless:MediumProtocol
 {
+    var interfacesInRangeCache = [UNodeID: [UNetworkInterfaceSimulationWireless]]()
+    
     init()
     {
     }
-   
+    
     func getPacketFromInterface (interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         log(2, ">> \(packet.txt)")
@@ -22,15 +24,45 @@ class MediumSimulatorForWireless:MediumProtocol
         
         // find wireless interfaces in range
         var interfacesForDelivery = findInterfacesInRange(wirelessInterface)
-     
-        // deliver
-        for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
-        {
-            dispatch_async(queueSerial, {
+        
+        // deliver stright
+        func deliverStright(){
+            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            {
                 interfaceForDelivery.getPacketFromNetwork(packet)
-            })
+            }
         }
-
+        
+        
+        // deliver serial
+        func deliverSerial(){
+            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            {
+                dispatch_async(queueSerial, {
+                    interfaceForDelivery.getPacketFromNetwork(packet)
+                })
+            }
+        }
+        
+        // deliver paralel;
+        func deliverpParalel(){
+            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            {
+                dispatch_async(queueConcurrent, {
+                    interfaceForDelivery.getPacketFromNetwork(packet)
+                })
+            }
+        }
+        
+        switch processingMode
+        {
+        case .Serial: deliverSerial()
+        case .Stright: deliverSerial()
+        case .Paralel: deliverpParalel()
+        default: log(7, "Wrong processing type")
+        }
+        
+        
     }
     
     
@@ -41,27 +73,46 @@ class MediumSimulatorForWireless:MediumProtocol
     
     func findInterfacesInRange(interface:UNetworkInterfaceSimulationWireless) -> [UNetworkInterfaceSimulationWireless]
     {
-        var result=[UNetworkInterfaceSimulationWireless]()
-        
-        // iterate over global list of nodes in simulator
-        
-        for (_, simulationNode) in enumerate(simulator.simulationNodes)
+        // check cache
+        if useCache
         {
-            for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
+        
+        if let resultsFromCache = checkCacheForNodeInterfaces(interface.node.id)
+        {
+            return resultsFromCache
+        }
+        }
+       
+            
+            var result=[UNetworkInterfaceSimulationWireless]()
+            
+            // iterate over global list of nodes in simulator
+            
+            for (_, simulationNode) in enumerate(simulator.simulationNodes)
             {
-                if let wirelessInterfaceToCheck = interfaceToCheck as? UNetworkInterfaceSimulationWireless
+                for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
                 {
-                    if (checkIfWirelessInterfacesAreInRange(interface, interface2: wirelessInterfaceToCheck))
+                    if let wirelessInterfaceToCheck = interfaceToCheck as? UNetworkInterfaceSimulationWireless
                     {
-                        if (!(wirelessInterfaceToCheck === interface))
+                        if (checkIfWirelessInterfacesAreInRange(interface, interface2: wirelessInterfaceToCheck))
                         {
-                            result.append(wirelessInterfaceToCheck)
+                            if (!(wirelessInterfaceToCheck === interface))
+                            {
+                                result.append(wirelessInterfaceToCheck)
+                            }
                         }
                     }
                 }
             }
-        }
-        return result
+            
+            // add results to cache
+            if useCache
+            {
+                
+                interfacesInRangeCache[interface.node.id] = result
+            }
+            return result
+        
     }
     
     
@@ -84,10 +135,16 @@ class MediumSimulatorForWireless:MediumProtocol
         return false
     }
     
+    func checkCacheForNodeInterfaces (nodeId:UNodeID) -> [UNetworkInterfaceSimulationWireless]?
+        
+    {
+        return interfacesInRangeCache[nodeId]
+    }
     
     
-
+    
 }
+
 
 
 

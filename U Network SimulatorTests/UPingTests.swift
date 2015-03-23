@@ -15,15 +15,30 @@ class UPingTests: XCTestCase {
         
         simulator=UNetworkSimulator()
         AppDelegate.sharedInstance.logClearText("")
-        AppDelegate.sharedInstance.logLevel = 6
+        AppDelegate.sharedInstance.logLevel = 3
         
     }
     
     override func tearDown() {
         super.tearDown()
         
-        println(simulationStats())
         println(AppDelegate.sharedInstance.logText)
+        let stats=simulationStats()
+        
+        println(stats.text)
+        
+        let pingSent = stats.values[StatsEvents.PingSent.rawValue]
+        let pingRecieved = stats.values[StatsEvents.PingRecieved.rawValue]
+        let pongRecieved = stats.values[StatsEvents.PongRecieved.rawValue]
+        let returned = stats.values[StatsEvents.PacketReturnedToSender.rawValue]
+        let dropped = stats.values[StatsEvents.PacketDropped.rawValue]
+
+
+        XCTAssert(pingSent - returned - dropped == pingRecieved && pingRecieved == pongRecieved, "ping or pong lost")
+
+        
+        
+
     }
     
     func testPingSimple()
@@ -88,31 +103,53 @@ class UPingTests: XCTestCase {
         AppDelegate.sharedInstance.logLevel = 3
 
         
-        let k:UInt32 = 10
-        let i:UInt32 = 10
+        let k:UInt32 = 30
+        let i:UInt32 = 30
         let j:UInt32 = 5
         
         // distance between nodes
         
         let distance:UInt64=600
         
+        processingMode = ProcessingType.Serial
+        
+        let delay = k*i*j/80
+        
         createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
-        
-        sleep(k*i*j/50)
-        AppDelegate.sharedInstance.logLevel = 2
+        log(5, "entering  \(delay) nap during initialisation ")
 
+       // sleep(delay)
+        log(5, "slepinig while netwoek setup in ping testing FINISHED")
+        AppDelegate.sharedInstance.logLevel = 4
+  
+        let numberOfNodes=simulator.simulationNodes.count
+        let repetitions = 1000
         
-        
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
-        
-         firstNode.pingApp.sendPing(lastNode.id, address: lastNode.address)
-      //   lastNode.pingApp.sendPing(firstNode.id, address: firstNode.address)
-        
-        sleep(15) // this must be adjusted to pass test on brute force routing to about k*i*j/12
-        
+        processingMode = ProcessingType.Serial
+        useCache = true
 
+        for i in 1...repetitions
+            
+            
+        {
+            
+            var index = Int (arc4random_uniform(UInt32(numberOfNodes)))
+            let nodeOne = simulator.simulationNodes[index].node
+            index = Int (arc4random_uniform(UInt32(numberOfNodes)))
+            let nodeTwo = simulator.simulationNodes[index].node
+            
+            nodeOne.pingApp.sendPing(nodeTwo.id, address: nodeTwo.address)
+        }
+        
+        
+log(5,"loop finished entering nap")
+        
+        sleep(450) // this must be adjusted to pass test on brute force routing to about k*i*j/12
+        
+/*
         XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
-     //   XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+
+*/
     }
 }

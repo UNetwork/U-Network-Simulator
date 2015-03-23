@@ -7,8 +7,15 @@
 
 import Foundation
 
+var processingMode = ProcessingType.Serial
+
+var useCache = true
+
  let queueSerial = dispatch_queue_create("Serial Queue", DISPATCH_QUEUE_SERIAL)
  let queueConcurrent = dispatch_queue_create("Concurrent Queue", DISPATCH_QUEUE_CONCURRENT)
 
+enum ProcessingType{
+    case Stright, Serial, Paralel
+}
 
 

@@ -95,24 +95,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     }
     
-    
+    static let sharedInstance=AppDelegate()
+
     
     // Shared singelton pattern
-    
-    class var sharedInstance: AppDelegate {
-        get {
-            struct Static {
-                static var instance: AppDelegate? = nil
-                static var token: dispatch_once_t = 0
-            }
-            dispatch_once(&Static.token, {
+   /*
+    class var sharedInstance: AppDelegate
+        {
+        get
+    {
+        struct Static
+        {
+            static var instance: AppDelegate? = nil
+            static var token: dispatch_once_t = 0
+        }
+        dispatch_once(&Static.token,
+            {
                 Static.instance = AppDelegate()
-            })
-            return Static.instance!
+        })
+        return Static.instance!
         }
     }
-
-
+    
+    */
 }
 
 

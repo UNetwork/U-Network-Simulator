@@ -18,7 +18,9 @@ class UNAppNodeStats {
     
     func addNodeStatsEvent(event:StatsEvents)
     {
-    nodeStats[event.rawValue]++
+      
+            nodeStats[event.rawValue]++
+     
     }
     
 }

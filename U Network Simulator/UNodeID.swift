@@ -14,9 +14,15 @@ Lenght is 64 - 256 bits.
 The 64-bit id with zero value is broadcast  id
 */
 
-class UNodeID {
+class UNodeID:Hashable {
     
     private var data=[UInt64]()
+    var hashValue: Int
+        {
+  
+            
+            return Int(data[0] & 0x7FFFFFFFFFFFFFFF)
+    }
     
     init (lenght:Int)
     {
@@ -62,6 +68,7 @@ class UNodeID {
     }
     
     
+    
     func isBroadcast() -> Bool
     {
         if(self.data.count == 1 && self.data[0] == 0)
@@ -82,5 +89,8 @@ class UNodeID {
     }
 }
 
+func == (lhs: UNodeID, rhs: UNodeID) -> Bool {
+    return lhs.isEqual(rhs)
 
 
+}

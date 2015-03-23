@@ -8,9 +8,11 @@
 
 import Foundation
 
-func simulationStats() -> String
+func simulationStats() -> (text:String, values:[Int])
 {
-   var result="\nSimulation Report\n\n"
+   
+    
+    var result="\nSimulation Report\n\n"
     
     var globalStats=Array(count: StatsEvents.allValues.count, repeatedValue: 0)
     
@@ -109,7 +111,7 @@ func simulationStats() -> String
     
     
     
-    return result
+    return (result, globalStats)
 }
 
 func createNodeMesh(rows:UInt32, columns:UInt32, layers:UInt32, distance:UInt64,  position:UNodeAddress, random:Bool)
@@ -147,6 +149,7 @@ func createNodeMesh(rows:UInt32, columns:UInt32, layers:UInt32, distance:UInt64,
     {
         aNode.node.setupAndStart()
     }
+    log (5,"Initial setup done")
  
 }
 
