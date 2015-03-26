@@ -30,6 +30,14 @@ struct UMemoryIdAddressRecord
     var id:UNodeID
     var address:UNodeAddress
     var time:UInt64
+    
+    init (aId:UNodeID, anAddress:UNodeAddress, aTime:UInt64)
+    {
+        self.id = aId
+        self.address = anAddress
+        self.time = aTime
+    }
+    
 }
 
 struct UMemoryNameIdRecord
@@ -39,11 +47,11 @@ struct UMemoryNameIdRecord
     var time:UInt64
     
     
-    init(name:String, id:UNodeID, time:UInt64)
+    init(aName:String, anId:UNodeID, aTime:UInt64)
     {
-        self.name=name
-        self.id=id
-        self.time = time
+        self.name=aName
+        self.id=anId
+        self.time = aTime
     }
     
     

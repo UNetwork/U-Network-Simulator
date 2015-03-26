@@ -12,11 +12,11 @@ import Foundation
 
 let uIDlengh:Int=2
 
-let standardPacketLifeTime:UInt32 = 1000000
+let standardPacketLifeTime:UInt32 = 512
 
 let maxDiscoveryBroadcastDeepth:Int = 5
 
-var defaultStoreSearchDepth:UInt32 = 30
+var defaultStoreSearchDepth:UInt32 = 32
 
 
 // Simulation - to be elimineted

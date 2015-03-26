@@ -55,6 +55,9 @@ enum StatsEvents:Int
     StoreIdForNameProcessed,
     SearchAddressForIdProcessed,
     StoreAddressForIdProcessed,
+    
+    SearchForAddressSucess,
+    
     IdSearchResultRecieved,
     AddressSearchResultRecieved,
     DataSent,
@@ -67,6 +70,6 @@ enum StatsEvents:Int
     DropPacketDropped,
     PacketReturnedToSender
     
-    static let allValues = ["DiscoveryBroadcastSent", "DiscoveryBroadcastPacketProcessed", "PingSent", "PingRecieved", "PongSent", "PongRecieved", "PingHadAPongWithProperSerial", "PongSerialError", "TrespassingPacketProcessedByNode",  "PacketDroppedAtInterface", "PacketRejected", "PacketConfirmedOK", "PacketWithGiveUpFlagSent", "PacketWithGiveUpFlagRecieved", "SearchIdForNameProcessed", "SearchForNameSucess", "StoreIdForNameProcessed", "SearchAddressForIdProcessed", "StoreAddressForIdProcessed", "IdSearchResultRecieved", "AddressSearchResultRecieved", "DataSent", "DataRecieved", "DataConfirmationSent", "DataConfirmationRecieved", "LookupRequestsAdded", "LookupRequestProcessed", "PacketDropped", "DropPacketDropped", "PacketReturnedToSender"]
+    static let allValues = ["DiscoveryBroadcastSent", "DiscoveryBroadcastPacketProcessed", "PingSent", "PingRecieved", "PongSent", "PongRecieved", "PingHadAPongWithProperSerial", "PongSerialError", "TrespassingPacketProcessedByNode",  "PacketDroppedAtInterface", "PacketRejected", "PacketConfirmedOK", "PacketWithGiveUpFlagSent", "PacketWithGiveUpFlagRecieved", "SearchIdForNameProcessed", "SearchForNameSucess", "StoreIdForNameProcessed", "SearchAddressForIdProcessed", "StoreAddressForIdProcessed", "SearchForAddressSucess", "IdSearchResultRecieved", "AddressSearchResultRecieved", "DataSent", "DataRecieved", "DataConfirmationSent", "DataConfirmationRecieved", "LookupRequestsAdded", "LookupRequestProcessed", "PacketDropped", "DropPacketDropped", "PacketReturnedToSender"]
 
 }

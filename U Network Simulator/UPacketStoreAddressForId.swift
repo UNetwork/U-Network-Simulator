@@ -10,8 +10,16 @@ import Foundation
 
 struct UPacketStoreAddressForId {
 
-    var iD:UNodeID
+    var id:UNodeID
     var address:UNodeAddress
     var time:UInt64
+    
+    init(anID:UNodeID, anAddress:UNodeAddress, aTime:UInt64)
+    {
+        self.id = anID
+        self.address = anAddress
+        self.time = aTime
+        
+    }
     
 }

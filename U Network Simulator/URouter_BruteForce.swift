@@ -123,11 +123,12 @@ class URouter_BruteForceRouting:URouterProtocol {
     {
         log(2,"R: \(node.txt) Created packet from envelope and cargo")
         
+        let packetLiftime = (envelope.destinationUID.isBroadcast() ? defaultStoreSearchDepth : standardPacketLifeTime)
         
 
-        if let peerToSendIndex = selectPeerForAddressFromAllPeers(envelope.destinationAddress)
+        if let peerToSendIndex = selectPeerFromIndexListAfterExclusions(envelope.destinationAddress, peerIndexes: allPeerIndexes())
         {
-            var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: standardPacketLifeTime)
+            var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: packetLiftime)
             
             let packet=UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: cargo)
             
@@ -324,30 +325,73 @@ class URouter_BruteForceRouting:URouterProtocol {
         return result
     }
     
-    func selectPeerForAddressFromAllPeers(address:UNodeAddress) -> Int?
+
+    
+    func selectPeerFromIndexListAfterExclusions(toAddress:UNodeAddress, peerIndexes:[Int]) -> Int?
     {
-        
-        // Here the brutality of brutal force takes place...
-        
+        var address = toAddress
         var result:Int?
-        if(node.peers.count > 0)
+        
+        if ((address.latitude == UInt64(0) || address.latitude == maxLatitude) && (address.longitude == UInt64(0) || (address.longitude == maxLongitude) && (address.altitude == UInt64(0)) || address.altitude == maxAltitude))
         {
-            result = Int(arc4random_uniform(UInt32(node.peers.count)))
+            // this is search store packet
+            address=findAddressForSearchOrStorePacket(address)
+
         }
+       
         
-        return result
-    }
-    
-    
-    func selectPeerFromIndexListAfterExclusions(address:UNodeAddress, peerIndexes:[Int]) -> Int?
-    {
-        var result:Int?
+        
+        
         if(node.peers.count > 0)
         {
             result = Int(arc4random_uniform(UInt32(peerIndexes.count)))
         }
         
+        
         return result
+    }
+    
+    func findAddressForSearchOrStorePacket(address:UNodeAddress) -> UNodeAddress
+    {
+        var corrLat = node.address.latitude
+        var corrLong = node.address.longitude
+        var corrAlt = node.address.altitude
+        
+        
+        if(address.latitude == maxLatitude)
+        {
+            corrLat = corrLat + (5 * wirelessInterfaceRange)
+        }
+        else
+        {
+            corrLat = corrLat - (5 * wirelessInterfaceRange)
+        }
+        
+        if( address.longitude == maxLongitude)
+        {
+            corrLong = corrLong + (5 * wirelessInterfaceRange)
+            corrLat = corrLat + (2 * wirelessInterfaceRange)
+        }
+        else
+        {
+            corrLong = corrLong - (5 * wirelessInterfaceRange)
+            corrLat = corrLat - (2 * wirelessInterfaceRange)
+
+        }
+        
+        if ( address.altitude == maxAltitude)
+        {
+            corrAlt = corrAlt + (5 * wirelessInterfaceRange)
+            
+        }
+        else
+        {
+            corrAlt = corrAlt - (5 * wirelessInterfaceRange)
+        }
+        
+        let result=UNodeAddress(inputLatitude: corrLat, inputLongitude: corrLong, inputAltitude: corrAlt)
+        return result
+        
     }
     
     
@@ -362,6 +406,15 @@ class URouter_BruteForceRouting:URouterProtocol {
                 result=index
                 break
             }
+        }
+        return result
+    }
+    
+    func allPeerIndexes() -> [Int]
+    {
+        var result = [Int]()
+        for (index, _) in enumerate(node.peers){
+         result.append(index)
         }
         return result
     }

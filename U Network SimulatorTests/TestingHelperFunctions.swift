@@ -134,10 +134,7 @@ func createNodeMesh(rows:UInt32, columns:UInt32, layers:UInt32, distance:UInt64,
                     distLat = arc4random_uniform(dist)
                     distLong = arc4random_uniform(dist)
                     distAlt = arc4random_uniform(dist)
-
                 }
-                
-                
             let nodePosition=USimulationRealLocation(inputLatitude: (UInt64(r-1) * distance) + position.latitude + UInt64(distLat), inputLongitude: (UInt64(c-1) * distance) + position.longitude + UInt64(distLong), inputAltitude: (UInt64(l-1) * distance) + position.altitude + UInt64(distAlt))
               
                 simulator.addWirelessNode(nodePosition)
@@ -150,6 +147,13 @@ func createNodeMesh(rows:UInt32, columns:UInt32, layers:UInt32, distance:UInt64,
         aNode.node.setupAndStart()
     }
     log (5,"Initial setup done")
+
+    for (_, aNode) in enumerate(simulator.simulationNodes)
+        {
+        aNode.node.populateOwnData()
+        }
+    
+    log (5,"Data populated")
  
 }
 

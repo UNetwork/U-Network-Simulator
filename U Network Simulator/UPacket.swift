@@ -58,6 +58,7 @@ struct UPacket
         }
 
 result += "\(self.header.transmitedByUID.txt) \n   H.TO:\(self.header.transmitedToUID.txt) E.FROM: \(self.envelope.orginatedByUID.txt) E.TO: \(self.envelope.destinationUID.txt)"
+        result += " ser: \(self.envelope.serial)"
         return result
     }
     

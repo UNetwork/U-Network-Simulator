@@ -10,7 +10,15 @@ import Foundation
 
 struct UPacketReplyForAddressSearch {
  
-    var iD:UNodeID
+    var id:UNodeID
     var address:UNodeAddress
+    var time:UInt64
+    
+    init(anId:UNodeID, anAddress:UNodeAddress, aTime:UInt64)
+        {
+            self.id=anId
+            self.address=anAddress
+            self.time=aTime
+        }
 
 }

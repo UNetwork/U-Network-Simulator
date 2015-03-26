@@ -18,4 +18,19 @@ enum ProcessingType{
     case Stright, Serial, Paralel
 }
 
+// some orientation points for data search and distribition packets
+
+
+let aboveNorthPoleLeft = UNodeAddress(inputLatitude: maxLatitude, inputLongitude:  UInt64(0), inputAltitude: maxAltitude)
+let belowNorthPoleLeft = UNodeAddress(inputLatitude: maxLatitude, inputLongitude:  UInt64(0), inputAltitude: UInt64(0))
+let aboveSouthPoleLeft = UNodeAddress(inputLatitude: UInt64(0), inputLongitude:  UInt64(0), inputAltitude: maxAltitude)
+let belowSouthPoleLeft = UNodeAddress(inputLatitude: UInt64(0), inputLongitude: UInt64(0), inputAltitude: UInt64(0))
+
+let aboveNorthPoleRight = UNodeAddress(inputLatitude: maxLatitude, inputLongitude:  maxLongitude, inputAltitude: maxAltitude)
+let belowNorthPoleRight = UNodeAddress(inputLatitude: maxLatitude, inputLongitude:  maxLongitude, inputAltitude: UInt64(0))
+let aboveSouthPoleRight = UNodeAddress(inputLatitude: UInt64(0), inputLongitude:  maxLongitude, inputAltitude: maxAltitude)
+let belowSouthPoleRight = UNodeAddress(inputLatitude: UInt64(0), inputLongitude: maxLongitude, inputAltitude: UInt64(0))
+
+let searchStoreAddresses = [aboveNorthPoleLeft, belowNorthPoleLeft, aboveSouthPoleLeft, belowNorthPoleLeft, aboveNorthPoleRight, belowNorthPoleRight, aboveSouthPoleRight, belowSouthPoleRight]
+
 

@@ -11,54 +11,34 @@ import Foundation
 class URouterSimpleDirection: URouter_BruteForceRouting
 {
     
-    override func selectPeerFromIndexListAfterExclusions(address:UNodeAddress, peerIndexes:[Int]) -> Int?
+    override func selectPeerFromIndexListAfterExclusions(inputAddress:UNodeAddress, peerIndexes:[Int]) -> Int?
     {
         var result:Int?
         
-        var smallestDifferenceToAddress:UInt64 = 1 << 63
+        var address = inputAddress
         
-        for(_, index) in enumerate(peerIndexes)
+        
+        if ((address.latitude == UInt64(0) || address.latitude == maxLatitude) && (address.longitude == UInt64(0) || (address.longitude == maxLongitude) && (address.altitude == UInt64(0)) || address.altitude == maxAltitude))
         {
-            let dlat=unsignedDifference(address.latitude, node.peers[index].address.latitude)
-            let dlong=unsignedDifference(address.longitude, node.peers[index].address.longitude)
-            let dalt=unsignedDifference(address.altitude, node.peers[index].address.altitude)
-            
-            if ( dlat + dlong + dalt < smallestDifferenceToAddress)
-            {
-                smallestDifferenceToAddress=dlat+dlong+dalt
-                result=index
-            }
-            
+///
+        address=findAddressForSearchOrStorePacket(address)
+        
+        
         }
-      
-        return result
-    }
-    
-    override func selectPeerForAddressFromAllPeers(address:UNodeAddress) -> Int?
-    {
-        
-        // simple least difference from peer to destination
-        
-        var result:Int?
-        var smallestDifferenceToAddress:UInt64 = 1 << 63
-        
-        for(index, peer) in enumerate(node.peers)
-        {
-            let dlat=unsignedDifference(address.latitude, peer.address.latitude)
-            let dlong=unsignedDifference(address.longitude, peer.address.longitude)
-            let dalt=unsignedDifference(address.altitude, peer.address.altitude)
-            
-            if ( dlat + dlong + dalt < smallestDifferenceToAddress)
+       
+            var smallestDifferenceToAddress:UInt64 = 1 << 63
+            for(_, index) in enumerate(peerIndexes)
             {
-                smallestDifferenceToAddress=dlat+dlong+dalt
-                result=index
+                let dlat=unsignedDifference(address.latitude, node.peers[index].address.latitude)
+                let dlong=unsignedDifference(address.longitude, node.peers[index].address.longitude)
+                let dalt=unsignedDifference(address.altitude, node.peers[index].address.altitude)
+                
+                if ( dlat + dlong + dalt < smallestDifferenceToAddress)
+                {
+                    smallestDifferenceToAddress=dlat+dlong+dalt
+                    result=index
+                }
             }
-            
-        }
-        
-        
-        
-        
         
         return result
     }
