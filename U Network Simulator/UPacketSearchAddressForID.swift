@@ -12,11 +12,13 @@ struct UPacketSearchAddressForID {
 
     var id:UNodeID
     var time:UInt64
+    var searchSerial:UInt64
     
     init (anId:UNodeID, aTime:UInt64)
     {
         self.id=anId
         self.time=aTime
+        self.searchSerial = random64()
     }
 
 }

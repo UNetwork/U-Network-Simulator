@@ -13,12 +13,14 @@ struct UPacketReplyForAddressSearch {
     var id:UNodeID
     var address:UNodeAddress
     var time:UInt64
+    var searchRequestSerial:UInt64
     
-    init(anId:UNodeID, anAddress:UNodeAddress, aTime:UInt64)
+    init(anId:UNodeID, anAddress:UNodeAddress, aTime:UInt64, forSerial:UInt64)
         {
             self.id=anId
             self.address=anAddress
             self.time=aTime
+            self.searchRequestSerial=forSerial
         }
 
 }

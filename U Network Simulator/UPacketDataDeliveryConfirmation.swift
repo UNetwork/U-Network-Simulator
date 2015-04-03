@@ -11,5 +11,5 @@ import Foundation
 struct UPacketDataDeliveryConfirmation
 {
     
-    var deliveredPacketSerial:UInt64
+    var deliveredPacketSerial:UInt64 = 0
 }

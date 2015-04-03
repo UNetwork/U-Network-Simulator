@@ -14,49 +14,20 @@ struct UPacketHeader
     var transmitedByUID:UNodeID
     var lifeCounterAndFlags:UPacketHeaderLifeCounterAndFlags
     
-    
     init (from:UNodeID, to: UNodeID, lifeTime:UInt32)
     {
-        
         transmitedToUID = to
         transmitedByUID = from
         lenghtAndChecksum = UPacketHeaderLenghtAndChecksum(fromId: from, toId: to)
         lifeCounterAndFlags = UPacketHeaderLifeCounterAndFlags(lifeCounter: lifeTime)
-        
     }
     
     func replyHeader() -> UPacketHeader
     {
         return UPacketHeader(from: transmitedToUID, to: transmitedByUID, lifeTime: UInt32(lifeCounterAndFlags.lifeCounter))
     }
-    
-    
 }
 
-struct UNetworkLookUpRequest
-{
-    var requester:UNodeID
-    var requesterAddress:UNodeAddress
-    var counter:UNetworkLookUpRequestTypeAndCounter
-    
-    
-}
-
-struct UNetworkLookUpRequestTypeAndCounter
-{
-
-    var data:UInt64
-    
-    /*
-    
-    hoop counter 8 bit
-    request type 8 bit
-    serial 48 bits
-    
-    
-    */
-    
-}
 
 struct UPacketEnvelope {
 
@@ -77,16 +48,14 @@ struct UPacketEnvelope {
         self.lenghtAndChecksum=UPacketEnvelopeLenghtAndChecksum(fromId: orginatedByUID, toId: destinationUID)
     }
     
-
     func replyEnvelope() -> UPacketEnvelope
     {
         var result=UPacketEnvelope(fromId: self.destinationUID, fromAddress: destinationAddress, toId: orginatedByUID, toAddress: originAddress)
-        
-        
-               return result
+        return result
     }
-
 }
+
+
 
 
 struct UPacketEnvelopeLenghtAndChecksum {
@@ -113,6 +82,30 @@ struct UPacketEnvelopeLenghtAndChecksum {
     
 }
 
+struct UNetworkLookUpRequest
+{
+    var requester:UNodeID
+    var requesterAddress:UNodeAddress
+    var counter:UNetworkLookUpRequestTypeAndCounter
+    
+    
+}
+
+struct UNetworkLookUpRequestTypeAndCounter
+{
+    
+    var data:UInt64
+    
+    /*
+    
+    hoop counter 8 bit
+    request type 8 bit
+    serial 48 bits
+    
+    
+    */
+    
+}
 
 
 struct UPacketHeaderLenghtAndChecksum {

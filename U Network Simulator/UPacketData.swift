@@ -9,6 +9,15 @@
 import Foundation
 
 struct UPacketData {
+    
+    var appID = UInt64 (0)
 
     var load = [UInt64]()
+    
+    
+    init (appID:UInt64, data:[UInt64])
+    {
+        self.appID=appID
+        self.load=data
+    }
 }

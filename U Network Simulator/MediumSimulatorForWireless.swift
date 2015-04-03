@@ -76,42 +76,42 @@ class MediumSimulatorForWireless:MediumProtocol
         // check cache
         if useCache
         {
-        
-        if let resultsFromCache = checkCacheForNodeInterfaces(interface.node.id)
-        {
-            return resultsFromCache
-        }
-        }
-       
             
-            var result=[UNetworkInterfaceSimulationWireless]()
-            
-            // iterate over global list of nodes in simulator
-            
-            for (_, simulationNode) in enumerate(simulator.simulationNodes)
+            if let resultsFromCache = checkCacheForNodeInterfaces(interface.node.id)
             {
-                for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
+                return resultsFromCache
+            }
+        }
+        
+        
+        var result=[UNetworkInterfaceSimulationWireless]()
+        
+        // iterate over global list of nodes in simulator
+        
+        for (_, simulationNode) in enumerate(simulator.simulationNodes)
+        {
+            for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
+            {
+                if let wirelessInterfaceToCheck = interfaceToCheck as? UNetworkInterfaceSimulationWireless
                 {
-                    if let wirelessInterfaceToCheck = interfaceToCheck as? UNetworkInterfaceSimulationWireless
+                    if (checkIfWirelessInterfacesAreInRange(interface, interface2: wirelessInterfaceToCheck))
                     {
-                        if (checkIfWirelessInterfacesAreInRange(interface, interface2: wirelessInterfaceToCheck))
+                        if (!(wirelessInterfaceToCheck === interface))
                         {
-                            if (!(wirelessInterfaceToCheck === interface))
-                            {
-                                result.append(wirelessInterfaceToCheck)
-                            }
+                            result.append(wirelessInterfaceToCheck)
                         }
                     }
                 }
             }
+        }
+        
+        // add results to cache
+        if useCache
+        {
             
-            // add results to cache
-            if useCache
-            {
-                
-                interfacesInRangeCache[interface.node.id] = result
-            }
-            return result
+            interfacesInRangeCache[interface.node.id] = result
+        }
+        return result
         
     }
     

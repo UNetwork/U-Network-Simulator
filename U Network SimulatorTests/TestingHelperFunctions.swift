@@ -37,8 +37,8 @@ func simulationStats() -> (text:String, values:[Int])
         }
         
         avgPeers += simNode.node.peers.count
-        avgNames += simNode.node.knownNames.count
-        avgAddresses += simNode.node.knownNames.count
+        avgNames += simNode.node.knownIDs.count
+        avgAddresses += simNode.node.knownIDs.count
         
         if(simNode.node.address.latitude<minLat)
         {
@@ -103,14 +103,7 @@ func simulationStats() -> (text:String, values:[Int])
     {
         result+="\(index) : \(data)\n"
     }
-    
 
-    
-    
-    
-    
-    
-    
     return (result, globalStats)
 }
 

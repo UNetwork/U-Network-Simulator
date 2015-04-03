@@ -13,6 +13,38 @@ import Foundation
 protocol UAppProtocol
 {
     var appID:UInt64 {get}
-    func start()
-    func getPacket(from:UNodeID, data:[UInt64])
+    
+    var nodeAPI:UNodeAPI {get set}
+    
+    func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
+    
+    func getUNetworkError(error:UNetworkAPIError)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    
+    
+    func getDataDeliveryConfirmation(envelope:UPacketEnvelope, data:UPacketDataDeliveryConfirmation)
+    
+    func getIdSearchResults(result:UPacketReplyForIdSearch, forName:String)
+    
+    func getAddressSearchResult(result:UPacketReplyForAddressSearch)
+    
+    func getPong(envelope:UPacketEnvelope, serial:UInt64)
+    */
+    
+}
+
+
+struct UNetworkAPIError {
+    var flags:UInt64=0
 }

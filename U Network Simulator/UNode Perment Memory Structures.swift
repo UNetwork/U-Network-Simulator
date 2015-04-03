@@ -27,13 +27,11 @@ struct UPeerDataRecord
 
 struct UMemoryIdAddressRecord
 {
-    var id:UNodeID
     var address:UNodeAddress
     var time:UInt64
     
-    init (aId:UNodeID, anAddress:UNodeAddress, aTime:UInt64)
+    init  (anAddress:UNodeAddress, aTime:UInt64)
     {
-        self.id = aId
         self.address = anAddress
         self.time = aTime
     }
@@ -42,14 +40,12 @@ struct UMemoryIdAddressRecord
 
 struct UMemoryNameIdRecord
 {
-    var name:String
     var id:UNodeID
     var time:UInt64
     
     
-    init(aName:String, anId:UNodeID, aTime:UInt64)
+    init(anId:UNodeID, aTime:UInt64)
     {
-        self.name=aName
         self.id=anId
         self.time = aTime
     }
@@ -57,9 +53,6 @@ struct UMemoryNameIdRecord
     
 }
 
-struct UNodeContacts {
-    
-}
 
 
 

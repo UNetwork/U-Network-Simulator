@@ -9,8 +9,8 @@ import Foundation
 
 class UNAppSearch
 {
-    var nameSearchTable=[NameSearchTableRecord]()
-    var addressSearchTable=[AddressSearchTableRecord]()
+    var idSearches = [UInt64: String]()
+    var addressSearches = [UInt64: UNodeID]()
     
     
     let node:UNode
@@ -21,58 +21,61 @@ class UNAppSearch
         
     }
     
-    func findIdForName(name:String)
+    func findIdForName(name:String, serial:UInt64)
     {
-        
-        
-        
         //  Destination of packet is specified in envelope, but not treated as id or address but route for packet.
-        let searchCargo=UPacketSearchIdForName(nameToSearch: name)
         
-        let searchTableRecord = NameSearchTableRecord(searchedName: name, searchSerial: searchCargo.searchSerial)
-        
-        self.nameSearchTable.append(searchTableRecord)
+        var searchCargo=UPacketSearchIdForName(nameToSearch: name)
+        searchCargo.searchSerial = serial
+        idSearches[serial] = name
         
         for (_, address) in enumerate(searchStoreAddresses)
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.SearchIdForName(searchCargo))
         }
-        
-        
     }
     
-    func nameFound(packetCargo:UPacketReplyForIdSearch)
+    func idFound(packetCargo:UPacketReplyForIdSearch)
     {
-        node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForNameSucess)
-
-    
+        
+        if let name = idSearches[packetCargo.searchRequestSerial]
+        {
+            node.knownIDs[name] = UMemoryNameIdRecord (anId: packetCargo.foundId, aTime: 0)
+            node.dataApp.recieveIdSearchResults(packetCargo)
+            node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForNameSucess)
+        }
+        else
+        {
+            log(6,"No serial for id search")
+        }
     }
     
-    func findAddressForId(id:UNodeID)
+    func findAddressForId(id:UNodeID, serial:UInt64)
     {
-let cargo=UPacketType.SearchAddressForID(UPacketSearchAddressForID(anId: id, aTime: UInt64(0)))
+        var cargo = UPacketSearchAddressForID(anId: id, aTime: UInt64(0))
+        cargo.searchSerial = serial
+        addressSearches[serial] = id
+     
         for (_, address) in enumerate(searchStoreAddresses)
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
-            node.router.getPacketToRouteFromNode(envelope, cargo: cargo)
+            node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.SearchAddressForID(cargo))
         }
-    
-     
-    
     }
     
     func addressFound(packetCargo:UPacketReplyForAddressSearch)
     {
-        node.nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultRecieved)
-        log(3, "\(node.txt) Address found: \(packetCargo.address.txt) for \(packetCargo.id) ")
-        
+        if let id = addressSearches[packetCargo.searchRequestSerial]
+        {
+            node.knownAddresses[id] = UMemoryIdAddressRecord(anAddress: packetCargo.address, aTime: 0)
+            node.dataApp.recieveAddressSearchResults(packetCargo)
+            node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForAddressSucess)
+        }
     }
     
     func storeName()
     {
-        
-        
         for (_, address) in enumerate(searchStoreAddresses)
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
@@ -80,12 +83,6 @@ let cargo=UPacketType.SearchAddressForID(UPacketSearchAddressForID(anId: id, aTi
             
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.StoreIdForName(storeCargo))
         }
-        
-        
-        
-
-        
-        
     }
     
     func storeAddress()
@@ -99,20 +96,9 @@ let cargo=UPacketType.SearchAddressForID(UPacketSearchAddressForID(anId: id, aTi
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.StoreAddressForId(storeCargo))
         }
 
-        
     }
 
 
 
 }
 
-struct NameSearchTableRecord
-{
-    var searchedName:String=""
-    var searchSerial:UInt64=0
-}
-
-struct AddressSearchTableRecord {
-    var searchedId:UNodeID
-    var searcheSearial:UInt64
-}

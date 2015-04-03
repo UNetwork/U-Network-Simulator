@@ -54,11 +54,11 @@ class UNameStoreSearchTest: XCTestCase {
         
         sleep(1)
         
-        XCTAssert(firstNode.knownNames.count == 2, "Wrong number of names")
-        XCTAssert(lastNode.knownNames.count == 2, "Wrong number of names")
+        XCTAssert(firstNode.knownIDs.count == 2, "Wrong number of names")
+        XCTAssert(lastNode.knownIDs.count == 2, "Wrong number of names")
         
-        firstNode.searchApp.findIdForName(firstNode.userName)
-        lastNode.searchApp.findIdForName(firstNode.userName)
+        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
         
         sleep(1)
         
@@ -91,13 +91,12 @@ class UNameStoreSearchTest: XCTestCase {
         let firstNode=simulator.simulationNodes[0].node
         let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
-        firstNode.searchApp.storeName()
-        lastNode.searchApp.storeName()
+
         
         sleep(1)
         
-        firstNode.searchApp.findIdForName(firstNode.userName)
-        lastNode.searchApp.findIdForName(firstNode.userName)
+        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
         
         sleep(1)
         
@@ -123,25 +122,21 @@ class UNameStoreSearchTest: XCTestCase {
         
         createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
         
-        sleep(5)
+        sleep(135)
         
         
         let firstNode=simulator.simulationNodes[0].node
         let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
-        firstNode.searchApp.storeName()
-        lastNode.searchApp.storeName()
         
-        sleep(3)
+        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
         
-        firstNode.searchApp.findIdForName(firstNode.userName)
-        lastNode.searchApp.findIdForName(firstNode.userName)
-        
-        sleep(3)
+        sleep(160)
         
         
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
+        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] > 0, "name not found")
+        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] >  0, "name not found")
 
     }
     

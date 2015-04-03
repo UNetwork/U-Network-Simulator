@@ -73,3 +73,63 @@ func randomUserName (len : Int) -> String {
     
     return randomString as String
 }
+
+
+// string to data format (UInt64) conversion
+
+func stringToUData (text:String) -> [UInt64]
+{
+    var result = [UInt64]()
+    
+    var shifter = UInt64(8)
+    var currentDatachunk = UInt64(0)
+    
+    for char in text.utf8
+    {
+        shifter--
+        
+        currentDatachunk += UInt64(char) << (shifter * 8)
+        
+        if (shifter == 0)
+        {
+            result.append(currentDatachunk)
+            shifter = 8
+            currentDatachunk = 0
+        }
+    }
+    
+    if (shifter < 8)
+    {
+        result.append(currentDatachunk)
+    }
+    
+    return result
+    
+}
+
+
+func uDataToString (data: [UInt64]) -> String
+{
+    var result8 = [UInt8]()
+    
+    for dataChunk in data
+    {
+        for i in 0...7
+        {
+            let byte64 = (dataChunk >> (UInt64(7-i) * 8)) & 0xFF
+            
+            let byte8 = UInt8(byte64)
+            
+            result8.append(byte8)
+        }
+        
+    }
+    
+    if let result =  (String(bytes: result8, encoding: NSUTF8StringEncoding))
+    {
+        return result
+    }
+    
+    return ""
+}
+

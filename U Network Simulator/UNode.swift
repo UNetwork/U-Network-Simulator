@@ -16,20 +16,19 @@ to transmit the trespassing packet. Node is servicing user application with U Ne
 class UNode {
     
     
-    let id:UNodeID                                  // Unique Id
-    var address:UNodeAddress                       // Current Address - geographical position
-    var userName:String                            // User name of node if defined
-    var timeCounter:UInt64=0                               // Local "time"
+    let id:UNodeID                                          // Unique Id
+    var address:UNodeAddress                                // Current Address - geographical position
+    var userName:String                                     // User name of node if defined
+    var timeCounter:UInt64=0                                // Local "time"
     
-    var interfaces=[UNetworkInterfaceProtocol]()    // Network interfaces
-    var router:URouterProtocol!                     // Handler for packet router
-                                                    // The search and store packets are routed differently
-    var peers = [UPeerDataRecord]()                 // Currently available connected nodes
-    var knownAddresses = [UMemoryIdAddressRecord]() // Memory of search for address service
-    var knownNames  = [UMemoryNameIdRecord]()       // Memory of search for name service
+    var interfaces=[UNetworkInterfaceProtocol]()            // Network interfaces
+    var router:URouterProtocol!                             // Handler for packet router
+
+    var peers = [UPeerDataRecord]()                         // Currently available connected nodes
+    var knownAddresses = [UNodeID:UMemoryIdAddressRecord]() // Memory of search for address service
+    var knownIDs  = [String:UMemoryNameIdRecord]()          // Memory of search for name service
     
-    var contacts = [UNodeContacts] ()               // Commonly contacted noods, contacts
-    var apps = [UAppProtocol] ()                    // Handler for all "installed" apps
+    var appsAPI: UNodeAPI!                                  // Handler for all API of apps
     
     
     //Node apps required
@@ -52,11 +51,11 @@ class UNode {
         id=UNodeID(lenght: uIDlengh)
         userName = randomUserName(6)
         address = unknownNodeAddress
+        self.appsAPI=UNodeAPI(node: self)
         
         
         // start node apps
         
-  //      pingApp=UNAppPing(node:self)
 
         
     }
@@ -78,8 +77,9 @@ class UNode {
         dataApp = UNAppDataTransfer(node: self)
         
         // add self data to search tables
-        let ownNameRecord=UMemoryNameIdRecord(aName: self.userName, anId: self.id, aTime: nodeTime)
-        knownNames.append(ownNameRecord)
+
+        
+        knownIDs[self.userName] = UMemoryNameIdRecord(anId: self.id, aTime: self.nodeTime)
         
         
         
@@ -108,8 +108,9 @@ class UNode {
         }
         
 
-        let ownAddressRecord=UMemoryIdAddressRecord(aId: self.id, anAddress: self.address, aTime: 1)
-        self.knownAddresses.append(ownAddressRecord)
+        
+        
+        knownAddresses[self.id] = UMemoryIdAddressRecord(anAddress: self.address, aTime: self.nodeTime)
         
         // start apps
         
@@ -264,7 +265,7 @@ class UNode {
         nodeStats.addNodeStatsEvent(StatsEvents.SearchIdForNameProcessed)
         log(2, "\(self.txt) Searching Id for name: \(request.name)")
         
-        if let foundId=findIdForName(request.name) 
+        if let foundId=knownIDs[request.name]
         {
             
             // name found reply data
@@ -272,7 +273,7 @@ class UNode {
             
             let newEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
             
-            let searchreplyCargo = UPacketType.ReplyForIdSearch(UPacketReplyForIdSearch(id: foundId, serial: request.searchSerial))
+            let searchreplyCargo = UPacketType.ReplyForIdSearch(UPacketReplyForIdSearch(id: foundId.id, serial: request.searchSerial))
             
             router.getPacketToRouteFromNode(newEnvelope, cargo: searchreplyCargo)
             
@@ -296,9 +297,9 @@ class UNode {
         nodeStats.addNodeStatsEvent(StatsEvents.StoreIdForNameProcessed)
         
         
-        if let id=findIdForName(request.name)
+        if let searchedIdRecord=knownIDs[request.name]
         {
-            if(id.isEqual(request.id))
+            if(searchedIdRecord.id.isEqual(request.id))
             {
                 // reply with positive anwser
             }
@@ -310,7 +311,7 @@ class UNode {
         else
         {
             // add record
-            self.knownNames.append(UMemoryNameIdRecord(aName: request.name, anId: envelope.orginatedByUID, aTime: nodeTime))
+            self.knownIDs[request.name] = UMemoryNameIdRecord(anId: envelope.orginatedByUID, aTime: nodeTime)
         }
         
         let packet = UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: UPacketType.StoreIdForName(request))
@@ -329,15 +330,15 @@ class UNode {
     func processSearchAddressForID(interface:UNetworkInterfaceProtocol, header:UPacketHeader, envelope:UPacketEnvelope, request:UPacketSearchAddressForID)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.SearchAddressForIdProcessed)
-        let searchResult = findAddressForId(request.id)
-
-        if let address = searchResult.address
-        {
+        if let searchResult = knownAddresses[request.id]
+ {
+        let address = searchResult.address
+       
            // if time is later in request send reply
-            if (searchResult.time! >= request.time)
+            if (searchResult.time >= request.time)
             {
              let newEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
-                let cargo=UPacketType.ReplyForAddressSearch(UPacketReplyForAddressSearch(anId: request.id, anAddress: address, aTime: searchResult.time!))
+                let cargo=UPacketType.ReplyForAddressSearch(UPacketReplyForAddressSearch(anId: request.id, anAddress: address, aTime: searchResult.time, forSerial:request.searchSerial))
                 router.getPacketToRouteFromNode(newEnvelope, cargo: cargo)
                 
             }
@@ -367,9 +368,8 @@ class UNode {
     {
         nodeStats.addNodeStatsEvent(StatsEvents.StoreAddressForIdProcessed)
         
-        let searchResult = findAddressForId(request.id)
+        if let searchResult = knownAddresses[request.id]
         
-        if let address = searchResult.address
         
         {
            // check for time if newer then stored and update if necessery
@@ -382,7 +382,7 @@ class UNode {
         else
         {
             // add record
-            self.knownAddresses.append(UMemoryIdAddressRecord(aId: request.id, anAddress: request.address, aTime: request.time) )
+            self.knownAddresses[request.id] = UMemoryIdAddressRecord(anAddress: request.address, aTime: request.time)
         }
         
         
@@ -405,7 +405,7 @@ class UNode {
     func processIdSearchResults(envelope:UPacketEnvelope, searchResult:UPacketReplyForIdSearch)
     {
      nodeStats.addNodeStatsEvent(StatsEvents.IdSearchResultRecieved)
-        self.searchApp.nameFound(searchResult)
+        self.searchApp.idFound(searchResult)
         
     }
     
@@ -491,47 +491,7 @@ class UNode {
         }
         return result
     }
-    
-    func findIdForName(nameToFind:String) -> UNodeID?
-    {
-        var result:UNodeID?
-        
-        for(_, nameRecord) in enumerate(self.knownNames)
-        {
-            if(nameRecord.name == nameToFind)
-            {
-
-                result = nameRecord.id
-                break
-
-                
-            }
-        }
-        
-        
-        return result
-    }
-    
-    
-    func findAddressForId(id:UNodeID) -> (address:UNodeAddress?, time:UInt64?)
-    {
-        var resultAddress:UNodeAddress?
-        var resultTime:UInt64?
-        
-        for (_, addressRecord) in enumerate(knownAddresses)
-        {
-            if(addressRecord.id.isEqual(id))
-            {
-                resultAddress=addressRecord.address
-                resultTime = addressRecord.time
-                break
-            }
-        }
-        
-        return (resultAddress, resultTime)
-        
-    }
-    
+       
     // Other Utility
     
     func findAddressFromConnectedPeers()

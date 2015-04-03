@@ -57,8 +57,8 @@ class UAddressStoreSearchTests: XCTestCase {
         AppDelegate.sharedInstance.logLevel = 2
 
         
-        firstNode.searchApp.findAddressForId(lastNode.id)
-        lastNode.searchApp.findAddressForId(firstNode.id)
+        firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
+        lastNode.searchApp.findAddressForId(firstNode.id, serial:random64())
         
         sleep(1)
         
@@ -91,8 +91,8 @@ class UAddressStoreSearchTests: XCTestCase {
         AppDelegate.sharedInstance.logLevel = 3
 
         
-        firstNode.searchApp.findAddressForId(lastNode.id)
-        lastNode.searchApp.findAddressForId(firstNode.id)
+        firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
+        lastNode.searchApp.findAddressForId(firstNode.id, serial:random64())
         
         sleep(1)
         

@@ -22,6 +22,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var logChanged=true
     var logLevel:Int=6
     
+    static let sharedInstance=AppDelegate()
+
+    
     @IBOutlet var logTextView: NSTextView!
     
     
@@ -52,15 +55,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
        
         
-         
         
         
     }
-    
 
-    
-    
-    
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
@@ -85,6 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if(logChanged)
         {
+
             logTextView.string=AppDelegate.sharedInstance.logText
             logTextView.scrollToEndOfDocument("")
             logChanged=false
@@ -95,29 +94,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     }
     
-    static let sharedInstance=AppDelegate()
 
-    
-    // Shared singelton pattern
-   /*
-    class var sharedInstance: AppDelegate
-        {
-        get
-    {
-        struct Static
-        {
-            static var instance: AppDelegate? = nil
-            static var token: dispatch_once_t = 0
-        }
-        dispatch_once(&Static.token,
-            {
-                Static.instance = AppDelegate()
-        })
-        return Static.instance!
-        }
-    }
-    
-    */
+
 }
 
 

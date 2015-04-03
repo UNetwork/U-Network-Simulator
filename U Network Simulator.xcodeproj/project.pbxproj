@@ -65,6 +65,7 @@
 		FEB5E4151A8A987C00A459E6 /* USimulationRealLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4141A8A987C00A459E6 /* USimulationRealLocation.swift */; };
 		FEB5E4181A8A98F900A459E6 /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
 		FEB606A71AC2F066004C752E /* UAddressStoreSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB606A61AC2F066004C752E /* UAddressStoreSearchTests.swift */; };
+		FEB606A81AC3ED75004C752E /* TestingHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA94DDD1AB57A440048DFD3 /* TestingHelperFunctions.swift */; };
 		FEBFCDC31AAEEC2C00E09666 /* UNAppPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */; };
 		FEBFCDC41AAEEC2C00E09666 /* UNAppPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */; };
 		FEBFCDC61AAF446700E09666 /* UPingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC51AAF446700E09666 /* UPingTests.swift */; };
@@ -233,8 +234,6 @@
 		FE45B7DC1A9342E400B82E5E /* U Node APIs */ = {
 			isa = PBXGroup;
 			children = (
-				FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */,
-				FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */,
 			);
 			name = "U Node APIs";
 			sourceTree = "<group>";
@@ -309,12 +308,12 @@
 				FE5BC8141A9739650040F7BD /* Constants Definitions.swift */,
 				FEED381A1AA2497800BB3C26 /* Global Objects.swift */,
 				FE45B7DD1A9343A700B82E5E /* U Core Objects */,
+				FEED38371AA24CDF00BB3C26 /* U User Apps */,
 				FEB5E3FD1A89E05B00A459E6 /* U Network SimulatorTests */,
 				FEE899781A98D1C60057ACD7 /* U Routing */,
 				FEE899741A98D0E10057ACD7 /* U Network Interfaces */,
 				FE45B7DC1A9342E400B82E5E /* U Node APIs */,
 				FE4D6A881AA590FC008B3B4E /* U Node Apps */,
-				FEED38371AA24CDF00BB3C26 /* U User Apps */,
 				FEB5E3EC1A89E05B00A459E6 /* U Network Simulator */,
 				FE45B7DF1A93448C00B82E5E /* Misc */,
 				FEA94DDF1AB828700048DFD3 /* U Network Testing Playgound */,
@@ -423,6 +422,8 @@
 		FEED38371AA24CDF00BB3C26 /* U User Apps */ = {
 			isa = PBXGroup;
 			children = (
+				FE4D6A8C1AA59223008B3B4E /* UAppProtocol.swift */,
+				FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */,
 				FE4D6A851AA59083008B3B4E /* UAppChat.swift */,
 			);
 			name = "U User Apps";
@@ -527,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB606A81AC3ED75004C752E /* TestingHelperFunctions.swift in Sources */,
 				FEACA9A91AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */,
 				FEE899631A9879100057ACD7 /* UPacket.swift in Sources */,
 				FEB5E3F01A89E05B00A459E6 /* AppDelegate.swift in Sources */,
