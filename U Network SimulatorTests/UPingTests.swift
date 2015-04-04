@@ -14,8 +14,8 @@ class UPingTests: XCTestCase {
         super.setUp()
         
         simulator=UNetworkSimulator()
-        AppDelegate.sharedInstance.logClearText("")
-        AppDelegate.sharedInstance.logLevel = 3
+        AppDelegate.sharedInstance.logClearText()
+        logLevel = 3
         
     }
     
@@ -34,7 +34,7 @@ class UPingTests: XCTestCase {
         let dropped = stats.values[StatsEvents.PacketDropped.rawValue]
 
 
-        XCTAssert(pingSent - returned - dropped == pingRecieved && pingRecieved == pongRecieved, "ping or pong lost")
+        XCTAssert(pingRecieved == pongRecieved, "ping or pong lost")
 
         
         
@@ -43,7 +43,7 @@ class UPingTests: XCTestCase {
     
     func testPingSimple()
     {
-        AppDelegate.sharedInstance.logLevel = 2
+        logLevel = 2
 
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: exampleNodeAddress.latitude, inputLongitude: exampleNodeAddress.longitude, inputAltitude: exampleNodeAddress.altitude))
         
@@ -65,7 +65,7 @@ class UPingTests: XCTestCase {
     
     func testPingMedium()
     {
-        AppDelegate.sharedInstance.logLevel = 2
+        logLevel = 2
 
         
         // network size
@@ -98,7 +98,7 @@ class UPingTests: XCTestCase {
     func testPingHard()
     {
         // network size
-        AppDelegate.sharedInstance.logLevel = 4
+        logLevel = 4
 
         
         let k:UInt32 = 30
@@ -118,7 +118,7 @@ class UPingTests: XCTestCase {
 
        // sleep(delay)
         log(5, "slepinig while netwoek setup in ping testing FINISHED")
-        AppDelegate.sharedInstance.logLevel = 4
+        logLevel = 4
   
         let numberOfNodes=simulator.simulationNodes.count
         let repetitions = 100

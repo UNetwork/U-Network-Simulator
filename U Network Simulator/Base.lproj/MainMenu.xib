@@ -13,7 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="U_Network_Simulator" customModuleProvider="target">
             <connections>
-                <outlet property="logTextView" destination="2zL-Vi-i3z" id="yNR-WD-AoL"/>
+                <outlet property="toolbar" destination="Lxf-On-LAD" id="GSQ-rX-vKg"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -32,11 +32,6 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
-                            <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                            <menuItem title="Services" id="NMo-om-nkz">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
                             <menuItem title="Hide U Network Simulator" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
@@ -412,96 +407,63 @@
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="750" height="550"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USV-Cw-p3d">
-                        <rect key="frame" x="20" y="71" width="710" height="459"/>
-                        <clipView key="contentView" id="GAi-ok-Ekl">
-                            <rect key="frame" x="1" y="1" width="223" height="133"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="2zL-Vi-i3z">
-                                    <rect key="frame" x="0.0" y="0.0" width="223" height="457"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="708" height="457"/>
-                                    <size key="maxSize" width="710" height="10000000"/>
-                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="708" height="457"/>
-                                    <size key="maxSize" width="710" height="10000000"/>
-                                </textView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Hga-2a-hkr">
-                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="OJv-hW-Ns7">
-                            <rect key="frame" x="224" y="1" width="15" height="133"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IOU-jp-nts">
-                        <rect key="frame" x="257" y="13" width="127" height="32"/>
-                        <buttonCell key="cell" type="push" title="Clear Console" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ddB-eh-Lpa">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="logClearText:" target="Voe-Tx-rLC" id="NTL-2F-CAW"/>
-                        </connections>
-                    </button>
-                    <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gsU-6B-LLR">
-                        <rect key="frame" x="139" y="18" width="99" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="96" id="uLy-bB-Qd7"/>
-                        </constraints>
-                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0" drawsBackground="YES" completes="NO" numberOfVisibleItems="8" id="K8K-2O-51C">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            <objectValues>
-                                <string>0</string>
-                                <string>1</string>
-                                <string>2</string>
-                                <string>3</string>
-                                <string>4</string>
-                                <string>5</string>
-                                <string>6</string>
-                                <string>7</string>
-                            </objectValues>
-                        </comboBoxCell>
-                        <connections>
-                            <action selector="logLevelComboBox:" target="Voe-Tx-rLC" id="vUU-fo-6Ur"/>
-                        </connections>
-                    </comboBox>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="USV-Cw-p3d" secondAttribute="trailing" constant="20" symbolic="YES" id="1PC-mD-wlB"/>
-                    <constraint firstItem="USV-Cw-p3d" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" symbolic="YES" id="29E-gX-sX7"/>
-                    <constraint firstItem="IOU-jp-nts" firstAttribute="baseline" secondItem="gsU-6B-LLR" secondAttribute="baseline" id="Asb-Sq-4V1"/>
-                    <constraint firstAttribute="bottom" secondItem="IOU-jp-nts" secondAttribute="bottom" constant="20" symbolic="YES" id="b5X-Se-eaP"/>
-                    <constraint firstItem="IOU-jp-nts" firstAttribute="leading" secondItem="gsU-6B-LLR" secondAttribute="trailing" constant="28" id="b7u-I6-Egn"/>
-                    <constraint firstItem="USV-Cw-p3d" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="bee-RR-BU5"/>
-                    <constraint firstItem="gsU-6B-LLR" firstAttribute="top" secondItem="USV-Cw-p3d" secondAttribute="bottom" constant="29" id="nWl-CD-QeN"/>
-                    <constraint firstItem="gsU-6B-LLR" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="139" id="thP-CL-1dx"/>
-                </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="EF987825-0876-4D8B-8A48-D501B67F3157" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Lxf-On-LAD">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="DE0F4F35-DD15-44E8-8470-F3688DECB3AE" label="Show Console" paletteLabel="Show Console" tag="-1" image="NSActionTemplate" id="SXy-TF-SRp">
+                        <connections>
+                            <action selector="showConsoleWindow:" target="Voe-Tx-rLC" id="fLs-x2-ZIS"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="465E16D1-ABC2-45DB-9B02-23E33E2E40E8" label="Node inspector" paletteLabel="Node inspector" tag="-1" image="NSInfo" id="IUe-Bg-AJt">
+                        <connections>
+                            <action selector="showNodeInspectorWindow:" target="Voe-Tx-rLC" id="Owi-L1-7BP"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="141555E1-99A2-4ACB-8490-6DA22484714A" label="Show Stats" paletteLabel="Show Stats" tag="-1" image="NSPathTemplate" id="lga-ig-Dmy">
+                        <connections>
+                            <action selector="showStats:" target="Voe-Tx-rLC" id="5Qa-vZ-FYj"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="2FD6370D-645C-4DA4-89E5-CD45A13E2D36" label="Stop/Start" paletteLabel="Stop/Start" tag="-1" image="NSStopProgressTemplate" id="39i-rc-sx4">
+                        <connections>
+                            <action selector="toggleSimulationPause:" target="Voe-Tx-rLC" id="Gjk-K1-5xi"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E989F524-4451-42D3-BEF6-A0CC9E1AB056" label="Add Nodes" paletteLabel="Add Nodes" tag="-1" image="NSAddTemplate" id="iOb-Th-fhA">
+                        <connections>
+                            <action selector="showAddNodesWindow:" target="Voe-Tx-rLC" id="wCl-r5-8Km"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="FB5F7156-0692-497B-9B81-907987DB3E89" label="Settings" paletteLabel="Settings" tag="-1" image="NSPreferencesGeneral" id="jh9-8c-t9J">
+                        <connections>
+                            <action selector="showSettingssWindow:" target="Voe-Tx-rLC" id="obu-Kd-oKz"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="z4E-mh-1Fj"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="9SI-FZ-GMZ"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="SXy-TF-SRp"/>
+                    <toolbarItem reference="IUe-Bg-AJt"/>
+                    <toolbarItem reference="lga-ig-Dmy"/>
+                    <toolbarItem reference="9SI-FZ-GMZ"/>
+                    <toolbarItem reference="39i-rc-sx4"/>
+                    <toolbarItem reference="9SI-FZ-GMZ"/>
+                    <toolbarItem reference="jh9-8c-t9J"/>
+                    <toolbarItem reference="9SI-FZ-GMZ"/>
+                    <toolbarItem reference="iOb-Th-fhA"/>
+                </defaultToolbarItems>
+            </toolbar>
             <point key="canvasLocation" x="416" y="796"/>
         </window>
-        <menu id="n2f-88-pA0">
-            <items>
-                <menuItem title="Item 1" id="A2U-xP-z54">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Item 2" id="roB-a6-9XG">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Item 3" id="geI-j2-jHW">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-            </items>
-            <point key="canvasLocation" x="813" y="77.5"/>
-        </menu>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSInfo" width="32" height="32"/>
+        <image name="NSPathTemplate" width="16" height="10"/>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="NSStopProgressTemplate" width="11" height="11"/>
+    </resources>
 </document>

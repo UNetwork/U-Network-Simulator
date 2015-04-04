@@ -51,6 +51,8 @@ class UNetworkSimulator {
                 node.interfaces.append(bridgeInterface)
             }
             
+            node.setupAndStart()
+            
             let simulationNode=SimulationNode(node:node, nodeConfiguration:configurationData)
             self.simulationNodes.append(simulationNode)
         }

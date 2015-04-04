@@ -28,6 +28,14 @@
 		FE5BC8131A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */; };
 		FE5BC8151A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
 		FE5BC8161A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
+		FE60F0301ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */; };
+		FE60F0311ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */; };
+		FE60F0331ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */; };
+		FE60F0341ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */; };
+		FE60F0361ACFF50A0049DA76 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0351ACFF50A0049DA76 /* StatsWindowController.swift */; };
+		FE60F0371ACFF50A0049DA76 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0351ACFF50A0049DA76 /* StatsWindowController.swift */; };
+		FE60F0391ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */; };
+		FE60F03A1ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */; };
 		FE61FC421AC18AA200B5C242 /* UNameStoreSearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE61FC411AC18AA200B5C242 /* UNameStoreSearchTest.swift */; };
 		FE6E57B51A94B5A200F8F0D5 /* U Coordinate System Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */; };
 		FE6E57BA1A94B6A100F8F0D5 /* U Coordinate System Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */; };
@@ -71,6 +79,14 @@
 		FEBFCDC61AAF446700E09666 /* UPingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC51AAF446700E09666 /* UPingTests.swift */; };
 		FEBFCDC81AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */; };
 		FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */; };
+		FEC6B50F1ACFB11E002B8AD1 /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */; };
+		FEC6B5131ACFB207002B8AD1 /* AddNodesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B5121ACFB207002B8AD1 /* AddNodesWindow.xib */; };
+		FEC6B5151ACFB2BA002B8AD1 /* StatsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B5141ACFB2BA002B8AD1 /* StatsWindow.xib */; };
+		FEC6B5171ACFD1BD002B8AD1 /* NodeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */; };
+		FEC6B5191ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */; };
+		FEC6B51A1ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */; };
+		FEC6B51D1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */; };
+		FEC6B51E1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */; };
 		FEC90F1C1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
 		FEC90F1D1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
 		FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
@@ -150,6 +166,10 @@
 		FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = USimulationRealLocationTests.swift; path = "U Network SimulatorTests/USimulationRealLocationTests.swift"; sourceTree = "<group>"; };
 		FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAPIForApps.swift; path = "U Network Simulator/UNodeAPIForApps.swift"; sourceTree = "<group>"; };
 		FE5BC8141A9739650040F7BD /* Constants Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Constants Definitions.swift"; path = "U Network Simulator/Constants Definitions.swift"; sourceTree = "<group>"; };
+		FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNodesWindowController.swift; sourceTree = "<group>"; };
+		FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeWindowController.swift; sourceTree = "<group>"; };
+		FE60F0351ACFF50A0049DA76 /* StatsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
+		FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		FE61FC411AC18AA200B5C242 /* UNameStoreSearchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNameStoreSearchTest.swift; sourceTree = "<group>"; };
 		FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Coordinate System Functions.swift"; sourceTree = "<group>"; };
 		FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = U_Coordinate_SystemTests.swift; path = "U Network SimulatorTests/U_Coordinate_SystemTests.swift"; sourceTree = "<group>"; };
@@ -183,6 +203,12 @@
 		FEBFCDC21AAEEC2C00E09666 /* UNAppPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppPing.swift; path = "U Network Simulator/UNAppPing.swift"; sourceTree = "<group>"; };
 		FEBFCDC51AAF446700E09666 /* UPingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPingTests.swift; sourceTree = "<group>"; };
 		FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouter_SimpleDirection.swift; path = "U Network Simulator/URouter_SimpleDirection.swift"; sourceTree = "<group>"; };
+		FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
+		FEC6B5121ACFB207002B8AD1 /* AddNodesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNodesWindow.xib; sourceTree = "<group>"; };
+		FEC6B5141ACFB2BA002B8AD1 /* StatsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsWindow.xib; sourceTree = "<group>"; };
+		FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeWindow.xib; sourceTree = "<group>"; };
+		FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindow.xib; sourceTree = "<group>"; };
+		FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleWindowController.swift; sourceTree = "<group>"; };
 		FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppNodeCurrentState.swift; path = "U Network Simulator/UNAppNodeCurrentState.swift"; sourceTree = "<group>"; };
 		FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketHeader.swift; path = "U Network Simulator/UPacketHeader.swift"; sourceTree = "<group>"; };
 		FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryBroadcast.swift; path = "U Network Simulator/UPacketDiscoveryBroadcast.swift"; sourceTree = "<group>"; };
@@ -337,7 +363,7 @@
 				FE45B7DE1A93445C00B82E5E /* Simulation Objects */,
 				FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */,
 				FEB5E3F11A89E05B00A459E6 /* Images.xcassets */,
-				FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */,
+				FEC6B51B1ACFD53F002B8AD1 /* UI */,
 				FEB5E3ED1A89E05B00A459E6 /* Supporting Files */,
 			);
 			path = "U Network Simulator";
@@ -370,6 +396,24 @@
 			);
 			name = "Supporting Files";
 			path = "U Network SimulatorTests";
+			sourceTree = "<group>";
+		};
+		FEC6B51B1ACFD53F002B8AD1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */,
+				FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */,
+				FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */,
+				FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */,
+				FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */,
+				FEC6B5141ACFB2BA002B8AD1 /* StatsWindow.xib */,
+				FE60F0351ACFF50A0049DA76 /* StatsWindowController.swift */,
+				FEC6B5121ACFB207002B8AD1 /* AddNodesWindow.xib */,
+				FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */,
+				FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */,
+				FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		FEE899741A98D0E10057ACD7 /* U Network Interfaces */ = {
@@ -509,8 +553,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEC6B5191ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */,
 				FEB5E3F21A89E05B00A459E6 /* Images.xcassets in Resources */,
+				FEC6B5131ACFB207002B8AD1 /* AddNodesWindow.xib in Resources */,
+				FEC6B5171ACFD1BD002B8AD1 /* NodeWindow.xib in Resources */,
 				FEB5E3F51A89E05B00A459E6 /* MainMenu.xib in Resources */,
+				FEC6B50F1ACFB11E002B8AD1 /* ConsoleWindow.xib in Resources */,
+				FEC6B5151ACFB2BA002B8AD1 /* StatsWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +567,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEC6B51A1ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +583,9 @@
 				FEE899631A9879100057ACD7 /* UPacket.swift in Sources */,
 				FEB5E3F01A89E05B00A459E6 /* AppDelegate.swift in Sources */,
 				FEC90F1C1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */,
+				FE60F0361ACFF50A0049DA76 /* StatsWindowController.swift in Sources */,
 				FEED381D1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */,
+				FE60F0331ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */,
 				FEA80C3A1A966C5C0061CEA3 /* UNode.swift in Sources */,
 				FEA94DCA1AB1E6A40048DFD3 /* UNAppSearch.swift in Sources */,
 				FEE899721A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */,
@@ -561,6 +613,8 @@
 				FE4D6A8A1AA591D6008B3B4E /* UNAppNodeStats.swift in Sources */,
 				FEB5E40F1A8A031200A459E6 /* UNodeID.swift in Sources */,
 				FEBFCDC31AAEEC2C00E09666 /* UNAppPing.swift in Sources */,
+				FE60F0301ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */,
+				FE60F0391ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */,
 				FEA94DCD1AB1E75D0048DFD3 /* UNAppDataTransfer.swift in Sources */,
 				FEE8997D1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */,
 				FEE8996F1A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */,
@@ -575,6 +629,7 @@
 				FEE899661A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */,
 				FEBFCDC81AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
 				FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
+				FEC6B51D1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */,
 				FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
 				FE22CDC71AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */,
 				FEACA9B21AA06E24001524FB /* Simulator.swift in Sources */,
@@ -609,6 +664,7 @@
 				FEE899731A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */,
 				FEA94DCB1AB1E6A40048DFD3 /* UNAppSearch.swift in Sources */,
 				FEED382E1AA2497800BB3C26 /* UPacketPing.swift in Sources */,
+				FE60F0341ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */,
 				FEA80C381A96673D0061CEA3 /* UNodeIDTests.swift in Sources */,
 				FEACA9B31AA06E24001524FB /* Simulator.swift in Sources */,
 				FEA0072A1A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
@@ -616,6 +672,7 @@
 				FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */,
 				FE5BC8101A971D5C0040F7BD /* USimulationRealLocationTests.swift in Sources */,
 				FEA94DDA1AB452C70048DFD3 /* UPacketDropped.swift in Sources */,
+				FE60F03A1ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */,
 				FEACA9AA1AA0677E001524FB /* MediumSimulatorArbitraryGroup.swift in Sources */,
 				FEBFCDC61AAF446700E09666 /* UPingTests.swift in Sources */,
 				FEED38261AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */,
@@ -633,9 +690,11 @@
 				FEBFCDC41AAEEC2C00E09666 /* UNAppPing.swift in Sources */,
 				FEED38201AA2497800BB3C26 /* UPacketData.swift in Sources */,
 				FEED383A1AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
+				FE60F0371ACFF50A0049DA76 /* StatsWindowController.swift in Sources */,
 				FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */,
 				FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
+				FE60F0311ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */,
 				FEA94DDE1AB57A440048DFD3 /* TestingHelperFunctions.swift in Sources */,
 				FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */,
 				FEA0072D1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */,
@@ -651,6 +710,7 @@
 				FEED38281AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
 				FEED38301AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
 				FE45B7E41A93492200B82E5E /* AppDelegate.swift in Sources */,
+				FEC6B51E1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */,
 				FE091B851AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift in Sources */,
 				FEA94DE11AB851E50048DFD3 /* UDiscoveryProtocolTests.swift in Sources */,
 			);

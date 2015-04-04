@@ -15,25 +15,123 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var toolbar: NSToolbar!
+    
+    var consoleWindow:ConsoleWindowController?
+    var addNodesWindow:AddNodesWindowController?
+    var statsWindow:StatsWindowController?
+    var nodeWindow:NodeWindowController?
+    var settingsWindow:SettingsWindowController?
+    
+
+    @IBAction func showConsoleWindow(sender: AnyObject)
+    {
+        if  let win = consoleWindow   // bug is here when closing window with red dot and opening again
+        {
+            consoleWindow!.close()
+            consoleWindow=nil
+        }
+        else
+        {
+            let newWindow=ConsoleWindowController(windowNibName: "ConsoleWindow")
+            consoleWindow=newWindow
+            consoleWindow!.window?.makeKeyWindow()
+        }
+    }
+    
+    @IBAction func showNodeInspectorWindow(sender: AnyObject)
+    {
+        if let win = nodeWindow
+        {
+            nodeWindow!.close()
+            nodeWindow=nil
+        }
+        else
+        {
+            let newWindow=NodeWindowController(windowNibName: "NodeWindow")
+            nodeWindow=newWindow
+            nodeWindow!.window?.makeKeyWindow()
+        }
+
+    }
+    
+    
+    @IBAction func showStats(sender: AnyObject)
+    {
+        if let win = statsWindow
+        {
+            statsWindow!.close()
+            statsWindow=nil
+        }
+        else
+        {
+            let newWindow=StatsWindowController(windowNibName: "StatsWindow")
+            statsWindow=newWindow
+            statsWindow!.window?.makeKeyWindow()
+        }
+
+    }
+    
+    @IBAction func toggleSimulationPause(sender: AnyObject)
+    {
+    
+    
+    // gobal switch toggle
+    
+    
+    
+    
+    
+    }
+    
+    @IBAction func showAddNodesWindow(sender: AnyObject)
+    {
+        if let win = addNodesWindow
+        {
+            addNodesWindow!.close()
+            addNodesWindow=nil
+        }
+        else
+        {
+            let newWindow=AddNodesWindowController(windowNibName: "AddNodesWindow")
+            addNodesWindow=newWindow
+            addNodesWindow!.window?.makeKeyWindow()
+        }
+
+    }
+    
+    
+    @IBAction func showSettingssWindow(sender: AnyObject)
+    {
+        if let win = settingsWindow
+        {
+            settingsWindow!.close()
+            settingsWindow=nil
+        }
+        else
+        {
+            let newWindow=SettingsWindowController(windowNibName: "SettingsWindow")
+            settingsWindow=newWindow
+            settingsWindow!.window?.makeKeyWindow()
+        }
+
+    }
+    
+    
+    
     
     // Console objects
     
     var logText:String=""
     var logChanged=true
-    var logLevel:Int=6
     
     static let sharedInstance=AppDelegate()
 
     
-    @IBOutlet var logTextView: NSTextView!
     
+ 
     
-    @IBAction func logLevelComboBox(sender: NSComboBox)
-    {
-        logLevel = sender.integerValue
-    }
-    
-    @IBAction func logClearText(sender: AnyObject) {
+     func logClearText() {
         AppDelegate.sharedInstance.logText=""
         logChanged=true
         
@@ -70,28 +168,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func uIInitialisation()
     {
         uIUpdateTimer=NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector:"uIUpdate" , userInfo: nil, repeats: true)
-        logTextView.editable=false
         
     }
     
     // UI Update
     
     func uIUpdate(){
-    
-        
-        // Log
-        
-        if(logChanged)
-        {
-
-            logTextView.string=AppDelegate.sharedInstance.logText
-            logTextView.scrollToEndOfDocument("")
-            logChanged=false
-        }
-    
-    
-    
-    
+consoleWindow?.updateConsole()
     }
     
 

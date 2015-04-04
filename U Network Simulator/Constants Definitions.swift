@@ -18,10 +18,13 @@ let maxDiscoveryBroadcastDeepth:Int = 5
 
 var defaultStoreSearchDepth:UInt32 = 8
 
+var logLevel:Int=6
+
+
 
 // Simulation - to be elimineted
 
-let wirelessInterfaceRange = UInt64(1000)
+let wirelessInterfaceRange = UInt64(100_000_000_000)
 
 
 

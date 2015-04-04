@@ -53,9 +53,10 @@ class UNode {
         address = unknownNodeAddress
         self.appsAPI=UNodeAPI(node: self)
         
+        log(0,"node for owner: \(userName) created")
         
-        // start node apps
         
+
 
         
     }
@@ -64,8 +65,7 @@ class UNode {
     {
         
         //Avoid logging during initialisation
-        let geniueLogLevel = AppDelegate.sharedInstance.logLevel
-        AppDelegate.sharedInstance.logLevel=3
+    
 
         
         // setup router
@@ -97,7 +97,6 @@ class UNode {
         }
         refreshPeers()
 
-        AppDelegate.sharedInstance.logLevel=geniueLogLevel
         
         // if failed to find address in interfaces take the avarge address from peers
 
@@ -496,6 +495,7 @@ class UNode {
     
     func findAddressFromConnectedPeers()
     {
+        if (peers.count > 0){
         var latitudeSum:UInt64 = 0
         var longitudeSum:UInt64 = 0
         var altitudeSum:UInt64 = 0
@@ -513,6 +513,7 @@ class UNode {
         altitudeSum = altitudeSum / UInt64(peers.count)
 
         self.address=UNodeAddress(inputLatitude: latitudeSum, inputLongitude: longitudeSum, inputAltitude: altitudeSum)
+        }
     }
     
     var nodeTime:UInt64

@@ -29,7 +29,7 @@ func strToUInt64(stringToConvert:String)->(UInt64)
 
 func log(level:Int, text:String)
 {
-    if (AppDelegate.sharedInstance.logLevel <= level)
+    if (logLevel <= level)
     {
         println(text)
         AppDelegate.sharedInstance.logText+=text+"\n"
@@ -131,5 +131,12 @@ func uDataToString (data: [UInt64]) -> String
     }
     
     return ""
+}
+
+
+extension String {
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
 }
 

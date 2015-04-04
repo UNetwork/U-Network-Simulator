@@ -14,7 +14,7 @@ class UDiscoveryProtocolTests: XCTestCase {
         super.setUp()
         
         simulator=UNetworkSimulator()
-        AppDelegate.sharedInstance.logClearText("")
+        AppDelegate.sharedInstance.logClearText()
     
     }
     

@@ -17,8 +17,8 @@ class UNameStoreSearchTest: XCTestCase {
         super.setUp()
         
         simulator=UNetworkSimulator()
-        AppDelegate.sharedInstance.logClearText("")
-        AppDelegate.sharedInstance.logLevel = 3
+        AppDelegate.sharedInstance.logClearText()
+        logLevel = 3
     }
     
     override func tearDown()
@@ -36,7 +36,7 @@ class UNameStoreSearchTest: XCTestCase {
     
     func testNameStoreSimple() {
         
-        AppDelegate.sharedInstance.logLevel = 2
+        logLevel = 2
         
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: exampleNodeAddress.latitude, inputLongitude: exampleNodeAddress.longitude, inputAltitude: exampleNodeAddress.altitude))
         
@@ -72,7 +72,7 @@ class UNameStoreSearchTest: XCTestCase {
     func testNameStoreMedium()
     {
         
-        AppDelegate.sharedInstance.logLevel = 2
+        logLevel = 2
         
         // network size
         
@@ -108,7 +108,7 @@ class UNameStoreSearchTest: XCTestCase {
     
     func testNameStoreABitMore()
     {
-        AppDelegate.sharedInstance.logLevel = 3
+        logLevel = 3
         
         // network size
         

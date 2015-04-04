@@ -15,8 +15,8 @@ class UAddressStoreSearchTests: XCTestCase {
         super.setUp()
         
         simulator=UNetworkSimulator()
-        AppDelegate.sharedInstance.logClearText("")
-        AppDelegate.sharedInstance.logLevel = 3
+        AppDelegate.sharedInstance.logClearText()
+        logLevel = 3
     }
     
     override func tearDown()
@@ -36,7 +36,7 @@ class UAddressStoreSearchTests: XCTestCase {
     func testAddressSearchSimple()
     {
         
-        AppDelegate.sharedInstance.logLevel = 3
+        logLevel = 3
         
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: exampleNodeAddress.latitude, inputLongitude: exampleNodeAddress.longitude, inputAltitude: exampleNodeAddress.altitude))
         
@@ -54,7 +54,7 @@ class UAddressStoreSearchTests: XCTestCase {
         
         sleep(1)
         
-        AppDelegate.sharedInstance.logLevel = 2
+        logLevel = 2
 
         
         firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
@@ -88,7 +88,7 @@ class UAddressStoreSearchTests: XCTestCase {
         let firstNode=simulator.simulationNodes[0].node
         let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
-        AppDelegate.sharedInstance.logLevel = 3
+        logLevel = 3
 
         
         firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
