@@ -54,24 +54,19 @@ class AddNodesWindowController:NSWindowController
         let deltaAlt = unsignedDifference(convertedPosition.altitude, convertedDeltaPosition.altitude)
 
         
-        
-        
-        
         if let repetitions=numberValue
         {
             for index in 1...repetitions
             {
 
-                let finalLatitude = (deltaLat == 0 ? convertedPosition.latitude : convertedPosition.latitude &+ (random64() % deltaLat))
+                let finalLatitude = deltaLat == 0 ? convertedPosition.latitude : convertedPosition.latitude &+ (random64() % deltaLat)
                 let finalLongitude = deltaLong == 0 ? convertedPosition.longitude : convertedPosition.longitude &+ (random64() % deltaLong)
                 let finalAltitude = deltaAlt == 0 ? convertedPosition.altitude : convertedPosition.altitude &+ (random64() % deltaAlt)
                 
                 let nodePosition = USimulationRealLocation(inputLatitude: finalLatitude, inputLongitude: finalLongitude, inputAltitude: finalAltitude)
                 
                 simulator.addWirelessNode(nodePosition)
-                
-                
-                
+
                 
             }
         }
@@ -79,15 +74,7 @@ class AddNodesWindowController:NSWindowController
         
         
     }
-    override init(window: NSWindow!)
-    {
-        super.init(window: window)
-    }
-    
-    required init?(coder: (NSCoder!))
-    {
-        super.init(coder: coder)
-    }
+
     
     override func windowDidLoad() {
         super.windowDidLoad()

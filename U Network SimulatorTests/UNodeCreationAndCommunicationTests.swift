@@ -49,11 +49,11 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
             
         }
         */
-        simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[63].node.id, address: simulator.simulationNodes[63].node.address)
+      //  simulator.simulationNodes[0].node.pingApp.sendPing(simulator.simulationNodes[63].node.id, address: simulator.simulationNodes[63].node.address)
         
         
         sleep(10)
-        XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
+  //      XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
         
         println(simulationStats())
 

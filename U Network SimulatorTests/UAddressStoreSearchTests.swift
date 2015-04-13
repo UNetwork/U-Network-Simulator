@@ -42,29 +42,7 @@ class UAddressStoreSearchTests: XCTestCase {
         
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: closeToExampleNodeAddress.latitude, inputLongitude: closeToExampleNodeAddress.longitude, inputAltitude: closeToExampleNodeAddress.altitude))
         
-        simulator.simulationNodes[0].node.setupAndStart()
-        simulator.simulationNodes[1].node.setupAndStart()
-        
-        sleep(1)
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
-        
-        firstNode.searchApp.storeAddress()
-        lastNode.searchApp.storeAddress()
-        
-        sleep(1)
-        
-        logLevel = 2
-
-        
-        firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
-        lastNode.searchApp.findAddressForId(firstNode.id, serial:random64())
-        
-        sleep(1)
-        
-        
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.AddressSearchResultRecieved.rawValue] == 8, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.AddressSearchResultRecieved.rawValue] == 8, "name not found")
+ 
         
         
     }
@@ -84,22 +62,7 @@ class UAddressStoreSearchTests: XCTestCase {
         createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
         
         sleep(5)
-        
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
-        
-        logLevel = 3
-
-        
-        firstNode.searchApp.findAddressForId(lastNode.id, serial:random64())
-        lastNode.searchApp.findAddressForId(firstNode.id, serial:random64())
-        
-        sleep(1)
-        
-        
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.AddressSearchResultRecieved.rawValue] == 8, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.AddressSearchResultRecieved.rawValue] == 8, "name not found")
-
+      
 
     }
 

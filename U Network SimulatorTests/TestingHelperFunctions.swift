@@ -29,7 +29,7 @@ func simulationStats() -> (text:String, values:[Int])
     
     var numberOfPeersDistribution=Array(count: 16, repeatedValue: 0)
     
-    for (_, simNode) in enumerate(simulator.simulationNodes)
+    for  simNode in simulator.simulationNodes.values
     {
         for(i, value)in enumerate(simNode.node.nodeStats.nodeStats)
         {
@@ -135,13 +135,13 @@ func createNodeMesh(rows:UInt32, columns:UInt32, layers:UInt32, distance:UInt64,
         }
     }
     
-    for (_, aNode) in enumerate(simulator.simulationNodes)
+    for  aNode in simulator.simulationNodes.values
     {
         aNode.node.setupAndStart()
     }
     log (5,"Initial setup done")
 
-    for (_, aNode) in enumerate(simulator.simulationNodes)
+    for  aNode in simulator.simulationNodes.values
         {
         aNode.node.populateOwnData()
         }

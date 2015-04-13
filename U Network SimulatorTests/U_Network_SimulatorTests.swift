@@ -30,13 +30,9 @@ class U_Network_SimulatorTests:XCTestCase {
         
         XCTAssert(simulator.simulationNodes.count == 3, "Adding wireless node fail")
         
-        var someWirelessInterfaces = simulator.wirelessMedium.findInterfacesInRange(simulator.simulationNodes[0].node.interfaces[0] as! UNetworkInterfaceSimulationWireless)
+  //      var someWirelessInterfaces = simulator.wirelessMedium.findInterfacesInRange(simulator.simulationNodes[0].node.interfaces[0] as! UNetworkInterfaceSimulationWireless)
         
-        XCTAssert(someWirelessInterfaces.count == 1, "Cant locate wireless interface nearby")
-        
-        someWirelessInterfaces = simulator.wirelessMedium.findInterfacesInRange(simulator.simulationNodes[2].node.interfaces[0] as! UNetworkInterfaceSimulationWireless)
-        
-        XCTAssert(someWirelessInterfaces.count == 0, "Cant locate wireless interface nearby")
+
 
         // range
         

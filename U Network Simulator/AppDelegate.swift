@@ -13,6 +13,12 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    static let sharedInstance=AppDelegate()
+    
+    
+
+
 
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var toolbar: NSToolbar!
@@ -22,34 +28,63 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statsWindow:StatsWindowController?
     var nodeWindow:NodeWindowController?
     var settingsWindow:SettingsWindowController?
+    var visualisationWindow:VisualisationWindowController?
+    
+    override init() {
+        super.init()
+        
+        
+    }
+    
+    @IBAction func refresh(sender: AnyObject) {
+        
+       // visualisationWindow?.refreshEverything()
+        
+        refreshVisualisationWindow()
+    }
+    
+    @IBAction func visualisationWindow(sender: AnyObject) {
+        if  let win = visualisationWindow
+        {
+            visualisationWindow!.showWindow(nil)
+            visualisationWindow!.window?.makeKeyWindow()
+        }
+        else
+        {
+            let newWindow=VisualisationWindowController(windowNibName: "VisualisationWindow")
+            visualisationWindow = newWindow
+            visualisationWindow!.window!.delegate = visualisationWindow!
+            visualisationWindow!.window?.makeKeyWindow()
+        }
+    }
     
 
     @IBAction func showConsoleWindow(sender: AnyObject)
     {
-        if  let win = consoleWindow   // bug is here when closing window with red dot and opening again
+        if  let win = consoleWindow
         {
-            consoleWindow!.close()
-            consoleWindow=nil
+            consoleWindow!.showWindow(nil)
+            consoleWindow!.window?.makeKeyWindow()
         }
         else
         {
             let newWindow=ConsoleWindowController(windowNibName: "ConsoleWindow")
-            consoleWindow=newWindow
+            consoleWindow = newWindow
             consoleWindow!.window?.makeKeyWindow()
         }
     }
     
     @IBAction func showNodeInspectorWindow(sender: AnyObject)
     {
-        if let win = nodeWindow
+        if  let win = nodeWindow
         {
-            nodeWindow!.close()
-            nodeWindow=nil
+            nodeWindow!.showWindow(nil)
+            nodeWindow!.window?.makeKeyWindow()
         }
         else
         {
             let newWindow=NodeWindowController(windowNibName: "NodeWindow")
-            nodeWindow=newWindow
+            nodeWindow = newWindow
             nodeWindow!.window?.makeKeyWindow()
         }
 
@@ -58,15 +93,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func showStats(sender: AnyObject)
     {
-        if let win = statsWindow
+        if  let win = statsWindow
         {
-            statsWindow!.close()
-            statsWindow=nil
+            statsWindow!.showWindow(nil)
+            statsWindow!.window?.makeKeyWindow()
         }
         else
         {
             let newWindow=StatsWindowController(windowNibName: "StatsWindow")
-            statsWindow=newWindow
+            statsWindow = newWindow
             statsWindow!.window?.makeKeyWindow()
         }
 
@@ -86,15 +121,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func showAddNodesWindow(sender: AnyObject)
     {
-        if let win = addNodesWindow
+        if  let win = addNodesWindow
         {
-            addNodesWindow!.close()
-            addNodesWindow=nil
+            addNodesWindow!.showWindow(nil)
+            addNodesWindow!.window?.makeKeyWindow()
         }
         else
         {
             let newWindow=AddNodesWindowController(windowNibName: "AddNodesWindow")
-            addNodesWindow=newWindow
+            addNodesWindow = newWindow
             addNodesWindow!.window?.makeKeyWindow()
         }
 
@@ -103,15 +138,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func showSettingssWindow(sender: AnyObject)
     {
-        if let win = settingsWindow
+        if  let win = settingsWindow
         {
-            settingsWindow!.close()
-            settingsWindow=nil
+            settingsWindow!.showWindow(nil)
+            settingsWindow!.window?.makeKeyWindow()
         }
         else
         {
             let newWindow=SettingsWindowController(windowNibName: "SettingsWindow")
-            settingsWindow=newWindow
+            settingsWindow = newWindow
             settingsWindow!.window?.makeKeyWindow()
         }
 
@@ -125,7 +160,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var logText:String=""
     var logChanged=true
     
-    static let sharedInstance=AppDelegate()
 
     
     
@@ -151,6 +185,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         uIInitialisation()      // UI Setup
         
+        refreshVisualisationWindow()
        
         
         
@@ -175,6 +210,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func uIUpdate(){
 consoleWindow?.updateConsole()
+    }
+    
+    func refreshVisualisationWindow()
+    {
+        
+        
+        
+        visualisationWindow?.refreshEverything()
     }
     
 

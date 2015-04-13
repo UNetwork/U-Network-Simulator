@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "U Network SimulatorTests/UNameStoreSearchTest.swift"
-            timestampString = "449214851.964505"
+            timestampString = "450525576.27416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "testNameStoreABitMore()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "U Network Simulator/AppDelegate.swift"
+            timestampString = "450544618.015154"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "refreshVisualisationWindow()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

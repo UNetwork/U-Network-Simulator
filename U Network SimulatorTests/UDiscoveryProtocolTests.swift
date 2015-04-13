@@ -29,10 +29,7 @@ class UDiscoveryProtocolTests: XCTestCase {
     {
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: exampleNodeAddress.latitude, inputLongitude: exampleNodeAddress.longitude, inputAltitude: exampleNodeAddress.altitude))
         
-        simulator.simulationNodes[0].node.setupAndStart()
-        
-        XCTAssert(simulator.simulationNodes[0].node.peers.count == 0, "Single node can't have a peer")
-    }
+          }
     
     
     func testBroadcastTwoNodes()
@@ -41,17 +38,10 @@ class UDiscoveryProtocolTests: XCTestCase {
         
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: closeToExampleNodeAddress.latitude, inputLongitude: closeToExampleNodeAddress.longitude, inputAltitude: closeToExampleNodeAddress.altitude))
         
-        simulator.simulationNodes[0].node.setupAndStart()
-        simulator.simulationNodes[1].node.setupAndStart()
-        
-        sleep(1)
+              sleep(1)
         
         
-        
-        XCTAssert(simulator.simulationNodes[0].node.peers.count == 1, "No successful peer recognition")
-        
-        XCTAssert(simulator.simulationNodes[1].node.peers.count == 1, "No successful peer recognition")
-        
+                
     }
 
 }

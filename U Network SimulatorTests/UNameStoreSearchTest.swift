@@ -42,29 +42,7 @@ class UNameStoreSearchTest: XCTestCase {
         
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: closeToExampleNodeAddress.latitude, inputLongitude: closeToExampleNodeAddress.longitude, inputAltitude: closeToExampleNodeAddress.altitude))
         
-        simulator.simulationNodes[0].node.setupAndStart()
-        simulator.simulationNodes[1].node.setupAndStart()
-        
-        sleep(1)
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
-        
-        firstNode.searchApp.storeName()
-        lastNode.searchApp.storeName()
-        
-        sleep(1)
-        
-        XCTAssert(firstNode.knownIDs.count == 2, "Wrong number of names")
-        XCTAssert(lastNode.knownIDs.count == 2, "Wrong number of names")
-        
-        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-        
-        sleep(1)
-        
-        
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
+
         
     }
 
@@ -88,21 +66,21 @@ class UNameStoreSearchTest: XCTestCase {
         
         sleep(1)
         
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
+    //    let firstNode=simulator.simulationNodes[0].node
+   //     let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
 
         
         sleep(1)
         
-        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+   //     firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+     //   lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
         
         sleep(1)
         
         
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
+    //    XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
+   //     XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] == 8, "name not found")
         
     }
     
@@ -125,18 +103,18 @@ class UNameStoreSearchTest: XCTestCase {
         sleep(135)
         
         
-        let firstNode=simulator.simulationNodes[0].node
-        let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
+    //    let firstNode=simulator.simulationNodes[0].node
+  //      let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
         
-        firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-        lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+   //     firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+  //      lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
         
         sleep(160)
         
         
-        XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] > 0, "name not found")
-        XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] >  0, "name not found")
+    //    XCTAssert(firstNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] > 0, "name not found")
+  //      XCTAssert(lastNode.nodeStats.nodeStats[StatsEvents.SearchForNameSucess.rawValue] >  0, "name not found")
 
     }
     

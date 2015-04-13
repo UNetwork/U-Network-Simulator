@@ -14,6 +14,10 @@ class ConsoleWindowController:NSWindowController
 {
     @IBOutlet var consoleTextView: NSTextView!
     
+    
+    
+    
+    
     @IBAction func clearLog(sender: AnyObject)
     {
         AppDelegate.sharedInstance.logClearText()
@@ -22,6 +26,9 @@ class ConsoleWindowController:NSWindowController
     @IBAction func changeLogLevel(sender: NSComboBox)
     {
         logLevel = sender.integerValue
+        
+        
+        
     }
     
     
@@ -35,24 +42,18 @@ class ConsoleWindowController:NSWindowController
             AppDelegate.sharedInstance.logChanged = false
         }
         
+   
+        
     }
-    override init(window: NSWindow!)
-    {
-        super.init(window: window)
-    }
-    
-    required init?(coder: (NSCoder!))
-    {
-        super.init(coder: coder)
-    }
+
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
         consoleTextView.editable = false
         
-        log(0,"console windows loaded sucessfuly")
-        
+        log(0,"console window loaded sucessfuly")
+
         
     }
 }

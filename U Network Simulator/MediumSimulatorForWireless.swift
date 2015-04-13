@@ -88,7 +88,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         // iterate over global list of nodes in simulator
         
-        for (_, simulationNode) in enumerate(simulator.simulationNodes)
+        for  simulationNode in simulator.simulationNodes.values
         {
             for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
             {
