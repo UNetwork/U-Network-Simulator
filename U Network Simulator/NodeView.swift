@@ -289,7 +289,7 @@ class NodeView:NSView {
         var bPath:NSBezierPath = NSBezierPath()
         bPath.appendBezierPathWithRoundedRect(self.bounds, xRadius: 10.0, yRadius: 10.0)
         
-        let aColor = NSColor(calibratedRed:(clicked ? 1.0 : 0.75), green: 0.85, blue: 0.18, alpha: 0.5)
+        let aColor = NSColor(calibratedRed:(clicked ? 1.0 : 0.75), green:clicked ? 0.0 : 0.85, blue: clicked ? 1.0 : 0.75, alpha: clicked ? 1.0 : 0.5)
         aColor.set()
         bPath.fill()
         

@@ -181,6 +181,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 {
                     aView.removeFromSuperview()
                 }
+               if aView is NodeView
+               {
+                (aView as! NodeView).clicked = false
+                (aView as! NodeView).setNeedsDisplayInRect(aView.bounds)
+                }
             }
         }
         
@@ -195,6 +200,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let toSimulationNode = simulator.simulationNodes[toNodeId]
         
         fromSimulationNode!.node.pingApp!.sendPing(toNodeId, address: toSimulationNode!.node.address)
+        
+        if (visualisationWindow != nil)
+        {
+           
+            let fromView =  visualisationWindow!.nodeViews[fromNodeId]!
+            
+            fromView.clicked = true
+            fromView.setNeedsDisplayInRect(fromView.bounds)
+            
+            let toView = visualisationWindow!.nodeViews[toNodeId]!
+            
+            toView.clicked = true
+            toView.setNeedsDisplayInRect(toView.bounds)
+            
+            
+                }
+        
         
         
     }
