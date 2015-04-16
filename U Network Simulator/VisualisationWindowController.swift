@@ -60,7 +60,9 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     func showConnection(fromId:UNodeID, toId:UNodeID, forWindow:NSWindow, packet:UPacket)
     {
     
+        let connectionType=packetTypeInInt(packet)
         
+        if(visiblePackets[connectionType]){
         
         
         if let visWin = self.window
@@ -91,7 +93,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
 
         }
         
-        
+        }
         
         
         

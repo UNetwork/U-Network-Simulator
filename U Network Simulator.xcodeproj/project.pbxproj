@@ -41,6 +41,8 @@
 		FE6E57BA1A94B6A100F8F0D5 /* U Coordinate System Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */; };
 		FE6E57BB1A94B6A100F8F0D5 /* U Coordinate System Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */; };
 		FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */; };
+		FE7F52491ADFEF42001D3FA1 /* UIMisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7F52481ADFEF42001D3FA1 /* UIMisc.swift */; };
+		FE7F524A1ADFEF42001D3FA1 /* UIMisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7F52481ADFEF42001D3FA1 /* UIMisc.swift */; };
 		FEA007261A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */; };
 		FEA007271A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */; };
 		FEA007291A9D97F20047E3B5 /* MediumProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */; };
@@ -178,6 +180,7 @@
 		FE61FC411AC18AA200B5C242 /* UNameStoreSearchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNameStoreSearchTest.swift; sourceTree = "<group>"; };
 		FE6E57B41A94B5A200F8F0D5 /* U Coordinate System Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Coordinate System Functions.swift"; sourceTree = "<group>"; };
 		FE6E57BD1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = U_Coordinate_SystemTests.swift; path = "U Network SimulatorTests/U_Coordinate_SystemTests.swift"; sourceTree = "<group>"; };
+		FE7F52481ADFEF42001D3FA1 /* UIMisc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMisc.swift; sourceTree = "<group>"; };
 		FEA007251A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorForWireless.swift; sourceTree = "<group>"; };
 		FEA007281A9D97F20047E3B5 /* MediumProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumProtocol.swift; sourceTree = "<group>"; };
 		FEA0072B1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumSimulatorForInternet.swift; sourceTree = "<group>"; };
@@ -423,6 +426,7 @@
 				FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */,
 				FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */,
 				FEFA10011AD677BB007DD801 /* NodeView.swift */,
+				FE7F52481ADFEF42001D3FA1 /* UIMisc.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -620,6 +624,7 @@
 				FEED38351AA2497800BB3C26 /* Global Objects.swift in Sources */,
 				FEED38211AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */,
 				FEED38271AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
+				FE7F52491ADFEF42001D3FA1 /* UIMisc.swift in Sources */,
 				FE45B7E71A939A5600B82E5E /* U Coordinate System Structures.swift in Sources */,
 				FEE899761A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */,
 				FEED382D1AA2497800BB3C26 /* UPacketPing.swift in Sources */,
@@ -707,6 +712,7 @@
 				FEED383A1AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
 				FE60F0371ACFF50A0049DA76 /* StatsWindowController.swift in Sources */,
 				FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
+				FE7F524A1ADFEF42001D3FA1 /* UIMisc.swift in Sources */,
 				FEFA10031AD677BB007DD801 /* NodeView.swift in Sources */,
 				FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */,
 				FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,

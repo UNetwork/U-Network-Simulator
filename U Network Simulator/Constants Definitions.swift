@@ -16,9 +16,9 @@ let standardPacketLifeTime:UInt32 = 512
 
 let maxDiscoveryBroadcastDeepth:Int = 5
 
-var defaultStoreSearchDepth:UInt32 = 8
+var defaultStoreSearchDepth:UInt32 = 32
 
-var logLevel:Int=6
+var logLevel:Int=3
 
 
 
