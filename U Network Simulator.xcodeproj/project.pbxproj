@@ -88,7 +88,6 @@
 		FEC6B51E1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */; };
 		FEC90F1C1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
 		FEC90F1D1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */; };
-		FED159B91ADA9A4E00DA6481 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED159B81ADA9A4E00DA6481 /* ConnectionView.swift */; };
 		FEE8995D1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
 		FEE8995E1A9742240057ACD7 /* UPacketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */; };
 		FEE899601A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */; };
@@ -216,7 +215,6 @@
 		FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindow.xib; sourceTree = "<group>"; };
 		FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleWindowController.swift; sourceTree = "<group>"; };
 		FEC90F1B1AA624C10068B2C1 /* UNAppNodeCurrentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNAppNodeCurrentState.swift; path = "U Network Simulator/UNAppNodeCurrentState.swift"; sourceTree = "<group>"; };
-		FED159B81ADA9A4E00DA6481 /* ConnectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FEE8995C1A9742240057ACD7 /* UPacketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketHeader.swift; path = "U Network Simulator/UPacketHeader.swift"; sourceTree = "<group>"; };
 		FEE8995F1A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketDiscoveryBroadcast.swift; path = "U Network Simulator/UPacketDiscoveryBroadcast.swift"; sourceTree = "<group>"; };
 		FEE899621A9879100057ACD7 /* UPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacket.swift; path = "U Network Simulator/UPacket.swift"; sourceTree = "<group>"; };
@@ -370,10 +368,10 @@
 			isa = PBXGroup;
 			children = (
 				FEACA9B11AA06E24001524FB /* Simulator.swift */,
+				FEC6B51B1ACFD53F002B8AD1 /* UI */,
 				FE45B7DE1A93445C00B82E5E /* Simulation Objects */,
 				FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */,
 				FEB5E3F11A89E05B00A459E6 /* Images.xcassets */,
-				FEC6B51B1ACFD53F002B8AD1 /* UI */,
 				FEB5E3ED1A89E05B00A459E6 /* Supporting Files */,
 			);
 			path = "U Network Simulator";
@@ -425,7 +423,6 @@
 				FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */,
 				FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */,
 				FEFA10011AD677BB007DD801 /* NodeView.swift */,
-				FED159B81ADA9A4E00DA6481 /* ConnectionView.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -629,7 +626,6 @@
 				FE4D6A8A1AA591D6008B3B4E /* UNAppNodeStats.swift in Sources */,
 				FEB5E40F1A8A031200A459E6 /* UNodeID.swift in Sources */,
 				FEBFCDC31AAEEC2C00E09666 /* UNAppPing.swift in Sources */,
-				FED159B91ADA9A4E00DA6481 /* ConnectionView.swift in Sources */,
 				FE60F0301ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */,
 				FE60F0391ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */,
 				FEA94DCD1AB1E75D0048DFD3 /* UNAppDataTransfer.swift in Sources */,

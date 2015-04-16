@@ -358,6 +358,39 @@ class URouter_BruteForceRouting:URouterProtocol {
         var corrAlt = node.address.altitude
         
         
+        
+        if(address.latitude == maxLatitude)
+        {
+            corrLat = corrLat + (2 * wirelessInterfaceRange)
+        }
+        else
+        {
+            corrLat = corrLat - (2 * wirelessInterfaceRange)
+        }
+        
+        if( address.longitude == maxLongitude)
+        {
+            corrLong = corrLong + (2 * wirelessInterfaceRange)
+            corrLat = corrLat + (1 * wirelessInterfaceRange)
+        }
+        else
+        {
+            corrLong = corrLong - (2 * wirelessInterfaceRange)
+            corrLat = corrLat - (1 * wirelessInterfaceRange)
+            
+        }
+        
+        if ( address.altitude == maxAltitude)
+        {
+            corrAlt = maxAltitude
+            
+        }
+        else
+        {
+            corrAlt = 0
+        }
+        
+        /*
         if(address.latitude == maxLatitude)
         {
             corrLat = corrLat + (5 * wirelessInterfaceRange)
@@ -388,6 +421,8 @@ class URouter_BruteForceRouting:URouterProtocol {
         {
             corrAlt = corrAlt - (5 * wirelessInterfaceRange)
         }
+
+*/
         
         let result=UNodeAddress(inputLatitude: corrLat, inputLongitude: corrLong, inputAltitude: corrAlt)
         return result

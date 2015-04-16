@@ -10,12 +10,12 @@ import Foundation
 import Cocoa
 
 
-class UNetworkSimulator {
-    
-    
-    
+class UNetworkSimulator:NSObject
+{
     
     var simulationNodes = [UNodeID:SimulationNode]()
+    
+    var simulationNodeIdCache = [UNodeID]()
     
     var wirelessMedium = MediumSimulatorForWireless()
     var internetMedium = MediumSimulatorForInternet()
@@ -31,10 +31,17 @@ class UNetworkSimulator {
     var minAlt=UInt64.max
     var maxAlt=UInt64(0)
     
+    // heartbeatloop
+
+    var heartBeatTimer:NSTimer?
     
     
     
-    init(){}
+    
+    override init(){
+    super.init()
+    
+    }
     
     func addNodes(configurations:[SimulationNodeConfiguration])
     {
@@ -71,6 +78,19 @@ class UNetworkSimulator {
             
             let simulationNode=SimulationNode(node:node, nodeConfiguration:configurationData)
             self.simulationNodes[node.id] = simulationNode
+            self.simulationNodeIdCache.append(node.id)
+            
+            
+            if (heartBeatTimer != nil )
+            {
+                heartBeatTimer!.invalidate()
+                heartBeatTimer = nil
+            }
+            
+            let timeInterval = 1 / Float64(simulationNodeIdCache.count)
+            
+            
+            heartBeatTimer=NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("heartBeatLoop"), userInfo: nil, repeats: true)
             
             
             
@@ -91,7 +111,8 @@ class UNetworkSimulator {
             
             let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
             
-            if let visWindow = appdel.visualisationWindow?.window
+            
+            if let visWin = appdel.visualisationWindow?.window
             {
                 if spaceChanged
                 {
@@ -99,10 +120,10 @@ class UNetworkSimulator {
                 }
                 else
                 {
-                    let newView = node.view(visWindow)
-                    visWindow.contentView.addSubview(newView)
+                appdel.visualisationWindow!.addNodeView(node.view(visWin))
                 }
             }
+            
         }
     }
     
@@ -118,6 +139,24 @@ class UNetworkSimulator {
         self.addNodes(configurations)
         
     }
+    
+    func heartBeatLoop()
+    {
+        if simulationNodes.count > 0
+        {
+            let randomIndex = arc4random_uniform(UInt32(simulationNodeIdCache.count))
+            let randomId=simulationNodeIdCache[Int(randomIndex)]
+            
+            if let choosenNode=simulationNodes[randomId]
+            {
+                choosenNode.node.heartBeat()
+            }
+        }
+    }
+    
+    
+    
+    
     // Some god options
     
     func findNodeWithName(name:String) -> UNode?

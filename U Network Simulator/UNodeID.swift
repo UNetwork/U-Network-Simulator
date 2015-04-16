@@ -87,6 +87,12 @@ class UNodeID:Hashable {
     {
     return "id: \(self.data[0]%1000000)"
     }
+    
+    func hashWithId(id:UNodeID) -> UInt64
+    {
+        let result = self.data[0] ^ id.data[0]
+        return result
+    }
 }
 
 func == (lhs: UNodeID, rhs: UNodeID) -> Bool {

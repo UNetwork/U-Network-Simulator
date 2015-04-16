@@ -36,6 +36,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
+    // menu items
+    
+    
+    
+    @IBAction func resetSimulator(sender: AnyObject) {
+        simulator=UNetworkSimulator()
+        visualisationWindow?.refreshEverything()
+    }
+    
+    
     @IBAction func refresh(sender: AnyObject) {
         
        // visualisationWindow?.refreshEverything()
@@ -53,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         {
             let newWindow=VisualisationWindowController(windowNibName: "VisualisationWindow")
             visualisationWindow = newWindow
-            visualisationWindow!.window!.delegate = visualisationWindow!
+            visualisationWindow!.window?.backgroundColor = NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 1)
             visualisationWindow!.window?.makeKeyWindow()
         }
     }
@@ -161,8 +171,57 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var logChanged=true
     
 
+    @IBAction func clearConnections(sender: AnyObject) {
+        
+        if let visWin = self.visualisationWindow?.window
+        {
+            for aView in visWin.contentView.subviews
+            {
+                if aView is ConnectionView
+                {
+                    aView.removeFromSuperview()
+                }
+            }
+        }
+        
+    }
+    
+    @IBAction func randomPing(sender: AnyObject)
+    {
+        let fromNodeId = simulator.simulationNodeIdCache[Int(arc4random_uniform(UInt32(simulator.simulationNodeIdCache.count)))]
+        let toNodeId = simulator.simulationNodeIdCache[Int(arc4random_uniform(UInt32(simulator.simulationNodeIdCache.count)))]
+        
+        let fromSimulationNode = simulator.simulationNodes[fromNodeId]
+        let toSimulationNode = simulator.simulationNodes[toNodeId]
+        
+        fromSimulationNode!.node.pingApp!.sendPing(toNodeId, address: toSimulationNode!.node.address)
+        
+        
+    }
+    
+    @IBAction func randomNameStore(sender: AnyObject) {
+         let randomNode = simulator.simulationNodeIdCache[Int(arc4random_uniform(UInt32(simulator.simulationNodeIdCache.count)))]
+            let simulationNode = simulator.simulationNodes[randomNode]
+        
+        simulationNode!.node.searchApp.storeName()
+    }
     
     
+    @IBAction func randomAddressStore(sender: AnyObject) {
+        let randomNode = simulator.simulationNodeIdCache[Int(arc4random_uniform(UInt32(simulator.simulationNodeIdCache.count)))]
+        let simulationNode = simulator.simulationNodes[randomNode]
+        
+        simulationNode!.node.searchApp.storeAddress()
+    }
+
+    
+    @IBAction func refreshAllPeers(sender: AnyObject) {
+        
+        for simNode in simulator.simulationNodes.values
+        {
+            simNode.node.refreshPeers()
+        }
+    }
  
     
      func logClearText() {

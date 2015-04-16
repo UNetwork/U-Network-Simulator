@@ -13,6 +13,8 @@ class NodeWindowController:NSWindowController
     
 {
     
+    var currentNodeId=UNodeID()
+    
     @IBOutlet weak var infoText: NSTextField!
     
     
@@ -37,4 +39,28 @@ class NodeWindowController:NSWindowController
         
         
     }
+    
+    
+    func showNode(nodeId:UNodeID)
+    {
+        if let simNode = simulator.simulationNodes[nodeId]
+        {
+            currentNodeId=nodeId
+            var info = "Name: "
+            info += simNode.node.userName
+            info += "\n"
+            info += "Lat: \(simNode.node.address.latitude)\n"
+            info += "Long: \(simNode.node.address.longitude)\n"
+            info += "Alt: \(simNode.node.address.altitude)\n"
+            info += "\n"
+            info += "Peers: \(simNode.node.peers.count)\n"
+            
+            infoText.stringValue = info
+
+            
+            
+        }
+    }
+    
+    
 }

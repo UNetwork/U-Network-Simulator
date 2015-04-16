@@ -105,9 +105,6 @@
                     <constraint firstItem="iei-ue-YqW" firstAttribute="top" secondItem="MPY-3C-nG2" secondAttribute="bottom" constant="8" symbolic="YES" id="txR-nA-kQZ"/>
                 </constraints>
             </view>
-            <connections>
-                <outlet property="consoleTextView" destination="k7e-ZM-0zv" id="TfQ-wd-n3p"/>
-            </connections>
             <point key="canvasLocation" x="537" y="657.5"/>
         </window>
     </objects>

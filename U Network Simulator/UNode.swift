@@ -54,20 +54,10 @@ class UNode {
         self.appsAPI=UNodeAPI(node: self)
         
         log(0,"node for owner: \(userName) created")
-        
-        
-
-
-        
     }
     
     func setupAndStart()
     {
-        
-        //Avoid logging during initialisation
-    
-
-        
         // setup router
         router = CurrentRouter(node:self)
         
@@ -77,13 +67,8 @@ class UNode {
         dataApp = UNAppDataTransfer(node: self)
         
         // add self data to search tables
-
         
         knownIDs[self.userName] = UMemoryNameIdRecord(anId: self.id, aTime: self.nodeTime)
-        
-        
-        
-        
 
         // find addres from interfaces
         for (_, interface) in enumerate(self.interfaces)
@@ -95,30 +80,23 @@ class UNode {
                 // we take first avaliable location form interface
             }
         }
+        
+        
         refreshPeers()
-
         
         // if failed to find address in interfaces take the avarge address from peers
-
         
         if(self.address.isUnknown)
         {
             findAddressFromConnectedPeers()
         }
-        
 
-        
         
         knownAddresses[self.id] = UMemoryIdAddressRecord(anAddress: self.address, aTime: self.nodeTime)
         
         // start apps
         
-        
-        
-        
-        
-        
-        
+
         // set up node maintenance loop
     }
     
@@ -126,6 +104,25 @@ class UNode {
     {
         searchApp.storeName()
         searchApp.storeAddress()    
+    }
+    
+    func heartBeat()
+    {
+        router.maintenanceLoop()
+        /*
+        if (rand()%150 == 0)
+        {
+            refreshPeers()
+        }
+        if (rand()%60 == 0)
+        {
+            self.searchApp.storeAddress()
+        }
+        if (rand()%60 == 0)
+        {
+            self.searchApp.storeName()
+        }
+*/
     }
     
 
@@ -233,16 +230,13 @@ class UNode {
         log(2, "N: \(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
         
         interface.sendPacketToNetwork(replyPacket)
-        
 
-        
-        
     }
     
     func processDiscoveryBroadcastreply(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         // check if replyer is already on peers list, add if not
-
+        
         if let peerIndex = findInPeers(packet.header.transmitedByUID)
         {
             // update data
@@ -251,6 +245,7 @@ class UNode {
         {
             let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
             self.peers.append(newPeerRecord)
+            log(3,"Peer added")
             
         }
         

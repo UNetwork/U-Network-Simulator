@@ -11,25 +11,13 @@ import Cocoa
 
 class AddNodesWindowController:NSWindowController
 {
-    
-    
     @IBOutlet weak var fromLat: NSTextField!
-    
     @IBOutlet weak var fromLong: NSTextField!
-    
     @IBOutlet weak var fromAlt: NSTextField!
-    
-    
     @IBOutlet weak var toLat: NSTextField!
-    
     @IBOutlet weak var toLong: NSTextField!
-    
-    
     @IBOutlet weak var toAlt: NSTextField!
-    
-    
     @IBOutlet weak var number: NSTextField!
-    
     
     @IBAction func addNodes(sender: AnyObject)
     {
@@ -53,35 +41,22 @@ class AddNodesWindowController:NSWindowController
         let deltaLong = unsignedDifference(convertedPosition.longitude, convertedDeltaPosition.longitude)
         let deltaAlt = unsignedDifference(convertedPosition.altitude, convertedDeltaPosition.altitude)
 
-        
-        if let repetitions=numberValue
+        if let repetitions = numberValue
         {
             for index in 1...repetitions
             {
-
                 let finalLatitude = deltaLat == 0 ? convertedPosition.latitude : convertedPosition.latitude &+ (random64() % deltaLat)
                 let finalLongitude = deltaLong == 0 ? convertedPosition.longitude : convertedPosition.longitude &+ (random64() % deltaLong)
                 let finalAltitude = deltaAlt == 0 ? convertedPosition.altitude : convertedPosition.altitude &+ (random64() % deltaAlt)
-                
                 let nodePosition = USimulationRealLocation(inputLatitude: finalLatitude, inputLongitude: finalLongitude, inputAltitude: finalAltitude)
                 
                 simulator.addWirelessNode(nodePosition)
-
-                
             }
         }
-        
-        
-        
     }
 
-    
-    override func windowDidLoad() {
+    override func windowDidLoad()
+    {
         super.windowDidLoad()
-        
-        
-        
-        
     }
-    
 }

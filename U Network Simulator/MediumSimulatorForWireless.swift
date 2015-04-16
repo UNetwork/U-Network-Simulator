@@ -6,6 +6,13 @@
 //
 
 import Foundation
+import Cocoa
+
+
+
+
+
+
 
 
 class MediumSimulatorForWireless:MediumProtocol
@@ -19,6 +26,7 @@ class MediumSimulatorForWireless:MediumProtocol
     func getPacketFromInterface (interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         log(2, ">> \(packet.txt)")
+        let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
         
         var wirelessInterface = interface as! UNetworkInterfaceSimulationWireless
         
@@ -40,6 +48,14 @@ class MediumSimulatorForWireless:MediumProtocol
             {
                 dispatch_async(queueSerial, {
                     interfaceForDelivery.getPacketFromNetwork(packet)
+                    
+                    if let visWindowController = appdel.visualisationWindow
+                    {
+                        let toNodeId = interfaceForDelivery.node.id
+                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                        
+                    }
+                    
                 })
             }
         }
@@ -57,10 +73,13 @@ class MediumSimulatorForWireless:MediumProtocol
         switch processingMode
         {
         case .Serial: deliverSerial()
-        case .Stright: deliverSerial()
+        case .Stright: deliverStright()
         case .Paralel: deliverpParalel()
         default: log(7, "Wrong processing type")
         }
+        
+        // visualisation
+        
         
         
     }

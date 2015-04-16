@@ -19,13 +19,13 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="344" height="402"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="-5" width="344" height="402"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1q-Yv-0GE">
-                        <rect key="frame" x="18" y="229" width="100" height="153"/>
+                        <rect key="frame" x="18" y="263" width="308" height="119"/>
                         <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="s8w-Pl-u0i">
                             <font key="font" metaFont="system"/>
                             <string key="title">Name: ABCDE
@@ -140,12 +140,6 @@ Data queue: 7
                     </textField>
                 </subviews>
             </view>
-            <connections>
-                <outlet property="chatText" destination="Yat-WP-jIb" id="IaE-0t-8wg"/>
-                <outlet property="infoText" destination="w1q-Yv-0GE" id="dOX-M0-wC1"/>
-                <outlet property="message" destination="1rL-yD-xDa" id="c8z-8g-4Vo"/>
-                <outlet property="namesTable" destination="2D2-bm-B3w" id="hTW-gn-R9P"/>
-            </connections>
             <point key="canvasLocation" x="464" y="545"/>
         </window>
     </objects>

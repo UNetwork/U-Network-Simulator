@@ -9,9 +9,18 @@
 import Foundation
 import Cocoa
 
-class VisualisationWindowController:NSWindowController, NSWindowDelegate {
+class VisualisationWindowController:NSWindowController, NSWindowDelegate
+{
     
-    var nodeViews=[UNodeID:NodeView]()
+    let maxConnection = 300
+    var viewLimitExceeded = false
+    
+    var nodeViews = [UNodeID:NodeView]()
+    var connectionViews = [ConnectionView]()
+    
+    var currentSlot = 0
+    
+    
     
     
     
@@ -20,12 +29,17 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate {
         refreshEverything() 
     }
     
-    
-    
+    func addNodeView(aNodeView:NodeView)
+    {
+        self.nodeViews[aNodeView.forNode] = aNodeView
+        self.window?.contentView.addSubview(aNodeView)
+        
+    }
     
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        self.window?.delegate = self
         
         refreshEverything()
     }
@@ -37,6 +51,54 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate {
         
     }
     
+    override func  mouseDown(theEvent: NSEvent) {
+    log(7,"window cklicke")
+    }
+    
+    
+    
+    func showConnection(fromId:UNodeID, toId:UNodeID, forWindow:NSWindow, packet:UPacket)
+    {
+    
+        
+        
+        
+        if let visWin = self.window
+        {
+            let conView = ConnectionView(nodes: fromId, toId: toId, forWindow: forWindow, packet: packet)
+            
+            if viewLimitExceeded
+            {
+                connectionViews[currentSlot].removeFromSuperview()
+                connectionViews[currentSlot] = conView
+                visWin.contentView.addSubview(conView)
+                currentSlot++
+                if currentSlot > maxConnection - 1 {currentSlot = 0}
+            }
+            else
+            {
+                connectionViews.append(conView)
+                visWin.contentView.addSubview(conView)
+                
+                currentSlot++
+                if currentSlot > maxConnection - 1 {currentSlot = 0; viewLimitExceeded = true}
+
+                
+            }
+            
+            
+            
+
+        }
+        
+        
+        
+        
+        
+    }
+    
+
+    
     
     func refreshEverything()
     {
@@ -47,13 +109,15 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate {
             for aView in visWin.contentView.subviews
             {
                 aView.removeFromSuperview()
+                nodeViews = [UNodeID:NodeView]()
             }
             
             for aSimulationNode in simulator.simulationNodes.values
             {
-                visWin.contentView.addSubview( aSimulationNode.node.view(visWin))
+                self.addNodeView(aSimulationNode.node.view(visWin))
             }
             
+       
             
             
             
@@ -62,3 +126,5 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate {
     }
     
 }
+
+
