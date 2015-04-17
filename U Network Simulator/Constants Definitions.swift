@@ -10,11 +10,11 @@ import Foundation
 
 // Parameters - to be eliminated
 
-let uIDlengh:Int=2
+var uIDlengh:Int=2
 
-let standardPacketLifeTime:UInt32 = 512
+var standardPacketLifeTime:UInt32 = 512
 
-let maxDiscoveryBroadcastDeepth:Int = 5
+var maxDiscoveryBroadcastDeepth:Int = 5
 
 var defaultStoreSearchDepth:UInt32 = 32
 
@@ -24,7 +24,7 @@ var logLevel:Int=3
 
 // Simulation - to be elimineted
 
-let wirelessInterfaceRange = UInt64(100_000_000_000)
+var wirelessInterfaceRange = UInt64(1000_000)
 
 
 
@@ -37,6 +37,10 @@ let unknownNodeAddress = UNodeAddress()
  typealias CurrentRouter = URouterSimpleDirection
 
 // typealias CurrentRouter = URouter_BruteForceRouting
+
+
+var maxConnection = 5000
+
 
 
 

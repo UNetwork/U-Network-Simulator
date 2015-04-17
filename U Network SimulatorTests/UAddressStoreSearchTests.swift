@@ -59,7 +59,7 @@ class UAddressStoreSearchTests: XCTestCase {
         
         let distance:UInt64=570
         
-        createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
+  //      createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
         
         sleep(5)
       

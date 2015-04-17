@@ -82,7 +82,7 @@ class UNode {
         }
         
         
-        refreshPeers()
+       // refreshPeers()
         
         // if failed to find address in interfaces take the avarge address from peers
         
@@ -109,20 +109,31 @@ class UNode {
     func heartBeat()
     {
         router.maintenanceLoop()
-        /*
-        if (rand()%150 == 0)
+       
+        if heartBeatPeersValue > 0
         {
-            refreshPeers()
+            if ((rand() % Int32(heartBeatPeersValue)) == 0)
+            {
+                refreshPeers()
+            }
         }
-        if (rand()%60 == 0)
+        if heartBeatNameStoreValue > 0
         {
-            self.searchApp.storeAddress()
+            if ((rand() % Int32(heartBeatNameStoreValue)) == 0)
+            {
+                self.searchApp.storeName()
+            }
         }
-        if (rand()%60 == 0)
+        if heartBeatAddressStoreValue > 0
         {
-            self.searchApp.storeName()
+            if ((rand() % Int32(heartBeatAddressStoreValue)) == 0)
+            {
+               self.searchApp.storeAddress()
+            }
         }
-*/
+        
+
+ 
     }
     
 

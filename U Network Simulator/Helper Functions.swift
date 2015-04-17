@@ -61,7 +61,7 @@ func unsignedDifference(a:UInt64, b:UInt64)->(UInt64){
 
 func randomUserName (len : Int) -> String {
     
-    let letters : NSString = "aaaaaabbbccccddddeeeeeffghhhiiiiiijjjkkkkklllmmmnnnooooopppqrrrrsssstttuuuuuvwwxyyzz"
+    let letters : NSString = "aaaaaabbbccccddddeeeeeffghhhiiiiiijjjkkkkklllmmmnnnooooopppqrrrrssstttuuuuuvwwxyyzz"
     
     var randomString : NSMutableString = NSMutableString(capacity: len)
     

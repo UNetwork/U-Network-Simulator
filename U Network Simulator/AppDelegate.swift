@@ -283,7 +283,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func uIInitialisation()
     {
-        uIUpdateTimer=NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector:"uIUpdate" , userInfo: nil, repeats: true)
+        uIUpdateTimer=NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector:"uIUpdate" , userInfo: nil, repeats: true)
         
     }
     
@@ -291,6 +291,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func uIUpdate(){
 consoleWindow?.updateConsole()
+        statsWindow?.update("")
     }
     
     func refreshVisualisationWindow()

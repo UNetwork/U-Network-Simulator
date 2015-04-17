@@ -67,7 +67,7 @@ class UPingTests: XCTestCase {
         
         let distance:UInt64=570
         
-        createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
+    //    createNodeMesh(k, i, j, distance, exampleNodeAddress, false)
         
         sleep(1)
            }
@@ -90,7 +90,7 @@ class UPingTests: XCTestCase {
         
         let delay = k*i*j/80
         
-        createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
+   //     createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
         log(5, "entering  \(delay) nap during initialisation ")
 
        // sleep(delay)

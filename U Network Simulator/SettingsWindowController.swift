@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-var visiblePackets=Array(count: 17, repeatedValue: true)
+
 
 class SettingsWindowController:NSWindowController
 {
@@ -106,6 +106,9 @@ class SettingsWindowController:NSWindowController
     }
     
     @IBAction func updateNumberOfVisible(sender: AnyObject) {
+    
+    maxConnection = numberOfVisiblePackets.integerValue
+    
     }
     @IBOutlet weak var numberOfVisiblePackets: NSTextField!
     // heartbeat
@@ -115,31 +118,60 @@ class SettingsWindowController:NSWindowController
     @IBOutlet weak var heartBeatAddressStore: NSTextField!
     
     @IBAction func updateHeartBeat(sender: AnyObject) {
+        
+        heartBeatPeersValue = heartBeatPeers.integerValue
+        heartBeatNameStoreValue = heartBeatNameStore.integerValue
+        heartBeatAddressStoreValue = heartBeatAddressStore.integerValue
     }
     
     // hardcore
     
-    @IBOutlet weak var wirelessInterfaceRange: NSTextField!
+    @IBOutlet weak var wirelessInterfaceRangeField: NSTextField!
     
-    @IBOutlet weak var packetLifeTime: NSTextField!
+    @IBOutlet weak var packetLifeTimeField: NSTextField!
     
     
-    @IBOutlet weak var discoveryBroadcastDepth: NSTextField!
+    @IBOutlet weak var discoveryBroadcastDepthField: NSTextField!
     
-    @IBOutlet weak var storeSearchDepth: NSTextField!
+    @IBOutlet weak var storeSearchDepthField: NSTextField!
     
     
     @IBAction func updateHardcore(sender: AnyObject) {
+        
+        wirelessInterfaceRange = UInt64(wirelessInterfaceRangeField.integerValue)
+        standardPacketLifeTime = UInt32(packetLifeTimeField.integerValue)
+        maxDiscoveryBroadcastDeepth = discoveryBroadcastDepthField.integerValue
+        defaultStoreSearchDepth = UInt32(storeSearchDepthField.integerValue)
+        
+        
+        
+        
     }
     
     // nothing will work if changed
     
     
     @IBAction func processingTypeCombo(sender: NSComboBox) {
+        
+        let bzdet=sender.indexOfSelectedItem
+        
+        
+        switch sender.indexOfSelectedItem
+        {
+        case 0: processingMode = ProcessingType.Stright
+        case 1: processingMode = ProcessingType.Serial
+        case 2: processingMode = ProcessingType.Paralel
+        default: log(7,"Unknown processing type selected")
+        }
+        
+        
+        
     }
     
     
-    @IBAction func useCache(sender: AnyObject) {
+    @IBAction func useCacheSwitch(sender: AnyObject) {
+        if useCache {useCache=false}else{useCache=true}
+
     }
     
     
@@ -182,6 +214,20 @@ class SettingsWindowController:NSWindowController
         self.colorBoxDataDeliveryConfirmation.setNeedsDisplay()
         self.colorBoxDropped.color=packetColors[16]
         self.colorBoxDropped.setNeedsDisplay()
+        
+        self.heartBeatPeers.integerValue = heartBeatPeersValue
+        self.heartBeatNameStore.integerValue = heartBeatNameStoreValue
+        self.heartBeatAddressStore.integerValue = heartBeatAddressStoreValue
+        
+        
+        self.wirelessInterfaceRangeField.integerValue = Int(wirelessInterfaceRange)
+        self.packetLifeTimeField.integerValue = Int(standardPacketLifeTime)
+        self.discoveryBroadcastDepthField.integerValue = maxDiscoveryBroadcastDeepth
+        self.storeSearchDepthField.integerValue = Int(defaultStoreSearchDepth)
+        
+        self.numberOfVisiblePackets.integerValue = maxConnection
+        
+        
         
         
         

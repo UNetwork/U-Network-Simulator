@@ -12,7 +12,6 @@ import Cocoa
 class VisualisationWindowController:NSWindowController, NSWindowDelegate
 {
     
-    let maxConnection = 5000
     var viewLimitExceeded = false
     
     var nodeViews = [UNodeID:NodeView]()

@@ -19,9 +19,16 @@ extension UNode {
         let windowWidth = Float64(forWindow.contentView.bounds!.width - nodeViewSize)
         let windowHeight = Float64(forWindow.contentView.bounds!.height  - nodeViewSize)
         
-        let deltaLat = Float64(simulator.maxLat - simulator.minLat)
-        let deltaLong = Float64(simulator.maxLong - simulator.minLong)
-        let deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
+        var deltaLat = Float64(simulator.maxLat - simulator.minLat)
+        var deltaLong = Float64(simulator.maxLong - simulator.minLong)
+        var deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
+        
+        if (deltaLat < 1) {deltaLat = 1}
+        if (deltaLong < 1) {deltaLong = 1}
+        if (deltaAlt < 1) {deltaAlt = 1}
+
+        
+        
         
         let scaleLat = windowWidth / deltaLat
         let scaleLong =  windowHeight / deltaLong
@@ -78,12 +85,20 @@ class ConnectionView:NSView {
     
     convenience init (nodes fromId:UNodeID, toId:UNodeID, forWindow:NSWindow, packet:UPacket)
     {
+        
+        
+        
         let windowWidth = Float64(forWindow.contentView.bounds!.width - nodeViewSize)
         let windowHeight = Float64(forWindow.contentView.bounds!.height  - nodeViewSize)
         
-        let deltaLat = Float64(simulator.maxLat - simulator.minLat)
-        let deltaLong = Float64(simulator.maxLong - simulator.minLong)
-        let deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
+        var deltaLat = Float64(simulator.maxLat - simulator.minLat)
+        var deltaLong = Float64(simulator.maxLong - simulator.minLong)
+        var deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
+        
+        
+        if (deltaLat < 1) {deltaLat = 1}
+        if (deltaLong < 1) {deltaLong = 1}
+        if (deltaAlt < 1) {deltaAlt = 1}
         
         let scaleLat = windowWidth / deltaLat
         let scaleLong =  windowHeight / deltaLong
@@ -118,18 +133,21 @@ class ConnectionView:NSView {
             tY = Float64(toNode.node.address.longitude - simulator.minLong) * scaleLong + (Float64(minViewSize) + tA)/2
         }
         
-        var viewX:Float64
-        var viewY:Float64
+        var viewX=Float64(0)
+        var viewY=Float64(0)
         
         
         if (fX < tX)
         {
             dX = tX - fX
+            if (dX < 1){dX=1}
             viewX = fX
         }
         else
         {
             dX = fX - tX
+            if (dX < 1){dX=1}
+
             viewX = tX
             prototype += 1
         }
@@ -137,11 +155,15 @@ class ConnectionView:NSView {
         if (fY < tY)
         {
             dY = tY - fY
+            if (dY < 1){dY=1}
+
             viewY = fY
         }
         else
         {
             dY = fY - tY
+            if (dY < 1){dY=1}
+
             viewY = tY
             prototype += 2
             
@@ -289,7 +311,7 @@ class NodeView:NSView {
         var bPath:NSBezierPath = NSBezierPath()
         bPath.appendBezierPathWithRoundedRect(self.bounds, xRadius: 10.0, yRadius: 10.0)
         
-        let aColor = NSColor(calibratedRed:(clicked ? 1.0 : 0.75), green:clicked ? 0.0 : 0.85, blue: clicked ? 1.0 : 0.75, alpha: clicked ? 1.0 : 0.5)
+        let aColor = NSColor(calibratedRed:(clicked ? 1.0 : 0.75), green:clicked ? 0.35 : 0.85, blue: clicked ? 0.0 : 0.75, alpha: clicked ? 1.0 : 0.5)
         aColor.set()
         bPath.fill()
         
@@ -304,24 +326,7 @@ class NodeView:NSView {
 
 
 
-let packetColors = [
-    NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0),
-    NSColor(calibratedRed: 0.25, green: 0, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.25, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 1, green: 0.75, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0, green: 0.25, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0, green: 0, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0.0, green: 0.25, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.75, blue: 0.75, alpha: 1)]
+
 
 
 

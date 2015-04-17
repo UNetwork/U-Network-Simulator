@@ -37,7 +37,17 @@ class MediumSimulatorForWireless:MediumProtocol
         func deliverStright(){
             for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
             {
+                
                 interfaceForDelivery.getPacketFromNetwork(packet)
+                
+                if let visWindowController = appdel.visualisationWindow
+                {
+                    let toNodeId = interfaceForDelivery.node.id
+                    visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                    
+                }
+                
+                
             }
         }
         
@@ -66,6 +76,14 @@ class MediumSimulatorForWireless:MediumProtocol
             {
                 dispatch_async(queueConcurrent, {
                     interfaceForDelivery.getPacketFromNetwork(packet)
+                    
+                    if let visWindowController = appdel.visualisationWindow
+                    {
+                        let toNodeId = interfaceForDelivery.node.id
+                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                        
+                    }
+                    
                 })
             }
         }

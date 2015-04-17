@@ -12,7 +12,7 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
     
     func  testNodeCreation()
     {
-      createNodeMesh(5, 5, 5, 900, UNodeAddress(inputLatitude: 65536, inputLongitude: 65536, inputAltitude: 65536), false)
+  //    createNodeMesh(5, 5, 5, 900, UNodeAddress(inputLatitude: 65536, inputLongitude: 65536, inputAltitude: 65536), false)
         
             /*
         simulator=UNetworkSimulator()

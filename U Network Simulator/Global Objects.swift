@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Cocoa
 
 var processingMode = ProcessingType.Serial
 
@@ -17,6 +18,11 @@ var useCache = false
 enum ProcessingType{
     case Stright, Serial, Paralel
 }
+
+var visiblePackets=Array(count: 17, repeatedValue: true)
+var heartBeatPeersValue=0
+var heartBeatNameStoreValue=0
+var heartBeatAddressStoreValue=0
 
 // some orientation points for data search and distribition packets
 
@@ -33,4 +39,23 @@ let belowSouthPoleRight = UNodeAddress(inputLatitude: UInt64(0), inputLongitude:
 
 let searchStoreAddresses = [aboveNorthPoleLeft, belowNorthPoleLeft, aboveSouthPoleLeft, belowNorthPoleLeft, aboveNorthPoleRight, belowNorthPoleRight, aboveSouthPoleRight, belowSouthPoleRight]
 
+
+let packetColors = [
+    NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0),
+    NSColor(calibratedRed: 0.25, green: 0, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.25, green: 0.25, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 1, green: 0.75, blue: 0.25, alpha: 1),
+    NSColor(calibratedRed: 0, green: 0.25, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0, green: 0, blue: 0.25, alpha: 1),
+    NSColor(calibratedRed: 0.0, green: 0.25, blue: 0.25, alpha: 1),
+    NSColor(calibratedRed: 0.25, green: 0.5, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.25, green: 0, blue: 0.5, alpha: 1),
+    NSColor(calibratedRed: 0.5, green: 0, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.5, green: 0.5, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.5, green: 0, blue: 0.5, alpha: 1),
+    NSColor(calibratedRed: 1, green: 0.35, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.1, green: 0.73, blue: 1, alpha: 1),
+    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0, alpha: 1),
+    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0.5, alpha: 1),
+    NSColor(calibratedRed: 0.25, green: 0.75, blue: 0.75, alpha: 1)]
 
