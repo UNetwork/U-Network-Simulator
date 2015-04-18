@@ -77,13 +77,17 @@ class MediumSimulatorForWireless:MediumProtocol
                 dispatch_async(queueConcurrent, {
                     interfaceForDelivery.getPacketFromNetwork(packet)
                     
-                    if let visWindowController = appdel.visualisationWindow
-                    {
-                        let toNodeId = interfaceForDelivery.node.id
-                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
-                        
-                    }
                     
+                    
+                })
+                
+                dispatch_async(queueSerial, {
+                    if let visWindowController = appdel.visualisationWindow
+                {
+                    let toNodeId = interfaceForDelivery.node.id
+                    visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                    
+                    }
                 })
             }
         }

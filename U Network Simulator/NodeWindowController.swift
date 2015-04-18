@@ -16,8 +16,75 @@ class NodeWindowController:NSWindowController
     var currentNodeId=UNodeID()
     
     @IBOutlet weak var infoText: NSTextField!
+    //Ping
+    @IBOutlet weak var pingIdField: NSTextField!
+    @IBOutlet weak var pingAddressField: NSTextField!
+    @IBAction func doPing(sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func pingAllSelectedNodes(sender: AnyObject)
+    {
+        var pingToData = [UNodeID, UNodeAddress]()
+        let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
+        
+        if let visWin = appdel.visualisationWindow
+        {
+            
+            for aView in visWin.window!.contentView.subviews
+            {
+                if aView is NodeView
+                {
+                    if ((aView as! NodeView).clicked == true) && (!(aView as! NodeView).forNode.isEqual(currentNodeId))
+                    {
+                        if let toNode = simulator.simulationNodes[(aView as! NodeView).forNode]
+                        {
+                            let toID=toNode.node.id
+                            let toNodeAddress=toNode.node.address
+                            pingToData.append(toID, toNodeAddress)
+                        }
+                    }
+                }
+            }
+            
+            for (_, (id, address)) in enumerate(pingToData)
+            {
+                if let nodeToPing = simulator.simulationNodes[currentNodeId]
+                {
+                    nodeToPing.node.pingApp.sendPing(id, address: address)
+                }
+                
+            }
+        }
+        
+    }
     
     
+    //Search
+    @IBOutlet weak var searchWithNameField: NSTextField!
+    @IBOutlet weak var searchWithIdField: NSTextField!
+    @IBAction func search(sender: AnyObject)
+    {
+        
+    }
+    @IBAction func broadcastAddress(sender: AnyObject)
+    {
+        if let simNode = simulator.simulationNodes[currentNodeId]
+        {
+            simNode.node.searchApp.storeAddress()
+        }
+    }
+    
+    @IBAction func broadcastName(sender: AnyObject) {
+        if let simNode = simulator.simulationNodes[currentNodeId]
+        {
+            simNode.node.searchApp.storeName()
+        }
+
+        
+    }
+    // chat app
     
     @IBOutlet weak var chatText: NSTextField!
     
@@ -30,13 +97,23 @@ class NodeWindowController:NSWindowController
         
         
     }
+    //Memory
+    
+    @IBOutlet weak var nameIdTable: NSTableView!
+    
+    //Router
+    
+    //Stats
+    
+    @IBOutlet weak var nodeStatsTextField: NSTextField!
 
+    @IBAction func resetNodeStats(sender: AnyObject) {
+    }
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        
-        
+
         
     }
     
