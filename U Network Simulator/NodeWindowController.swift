@@ -32,13 +32,13 @@ class NodeWindowController:NSWindowController
         if let visWin = appdel.visualisationWindow
         {
             
-            for aView in visWin.window!.contentView.subviews
+            for aView in visWin.window!.contentView.layer!!.sublayers
             {
-                if aView is NodeView
+                if aView is NodeLayer
                 {
-                    if ((aView as! NodeView).clicked == true) && (!(aView as! NodeView).forNode.isEqual(currentNodeId))
+                    if ((aView as! NodeLayer).clicked == true) && (!(aView as! NodeLayer).forNode.isEqual(currentNodeId))
                     {
-                        if let toNode = simulator.simulationNodes[(aView as! NodeView).forNode]
+                        if let toNode = simulator.simulationNodes[(aView as! NodeLayer).forNode]
                         {
                             let toID=toNode.node.id
                             let toNodeAddress=toNode.node.address

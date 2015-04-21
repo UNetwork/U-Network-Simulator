@@ -10,6 +10,8 @@
 		FE091B851AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */; };
 		FE22CDC71AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */; };
 		FE22CDC81AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */; };
+		FE2D0EF11AE6159C00E892B6 /* VisualisationLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */; };
+		FE2D0EF21AE6159C00E892B6 /* VisualisationLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */; };
 		FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
 		FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E40E1A8A031200A459E6 /* UNodeID.swift */; };
 		FE45B7E21A93492200B82E5E /* Helper Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */; };
@@ -148,8 +150,6 @@
 		FEFA0FFD1AD66FBC007DD801 /* VisualisationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */; };
 		FEFA0FFF1AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */; };
 		FEFA10001AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */; };
-		FEFA10021AD677BB007DD801 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA10011AD677BB007DD801 /* NodeView.swift */; };
-		FEFA10031AD677BB007DD801 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA10011AD677BB007DD801 /* NodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +165,7 @@
 /* Begin PBXFileReference section */
 		FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeCreationAndCommunicationTests.swift; path = "U Network SimulatorTests/UNodeCreationAndCommunicationTests.swift"; sourceTree = "<group>"; };
 		FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketStoreAddressForId.swift; path = "U Network Simulator/UPacketStoreAddressForId.swift"; sourceTree = "<group>"; };
+		FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualisationLayers.swift; sourceTree = "<group>"; };
 		FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Structures.swift"; path = "U Network Simulator/U Coordinate System Structures.swift"; sourceTree = SOURCE_ROOT; };
 		FE4D6A841AA58922008B3B4E /* 1stRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1stRead.swift; sourceTree = "<group>"; };
 		FE4D6A851AA59083008B3B4E /* UAppChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UAppChat.swift; path = "U Network Simulator/UAppChat.swift"; sourceTree = "<group>"; };
@@ -247,7 +248,6 @@
 		FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReplyForNetworkLookupRequest.swift; path = "U Network Simulator/UPacketReplyForNetworkLookupRequest.swift"; sourceTree = "<group>"; };
 		FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualisationWindow.xib; sourceTree = "<group>"; };
 		FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualisationWindowController.swift; sourceTree = "<group>"; };
-		FEFA10011AD677BB007DD801 /* NodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +415,7 @@
 				FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */,
 				FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */,
 				FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */,
+				FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */,
 				FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */,
 				FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */,
 				FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */,
@@ -425,7 +426,6 @@
 				FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */,
 				FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */,
 				FE60F0381ACFF5A30049DA76 /* SettingsWindowController.swift */,
-				FEFA10011AD677BB007DD801 /* NodeView.swift */,
 				FE7F52481ADFEF42001D3FA1 /* UIMisc.swift */,
 			);
 			name = UI;
@@ -601,7 +601,6 @@
 				FEC90F1C1AA624C10068B2C1 /* UNAppNodeCurrentState.swift in Sources */,
 				FE60F0361ACFF50A0049DA76 /* StatsWindowController.swift in Sources */,
 				FEED381D1AA2497800BB3C26 /* UPacketDataDeliveryConfirmation.swift in Sources */,
-				FEFA10021AD677BB007DD801 /* NodeView.swift in Sources */,
 				FE60F0331ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */,
 				FEA80C3A1A966C5C0061CEA3 /* UNode.swift in Sources */,
 				FEA94DCA1AB1E6A40048DFD3 /* UNAppSearch.swift in Sources */,
@@ -634,6 +633,7 @@
 				FE60F0301ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */,
 				FE60F0391ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */,
 				FEA94DCD1AB1E75D0048DFD3 /* UNAppDataTransfer.swift in Sources */,
+				FE2D0EF11AE6159C00E892B6 /* VisualisationLayers.swift in Sources */,
 				FEE8997D1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */,
 				FEE8996F1A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */,
 				FEA007261A9CADCF0047E3B5 /* MediumSimulatorForWireless.swift in Sources */,
@@ -672,6 +672,7 @@
 				FEA80C3B1A966C5C0061CEA3 /* UNode.swift in Sources */,
 				FE4D6A8E1AA59223008B3B4E /* UAppProtocol.swift in Sources */,
 				FEE899611A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */,
+				FE2D0EF21AE6159C00E892B6 /* VisualisationLayers.swift in Sources */,
 				FE6E57BB1A94B6A100F8F0D5 /* U Coordinate System Functions.swift in Sources */,
 				FEE899851A99F1F90057ACD7 /* UNode Perment Memory Structures.swift in Sources */,
 				FEB606A71AC2F066004C752E /* UAddressStoreSearchTests.swift in Sources */,
@@ -713,7 +714,6 @@
 				FE60F0371ACFF50A0049DA76 /* StatsWindowController.swift in Sources */,
 				FEED38341AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FE7F524A1ADFEF42001D3FA1 /* UIMisc.swift in Sources */,
-				FEFA10031AD677BB007DD801 /* NodeView.swift in Sources */,
 				FE4D6A871AA59083008B3B4E /* UAppChat.swift in Sources */,
 				FEBFCDC91AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
 				FE60F0311ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */,

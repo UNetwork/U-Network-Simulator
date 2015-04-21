@@ -8,30 +8,21 @@
 
 import Foundation
 import Cocoa
+import QuartzCore
 
 class VisualisationWindowController:NSWindowController, NSWindowDelegate
 {
-    
-    var viewLimitExceeded = false
-    
-    var nodeViews = [UNodeID:NodeView]()
-    var connectionViews = [ConnectionView]()
-    
-    var currentSlot = 0
-    
-    
-    
-    
-    
+    var nodeViews = [UNodeID:NodeLayer]()
+    var connectionViews = [UInt64:ConnectionLayer]()
     
     func windowDidResize(notification: NSNotification) {
-        refreshEverything() 
+        refreshEverything()
     }
     
-    func addNodeView(aNodeView:NodeView)
+    func addNodeLayer(aNodeLayer:NodeLayer)
     {
-        self.nodeViews[aNodeView.forNode] = aNodeView
-        self.window?.contentView.addSubview(aNodeView)
+        self.nodeViews[aNodeLayer.forNode] = aNodeLayer
+        self.window?.contentView.layer!!.addSublayer(aNodeLayer)
         
     }
     
@@ -39,86 +30,108 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
-        
+        var cv = self.window!.contentView as! NSView
+        cv.wantsLayer = true
         refreshEverything()
     }
     
     
-    @IBAction func showNode(sender: AnyObject) {
-        
-        refreshEverything()
-        
-    }
+
     
     override func  mouseDown(theEvent: NSEvent) {
-    log(7,"window cklicke")
+        log(7,"window cklicke")
+        
+        for aLayer in self.window!.contentView.layer!!.sublayers
+        {
+            if aLayer is NodeLayer{
+                if let hitlayer = (aLayer as! NodeLayer).hitTest(CGPoint(x: theEvent.locationInWindow.x, y: theEvent.locationInWindow.y))
+                {
+                    log(7,"layer clicked")
+                    (hitlayer as! NodeLayer).getClick()
+                    
+                }
+            }
+        }
     }
     
     
     
     func showConnection(fromId:UNodeID, toId:UNodeID, forWindow:NSWindow, packet:UPacket)
     {
-    
-        let connectionType=packetTypeInInt(packet)
+        let packetColor = packetTypeInInt(packet)
         
-        if(visiblePackets[connectionType]){
+        let rootLayer = self.window?.contentView.layer!!
         
-        
-        if let visWin = self.window
+        if visiblePackets[packetColor]
         {
-            let conView = ConnectionView(nodes: fromId, toId: toId, forWindow: forWindow, packet: packet)
             
-            if viewLimitExceeded
+            
+            let connectionViewHash = fromId.hashForView(toId)
+            
+            if let aConnectionView = connectionViews[connectionViewHash]
             {
-                connectionViews[currentSlot].removeFromSuperview()
-                connectionViews[currentSlot] = conView
-                visWin.contentView.addSubview(conView)
-                currentSlot++
-                if currentSlot > maxConnection - 1 {currentSlot = 0}
+                aConnectionView.color = packetColor
+                aConnectionView.opacity = 0.1
+               //  aConnectionView.setNeedsDisplayInRect(aConnectionView.bounds)
+                aConnectionView.strokeColor = packetColors[packetColor]
+                let fadeAnimation = CABasicAnimation(keyPath: "opacity")
+                
+                fadeAnimation.fromValue = NSNumber(float: 1.0)
+                fadeAnimation.toValue = NSNumber(float: 0.1)
+                fadeAnimation.duration = 3.0
+                
+                aConnectionView.addAnimation(fadeAnimation, forKey: "")
             }
             else
-            {
-                connectionViews.append(conView)
-                visWin.contentView.addSubview(conView)
                 
-                currentSlot++
-                if currentSlot > maxConnection - 1 {currentSlot = 0; viewLimitExceeded = true}
-
+            {
+                var newConnectionView = createConnectionLayer(nodes: fromId, toId, rootLayer!, packet)
+                
+                
+                
+                connectionViews[connectionViewHash] = newConnectionView
+                newConnectionView.opacity = 0.1
+                let fadeAnimation = CABasicAnimation(keyPath: "opacity")
+                
+                fadeAnimation.fromValue = NSNumber(float: 1.0)
+                fadeAnimation.toValue = NSNumber(float: 0.1)
+                fadeAnimation.duration = 3.0
+                
+                newConnectionView.addAnimation(fadeAnimation, forKey: "")
+                
+                rootLayer!.addSublayer(newConnectionView)
                 
             }
-            
-            
-            
-
         }
-        
-        }
-        
         
         
     }
     
-
+    
+    
+    
+    
+    
+    
     
     
     func refreshEverything()
     {
         
         
-        if let visWin = self.window
+        if let visWinContentLayer = self.window?.contentView.layer
         {
-            for aView in visWin.contentView.subviews
-            {
-                aView.removeFromSuperview()
-                nodeViews = [UNodeID:NodeView]()
-            }
+            visWinContentLayer?.sublayers = nil
+            self.connectionViews = [UInt64:ConnectionLayer]()
+            self.nodeViews = [UNodeID:NodeLayer]()
+            
             
             for aSimulationNode in simulator.simulationNodes.values
             {
-                self.addNodeView(aSimulationNode.node.view(visWin))
+                self.addNodeLayer(aSimulationNode.node.visualistaionLayer(visWinContentLayer!))
             }
             
-       
+            
             
             
             
@@ -126,6 +139,19 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
         }
     }
     
+}
+
+
+extension UNodeID
+{
+    func hashForView(withId:UNodeID) -> UInt64
+    {
+        return self.data[0] ^ withId.data[0]
+    }
+    var txt:String
+        {
+            return "id: \(self.data[0]%1000000)"
+    }
 }
 
 

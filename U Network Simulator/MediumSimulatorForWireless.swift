@@ -58,15 +58,22 @@ class MediumSimulatorForWireless:MediumProtocol
             {
                 dispatch_async(queueSerial, {
                     interfaceForDelivery.getPacketFromNetwork(packet)
-                    
+                    })
+                
+                dispatch_async(dispatch_get_main_queue(), {
                     if let visWindowController = appdel.visualisationWindow
                     {
                         let toNodeId = interfaceForDelivery.node.id
-                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
                         
+                        if (packet.header.transmitedByUID.isBroadcast() || toNodeId.isEqual(packet.header.transmitedToUID))
+                        {
+                        
+                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                        }
                     }
-                    
+
                 })
+                
             }
         }
         
@@ -81,12 +88,15 @@ class MediumSimulatorForWireless:MediumProtocol
                     
                 })
                 
-                dispatch_async(queueSerial, {
+                dispatch_async(dispatch_get_main_queue(), {
                     if let visWindowController = appdel.visualisationWindow
                 {
                     let toNodeId = interfaceForDelivery.node.id
-                    visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
-                    
+                    if (packet.header.transmitedByUID.isBroadcast() || toNodeId.isEqual(packet.header.transmitedToUID))
+                    {
+                        
+                        visWindowController.showConnection(interface.node.id, toId: toNodeId, forWindow: visWindowController.window!, packet: packet)
+                    }
                     }
                 })
             }

@@ -182,37 +182,37 @@ class SettingsWindowController:NSWindowController
         super.windowDidLoad()
         
         
-        self.colorBoxDiscoveryBroadcast.color=packetColors[1]
+        self.colorBoxDiscoveryBroadcast.color=NSColor(CGColor: packetColors[1])
         self.colorBoxDiscoveryBroadcast.setNeedsDisplay()
-        self.colorBoxReceptionConfirmation.color=packetColors[2]
+        self.colorBoxReceptionConfirmation.color=NSColor(CGColor: packetColors[2])
         self.colorBoxReceptionConfirmation.setNeedsDisplay()
-        self.colorBoxReplayForDiscovery.color=packetColors[3]
+        self.colorBoxReplayForDiscovery.color=NSColor(CGColor: packetColors[3])
         self.colorBoxReplayForDiscovery.setNeedsDisplay()
-        self.colorBoxReplayForNetworkLookupRequest.color=packetColors[4]
+        self.colorBoxReplayForNetworkLookupRequest.color=NSColor(CGColor: packetColors[4])
         self.colorBoxReplayForNetworkLookupRequest.setNeedsDisplay()
-        self.colorBoxSearchIdForName.color=packetColors[5]
+        self.colorBoxSearchIdForName.color=NSColor(CGColor: packetColors[5])
         self.colorBoxSearchIdForName.setNeedsDisplay()
-        self.colorBoxStoreIdForName.color=packetColors[6]
+        self.colorBoxStoreIdForName.color=NSColor(CGColor: packetColors[6])
         self.colorBoxStoreIdForName.setNeedsDisplay()
-        self.colorBoxStoreNameReply.color=packetColors[7]
+        self.colorBoxStoreNameReply.color=NSColor(CGColor: packetColors[7])
         self.colorBoxStoreNameReply.setNeedsDisplay()
-        self.colorBoxSearchAddressForID.color=packetColors[8]
+        self.colorBoxSearchAddressForID.color=NSColor(CGColor: packetColors[8])
         self.colorBoxSearchAddressForID.setNeedsDisplay()
-        self.colorBoxStoreAddressForId.color=packetColors[9]
+        self.colorBoxStoreAddressForId.color=NSColor(CGColor: packetColors[9])
         self.colorBoxStoreAddressForId.setNeedsDisplay()
-        self.colorBoxReplyForIdSearch.color=packetColors[10]
+        self.colorBoxReplyForIdSearch.color=NSColor(CGColor: packetColors[10])
         self.colorBoxReplyForIdSearch.setNeedsDisplay()
-        self.colorBoxReplyForAddressSearch.color=packetColors[11]
+        self.colorBoxReplyForAddressSearch.color=NSColor(CGColor: packetColors[11])
         self.colorBoxReplyForAddressSearch.setNeedsDisplay()
-        self.colorBoxPing.color=packetColors[12]
+        self.colorBoxPing.color=NSColor(CGColor: packetColors[12])
         self.colorBoxPing.setNeedsDisplay()
-        self.colorBoxPong.color=packetColors[13]
+        self.colorBoxPong.color=NSColor(CGColor: packetColors[13])
         self.colorBoxPong.setNeedsDisplay()
-        self.colorBoxData.color=packetColors[14]
+        self.colorBoxData.color=NSColor(CGColor: packetColors[14])
         self.colorBoxData.setNeedsDisplay()
-        self.colorBoxDataDeliveryConfirmation.color=packetColors[15]
+        self.colorBoxDataDeliveryConfirmation.color=NSColor(CGColor: packetColors[15])
         self.colorBoxDataDeliveryConfirmation.setNeedsDisplay()
-        self.colorBoxDropped.color=packetColors[16]
+        self.colorBoxDropped.color=NSColor(CGColor: packetColors[16])
         self.colorBoxDropped.setNeedsDisplay()
         
         self.heartBeatPeers.integerValue = heartBeatPeersValue

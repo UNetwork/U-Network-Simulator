@@ -16,7 +16,7 @@ The 64-bit id with zero value is broadcast  id
 
 class UNodeID:Hashable {
     
-    private var data=[UInt64]()
+     var data=[UInt64]()
     var hashValue: Int
         {
   
@@ -83,16 +83,9 @@ class UNodeID:Hashable {
         return self.data.count
     }
     
-    var txt:String
-    {
-    return "id: \(self.data[0]%1000000)"
-    }
+
     
-    func hashWithId(id:UNodeID) -> UInt64
-    {
-        let result = self.data[0] ^ id.data[0]
-        return result
-    }
+
 }
 
 func == (lhs: UNodeID, rhs: UNodeID) -> Bool {

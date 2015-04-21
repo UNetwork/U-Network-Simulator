@@ -41,21 +41,21 @@ let searchStoreAddresses = [aboveNorthPoleLeft, belowNorthPoleLeft, aboveSouthPo
 
 
 let packetColors = [
-    NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0),
-    NSColor(calibratedRed: 0.25, green: 0, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.25, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 1, green: 0.75, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0, green: 0.25, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0, green: 0, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0.0, green: 0.25, blue: 0.25, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.5, green: 0, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 1, green: 0.35, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.1, green: 0.73, blue: 1, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0, alpha: 1),
-    NSColor(calibratedRed: 0.75, green: 0.5, blue: 0.5, alpha: 1),
-    NSColor(calibratedRed: 0.25, green: 0.75, blue: 0.75, alpha: 1)]
+    CGColorCreateGenericRGB(0, 0, 0, 0.2),
+    CGColorCreateGenericRGB(0.25,  0,  0,  1),
+    CGColorCreateGenericRGB(0.25,  0.25,  0,  1),
+    CGColorCreateGenericRGB(1,  0.75,  0.25,  1),
+    CGColorCreateGenericRGB(0,  0.25,  0,  1),
+    CGColorCreateGenericRGB(0,  0,  0.25,  1),
+    CGColorCreateGenericRGB(0.0,  0.25,  0.25,  1),
+    CGColorCreateGenericRGB(0.25,  0.5,  0,  1),
+    CGColorCreateGenericRGB(0.25,  0,  0.5,  1),
+    CGColorCreateGenericRGB(0.5,  0,  0,  1),
+    CGColorCreateGenericRGB(0.5,  0.5,  0,  1),
+    CGColorCreateGenericRGB(0.5,  0,  0.5,  1),
+    CGColorCreateGenericRGB(1,  0.35,  0,  1),
+    CGColorCreateGenericRGB(0.1,  0.73,  1,  1),
+    CGColorCreateGenericRGB(0.75,  0.5,  0,  1),
+    CGColorCreateGenericRGB(0.75,  0.5,  0.5,  1),
+    CGColorCreateGenericRGB(0.25,  0.75,  0.75,  1)]
 

@@ -11,7 +11,7 @@ import Cocoa
 
 class ColorBox:NSButton {
     
-    var color=packetColors[0]
+    var color = NSColor(CGColor:packetColors[0])
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -25,6 +25,6 @@ class ColorBox:NSButton {
         var bPath:NSBezierPath = NSBezierPath()
         bPath.appendBezierPathWithRoundedRect(self.bounds, xRadius: 10.0, yRadius: 10.0)
         
-        color.set()
+        color!.set()
         bPath.fill()    }
 }

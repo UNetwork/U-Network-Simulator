@@ -112,15 +112,15 @@ class UNetworkSimulator:NSObject
             let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
             
             
-            if let visWin = appdel.visualisationWindow?.window
+            if let visWin = appdel.visualisationWindow
             {
                 if spaceChanged
                 {
-                    appdel.visualisationWindow?.refreshEverything()
+                    visWin.refreshEverything()
                 }
                 else
                 {
-                appdel.visualisationWindow!.addNodeView(node.view(visWin))
+                visWin.addNodeLayer(node.visualistaionLayer(visWin.window!.contentView.layer!!))
                 }
             }
             

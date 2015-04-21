@@ -175,19 +175,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let visWin = self.visualisationWindow?.window
         {
-            for aView in visWin.contentView.subviews
+            for aView in visWin.contentView.layer!!.sublayers
             {
-                if aView is ConnectionView
+                if aView is ConnectionLayer
                 {
                     aView.removeFromSuperview()
                 }
-               if aView is NodeView
+               if aView is NodeLayer
                {
-                (aView as! NodeView).clicked = false
-                (aView as! NodeView).setNeedsDisplayInRect(aView.bounds)
+                (aView as! NodeLayer).clicked = false
+                (aView as! NodeLayer).setNeedsDisplayInRect(aView.bounds)
                 }
             }
+
+            self.visualisationWindow!.refreshEverything()
         }
+        
+        
         
     }
     
@@ -206,13 +210,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
            
             let fromView =  visualisationWindow!.nodeViews[fromNodeId]!
             
-            fromView.clicked = true
-            fromView.setNeedsDisplayInRect(fromView.bounds)
+            fromView.getClick()
             
             let toView = visualisationWindow!.nodeViews[toNodeId]!
             
-            toView.clicked = true
-            toView.setNeedsDisplayInRect(toView.bounds)
+            toView.getClick()
             
             
                 }
