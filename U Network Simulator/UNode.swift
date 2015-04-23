@@ -147,6 +147,8 @@ class UNode {
         {
             if(packet.envelope.destinationUID.isEqual(self.id) || packet.envelope.destinationUID.isBroadcast())
             {
+             //   self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
+                
                 switch packet.packetCargo
                 {
                 case .ReceptionConfirmation(let _): router.getReceptionConfirmation(interface, packet: packet) // this is router staff
@@ -181,6 +183,7 @@ class UNode {
                 
                 default: log(7, "Unknown packet type???")
                 }
+                
             }
             else
             {

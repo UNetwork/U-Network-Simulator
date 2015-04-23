@@ -45,7 +45,8 @@ class SettingsWindowController:NSWindowController
     
     
     @IBOutlet weak var colorBoxStoreIdForName: ColorBox!
-    @IBAction func switchStoreIdForName(sender: AnyObject) {      if visiblePackets[6] {visiblePackets[6]=false}else{visiblePackets[6]=true}
+    @IBAction func switchStoreIdForName(sender: AnyObject) {
+        if visiblePackets[6] {visiblePackets[6]=false}else{visiblePackets[6]=true}
     }
     
     
@@ -93,8 +94,6 @@ class SettingsWindowController:NSWindowController
               if visiblePackets[14] {visiblePackets[14]=false}else{visiblePackets[14]=true}
     }
     
-    
-    
     @IBOutlet weak var colorBoxDataDeliveryConfirmation: ColorBox!
     @IBAction func switchDataDeliveryConfirmation(sender: AnyObject) {
               if visiblePackets[15] {visiblePackets[15]=false}else{visiblePackets[15]=true}
@@ -105,12 +104,7 @@ class SettingsWindowController:NSWindowController
               if visiblePackets[16] {visiblePackets[16]=false}else{visiblePackets[16]=true}
     }
     
-    @IBAction func updateNumberOfVisible(sender: AnyObject) {
-    
-    maxConnection = numberOfVisiblePackets.integerValue
-    
-    }
-    @IBOutlet weak var numberOfVisiblePackets: NSTextField!
+
     // heartbeat
     
     @IBOutlet weak var heartBeatPeers: NSTextField!
@@ -127,34 +121,23 @@ class SettingsWindowController:NSWindowController
     // hardcore
     
     @IBOutlet weak var wirelessInterfaceRangeField: NSTextField!
-    
     @IBOutlet weak var packetLifeTimeField: NSTextField!
-    
-    
     @IBOutlet weak var discoveryBroadcastDepthField: NSTextField!
-    
     @IBOutlet weak var storeSearchDepthField: NSTextField!
     
-    
-    @IBAction func updateHardcore(sender: AnyObject) {
-        
+    @IBAction func updateHardcore(sender: AnyObject)
+    {
         wirelessInterfaceRange = UInt64(wirelessInterfaceRangeField.integerValue)
         standardPacketLifeTime = UInt32(packetLifeTimeField.integerValue)
         maxDiscoveryBroadcastDeepth = discoveryBroadcastDepthField.integerValue
         defaultStoreSearchDepth = UInt32(storeSearchDepthField.integerValue)
-        
-        
-        
-        
     }
     
     // nothing will work if changed
     
     
-    @IBAction func processingTypeCombo(sender: NSComboBox) {
-        
-        let bzdet=sender.indexOfSelectedItem
-        
+    @IBAction func processingTypeCombo(sender: NSComboBox)
+    {
         
         switch sender.indexOfSelectedItem
         {
@@ -163,24 +146,16 @@ class SettingsWindowController:NSWindowController
         case 2: processingMode = ProcessingType.Paralel
         default: log(7,"Unknown processing type selected")
         }
-        
-        
-        
     }
     
-    
-    @IBAction func useCacheSwitch(sender: AnyObject) {
+    @IBAction func useCacheSwitch(sender: AnyObject)
+    {
         if useCache {useCache=false}else{useCache=true}
-
     }
-    
-    
-    
     
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        
         
         self.colorBoxDiscoveryBroadcast.color=NSColor(CGColor: packetColors[1])
         self.colorBoxDiscoveryBroadcast.setNeedsDisplay()
@@ -219,19 +194,9 @@ class SettingsWindowController:NSWindowController
         self.heartBeatNameStore.integerValue = heartBeatNameStoreValue
         self.heartBeatAddressStore.integerValue = heartBeatAddressStoreValue
         
-        
         self.wirelessInterfaceRangeField.integerValue = Int(wirelessInterfaceRange)
         self.packetLifeTimeField.integerValue = Int(standardPacketLifeTime)
         self.discoveryBroadcastDepthField.integerValue = maxDiscoveryBroadcastDeepth
         self.storeSearchDepthField.integerValue = Int(defaultStoreSearchDepth)
-        
-        self.numberOfVisiblePackets.integerValue = maxConnection
-        
-        
-        
-        
-        
     }
-
-    
 }

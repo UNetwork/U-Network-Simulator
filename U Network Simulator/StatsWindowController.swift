@@ -13,27 +13,22 @@ class StatsWindowController:NSWindowController
 
     @IBOutlet weak var statsText: NSTextField!
     
-    @IBAction func update(sender: AnyObject) {
-        
+    @IBAction func update(sender: AnyObject)
+    {
         self.statsText.stringValue = simulationStats().text
-
     }
     
     
-    override func windowDidLoad() {
+    override func windowDidLoad()
+    {
         super.windowDidLoad()
-        
-        
         self.statsText.stringValue=simulationStats().text
-        
     }
 }
 
 
 func simulationStats() -> (text:String, values:[Int])
-{
-    
-    
+{    
     var result=""
     
     var globalStats=Array(count: StatsEvents.allValues.count, repeatedValue: 0)

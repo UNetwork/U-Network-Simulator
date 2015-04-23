@@ -27,6 +27,9 @@ protocol URouterProtocol
     
     func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)
     
+    func sendPacketDeliveryConfirmation(interface:UNetworkInterfaceProtocol, packet:UPacket, rejected:Bool)
+
+    
     
         
     func maintenanceLoop()

@@ -177,15 +177,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         {
             for aView in visWin.contentView.layer!!.sublayers
             {
-                if aView is ConnectionLayer
-                {
-                    aView.removeFromSuperview()
-                }
+           
                if aView is NodeLayer
                {
-                (aView as! NodeLayer).clicked = false
-                (aView as! NodeLayer).setNeedsDisplayInRect(aView.bounds)
-                }
+                (aView as! NodeLayer).clicked = true
+                (aView as! NodeLayer).getClick()                }
             }
 
             self.visualisationWindow!.refreshEverything()

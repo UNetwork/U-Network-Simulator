@@ -14,14 +14,13 @@ Lenght is 64 - 256 bits.
 The 64-bit id with zero value is broadcast  id
 */
 
-class UNodeID:Hashable {
+class UNodeID:Hashable
+{
     
-     var data=[UInt64]()
+    var data=[UInt64]()
     var hashValue: Int
-        {
-  
-            
-            return Int(data[0] & 0x7FFFFFFFFFFFFFFF)
+    {
+        return Int(data[0] & 0x7FFFFFFFFFFFFFFF)
     }
     
     init (lenght:Int)
@@ -44,9 +43,8 @@ class UNodeID:Hashable {
     
     init ()     // Broadcast packet if in transmitedToUID in packet header or distribute locally id in envelope of store packet
     {
-       self.data.append(0)
+        self.data.append(0)
     }
-    
     
     func isEqual(to:UNodeID) -> Bool
     {
@@ -67,8 +65,6 @@ class UNodeID:Hashable {
         return true
     }
     
-    
-    
     func isBroadcast() -> Bool
     {
         if(self.data.count == 1 && self.data[0] == 0)
@@ -82,14 +78,9 @@ class UNodeID:Hashable {
     {
         return self.data.count
     }
-    
-
-    
-
 }
 
-func == (lhs: UNodeID, rhs: UNodeID) -> Bool {
+func == (lhs: UNodeID, rhs: UNodeID) -> Bool
+{
     return lhs.isEqual(rhs)
-
-
 }

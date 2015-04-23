@@ -14,10 +14,6 @@ class ConsoleWindowController:NSWindowController
 {
     @IBOutlet var consoleTextView: NSTextView!
     
-    
-    
-    
-    
     @IBAction func clearLog(sender: AnyObject)
     {
         AppDelegate.sharedInstance.logClearText()
@@ -26,11 +22,7 @@ class ConsoleWindowController:NSWindowController
     @IBAction func changeLogLevel(sender: NSComboBox)
     {
         logLevel = sender.integerValue
-        
-        
-        
     }
-    
     
     
     func updateConsole()
@@ -41,9 +33,6 @@ class ConsoleWindowController:NSWindowController
             consoleTextView.scrollToEndOfDocument("")
             AppDelegate.sharedInstance.logChanged = false
         }
-        
-   
-        
     }
 
     
@@ -51,9 +40,7 @@ class ConsoleWindowController:NSWindowController
         super.windowDidLoad()
         
         consoleTextView.editable = false
-        
         log(0,"console window loaded sucessfuly")
 
-        
     }
 }

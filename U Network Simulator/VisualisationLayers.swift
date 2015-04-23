@@ -21,30 +21,11 @@ extension UNode {
         result.forNode = self.id
         
         
-        let windowWidth = Float64(forLayer.bounds.width - nodeLayerSize)
-        let windowHeight = Float64(forLayer.bounds.height  - nodeLayerSize)
-        
-        var deltaLat = Float64(simulator.maxLat - simulator.minLat)
-        var deltaLong = Float64(simulator.maxLong - simulator.minLong)
-        var deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
-        
-        if (deltaLat < 1) {deltaLat = 1}
-        if (deltaLong < 1) {deltaLong = 1}
-        if (deltaAlt < 1) {deltaAlt = 1}
-
-        let scaleLat = windowWidth / deltaLat
-        let scaleLong =  windowHeight / deltaLong
-        let scaleAlt = Float64(nodeLayerSize - minNodeLayerSize) / deltaAlt
-        
-        
         let viewX = Float64(self.address.latitude - simulator.minLat) * scaleLat
         let viewY = Float64(self.address.longitude - simulator.minLong) * scaleLong
         let viewA = Float64(self.address.altitude - simulator.minAlt) * scaleAlt + Float64(minNodeLayerSize)
         
-        
         result.frame = CGRect(x: viewX, y: viewY, width: viewA, height: viewA)
-        
-    
         
         result.backgroundColor = packetColors[0]
         
@@ -72,53 +53,25 @@ class NodeLayer:CAShapeLayer
             if let nodeWindow = appdel.nodeWindow
             {
                 nodeWindow.showNode(clickedNode.node.id)
-                
-                
             }
-            
         }
-
-
         self.backgroundColor = clicked ? packetColors[6] : packetColors[0]
     }
-    
-  
-    
-    
-    
 }
 
 class ConnectionLayer:CAShapeLayer
 {
     
-    var type = Int(0)
     var color = Int(0)
-    
-    
     
 }
 
 
 
-func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer, packet:UPacket) -> ConnectionLayer
+func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, packet:UPacket) -> ConnectionLayer
 {
     var result = ConnectionLayer()
     
-    let windowWidth = Float64(forLayer.bounds.width - nodeLayerSize)
-    let windowHeight = Float64(forLayer.bounds.height  - nodeLayerSize)
-    
-    var deltaLat = Float64(simulator.maxLat - simulator.minLat)
-    var deltaLong = Float64(simulator.maxLong - simulator.minLong)
-    var deltaAlt = Float64(simulator.maxAlt - simulator.minAlt)
-    
-    
-    if (deltaLat < 1) {deltaLat = 1}
-    if (deltaLong < 1) {deltaLong = 1}
-    if (deltaAlt < 1) {deltaAlt = 1}
-    
-    let scaleLat = windowWidth / deltaLat
-    let scaleLong =  windowHeight / deltaLong
-    let scaleAlt = Float64(nodeLayerSize - minNodeLayerSize) / deltaAlt
     
     var fX = Float64(0)
     var fY = Float64(0)
@@ -132,11 +85,10 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     
     var prototype = Int(0)
     
-    
     if let fromNode = simulator.simulationNodes[fromId]
     {
         fA = Float64(fromNode.node.address.altitude - simulator.minAlt) * scaleAlt
-        
+
         fX = Float64(fromNode.node.address.latitude - simulator.minLat) * scaleLat + (Float64(minNodeLayerSize) + fA)/2
         fY = Float64(fromNode.node.address.longitude - simulator.minLong) * scaleLong + (Float64(minNodeLayerSize) + fA)/2
     }
@@ -144,7 +96,6 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     if let toNode = simulator.simulationNodes[toId]
     {
         tA = Float64(toNode.node.address.altitude - simulator.minAlt) * scaleAlt
-        
         tX = Float64(toNode.node.address.latitude - simulator.minLat) * scaleLat + (Float64(minNodeLayerSize) + tA)/2
         tY = Float64(toNode.node.address.longitude - simulator.minLong) * scaleLong + (Float64(minNodeLayerSize) + tA)/2
     }
@@ -152,7 +103,8 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     var viewX=Float64(0)
     var viewY=Float64(0)
     
-    
+    var aPath = CGPathCreateMutable()
+
     if (fX < tX)
     {
         dX = tX - fX
@@ -163,7 +115,6 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     {
         dX = fX - tX
         if (dX < 1){dX=1}
-        
         viewX = tX
         prototype += 1
     }
@@ -172,42 +123,34 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     {
         dY = tY - fY
         if (dY < 1){dY=1}
-        
         viewY = fY
     }
     else
     {
         dY = fY - tY
         if (dY < 1){dY=1}
-        
         viewY = tY
         prototype += 2
-        
     }
     
     result.frame = NSRect(x: viewX, y: viewY, width: dX , height: dY)
     
-    var aPath = CGPathCreateMutable()
-    result.type = prototype
-    
-    if (result.type == 0)
+    if (prototype == 0)
     {
         CGPathMoveToPoint(aPath,nil,0,0)
         CGPathAddLineToPoint(aPath, nil, result.bounds.width, result.bounds.height)
-        
-        
     }
-    if (result.type == 1)
+    if (prototype == 1)
     {
         CGPathMoveToPoint(aPath,nil,result.bounds.width,0)
         CGPathAddLineToPoint(aPath,nil, 0, result.bounds.height)
     }
-    if (result.type == 2)
+    if (prototype == 2)
     {
         CGPathMoveToPoint(aPath,nil,0,result.bounds.height)
         CGPathAddLineToPoint(aPath, nil, result.bounds.width, 0)
     }
-    if (result.type == 3)
+    if (prototype == 3)
     {
         CGPathMoveToPoint(aPath,nil,result.bounds.width, result.bounds.height)
         CGPathAddLineToPoint(aPath, nil, 0, 0)
@@ -216,6 +159,7 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, forLayer:CALayer,
     result.path = aPath
     
     result.strokeColor = packetColors[packetTypeInInt(packet)]
+    result.lineWidth = 3.0
     
     
     return result
