@@ -20,6 +20,19 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     func maintenanceLoop()
     {
+       for (index, aRecord) in enumerate(packetStack)
+       {
+        if aRecord.status == BrutForcePacketStatus.Sent
+        {
+            packetStack[index].waitingTimeOnPacketStack++
+            if aRecord.waitingTimeOnPacketStack  > delayInPacketResend
+            {
+                getPacketToRouteFromStack(index)
+            }
+        }
+        }
+        
+        
         // find not deliverd packets and resend
         // delete some useless and old data from packetstack
     }
@@ -138,7 +151,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             sentArray.append(node.peers[peerToSendIndex].id)
             
             
-            let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: node.id, sentToNodes: sentArray, status:BrutForcePacketStatus.Sent)
+            let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: node.id, sentToNodes: sentArray, status:BrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
             self.packetStack.append(newStackItem)
             
             
@@ -221,7 +234,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             else
             {
                 
-                // packet already processed, send negative packet delivery
+                // packet already processed, send negative packet delivery (rejected)
                 
                 log(2,"R: \(node.txt) Rejected \(packet.txt) ")
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
@@ -256,7 +269,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 
                 transmitedToPeers.append(packet.header.transmitedByUID)
                 transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
-                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent)
+                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
                 self.packetStack.append(newStackItem)
                 forwardPacketToPeer(interface, packet:packet, peerIndex:peerToSendPacketIndex)
             }
@@ -506,6 +519,7 @@ struct BruteForcePacketStackRecord {
     var recievedFrom:UNodeID
     var sentToNodes:[UNodeID]
     var status:BrutForcePacketStatus
+    var waitingTimeOnPacketStack: Int
 }
 
 

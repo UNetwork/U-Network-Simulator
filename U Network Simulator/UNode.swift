@@ -147,7 +147,7 @@ class UNode {
         {
             if(packet.envelope.destinationUID.isEqual(self.id) || packet.envelope.destinationUID.isBroadcast())
             {
-             //   self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
+            
                 
                 switch packet.packetCargo
                 {
@@ -155,31 +155,32 @@ class UNode {
                 
                 case .ReplyForDiscovery(let _): processDiscoveryBroadcastreply(interface, packet: packet)
                 
-                case .ReplyForNetworkLookupRequest(let _): router.getReplyForNetworkLookupRequest(interface, packet: packet) // router staff - future implementation for another sense of neighberhood
+                case .ReplyForNetworkLookupRequest(let _): router.getReplyForNetworkLookupRequest(interface, packet: packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false) // router staff - future implementation for another sense of neighberhood
                 
-                case .SearchIdForName(let searchForIdRequest): processSearchIdForName(interface, header:packet.header, envelope:packet.envelope, request: searchForIdRequest)
+                case .SearchIdForName(let searchForIdRequest): processSearchIdForName(interface, header:packet.header, envelope:packet.envelope, request: searchForIdRequest); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
 
-                case .StoreIdForName(let storeIdRequest): processStoreIdForName(interface, header:packet.header, envelope:packet.envelope, request: storeIdRequest)
+                case .StoreIdForName(let storeIdRequest): processStoreIdForName(interface, header:packet.header, envelope:packet.envelope, request: storeIdRequest); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                     
-                case .StoreNamereply(let replyCargo): processStoreNamereply(packet.envelope, reply:replyCargo)
+                case .StoreNamereply(let replyCargo): processStoreNamereply(packet.envelope, reply:replyCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .SearchAddressForID(let searchForAddressRequest): processSearchAddressForID(interface, header:packet.header, envelope:packet.envelope, request: searchForAddressRequest)
+                case .SearchAddressForID(let searchForAddressRequest): processSearchAddressForID(interface, header:packet.header, envelope:packet.envelope, request: searchForAddressRequest); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .StoreAddressForId(let searchForAddressRequest): processStoreAddressForId(interface, header:packet.header, envelope:packet.envelope, request: searchForAddressRequest)
+                case .StoreAddressForId(let searchForAddressRequest): processStoreAddressForId(interface, header:packet.header, envelope:packet.envelope, request: searchForAddressRequest); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .ReplyForIdSearch(let searchForIdResultCargo): processIdSearchResults(packet.envelope,  searchResult: searchForIdResultCargo)
+                case .ReplyForIdSearch(let searchForIdResultCargo): processIdSearchResults(packet.envelope,  searchResult: searchForIdResultCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .ReplyForAddressSearch(let _) : processAddressSearchResults(packet)
+                case .ReplyForAddressSearch(let _) : processAddressSearchResults(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .Ping(let pingCargo): processPing(packet.envelope, ping: pingCargo)
+                case .Ping(let pingCargo): processPing(packet.envelope, ping: pingCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
+
                 
-                case .Pong(let pongCargo): processPong(packet.envelope, pong: pongCargo)
+                case .Pong(let pongCargo): processPong(packet.envelope, pong: pongCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .Data(let _): processData(packet)
+                case .Data(let _): processData(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .DataDeliveryConfirmation(let _): processDataDeliveryConfirmation(packet)
+                case .DataDeliveryConfirmation(let _): processDataDeliveryConfirmation(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                     
-                case .Dropped(let droppedCargo): processDrop(packet.envelope, droppedPacket:droppedCargo)
+                case .Dropped(let droppedCargo): processDrop(packet.envelope, droppedPacket:droppedCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
                 default: log(7, "Unknown packet type???")
                 }

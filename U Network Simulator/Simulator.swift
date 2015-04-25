@@ -23,7 +23,7 @@ class UNetworkSimulator:NSObject
     var bridgeMedium = MediumSimulatorArbitraryGroup()
     
     // current space bondaries maxLat: 143864997596557 minLat:143864988096557 maxLong: 143864997596557 minLong: 143864988096557
-
+    
     
     var minLat=UInt64(143864988096557)
     var maxLat=UInt64(143864997596557)
@@ -33,15 +33,15 @@ class UNetworkSimulator:NSObject
     var maxAlt=UInt64(1000000)
     
     // heartbeatloop
-
+    
     var heartBeatTimer:NSTimer?
     
     
     
     
     override init(){
-    super.init()
-    
+        super.init()
+        
     }
     
     func addNodes(configurations:[SimulationNodeConfiguration])
@@ -121,7 +121,7 @@ class UNetworkSimulator:NSObject
                 }
                 else
                 {
-                visWin.addNodeLayer(node.visualistaionLayer(visWin.window!.contentView.layer!!))
+                    visWin.addNodeLayer(node.visualistaionLayer(visWin.window!.contentView.layer!!))
                 }
             }
             
@@ -154,6 +154,135 @@ class UNetworkSimulator:NSObject
             }
         }
     }
+    
+    // open save data
+    
+    func openNodeMap()
+    {
+        
+        var panel=NSOpenPanel()
+        
+        var panelhandler = panel.runModal()
+        
+        if (panelhandler==NSModalResponseOK)
+        {
+            
+            let fileContent=NSArray(contentsOfURL: panel.URL!)
+
+            log(7,"wireless in file: \(fileContent![0].count)")
+            
+            for index in 0 ..< fileContent![0].count
+            {
+                let lat = fileContent![0][index][0] as! NSNumber
+                let long = fileContent![0][index][1] as! NSNumber
+                let alt = fileContent![0][index][2] as! NSNumber
+                
+                let position = USimulationRealLocation(inputLatitude: lat.unsignedLongLongValue, inputLongitude: long.unsignedLongLongValue, inputAltitude: alt.unsignedLongLongValue)
+                
+                addWirelessNode(position)
+                
+                
+            }
+            
+            
+            
+            
+        }
+        else if (panelhandler==NSModalResponseCancel)
+        {
+            
+            return
+        }
+
+    }
+    
+    
+    
+    func saveCurrentNodeMap()
+    {
+        var dataForSave = [AnyObject]()
+
+        var panel = NSSavePanel()
+        var panelHandler = panel.runModal()
+        if (panelHandler == NSModalResponseOK)
+        {
+            var wireless = [[NSNumber]]()
+            var internets = [NSNumber]()    // :)
+            var bridges = [NSNumber]()
+            var ethernets = [NSNumber]()
+            
+            for simNode in simulationNodes.values
+            {
+                let configurationToSave = simNode.nodeConfiguration
+                
+                // array of 3 element nsnumber array
+                // array of nsnumbers for tcpip
+                // array of nsnumbers for bridge
+                // array of nsnumbers for ethernet
+                
+                
+                
+                for (index, wirelessInterfaceConfiguration) in enumerate(configurationToSave.simulationWirelessInterfeces)
+                {
+                    
+                    var nsposition = [NSNumber]()
+                    
+                    let lat = NSNumber(unsignedLongLong: wirelessInterfaceConfiguration.location.latitude)
+                    nsposition.append(lat)
+                    let long = NSNumber(unsignedLongLong: wirelessInterfaceConfiguration.location.longitude)
+                    nsposition.append(long)
+                    let alt = NSNumber(unsignedLongLong: wirelessInterfaceConfiguration.location.altitude)
+                    nsposition.append(alt)
+                    
+                    wireless.append(nsposition)
+                    
+                    
+                }
+                
+                for (index, internetInterfaceConfiguration) in enumerate(configurationToSave.simulationInternetInterfaces)
+                {
+                    internets.append(NSNumber(unsignedInt: internetInterfaceConfiguration.tCPIPAddress))
+                }
+                
+                for (index, ethernetInterfaceConfiguration) in enumerate(configurationToSave.simulationEthernetInterfaces)
+                {
+                    ethernets.append(NSNumber(unsignedLong: ethernetInterfaceConfiguration.hubNumber))
+                    
+                }
+                
+                for (index, bridgeInterfaceConfiguration) in enumerate(configurationToSave.simulationBridgeInterfaces)
+                {
+                    bridges.append(NSNumber(unsignedLong: bridgeInterfaceConfiguration.bridgeNumber))
+                }
+                
+                
+            }
+            var error:NSString?
+            
+            
+            dataForSave.append(wireless)
+            dataForSave.append(internets)
+            dataForSave.append(ethernets)
+            dataForSave.append(bridges)
+            
+            
+            
+            
+            var plist = NSPropertyListSerialization.dataFromPropertyList(dataForSave, format:NSPropertyListFormat.XMLFormat_v1_0, errorDescription: &error)
+            
+            
+            plist?.writeToURL(panel.URL!, atomically: true)
+            
+            //  currentFilePath=panel.URL
+        }
+        else if (panelHandler == NSCancelButton)
+        {
+            return
+        }
+        
+    }
+    
+    
     
     
     
