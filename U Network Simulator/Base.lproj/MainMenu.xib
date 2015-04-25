@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
@@ -197,7 +197,7 @@
         <window title="U Network Simulator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="335" y="390" width="750" height="550"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="750" height="550"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -262,6 +262,23 @@
                             <action selector="randomAddressStore:" target="Voe-Tx-rLC" id="WgC-RP-BJ0"/>
                         </connections>
                     </button>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-VT-HoV">
+                        <rect key="frame" x="95" y="337" width="156" height="26"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Lkm-0X-fHC">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="dWO-pd-zd0">
+                                <items>
+                                    <menuItem title="Add" id="3uH-Sh-Sz7"/>
+                                    <menuItem title="Delete" id="zky-yP-ex8"/>
+                                    <menuItem title="Select/Move" id="EAK-Q5-X8s" userLabel="Select/Move"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="setModeOfOperationForVisualisation:" target="Voe-Tx-rLC" id="XW7-D9-EaL"/>
+                        </connections>
+                    </popUpButton>
                 </subviews>
             </view>
             <toolbar key="toolbar" implicitIdentifier="EF987825-0876-4D8B-8A48-D501B67F3157" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Lxf-On-LAD">

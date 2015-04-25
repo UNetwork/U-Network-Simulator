@@ -24,6 +24,8 @@ var heartBeatPeersValue=0
 var heartBeatNameStoreValue=0
 var heartBeatAddressStoreValue=0
 
+var currentModeOfOperationForVisualisationVindow : Int = 0
+
 // some orientation points for data search and distribition packets
 
 

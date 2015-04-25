@@ -219,6 +219,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
+    @IBAction func setModeOfOperationForVisualisation(sender: NSPopUpButton)
+    {
+        
+        currentModeOfOperationForVisualisationVindow = sender.indexOfSelectedItem
+    }
+    
+    
+    
+    
     @IBAction func randomNameStore(sender: AnyObject) {
          let randomNode = simulator.simulationNodeIdCache[Int(arc4random_uniform(UInt32(simulator.simulationNodeIdCache.count)))]
             let simulationNode = simulator.simulationNodes[randomNode]
