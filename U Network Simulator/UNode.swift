@@ -485,6 +485,15 @@ class UNode {
         
     }
     
+    func resetInternalData()
+    {
+        timeCounter=0
+        peers = [UPeerDataRecord]()
+        knownAddresses = [UNodeID:UMemoryIdAddressRecord]()
+        knownIDs  = [String:UMemoryNameIdRecord]()
+        router.reset()
+    }
+    
     
     // Processing functions
     

@@ -154,9 +154,9 @@ struct UNodeAddress
     
     var txt:String
     {
-        var result="address: "
+        var result=""
         var coordinates=convertUInt64CoordinatesToFlotingPoint(self.latitude, self.longitude, self.altitude)
-        result += "lat: \(coordinates.latitude.value) long: \(coordinates.longitude.value) alt: \(coordinates.altitude.value)"
+        result += "\(coordinates.latitude.value) \(coordinates.longitude.value) \(coordinates.altitude.value)"
         
         
         

@@ -495,7 +495,7 @@
                     </comboBox>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pkR-By-nE6">
                         <rect key="frame" x="531" y="41" width="62" height="18"/>
-                        <buttonCell key="cell" type="check" title="Cache" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9IA-kK-0q6">
+                        <buttonCell key="cell" type="check" title="Cache" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="9IA-kK-0q6">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>

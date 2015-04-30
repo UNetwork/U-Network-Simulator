@@ -30,7 +30,7 @@ protocol URouterProtocol
     func sendPacketDeliveryConfirmation(interface:UNetworkInterfaceProtocol, packet:UPacket, rejected:Bool)
 
     
-    
+    func reset()
         
     func maintenanceLoop()
     

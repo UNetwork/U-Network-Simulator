@@ -9,13 +9,37 @@ import Foundation
 import Cocoa
 
 
-class NodeWindowController:NSWindowController
+class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDataSource, NSTableViewDelegate
     
 {
     
     var currentNodeId=UNodeID()
     
+    @IBOutlet weak var theTabView: NSTabView!
+    
     @IBOutlet weak var infoText: NSTextField!
+    
+    @IBAction func resetNode(sender: AnyObject)
+    {
+        if let aNode =  simulator.simulationNodes[currentNodeId]
+        {
+            aNode.node.resetInternalData()
+        }
+
+    }
+    
+    
+    @IBAction func refreshNodesPeers(sender: AnyObject)
+    {
+        if let aNode =  simulator.simulationNodes[currentNodeId]
+        {
+            aNode.node.refreshPeers()
+        }
+    }
+    
+    
+    
+    
     //Ping
     @IBOutlet weak var pingIdField: NSTextField!
     @IBOutlet weak var pingAddressField: NSTextField!
@@ -100,6 +124,15 @@ class NodeWindowController:NSWindowController
     //Memory
     
     @IBOutlet weak var nameIdTable: NSTableView!
+    var dataForNameIdTable = [UNodeID:NameIdTableRecord]()
+    var arrayToDisplay = [String, String, String]()
+    
+    
+    struct NameIdTableRecord
+    {
+        var name:String=""
+        var address = UNodeAddress()
+    }
     
     //Router
     
@@ -107,16 +140,201 @@ class NodeWindowController:NSWindowController
     
     @IBOutlet weak var nodeStatsTextField: NSTextField!
 
-    @IBAction func resetNodeStats(sender: AnyObject) {
+    @IBAction func resetNodeStats(sender: AnyObject)
+    {
     }
     
-    override func windowDidLoad() {
+    
+    
+    
+    
+    
+    
+    override func windowDidLoad()
+    {
         super.windowDidLoad()
+        theTabView.delegate = self
+        nameIdTable.setDataSource(self)
+        nameIdTable.setDelegate(self)
+        
+    }
+    
+    func tabView(tabView: NSTabView, didSelectTabViewItem tabViewItem: NSTabViewItem?)
+    {
+        
+        let nameOfTab = tabViewItem!.label
+        
+        switch nameOfTab
+        {
+        case "Ping" : refreshNodePingView()
+        case "Search": refreshNodeSearchView()
+        case "Chat" : refreshNodeChatView()
+        case "Memory" : refreshNodeMemoryView()
+        case "Router" : refreshNodeRouterView()
+        case "Stats" : refreshNodeStatsView()
+        case "Interfaces" : refreshNodeInterfacesView()
+            
+        default : log(7,"Nope")
+        }
+        
+        
+        
+    }
+    
+   
+    
+  
+    
+    func refreshNodePingView()
+    {
+        
+    }
+    
+    func refreshNodeSearchView()
+    {
+        
+    }
+    
+    func refreshNodeChatView()
+    {
+        
+    }
+    
+    func refreshNodeMemoryView()
+    {
+    nameIdTable.reloadData()
+    }
+    
+    func refreshNodeRouterView()
+    {
+        
+    }
+    
+    func refreshNodeStatsView()
+    {
+        log(7,"refreshing node stats view")
+        
+        var result = ""
+        
+        if let aNode = simulator.simulationNodes[currentNodeId]
+        {
+            for index in  0..<StatsEvents.allValues.count
+            {
+                result+="\(StatsEvents.allValues[index]) : \(aNode.node.nodeStats.nodeStats[index]) \n"     // what a crappy naming
+                result += (index == 1 || index == 7 || index == 13 ? "\n":"")
+            }
+            
+            self.nodeStatsTextField.stringValue = result
+        }
+    }
+    
+    func refreshNodeInterfacesView()
+    {
+        
+    }
+    
+    
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int
+    {
+        if let simNode = simulator.simulationNodes[currentNodeId]
+        {
+            dataForNameIdTable = [UNodeID:NameIdTableRecord]()
+            
+            
+            
+            
+            
+            
+            unifyNodeMemoryForTable()
+            return arrayToDisplay.count
+        }
+        return 0
+    }
+    
+
+    func tableView(tableView: NSTableView, viewForTableColumn: NSTableColumn?, row: Int) -> NSView?
+    {
+
+        var aCell = nameIdTable.makeViewWithIdentifier(viewForTableColumn!.title, owner: self) as! NSTableCellView
+        
+        let record=arrayToDisplay[row]
+        switch viewForTableColumn!.title
+        {
+        case "Name": aCell.textField!.stringValue = record.0
+        case "Id" :aCell.textField!.stringValue = record.1
+        case "Address": aCell.textField!.stringValue = record.2
+        default: log(7,"FTW 55")
+        }
+        
+        
         
 
-        
+        return aCell
     }
     
+    
+    func unifyNodeMemoryForTable()
+    {
+        if let simNode = simulator.simulationNodes[currentNodeId]
+        {
+            for nameIdRecord in simNode.node.knownIDs
+            {
+                let newTableRecord = NameIdTableRecord(name: nameIdRecord.0, address: UNodeAddress())
+                dataForNameIdTable[nameIdRecord.1.id] = newTableRecord
+            }
+            
+            for idAddressRecord in simNode.node.knownAddresses
+            {
+                if var existingRecord = dataForNameIdTable[idAddressRecord.0]
+                {
+                    existingRecord.address = idAddressRecord.1.address
+                    dataForNameIdTable[idAddressRecord.0] = existingRecord
+                }
+                else
+                {
+                    let newTableRecord=NameIdTableRecord(name: "", address: idAddressRecord.1.address)
+                    dataForNameIdTable[idAddressRecord.0] = newTableRecord
+                }
+                
+            }
+            
+            arrayToDisplay = [String, String, String]()
+            
+            for data in dataForNameIdTable
+            {
+                let name = data.1.name
+                let id = data.0.txt
+                let address = data.1.address.txt
+                
+                arrayToDisplay.append(name, id, address)
+            }
+            
+            
+            
+        }
+
+    }
+
+    
+    
+    func refreshCurrentViewTab()
+    {
+        let nameOfTab = theTabView.selectedTabViewItem!.label
+        
+        switch nameOfTab
+        {
+        case "Ping" : refreshNodePingView()
+        case "Search": refreshNodeSearchView()
+        case "Chat" : refreshNodeChatView()
+        case "Memory" : refreshNodeMemoryView()
+        case "Router" : refreshNodeRouterView()
+        case "Stats" : refreshNodeStatsView()
+        case "Interfaces" : refreshNodeInterfacesView()
+            
+        default : log(7,"Nope")
+        }
+
+    }
     
     func showNode(nodeId:UNodeID)
     {
@@ -134,6 +352,7 @@ class NodeWindowController:NSWindowController
             
             infoText.stringValue = info
 
+            refreshCurrentViewTab()
             
             
         }

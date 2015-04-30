@@ -133,6 +133,12 @@
                                     <action selector="resetSimulator:" target="Voe-Tx-rLC" id="v6f-Ib-FGD"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Reset network data" id="wsT-Ua-gKx">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="resetAllNodesData:" target="Voe-Tx-rLC" id="nd3-pG-Ema"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -197,7 +203,7 @@
         <window title="U Network Simulator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="335" y="390" width="750" height="550"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="750" height="550"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -271,7 +277,7 @@
                                 <items>
                                     <menuItem title="Add" id="3uH-Sh-Sz7"/>
                                     <menuItem title="Delete" id="zky-yP-ex8"/>
-                                    <menuItem title="Select/Move" id="EAK-Q5-X8s" userLabel="Select/Move"/>
+                                    <menuItem title="Select/Move" state="on" id="EAK-Q5-X8s" userLabel="Select/Move"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>

@@ -507,10 +507,14 @@ class URouter_BruteForceRouting:URouterProtocol {
     }
     
     
-    
-    
+    func reset()
+    {
+        packetStack=[BruteForcePacketStackRecord]()
+    }
     
 }
+
+
 
 
 struct BruteForcePacketStackRecord {

@@ -198,5 +198,6 @@ class SettingsWindowController:NSWindowController
         self.packetLifeTimeField.integerValue = Int(standardPacketLifeTime)
         self.discoveryBroadcastDepthField.integerValue = maxDiscoveryBroadcastDeepth
         self.storeSearchDepthField.integerValue = Int(defaultStoreSearchDepth)
+        
     }
 }

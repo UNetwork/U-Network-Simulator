@@ -10,7 +10,7 @@ import Cocoa
 
 var processingMode = ProcessingType.Serial
 
-var useCache = false
+var useCache = true
 
  let queueSerial = dispatch_queue_create("Serial Queue", DISPATCH_QUEUE_SERIAL)
  let queueConcurrent = dispatch_queue_create("Concurrent Queue", DISPATCH_QUEUE_CONCURRENT)
@@ -24,7 +24,7 @@ var heartBeatPeersValue=0
 var heartBeatNameStoreValue=0
 var heartBeatAddressStoreValue=0
 
-var currentModeOfOperationForVisualisationVindow : Int = 0
+var currentModeOfOperationForVisualisationVindow : Int = 2
 
 // some orientation points for data search and distribition packets
 

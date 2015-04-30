@@ -38,18 +38,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // menu items
     
-    @IBAction func saveNetworkMap(sender: NSMenuItem) {
+    @IBAction func saveNetworkMap(sender: NSMenuItem)
+    {
         simulator.saveCurrentNodeMap()
     }
     
-    @IBAction func openNetworkMap(sender: NSMenuItem) {
+    @IBAction func openNetworkMap(sender: NSMenuItem)
+    {
         simulator.openNodeMap()
     }
     
-    @IBAction func resetSimulator(sender: AnyObject) {
+    @IBAction func resetSimulator(sender: AnyObject)
+    {
         simulator=UNetworkSimulator()
         visualisationWindow?.refreshEverything()
     }
+    
+    @IBAction func resetAllNodesData(sender: AnyObject)
+    {
+        
+        for aNode in simulator.simulationNodes.values
+        {
+            aNode.node.resetInternalData()
+        }
+        
+        
+    }
+    
+    
     
     
     @IBAction func refresh(sender: AnyObject) {
