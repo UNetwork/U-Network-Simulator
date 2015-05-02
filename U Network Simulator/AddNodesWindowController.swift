@@ -49,7 +49,7 @@ class AddNodesWindowController:NSWindowController
         
         
         createNodeMesh(meshXValue, columns: meshYValue, layers: meshZValue, distance: distance, position: networkMeshAddress, random: (randomize == 0 ? false : true))
-        
+        self.window!.close()
     }
     
     

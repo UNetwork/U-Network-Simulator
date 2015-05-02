@@ -12,6 +12,8 @@
 		FE22CDC81AA246F200082D01 /* UPacketStoreAddressForId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */; };
 		FE2D0EF11AE6159C00E892B6 /* VisualisationLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */; };
 		FE2D0EF21AE6159C00E892B6 /* VisualisationLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */; };
+		FE2ED2111AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */; };
+		FE2ED2121AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */; };
 		FE45B7E01A93492200B82E5E /* UNodeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4171A8A98F900A459E6 /* UNodeAddress.swift */; };
 		FE45B7E11A93492200B82E5E /* UNodeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E40E1A8A031200A459E6 /* UNodeID.swift */; };
 		FE45B7E21A93492200B82E5E /* Helper Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5E4111A8A15B000A459E6 /* Helper Functions.swift */; };
@@ -166,6 +168,7 @@
 		FE091B841AAD8B7B0003D046 /* UNodeCreationAndCommunicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeCreationAndCommunicationTests.swift; path = "U Network SimulatorTests/UNodeCreationAndCommunicationTests.swift"; sourceTree = "<group>"; };
 		FE22CDC61AA246F200082D01 /* UPacketStoreAddressForId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketStoreAddressForId.swift; path = "U Network Simulator/UPacketStoreAddressForId.swift"; sourceTree = "<group>"; };
 		FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualisationLayers.swift; sourceTree = "<group>"; };
+		FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouter_DictionaryBruteForce.swift; path = "U Network Simulator/URouter_DictionaryBruteForce.swift"; sourceTree = "<group>"; };
 		FE45B7E61A939A5600B82E5E /* U Coordinate System Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "U Coordinate System Structures.swift"; path = "U Network Simulator/U Coordinate System Structures.swift"; sourceTree = SOURCE_ROOT; };
 		FE4D6A841AA58922008B3B4E /* 1stRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1stRead.swift; sourceTree = "<group>"; };
 		FE4D6A851AA59083008B3B4E /* UAppChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UAppChat.swift; path = "U Network Simulator/UAppChat.swift"; sourceTree = "<group>"; };
@@ -448,6 +451,7 @@
 			children = (
 				FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */,
 				FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */,
+				FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */,
 				FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */,
 			);
 			name = "U Routing";
@@ -616,6 +620,7 @@
 				FEED382B1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */,
 				FEED38391AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
 				FEED38251AA2497800BB3C26 /* UPacketReplyForIdSearch.swift in Sources */,
+				FE2ED2111AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift in Sources */,
 				FE4D6A861AA59083008B3B4E /* UAppChat.swift in Sources */,
 				FEA94DD91AB452C70048DFD3 /* UPacketDropped.swift in Sources */,
 				FEED381B1AA2497800BB3C26 /* UPacketStoreIdForName.swift in Sources */,
@@ -688,6 +693,7 @@
 				FE60F0341ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */,
 				FEA80C381A96673D0061CEA3 /* UNodeIDTests.swift in Sources */,
 				FEACA9B31AA06E24001524FB /* Simulator.swift in Sources */,
+				FE2ED2121AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift in Sources */,
 				FEA0072A1A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
 				FEED382A1AA2497800BB3C26 /* UPacketPong.swift in Sources */,
 				FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */,

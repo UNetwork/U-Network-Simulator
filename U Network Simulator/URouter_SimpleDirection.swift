@@ -8,7 +8,7 @@
 import Foundation
 
 
-class URouterSimpleDirection: URouter_BruteForceRouting
+class URouterSimpleDirection: URouter_DictionaryBruteForceRouting
 {
     
     override func selectPeerFromIndexListAfterExclusions(inputAddress:UNodeAddress, peerIndexes:[Int]) -> Int?

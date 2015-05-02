@@ -1,16 +1,16 @@
 //
-//  URouter_BruteForce.swift
+//  URouter_DictionaryBruteForce.swift
 //  U Network Simulator
 //
-//  Created by Andrzej Parszuto on 2/21/15.
+//  Created by Andrzej Parszuto on 4/30/15.
 //
 
 import Foundation
 
-class URouter_BruteForceRouting:URouterProtocol {
+class URouter_DictionaryBruteForceRouting:URouterProtocol {
     
     var node:UNode
-    var packetStack=[BruteForcePacketStackRecord]()
+    var packetDict=[UInt64:DictionaryBruteForcePacketStackRecord]()
     
     
     
@@ -22,16 +22,24 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     func maintenanceLoop()
     {
-       for (index, aRecord) in enumerate(packetStack)
-       {
-        if aRecord.status == BrutForcePacketStatus.Sent
+        for (serial, aRecord) in packetDict
         {
-            packetStack[index].waitingTimeOnPacketStack++
-            if aRecord.waitingTimeOnPacketStack  > delayInPacketResend
+            if aRecord.status == DictionaryBrutForcePacketStatus.Sent
             {
-                getPacketToRouteFromStack(index)
+               
+                
+                var updatedRecord = aRecord
+                updatedRecord.waitingTimeOnPacketStack++
+                
+                packetDict[serial]=updatedRecord
+                
+                
+                
+                if aRecord.waitingTimeOnPacketStack  > delayInPacketResend
+                {
+                    getPacketToRouteFromStack(serial)
+                }
             }
-        }
         }
         
         
@@ -52,22 +60,25 @@ class URouter_BruteForceRouting:URouterProtocol {
         }
         
         
-        if let packetIndex=searchForSerialOnStack(returningPacketSerial)
+        if let packetRecord=packetDict[returningPacketSerial]
         {
             if(packet.header.lifeCounterAndFlags.replyConfirmationType)
             {
                 // this is rejected packet by peer
                 // resend to another peer
-                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
-                let packetFromStack = packetStack[packetIndex].packet
                 
-               // self.getPacketToRouteFromNode(packetFromStack.envelope, cargo: packetFromStack.packetCargo)
-                self.getPacketToRouteFromStack(packetIndex)
+                node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
+                let packetFromStack = packetDict[returningPacketSerial]!.packet
+                
+                self.getPacketToRouteFromStack(returningPacketSerial)
             }
             else
             {
                 //confirmation ok
-                packetStack[packetIndex].status=BrutForcePacketStatus.Delivered
+                
+                var updatedPacketRecord = packetRecord
+                updatedPacketRecord.status = DictionaryBrutForcePacketStatus.Delivered
+                packetDict[returningPacketSerial] = updatedPacketRecord
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketConfirmedOK)
             }
         }
@@ -88,15 +99,22 @@ class URouter_BruteForceRouting:URouterProtocol {
         
     }
     
-    func getPacketToRouteFromStack(packetIndex:Int)
+    func getPacketToRouteFromStack(serial:UInt64)
     {
-        let stackRecord = packetStack[packetIndex]
+       if let stackRecord = packetDict[serial]
+       {
         
         if let peerToSendIndex = selectPeerFromIndexListAfterExclusions(stackRecord.packet.envelope.destinationAddress, peerIndexes:selectPeersExcluding(stackRecord.sentToNodes ))
         {
             log(2,"R: \(node.txt) Selected getPacketToRouteFromStack  \(node.peers[peerToSendIndex].id.txt)")
             
-            packetStack[packetIndex].sentToNodes.append(node.peers[peerToSendIndex].id)
+            var updatedStackRecord = stackRecord
+            updatedStackRecord.sentToNodes.append(node.peers[peerToSendIndex].id)
+            
+            
+            
+            
+            packetDict[serial] = updatedStackRecord
             forwardPacketToPeer(nil, packet: stackRecord.packet, peerIndex: peerToSendIndex)
         }
         else
@@ -118,7 +136,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                     packetToResend.header.lifeCounterAndFlags.setGiveUpFlag(true)
                     
                     node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
-
+                    
                     forwardPacketToPeer(nil, packet: packetToResend, peerIndex: returningToIndex)
                 }
                 else
@@ -131,6 +149,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             }
             
         }
+        }
     }
     
     
@@ -140,7 +159,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         
         let packetLiftime = (envelope.destinationUID.isBroadcast() ? defaultStoreSearchDepth : standardPacketLifeTime)
         
-
+        
         if let peerToSendIndex = selectPeerFromIndexListAfterExclusions(envelope.destinationAddress, peerIndexes: allPeerIndexes())
         {
             var header=UPacketHeader(from: node.id, to: node.peers[peerToSendIndex].id, lifeTime: packetLiftime)
@@ -153,8 +172,12 @@ class URouter_BruteForceRouting:URouterProtocol {
             sentArray.append(node.peers[peerToSendIndex].id)
             
             
-            let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: node.id, sentToNodes: sentArray, status:BrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
-            self.packetStack.append(newStackItem)
+            let newStackItem=DictionaryBruteForcePacketStackRecord(packet: packet, recievedFrom: node.id, sentToNodes: sentArray, status:DictionaryBrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
+           
+            
+            self.packetDict[packet.envelope.serial] = newStackItem
+            
+            
             
             
             forwardPacketToPeer(nil, packet: packet, peerIndex: peerToSendIndex)
@@ -164,7 +187,7 @@ class URouter_BruteForceRouting:URouterProtocol {
             // must be lonely node
             log(7,"R: \(node.txt) Lonely node tried to send a packet")
             node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
-
+            
         }
         
     }
@@ -173,7 +196,7 @@ class URouter_BruteForceRouting:URouterProtocol {
     func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         
-        if let packetIndex = searchForSerialOnStack(packet.envelope.serial)
+        if let packetRecord = packetDict[packet.envelope.serial]
         {
             // counter in this place
             if(packet.header.lifeCounterAndFlags.isGiveUp)
@@ -185,12 +208,16 @@ class URouter_BruteForceRouting:URouterProtocol {
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagRecieved)
                 
                 
-                var peersIndexes = selectPeersExcluding(packetStack[packetIndex].sentToNodes)
+                var peersIndexes = selectPeersExcluding(packetRecord.sentToNodes)
                 if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersIndexes)
                 {
                     log(2,"R: \(node.txt) Selected getPacketToRouteFromNode \(node.peers[peerToSendPacketIndex].id.txt)")
                     
-                    packetStack[packetIndex].sentToNodes.append(node.peers[peerToSendPacketIndex].id)
+                   var updatedPacketRecord = packetRecord
+                    updatedPacketRecord.sentToNodes.append(node.peers[peerToSendPacketIndex].id)
+                    
+                    packetDict[packet.envelope.serial]=updatedPacketRecord
+                    
                     // put GiveUp flag down
                     
                     var updatedPacket=packet
@@ -207,14 +234,14 @@ class URouter_BruteForceRouting:URouterProtocol {
                         
                         log(6,"\(node.txt) recieved back own packet and dont have any peer to forward it")
                         node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
-
+                        
                         
                     }
                     else
                     {
                         
                         node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagSent)
-                        var originIndex = searchForIdInNodePeers(packetStack[packetIndex].recievedFrom)
+                        var originIndex = searchForIdInNodePeers(packetRecord.recievedFrom)
                         var updatedPacket=packet
                         
                         updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
@@ -240,7 +267,13 @@ class URouter_BruteForceRouting:URouterProtocol {
                 
                 log(2,"R: \(node.txt) Rejected \(packet.txt) ")
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
-                packetStack[packetIndex].sentToNodes.append(packet.header.transmitedByUID)
+                
+                var updatedPacketRecord = packetRecord
+                updatedPacketRecord.sentToNodes.append(packet.header.transmitedByUID)
+                packetDict[packet.envelope.serial]=updatedPacketRecord
+                
+                
+                
                 sendPacketDeliveryConfirmation(interface, packet: packet, rejected:true)
                 
             }
@@ -257,9 +290,9 @@ class URouter_BruteForceRouting:URouterProtocol {
             let peersOtherThanSender=selectPeersExcluding(oneElementArray)
             
             if let peerToSendPacketIndex = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIndexes: peersOtherThanSender)
-
                 
-          //  ^^^ this suck
+                
+                //  ^^^ this suck
                 
             {
                 
@@ -271,9 +304,10 @@ class URouter_BruteForceRouting:URouterProtocol {
                 
                 transmitedToPeers.append(packet.header.transmitedByUID)
                 transmitedToPeers.append(node.peers[peerToSendPacketIndex].id)
-                let newStackItem=BruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:BrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
-                self.packetStack.append(newStackItem)
-                forwardPacketToPeer(interface, packet:packet, peerIndex:peerToSendPacketIndex)
+                let newStackItem = DictionaryBruteForcePacketStackRecord(packet: packet, recievedFrom: packet.header.transmitedByUID, sentToNodes: transmitedToPeers, status:DictionaryBrutForcePacketStatus.Sent, waitingTimeOnPacketStack:0)
+                
+                packetDict[packet.envelope.serial]=newStackItem
+                  forwardPacketToPeer(interface, packet:packet, peerIndex:peerToSendPacketIndex)
             }
             else
             {
@@ -284,7 +318,7 @@ class URouter_BruteForceRouting:URouterProtocol {
                 sendPacketDeliveryConfirmation(interface, packet: packet, rejected: true)
                 
                 
-   
+                
                 
                 
                 
@@ -298,21 +332,7 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     
     // processing functions
-    
-    func searchForSerialOnStack(serial:UInt64) -> Int?
-    {
-        var result:Int?
-        
-        for (i, stackRecord) in enumerate(self.packetStack)
-        {
-            if(stackRecord.packet.envelope.serial == serial)
-            {
-                result = i
-                break
-            }
-        }
-        return result
-    }
+
     
     
     
@@ -340,7 +360,7 @@ class URouter_BruteForceRouting:URouterProtocol {
         return result
     }
     
-
+    
     
     func selectPeerFromIndexListAfterExclusions(toAddress:UNodeAddress, peerIndexes:[Int]) -> Int?
     {
@@ -351,9 +371,9 @@ class URouter_BruteForceRouting:URouterProtocol {
         {
             // this is search store packet
             address=findAddressForSearchOrStorePacket(address)
-
+            
         }
-       
+        
         
         
         
@@ -408,36 +428,36 @@ class URouter_BruteForceRouting:URouterProtocol {
         /*
         if(address.latitude == maxLatitude)
         {
-            corrLat = corrLat + (5 * wirelessInterfaceRange)
+        corrLat = corrLat + (5 * wirelessInterfaceRange)
         }
         else
         {
-            corrLat = corrLat - (5 * wirelessInterfaceRange)
+        corrLat = corrLat - (5 * wirelessInterfaceRange)
         }
         
         if( address.longitude == maxLongitude)
         {
-            corrLong = corrLong + (5 * wirelessInterfaceRange)
-            corrLat = corrLat + (2 * wirelessInterfaceRange)
+        corrLong = corrLong + (5 * wirelessInterfaceRange)
+        corrLat = corrLat + (2 * wirelessInterfaceRange)
         }
         else
         {
-            corrLong = corrLong - (5 * wirelessInterfaceRange)
-            corrLat = corrLat - (2 * wirelessInterfaceRange)
-
+        corrLong = corrLong - (5 * wirelessInterfaceRange)
+        corrLat = corrLat - (2 * wirelessInterfaceRange)
+        
         }
         
         if ( address.altitude == maxAltitude)
         {
-            corrAlt = corrAlt + (5 * wirelessInterfaceRange)
-            
+        corrAlt = corrAlt + (5 * wirelessInterfaceRange)
+        
         }
         else
         {
-            corrAlt = corrAlt - (5 * wirelessInterfaceRange)
+        corrAlt = corrAlt - (5 * wirelessInterfaceRange)
         }
-
-*/
+        
+        */
         
         let result=UNodeAddress(inputLatitude: corrLat, inputLongitude: corrLong, inputAltitude: corrAlt)
         return result
@@ -464,7 +484,7 @@ class URouter_BruteForceRouting:URouterProtocol {
     {
         var result = [Int]()
         for (index, _) in enumerate(node.peers){
-         result.append(index)
+            result.append(index)
         }
         return result
     }
@@ -511,7 +531,7 @@ class URouter_BruteForceRouting:URouterProtocol {
     
     func reset()
     {
-        packetStack=[BruteForcePacketStackRecord]()
+        packetDict=[UInt64:DictionaryBruteForcePacketStackRecord]()
     }
     
 }
@@ -519,21 +539,19 @@ class URouter_BruteForceRouting:URouterProtocol {
 
 
 
-struct BruteForcePacketStackRecord {
+struct DictionaryBruteForcePacketStackRecord {
     
     var packet:UPacket
     var recievedFrom:UNodeID
     var sentToNodes:[UNodeID]
-    var status:BrutForcePacketStatus
+    var status:DictionaryBrutForcePacketStatus
     var waitingTimeOnPacketStack: Int
 }
 
 
-enum BrutForcePacketStatus:Int {
+enum DictionaryBrutForcePacketStatus:Int {
     case WaitingForRoute
     case Sent
     case Delivered
     
 }
-
-

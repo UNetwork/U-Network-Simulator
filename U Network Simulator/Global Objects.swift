@@ -19,7 +19,7 @@ enum ProcessingType{
     case Stright, Serial, Paralel
 }
 
-var visiblePackets=Array(count: 17, repeatedValue: true)
+var visiblePackets=[true,true,false,true,true,true,true,true,true,true,true,true,true,true,true,true,false]
 var heartBeatPeersValue=0
 var heartBeatNameStoreValue=0
 var heartBeatAddressStoreValue=0

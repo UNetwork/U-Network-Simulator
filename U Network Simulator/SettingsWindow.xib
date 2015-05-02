@@ -194,7 +194,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="laH-h0-F3N">
                         <rect key="frame" x="62" y="329" width="164" height="18"/>
-                        <buttonCell key="cell" type="check" title="ReceptionConfirmation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q5u-0k-p4B">
+                        <buttonCell key="cell" type="check" title="ReceptionConfirmation" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Q5u-0k-p4B">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -314,7 +314,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jvO-f0-z6D">
                         <rect key="frame" x="62" y="49" width="76" height="18"/>
-                        <buttonCell key="cell" type="check" title="Dropped" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vrp-vx-V4x">
+                        <buttonCell key="cell" type="check" title="Dropped" bezelStyle="regularSquare" imagePosition="left" inset="2" id="vrp-vx-V4x">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -339,7 +339,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="switchReplyForIdSearch:" target="-2" id="fWi-kT-4ew"/>
+                            <action selector="switchReplyForIdSearch:" target="-2" id="FwJ-fK-UOe"/>
                         </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKA-md-qM6" customClass="ColorBox" customModule="U_Network_Simulator" customModuleProvider="target">

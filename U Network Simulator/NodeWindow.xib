@@ -113,6 +113,13 @@ Data queue: 7
                                                 <action selector="pingAllSelectedNodes:" target="-2" id="0Q9-mF-Rlw"/>
                                             </connections>
                                         </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFo-HA-l7b">
+                                            <rect key="frame" x="4" y="84" width="447" height="282"/>
+                                            <buttonCell key="cell" type="smallSquare" title="Not avaliable" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SYy-Xg-chB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
                                     </subviews>
                                 </view>
                             </tabViewItem>
@@ -121,16 +128,6 @@ Data queue: 7
                                     <rect key="frame" x="10" y="33" width="454" height="375"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNk-KB-k8v">
-                                            <rect key="frame" x="227" y="37" width="162" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Broadcast Name" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y1T-Pj-PoY">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="broadcastName:" target="-2" id="EPU-4c-V6C"/>
-                                            </connections>
-                                        </button>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CdI-a0-ILg">
                                             <rect key="frame" x="26" y="339" width="96" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="name" drawsBackground="YES" id="4dG-M9-mUf">
@@ -166,13 +163,30 @@ Data queue: 7
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPR-nW-6Q4">
-                                            <rect key="frame" x="11" y="37" width="162" height="32"/>
+                                            <rect key="frame" x="11" y="15" width="162" height="32"/>
                                             <buttonCell key="cell" type="push" title="Broadcast Address" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="s3f-p3-Hy3">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="broadcastAddress:" target="-2" id="Ibh-sC-Qjc"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOi-uW-pCF">
+                                            <rect key="frame" x="4" y="69" width="447" height="297"/>
+                                            <buttonCell key="cell" type="smallSquare" title="Not avaliable" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wjx-24-jub">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNk-KB-k8v">
+                                            <rect key="frame" x="227" y="10" width="162" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Broadcast Name" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y1T-Pj-PoY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="broadcastName:" target="-2" id="EPU-4c-V6C"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -271,6 +285,13 @@ Data queue: 7
                                             <connections>
                                                 <action selector="sendMessage:" target="-2" id="r6G-Qd-KGc"/>
                                             </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3y-bB-UGO">
+                                            <rect key="frame" x="4" y="91" width="447" height="282"/>
+                                            <buttonCell key="cell" type="smallSquare" title="Not avaliable" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JzI-HA-6A2">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
                                         </button>
                                     </subviews>
                                 </view>

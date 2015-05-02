@@ -202,15 +202,15 @@
         </menu>
         <window title="U Network Simulator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="335" y="390" width="750" height="550"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="contentRect" x="335" y="390" width="750" height="442"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="750" height="550"/>
+                <rect key="frame" x="0.0" y="5" width="750" height="442"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzL-xn-35u">
-                        <rect key="frame" x="5" y="502" width="108" height="32"/>
-                        <buttonCell key="cell" type="push" title="VizWindow" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8P1-3N-SAj">
+                        <rect key="frame" x="14" y="85" width="130" height="32"/>
+                        <buttonCell key="cell" type="push" title="Show Network" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8P1-3N-SAj">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -218,19 +218,9 @@
                             <action selector="visualisationWindow:" target="Voe-Tx-rLC" id="0xX-8j-xNa"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZS-qc-vd5">
-                        <rect key="frame" x="5" y="474" width="70" height="32"/>
-                        <buttonCell key="cell" type="push" title="clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="z7Q-qF-Wzu">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="clearConnections:" target="Voe-Tx-rLC" id="JD6-KK-iLM"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jaQ-a5-0fa">
-                        <rect key="frame" x="376" y="463" width="123" height="32"/>
-                        <buttonCell key="cell" type="push" title="Random ping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2tk-i4-Ohn">
+                        <rect key="frame" x="276" y="219" width="168" height="32"/>
+                        <buttonCell key="cell" type="push" title="Random Nodes Ping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2tk-i4-Ohn">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -239,8 +229,8 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aA3-L8-imo">
-                        <rect key="frame" x="376" y="379" width="100" height="32"/>
-                        <buttonCell key="cell" type="push" title="refresh all" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mk0-gV-C8F">
+                        <rect key="frame" x="14" y="302" width="143" height="32"/>
+                        <buttonCell key="cell" type="push" title="Refresh Network" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mk0-gV-C8F">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -249,8 +239,8 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-OR-f44">
-                        <rect key="frame" x="405" y="273" width="165" height="32"/>
-                        <buttonCell key="cell" type="push" title="Random name store" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xP9-NC-0YX">
+                        <rect key="frame" x="276" y="153" width="169" height="32"/>
+                        <buttonCell key="cell" type="push" title="Random Name Store" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xP9-NC-0YX">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -259,8 +249,8 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3f-eI-zLz">
-                        <rect key="frame" x="412" y="217" width="180" height="32"/>
-                        <buttonCell key="cell" type="push" title="Random address store" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3FF-9J-UID">
+                        <rect key="frame" x="276" y="186" width="184" height="32"/>
+                        <buttonCell key="cell" type="push" title="Random Address Store" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3FF-9J-UID">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -269,8 +259,8 @@
                         </connections>
                     </button>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-VT-HoV">
-                        <rect key="frame" x="95" y="337" width="156" height="26"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Lkm-0X-fHC">
+                        <rect key="frame" x="554" y="177" width="156" height="26"/>
+                        <popUpButtonCell key="cell" type="push" title="Select/Move" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="EAK-Q5-X8s" id="Lkm-0X-fHC">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="dWO-pd-zd0">
@@ -285,6 +275,72 @@
                             <action selector="setModeOfOperationForVisualisation:" target="Voe-Tx-rLC" id="XW7-D9-EaL"/>
                         </connections>
                     </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3n3-lJ-mJU">
+                        <rect key="frame" x="602" y="377" width="4" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="IRo-J0-l3f">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-Jh-RKe">
+                        <rect key="frame" x="18" y="322" width="191" height="100"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="First add some nodes above. The default items in add mesh selection will be fine for the beggining." id="9Lg-j5-EED">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <color key="textColor" red="0.28658970281386231" green="0.56713620580808088" blue="0.053137328589514879" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0AL-KS-JfX">
+                        <rect key="frame" x="18" y="20" width="178" height="64"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="After adding nodes and refreshing the network you can see it. wow!" id="idl-TK-iRG">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <color key="textColor" red="0.28658970281386231" green="0.56713620580808088" blue="0.053137328589514879" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zLS-MN-cyF">
+                        <rect key="frame" x="554" y="65" width="178" height="100"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="You can also edit network with the tool selected above. But maybe not at first start " id="Bjm-GE-q41">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <color key="textColor" red="0.28658970281386231" green="0.56713620580808088" blue="0.053137328589514879" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UZC-Le-1PR">
+                        <rect key="frame" x="18" y="126" width="191" height="171"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="Ks5-tc-tZd">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <string key="title">Refresh Network button rebuilds network by sending broadcasting packets. Hit it! Hit it every time network changes (new or deleted nodes) for optimal performance. It take a lot of time for large networks by now. Count 20 before proceed for default mesh settings</string>
+                            <color key="textColor" red="0.28658970281386231" green="0.56713620580808088" blue="0.053137328589514879" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PX3-KZ-ONO">
+                        <rect key="frame" x="280" y="255" width="178" height="42"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Now you can see U network in work:" id="7fQ-Ci-SAW">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <color key="textColor" red="0.28658970281386231" green="0.56713620580808088" blue="0.053137328589514879" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guk-uW-GXr">
+                        <rect key="frame" x="554" y="251" width="178" height="171"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="Pk6-C7-4UL">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <string key="title">In settings you can turn on network heartbeat and see how currently implemented features work. Try 300 / 3000 / 3000 for default network. The less number the more propable that your mac will sink with overflowing packets</string>
+                            <color key="textColor" red="0.28658970280000001" green="0.56713620580000002" blue="0.053137328589999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2CU-yU-M8R">
+                        <rect key="frame" x="263" y="387" width="178" height="42"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Command selected node with Node Inspector" id="k6w-p0-ER8">
+                            <font key="font" size="13" name="HelveticaNeue"/>
+                            <color key="textColor" red="0.28658970280000001" green="0.56713620580000002" blue="0.053137328589999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <toolbar key="toolbar" implicitIdentifier="EF987825-0876-4D8B-8A48-D501B67F3157" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Lxf-On-LAD">
@@ -299,7 +355,7 @@
                             <action selector="showNodeInspectorWindow:" target="Voe-Tx-rLC" id="Owi-L1-7BP"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="141555E1-99A2-4ACB-8490-6DA22484714A" label="Show Stats" paletteLabel="Show Stats" tag="-1" image="NSPathTemplate" id="lga-ig-Dmy">
+                    <toolbarItem implicitItemIdentifier="141555E1-99A2-4ACB-8490-6DA22484714A" label="Network Stats" paletteLabel="Show Stats" tag="-1" image="NSPathTemplate" id="lga-ig-Dmy">
                         <connections>
                             <action selector="showStats:" target="Voe-Tx-rLC" id="5Qa-vZ-FYj"/>
                         </connections>
@@ -323,18 +379,16 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="9SI-FZ-GMZ"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="SXy-TF-SRp"/>
+                    <toolbarItem reference="iOb-Th-fhA"/>
+                    <toolbarItem reference="9SI-FZ-GMZ"/>
                     <toolbarItem reference="IUe-Bg-AJt"/>
                     <toolbarItem reference="lga-ig-Dmy"/>
                     <toolbarItem reference="9SI-FZ-GMZ"/>
-                    <toolbarItem reference="39i-rc-sx4"/>
-                    <toolbarItem reference="9SI-FZ-GMZ"/>
                     <toolbarItem reference="jh9-8c-t9J"/>
-                    <toolbarItem reference="9SI-FZ-GMZ"/>
-                    <toolbarItem reference="iOb-Th-fhA"/>
+                    <toolbarItem reference="SXy-TF-SRp"/>
                 </defaultToolbarItems>
             </toolbar>
-            <point key="canvasLocation" x="416" y="796"/>
+            <point key="canvasLocation" x="416" y="742"/>
         </window>
     </objects>
     <resources>

@@ -234,14 +234,14 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
             let fadeAnimation = CABasicAnimation(keyPath: "opacity")
             
             fadeAnimation.fromValue = NSNumber(float: 1.0)
-            fadeAnimation.toValue = NSNumber(float: 0.25)
+            fadeAnimation.toValue = NSNumber(float: 0)
             fadeAnimation.duration = 3.0
             let connectionViewHash = fromId.hashForView(toId)
             
             if let aConnectionView = connectionViews[connectionViewHash]
             {
                 aConnectionView.color = packetColor
-                aConnectionView.opacity = 0.25
+                aConnectionView.opacity = 0
                 aConnectionView.strokeColor = packetColors[packetColor]
                 aConnectionView.addAnimation(fadeAnimation, forKey: "")
             }
@@ -249,7 +249,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
             {
                 var newConnectionView = createConnectionLayer(nodes: fromId, toId, packet)
                 connectionViews[connectionViewHash] = newConnectionView
-                newConnectionView.opacity = 0.25
+                newConnectionView.opacity = 0
                 newConnectionView.addAnimation(fadeAnimation, forKey: "")
                 rootLayer!.addSublayer(newConnectionView)
             }
