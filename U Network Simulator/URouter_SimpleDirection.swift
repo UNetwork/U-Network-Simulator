@@ -11,11 +11,12 @@ import Foundation
 class URouterSimpleDirection: URouter_DictionaryBruteForceRouting
 {
     
-    override func selectPeerFromIndexListAfterExclusions(inputAddress:UNodeAddress, peerIndexes:[Int]) -> Int?
+    override func selectPeerFromIndexListAfterExclusions(toAddress:UNodeAddress, peerIDs:[UNodeID]) -> UNodeID?
+
     {
-        var result:Int?
+        var result:UNodeID?
         
-        var address = inputAddress
+        var address = toAddress
         
         
         if ((address.latitude == UInt64(0) || address.latitude == maxLatitude) && (address.longitude == UInt64(0) || (address.longitude == maxLongitude) && (address.altitude == UInt64(0)) || address.altitude == maxAltitude))
@@ -27,18 +28,22 @@ class URouterSimpleDirection: URouter_DictionaryBruteForceRouting
         }
        
             var smallestDifferenceToAddress:UInt64 = 1 << 63
-            for(_, index) in enumerate(peerIndexes)
+        
+        if peerIDs.count > 0
+        {
+            for anID in peerIDs
             {
-                let dlat=unsignedDifference(address.latitude, node.peers[index].address.latitude)
-                let dlong=unsignedDifference(address.longitude, node.peers[index].address.longitude)
-                let dalt=unsignedDifference(address.altitude, node.peers[index].address.altitude)
+                let dlat=unsignedDifference(address.latitude, node.peers[anID]!.address.latitude)
+                let dlong=unsignedDifference(address.longitude, node.peers[anID]!.address.longitude)
+                let dalt=unsignedDifference(address.altitude, node.peers[anID]!.address.altitude)
                 
                 if ( dlat + dlong + dalt < smallestDifferenceToAddress)
                 {
                     smallestDifferenceToAddress=dlat+dlong+dalt
-                    result=index
+                    result=anID
                 }
             }
+        }
         
         return result
     }

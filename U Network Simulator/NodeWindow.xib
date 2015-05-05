@@ -328,7 +328,7 @@ Data queue: 7
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView identifier="Name" id="lyW-f8-ZSR">
-                                                                        <rect key="frame" x="1" y="1" width="70.5" height="17"/>
+                                                                        <rect key="frame" x="1" y="1" width="71" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField identifier="Name" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bPW-kb-ra2">
@@ -360,7 +360,7 @@ Data queue: 7
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView identifier="Id" id="Qa7-E7-kLK">
-                                                                        <rect key="frame" x="74.5" y="1" width="75.5" height="17"/>
+                                                                        <rect key="frame" x="75" y="1" width="76" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField identifier="Id" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-dR-2VL">

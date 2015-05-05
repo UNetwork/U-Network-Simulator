@@ -24,7 +24,7 @@ class UNode {
     var interfaces=[UNetworkInterfaceProtocol]()            // Network interfaces
     var router:URouterProtocol!                             // Handler for packet router
 
-    var peers = [UPeerDataRecord]()                         // Currently available connected nodes
+    var peers = [UNodeID:UPeerDataRecord]()                         // Currently available connected nodes
     var knownAddresses = [UNodeID:UMemoryIdAddressRecord]() // Memory of search for address service
     var knownIDs  = [String:UMemoryNameIdRecord]()          // Memory of search for name service
     
@@ -252,15 +252,19 @@ class UNode {
     {
         // check if replyer is already on peers list, add if not
         
-        if let peerIndex = findInPeers(packet.header.transmitedByUID)
+        
+        
+        
+        
+        if let peerRecord = peers[packet.header.transmitedByUID]
         {
-            // update data
+            peers[packet.header.transmitedByUID]?.active = true
         }
         else
         {
             let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
-            self.peers.append(newPeerRecord)
-            log(3,"Peer added")
+            self.peers[packet.header.transmitedByUID] = newPeerRecord
+            log(3,"\(self.userName) added a peer")
             
         }
         
@@ -467,6 +471,18 @@ class UNode {
  // Other API
     func refreshPeers()
     {
+        
+        for peer in peers
+        {
+          
+                peers[peer.0]?.active = false
+            
+            
+        }
+        
+        
+        
+        
          // assemble packet and
         let discoveryBroadcastPacketHeader = UPacketHeader(from: self.id, to: broadcastNodeId, lifeTime: standardPacketLifeTime)
         let discoveryBroadcastPacketEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: broadcastNodeId, toAddress: unknownNodeAddress)
@@ -488,7 +504,7 @@ class UNode {
     func resetInternalData()
     {
         timeCounter=0
-        peers = [UPeerDataRecord]()
+        peers = [UNodeID:UPeerDataRecord]()
         knownAddresses = [UNodeID:UMemoryIdAddressRecord]()
         knownIDs  = [String:UMemoryNameIdRecord]()
         router.reset()
@@ -497,19 +513,6 @@ class UNode {
     
     // Processing functions
     
-    func findInPeers(nodeId:UNodeID) -> Int?
-    {
-        var result:Int?
-        for(i, peerRecord) in enumerate(self.peers)
-        {
-            if(peerRecord.id.isEqual(nodeId))
-            {
-            result = i
-            }
-        }
-        return result
-    }
-       
     // Other Utility
     
     func findAddressFromConnectedPeers()
@@ -520,7 +523,7 @@ class UNode {
         var altitudeSum:UInt64 = 0
         
         
-        for (_, peer) in enumerate(self.peers)
+        for (_, peer) in enumerate(self.peers.values)
         {
             latitudeSum+=peer.address.latitude
             longitudeSum+=peer.address.longitude

@@ -16,12 +16,14 @@ struct UPeerDataRecord
     var id:UNodeID
     var address:UNodeAddress
     var interface:UNetworkInterfaceProtocol
+    var active:Bool
     
     init(nodeId:UNodeID, address:UNodeAddress, interface:UNetworkInterfaceProtocol)
     {
-        self.id=nodeId
-        self.address=address
-        self.interface=interface
+        self.id = nodeId
+        self.address = address
+        self.interface = interface
+        self.active = true
     }
 }
 

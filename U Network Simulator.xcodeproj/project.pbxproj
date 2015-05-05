@@ -108,8 +108,6 @@
 		FEE899701A98C4BE0057ACD7 /* Traffic Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */; };
 		FEE899721A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */; };
 		FEE899731A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */; };
-		FEE899761A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */; };
-		FEE899771A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */; };
 		FEE8997A1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */; };
 		FEE8997B1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */; };
 		FEE8997D1A98DD3F0057ACD7 /* URouting Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */; };
@@ -630,7 +628,6 @@
 				FEED38271AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
 				FE7F52491ADFEF42001D3FA1 /* UIMisc.swift in Sources */,
 				FE45B7E71A939A5600B82E5E /* U Coordinate System Structures.swift in Sources */,
-				FEE899761A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */,
 				FEED382D1AA2497800BB3C26 /* UPacketPing.swift in Sources */,
 				FE4D6A8A1AA591D6008B3B4E /* UNAppNodeStats.swift in Sources */,
 				FEB5E40F1A8A031200A459E6 /* UNodeID.swift in Sources */,
@@ -668,7 +665,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEE899771A98D1B80057ACD7 /* URouter_BruteForce.swift in Sources */,
 				FEA94DD11AB1EC230048DFD3 /* UPacketStoreNameReplay.swift in Sources */,
 				FEE8997B1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
 				FEFA10001AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */,

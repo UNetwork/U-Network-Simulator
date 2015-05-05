@@ -150,7 +150,16 @@ class SettingsWindowController:NSWindowController
     
     @IBAction func useCacheSwitch(sender: AnyObject)
     {
-        if useCache {useCache=false}else{useCache=true}
+        if useCache
+        {
+            useCache=false
+        }
+        else
+        {
+            simulator.wirelessMedium.interfacesInRangeCache = [UNodeID: [UNetworkInterfaceSimulationWireless]]() //reset cache
+            useCache=true
+
+        }
     }
     
     
