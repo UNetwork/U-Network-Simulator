@@ -52,7 +52,7 @@ class UNAppDataTransfer
             {
                 // no address
                 nodeAppsPacketStack[packetSerial] = stackRecord
-                node.searchApp.findAddressForId(destinationIDRecord.id, serial: packetSerial)
+              //  node.searchApp.findAddressForId(destinationIDRecord.id, serial: packetSerial)
                 
             }
             
@@ -61,7 +61,7 @@ class UNAppDataTransfer
         {
             // no ID
             nodeAppsPacketStack[packetSerial] = stackRecord
-            node.searchApp.findIdForName(name, serial: packetSerial)
+          //  node.searchApp.findIdForName(name, serial: packetSerial)
             
         }
         
@@ -82,7 +82,7 @@ class UNAppDataTransfer
             stackRecord.destinationID = searchResult.foundId
             stackRecord.status = UDataTransferStatus.waitingForAddress
             nodeAppsPacketStack[searchResult.searchRequestSerial] = stackRecord
-            node.searchApp.findAddressForId(searchResult.foundId, serial:searchResult.searchRequestSerial)
+        //    node.searchApp.findAddressForId(searchResult.foundId, serial:searchResult.searchRequestSerial)
             
         }
         else

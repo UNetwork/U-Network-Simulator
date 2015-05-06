@@ -169,7 +169,7 @@ class UNode {
                 
                 case .ReplyForIdSearch(let searchForIdResultCargo): processIdSearchResults(packet.envelope,  searchResult: searchForIdResultCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .ReplyForAddressSearch(let _) : processAddressSearchResults(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
+                case .ReplyForAddressSearch(let searchForAddressResultCargo) : processAddressSearchResults(packet.envelope, searchResult: searchForAddressResultCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
                 case .Ping(let pingCargo): processPing(packet.envelope, ping: pingCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
 
@@ -422,9 +422,10 @@ class UNode {
         
     }
     
-    func processAddressSearchResults(packet:UPacket)
+    func processAddressSearchResults(envelope:UPacketEnvelope, searchResult:UPacketReplyForAddressSearch)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultRecieved)
+        self.searchApp.addressFound(searchResult)
     }
     
     func processPing(envelope:UPacketEnvelope, ping:UPacketPing)

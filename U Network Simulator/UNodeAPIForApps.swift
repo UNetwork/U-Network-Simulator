@@ -34,11 +34,16 @@ class UNodeAPI
         
     }
     
-    
-    func getErrorFromNetwork(error:UNodeNetworkError)
+    func searchForID(aName:String, app:UAppProtocol)
     {
-        
+        node.searchApp.findIdForName(aName, app: app)
     }
+    
+    func searchForAddress(anID:UNodeID, app:UAppProtocol)
+    {
+        node.searchApp.findAddressForId(anID, app: app)
+    }
+    
 
 }
 

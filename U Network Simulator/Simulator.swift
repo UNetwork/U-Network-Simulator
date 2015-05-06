@@ -25,12 +25,12 @@ class UNetworkSimulator:NSObject
     // current space bondaries maxLat: 143864997596557 minLat:143864988096557 maxLong: 143864997596557 minLong: 143864988096557
     
     
-    var minLat=UInt64(143864988096557)
-    var maxLat=UInt64(143864997596557)
-    var minLong=UInt64(143864988096557)
-    var maxLong=UInt64(143864997596557)
-    var minAlt=UInt64(1000000)
-    var maxAlt=UInt64(1000000)
+    var minLat=UInt64.max
+    var maxLat=UInt64(0)
+    var minLong=UInt64.max
+    var maxLong=UInt64(0)
+    var minAlt=UInt64.max
+    var maxAlt=UInt64(0)
     
     // heartbeatloop
     

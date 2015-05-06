@@ -9,8 +9,8 @@ import Foundation
 
 class UNAppSearch
 {
-    var idSearches = [UInt64: String]()
-    var addressSearches = [UInt64: UNodeID]()
+    var idSearches = [UInt64: IdSearchDictRecord]()
+    var addressSearches = [UInt64: AddressSearchDictRecord]()
     
     
     let node:UNode
@@ -21,14 +21,18 @@ class UNAppSearch
         
     }
     
-    func findIdForName(name:String, serial:UInt64)
+    func findIdForName(name:String, app:UAppProtocol)
     {
         //  Destination of packet is specified in envelope, but not treated as id or address but route for packet.
         
-        var searchCargo=UPacketSearchIdForName(nameToSearch: name)
-        searchCargo.searchSerial = serial
-        idSearches[serial] = name
+        var searchCargo = UPacketSearchIdForName(nameToSearch: name)
+        searchCargo.searchSerial = random64()
         
+        let newIdSearchEntry = IdSearchDictRecord(name: name, appId: app)
+        
+        idSearches[searchCargo.searchSerial] = newIdSearchEntry
+        
+
         for (_, address) in enumerate(searchStoreAddresses)
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
@@ -39,11 +43,14 @@ class UNAppSearch
     func idFound(packetCargo:UPacketReplyForIdSearch)
     {
         
-        if let name = idSearches[packetCargo.searchRequestSerial]
+        if let record = idSearches[packetCargo.searchRequestSerial]
         {
-            node.knownIDs[name] = UMemoryNameIdRecord (anId: packetCargo.foundId, aTime: 0)
-            node.dataApp.recieveIdSearchResults(packetCargo)
+            node.knownIDs[record.name] = UMemoryNameIdRecord (anId: packetCargo.foundId, aTime: 0)
             node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForNameSucess)
+
+            record.appId.getIdSearchResults(record.name, id: packetCargo.foundId)
+            
+            
         }
         else
         {
@@ -51,11 +58,14 @@ class UNAppSearch
         }
     }
     
-    func findAddressForId(id:UNodeID, serial:UInt64)
+    func findAddressForId(id:UNodeID, app:UAppProtocol)
     {
         var cargo = UPacketSearchAddressForID(anId: id, aTime: UInt64(0))
-        cargo.searchSerial = serial
-        addressSearches[serial] = id
+        cargo.searchSerial = random64()
+        
+        let newSearchForAddressRecord = AddressSearchDictRecord(id: id, appId: app)
+        
+        addressSearches[cargo.searchSerial] = newSearchForAddressRecord
      
         for (_, address) in enumerate(searchStoreAddresses)
         {
@@ -66,11 +76,15 @@ class UNAppSearch
     
     func addressFound(packetCargo:UPacketReplyForAddressSearch)
     {
-        if let id = addressSearches[packetCargo.searchRequestSerial]
+        if let searchRecord = addressSearches[packetCargo.searchRequestSerial]
         {
-            node.knownAddresses[id] = UMemoryIdAddressRecord(anAddress: packetCargo.address, aTime: 0)
-            node.dataApp.recieveAddressSearchResults(packetCargo)
+            node.knownAddresses[searchRecord.id] = UMemoryIdAddressRecord(anAddress: packetCargo.address, aTime: 0)
             node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForAddressSucess)
+
+            searchRecord.appId.getAddressSearchResults(searchRecord.id, address: packetCargo.address)
+            
+          
+            
         }
     }
     
@@ -98,7 +112,15 @@ class UNAppSearch
 
     }
 
-
-
 }
 
+struct IdSearchDictRecord
+{
+    var name:String
+    var appId:UAppProtocol
+}
+struct AddressSearchDictRecord
+{
+    var id:UNodeID
+    var appId:UAppProtocol
+}

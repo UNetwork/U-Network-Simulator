@@ -14,33 +14,15 @@ protocol UAppProtocol
 {
     var appID:UInt64 {get}
     
-    var nodeAPI:UNodeAPI {get set}
+    var nodeAPI:UNodeAPI? {get set}
     
-    func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
+   // func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
     
-    func getUNetworkError(error:UNetworkAPIError)
+    func getIdSearchResults(name:String, id:UNodeID)
     
+    func getAddressSearchResults(id:UNodeID, address:UNodeAddress)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
-    
-    func getDataDeliveryConfirmation(envelope:UPacketEnvelope, data:UPacketDataDeliveryConfirmation)
-    
-    func getIdSearchResults(result:UPacketReplyForIdSearch, forName:String)
-    
-    func getAddressSearchResult(result:UPacketReplyForAddressSearch)
-    
-    func getPong(envelope:UPacketEnvelope, serial:UInt64)
-    */
+  //  func getUNetworkError(error:UNetworkAPIError)
     
 }
 

@@ -9,11 +9,15 @@ import Foundation
 import Cocoa
 
 
-class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDataSource, NSTableViewDelegate
+class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDataSource, NSTableViewDelegate, UAppProtocol
     
 {
     
     var currentNodeId=UNodeID()
+    
+    
+    
+    
     
     @IBOutlet weak var theTabView: NSTabView!
     
@@ -88,10 +92,77 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     //Search
     @IBOutlet weak var searchWithNameField: NSTextField!
     @IBOutlet weak var searchWithIdField: NSTextField!
+    
+    @IBOutlet weak var searchResultsField: NSTextField!
+    var appID:UInt64 = 0x0000000000000001
+    
+    var nodeAPI:UNodeAPI?
+    
+    
+    func getIdSearchResults(name:String, id:UNodeID)
+    {
+       searchResultsField.stringValue += "Id search result: \(name) -> \(id.txt) \n"
+        
+        searchWithIdField.stringValue = ""
+        for aInt in id.data
+        {
+            searchWithIdField.stringValue += "\(aInt) "
+        }
+        
+     
+    }
+    
+    func getAddressSearchResults(id:UNodeID, address:UNodeAddress)
+    {
+        searchResultsField.stringValue += "Address search result: \(id.txt) -> \(address.txt) \n"
+
+    }
+    
+
+    
+    
+    
+    @IBAction func searchAddress(sender: AnyObject)
+    {
+    
+    let idInString = searchWithIdField.stringValue
+        let stringsInArray = idInString.componentsSeparatedByString(" ")
+        
+        var idData = [UInt64]()
+        
+        for aString in stringsInArray
+        {
+            if aString != ""
+            {
+            let aInt = strToUInt64(aString)
+            idData.append(aInt)
+            }
+        }
+    
+        var id = UNodeID(lenght: idData.count)
+        
+        id.data = idData
+        
+        nodeAPI?.searchForAddress(id, app: self)
+    
+    
+    }
+    
+    
+    
+    
+    
     @IBAction func search(sender: AnyObject)
     {
-        
+        searchResultsField.stringValue = ""
+        nodeAPI?.searchForID(searchWithNameField.stringValue, app: self)
     }
+    
+    
+    
+    
+    
+    
     @IBAction func broadcastAddress(sender: AnyObject)
     {
         if let simNode = simulator.simulationNodes[currentNodeId]
@@ -341,14 +412,19 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
         if let simNode = simulator.simulationNodes[nodeId]
         {
             currentNodeId=nodeId
+            nodeAPI=simNode.node.appsAPI
+            
+            
+            
             var info = "Name: "
             info += simNode.node.userName
             info += "\n"
             info += "Lat: \(simNode.node.address.latitude)\n"
             info += "Long: \(simNode.node.address.longitude)\n"
             info += "Alt: \(simNode.node.address.altitude)\n"
-            info += "\n"
+            info += "Id: \(simNode.node.id.txt)\n"
             info += "Peers: \(simNode.node.peers.count)\n"
+            
             
             infoText.stringValue = info
 

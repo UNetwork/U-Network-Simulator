@@ -41,7 +41,6 @@ let unknownNodeAddress = UNodeAddress()
 // typealias CurrentRouter = URouter_BruteForceRouting
 
 
-var maxConnection = 5000
 
 
 

@@ -11,7 +11,7 @@ This is an example of app for U Network
 */
 
 import Foundation
-
+/*
 class UAppChat:UAppProtocol {
     
     
@@ -104,3 +104,4 @@ class UAppChat:UAppProtocol {
     
     
 }
+*/
