@@ -34,4 +34,8 @@ protocol URouterProtocol
         
     func maintenanceLoop()
     
+    // for access to stack on runtime
+    
+     func status() -> [(String, String, String, String, String)]
+    
 }

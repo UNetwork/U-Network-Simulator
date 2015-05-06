@@ -196,7 +196,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     
     @IBOutlet weak var nameIdTable: NSTableView!
     var dataForNameIdTable = [UNodeID:NameIdTableRecord]()
-    var arrayToDisplay = [String, String, String]()
+    var memoryArrayToDisplay = [String, String, String]()
     
     
     struct NameIdTableRecord
@@ -206,6 +206,9 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     }
     
     //Router
+    @IBOutlet weak var routerTable: NSTableView!
+    var routerArrayToDisplay = [(String, String, String, String, String)]()
+    
     
     //Stats
     
@@ -227,6 +230,8 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
         theTabView.delegate = self
         nameIdTable.setDataSource(self)
         nameIdTable.setDelegate(self)
+        routerTable.setDelegate(self)
+        routerTable.setDataSource(self)
         
     }
     
@@ -279,6 +284,11 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     func refreshNodeRouterView()
     {
         
+     routerTable.reloadData()
+        
+        
+        
+        
     }
     
     func refreshNodeStatsView()
@@ -307,40 +317,81 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int
     {
-        if let simNode = simulator.simulationNodes[currentNodeId]
+        
+        if tableView.identifier == "Memory"
         {
-            dataForNameIdTable = [UNodeID:NameIdTableRecord]()
             
+            if let simNode = simulator.simulationNodes[currentNodeId]
+            {
+                dataForNameIdTable = [UNodeID:NameIdTableRecord]()
+                unifyNodeMemoryForTable()
+                return memoryArrayToDisplay.count
+            }
+            return 0
+        }
+        else if tableView.identifier == "Router"
+        {
+            if let aNode = simulator.simulationNodes[currentNodeId]
+            {
+                routerArrayToDisplay =  aNode.node.router.status()
+                return routerArrayToDisplay.count
+            }
+            return 0
             
-            
-            
-            
-            
-            unifyNodeMemoryForTable()
-            return arrayToDisplay.count
         }
         return 0
+
     }
     
-
+    
     func tableView(tableView: NSTableView, viewForTableColumn: NSTableColumn?, row: Int) -> NSView?
     {
-
-        var aCell = nameIdTable.makeViewWithIdentifier(viewForTableColumn!.title, owner: self) as! NSTableCellView
-        
-        let record=arrayToDisplay[row]
-        switch viewForTableColumn!.title
+        var aCell:NSTableCellView?
+        if tableView.identifier == "Memory"
         {
-        case "Name": aCell.textField!.stringValue = record.0
-        case "Id" :aCell.textField!.stringValue = record.1
-        case "Address": aCell.textField!.stringValue = record.2
-        default: log(7,"FTW 55")
+            
+            aCell = nameIdTable.makeViewWithIdentifier(viewForTableColumn!.title, owner: self) as! NSTableCellView
+            
+            let record=memoryArrayToDisplay[row]
+            switch viewForTableColumn!.title
+            {
+            case "Name": aCell!.textField!.stringValue = record.0
+            case "Id" :aCell!.textField!.stringValue = record.1
+            case "Address": aCell!.textField!.stringValue = record.2
+            default: log(7,"FTW 55")
+            }
+            return aCell
+            
+        }
+        else if tableView.identifier == "Router"
+        {
+            aCell = routerTable.makeViewWithIdentifier(viewForTableColumn!.title, owner: self) as! NSTableCellView
+
+            let record = routerArrayToDisplay[row]
+            switch viewForTableColumn!.title
+            {
+                case "from": aCell!.textField!.stringValue = record.0
+            case "sent": aCell!.textField!.stringValue = record.1
+
+            case "stat": aCell!.textField!.stringValue = record.2
+
+            case "wait": aCell!.textField!.stringValue = record.3
+
+            case "packet": aCell!.textField!.stringValue = record.4
+            default: log(7,"FTW ddd300")
+
+
+            }
+            
+            
         }
         
         
         
-
+        
         return aCell
+        
+        
     }
     
     
@@ -369,7 +420,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
                 
             }
             
-            arrayToDisplay = [String, String, String]()
+            memoryArrayToDisplay = [String, String, String]()
             
             for data in dataForNameIdTable
             {
@@ -377,7 +428,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
                 let id = data.0.txt
                 let address = data.1.address.txt
                 
-                arrayToDisplay.append(name, id, address)
+                memoryArrayToDisplay.append(name, id, address)
             }
             
             

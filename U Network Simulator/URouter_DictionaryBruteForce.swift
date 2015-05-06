@@ -79,7 +79,8 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
                 
                 var updatedPacketRecord = packetRecord
                 updatedPacketRecord.status = DictionaryBrutForcePacketStatus.Delivered
-                packetDict[returningPacketSerial] = updatedPacketRecord
+                packetDict[returningPacketSerial] = nil
+                packetDict[returningPacketSerial] =  updatedPacketRecord
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketConfirmedOK)
             }
         }
@@ -87,8 +88,6 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
         {
             // delivery confirmation packet serial not found on packet stack
             log(7,"R: \(node.txt) delivery confirmation packet serial: \(returningPacketSerial) not found on packet stack ")
-            
-            
         }
         
     }
@@ -457,40 +456,6 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
             corrAlt = 0
         }
         
-        /*
-        if(address.latitude == maxLatitude)
-        {
-        corrLat = corrLat + (5 * wirelessInterfaceRange)
-        }
-        else
-        {
-        corrLat = corrLat - (5 * wirelessInterfaceRange)
-        }
-        
-        if( address.longitude == maxLongitude)
-        {
-        corrLong = corrLong + (5 * wirelessInterfaceRange)
-        corrLat = corrLat + (2 * wirelessInterfaceRange)
-        }
-        else
-        {
-        corrLong = corrLong - (5 * wirelessInterfaceRange)
-        corrLat = corrLat - (2 * wirelessInterfaceRange)
-        
-        }
-        
-        if ( address.altitude == maxAltitude)
-        {
-        corrAlt = corrAlt + (5 * wirelessInterfaceRange)
-        
-        }
-        else
-        {
-        corrAlt = corrAlt - (5 * wirelessInterfaceRange)
-        }
-        
-        */
-        
         let result=UNodeAddress(inputLatitude: corrLat, inputLongitude: corrLong, inputAltitude: corrAlt)
         return result
         
@@ -559,6 +524,24 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
         packetDict=[UInt64:DictionaryBruteForcePacketStackRecord]()
     }
     
+    func status() -> [(String, String, String, String, String)]
+    {
+    
+    var result = [(String, String, String, String, String)]()
+        
+        for aRecord in packetDict
+        {
+            let from = aRecord.1.recievedFrom.txt
+            let sent = String(aRecord.1.sentToNodes.count)
+            let stat = String(aRecord.1.status.rawValue)
+            let wait = String(aRecord.1.waitingTimeOnPacketStack)
+            let packet = aRecord.1.packet.txt
+            
+            result.append((from, sent, stat, wait, packet))
+        }
+        return result
+
+    }
 }
 
 
