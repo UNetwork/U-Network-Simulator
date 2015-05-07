@@ -38,7 +38,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
                 if aRecord.waitingTimeOnPacketStack  > delayInPacketResend
                 {
                     getPacketToRouteFromStack(serial)
-                    node.refreshPeers()
+                   // node.refreshPeers()
                 }
             }
         }
@@ -79,7 +79,6 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
                 
                 var updatedPacketRecord = packetRecord
                 updatedPacketRecord.status = DictionaryBrutForcePacketStatus.Delivered
-                packetDict[returningPacketSerial] = nil
                 packetDict[returningPacketSerial] =  updatedPacketRecord
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketConfirmedOK)
             }
@@ -155,7 +154,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
     
     func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)
     {
-        log(2,"R: \(node.txt) Created packet from envelope and cargo")
+        log(7,"R: \(node.txt) Created packet from envelope and cargo")
         
         let packetLiftime = (envelope.destinationUID.isBroadcast() ? defaultStoreSearchDepth : standardPacketLifeTime)
         
@@ -186,7 +185,23 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
         else
         {
             // must be lonely node
-            log(7,"R: \(node.txt) Lonely node tried to send a packet")
+            log(7,"R: \(node.txt) Lonely node tried to send a packet, trying to refresh peers")
+
+            node.refreshPeers()
+
+           sleep(1)
+            
+            if node.peers.count > 0
+            {
+                log(7,"R: \(node.txt) refreshing peers helped, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(envelope, cargo)")
+
+                getPacketToRouteFromNode(envelope, cargo: cargo)
+            }
+            else
+            {
+                log(7,"R: \(node.txt) Lonely node tried to send a packet, refreshing peers didnt help")
+
+            }
             node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
             
         }
@@ -327,12 +342,26 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
             }
             else
             {
-                log(2, "R: \(node.txt) cannot find a peer for a new packet rejecting")
+                log(7, "R: \(node.txt) cannot find a peer for a new packet, refreshing")
                 
-                // reject
                 
+                node.refreshPeers()
+                
+              //  sleep(1)
+                
+                if node.peers.count > 1
+                {
+                    log(7, "R: \(node.txt) refreshing peers worked somehow, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(interface,packet)")
+
+                    getPacketToRouteFromNode(interface,packet: packet)
+
+                }
+                else
+                {
+                    log(7, "R: \(node.txt) cannot find a peer for a new packet, refreshing peers faild, rejecting")
+
                 sendPacketDeliveryConfirmation(interface, packet: packet, rejected: true)
-                
+                }
                 
                 
                 

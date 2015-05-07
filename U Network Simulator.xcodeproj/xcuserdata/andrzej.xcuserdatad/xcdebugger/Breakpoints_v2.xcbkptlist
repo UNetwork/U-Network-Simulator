@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "U Network Simulator/MediumSimulatorForWireless.swift"
-            timestampString = "451644292.105912"
+            timestampString = "452706524.256109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "findInterfacesInRange(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,22 +106,6 @@
             startingLineNumber = "90"
             endingLineNumber = "90"
             landmarkName = "recieveIdSearchResults(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "U Network Simulator/UNode.swift"
-            timestampString = "452584370.900706"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "getPacketFromInterface(_:packet:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

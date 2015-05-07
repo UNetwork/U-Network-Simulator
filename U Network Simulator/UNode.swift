@@ -30,6 +30,9 @@ class UNode {
     
     var appsAPI: UNodeAPI!                                  // Handler for all API of apps
     
+    var lastPeerRefresh = UInt64(0)
+    var lastNameStore = UInt64(0)
+    var lastAddressStore = UInt64(0)
     
     //Node apps required
     
@@ -145,6 +148,7 @@ class UNode {
         }
         else
         {
+      
             if(packet.envelope.destinationUID.isEqual(self.id) || packet.envelope.destinationUID.isBroadcast())
             {
             
@@ -243,6 +247,9 @@ class UNode {
         
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
         log(2, "N: \(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
+        
+     //   processDiscoveryBroadcastreply(interface, packet: packet)   // hack to add a peer from "passive" information
+        
         
         interface.sendPacketToNetwork(replyPacket)
 
@@ -472,7 +479,7 @@ class UNode {
  // Other API
     func refreshPeers()
     {
-        
+        lastPeerRefresh = nodeTime
         for peer in peers
         {
           
@@ -497,6 +504,8 @@ class UNode {
         for(_, interface) in enumerate(self.interfaces)
         {
             self.nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastSent)
+            
+            
             interface.sendPacketToNetwork(broadcastDiscoveryPacket)
         }
         

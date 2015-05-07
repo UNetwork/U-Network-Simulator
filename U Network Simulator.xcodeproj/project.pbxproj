@@ -227,7 +227,6 @@
 		FEE8996B1A98C49A0057ACD7 /* GlobalStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalStatistics.swift; sourceTree = "<group>"; };
 		FEE8996E1A98C4BE0057ACD7 /* Traffic Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Traffic Generator.swift"; sourceTree = "<group>"; };
 		FEE899711A98D0CF0057ACD7 /* UNetworkInterface_SimulationWireless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterface_SimulationWireless.swift; path = "U Network Simulator/UNetworkInterface_SimulationWireless.swift"; sourceTree = "<group>"; };
-		FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouter_BruteForce.swift; path = "U Network Simulator/URouter_BruteForce.swift"; sourceTree = "<group>"; };
 		FEE899791A98D6260057ACD7 /* Simulation Constants and Global Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Simulation Constants and Global Objects.swift"; sourceTree = "<group>"; };
 		FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URouting Protocol.swift"; path = "U Network Simulator/URouting Protocol.swift"; sourceTree = "<group>"; };
 		FEE899801A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNetworkInterfaceProtocol.swift; path = "U Network Simulator/UNetworkInterfaceProtocol.swift"; sourceTree = "<group>"; };
@@ -448,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				FEE8997C1A98DD3F0057ACD7 /* URouting Protocol.swift */,
-				FEE899751A98D1B80057ACD7 /* URouter_BruteForce.swift */,
 				FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */,
 				FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */,
 			);
