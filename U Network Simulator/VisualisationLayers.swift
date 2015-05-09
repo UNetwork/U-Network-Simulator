@@ -9,8 +9,8 @@ import Foundation
 import Cocoa
 
 
-let nodeLayerSize = CGFloat(25)
-let minNodeLayerSize = CGFloat(15)
+let nodeLayerSize = CGFloat(10)
+let minNodeLayerSize = CGFloat(5)
 
 
 extension UNode {

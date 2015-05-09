@@ -142,7 +142,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
                 {
                     //drop
                     log(6, "R: \(node.txt) Packet lost - no geniue peer aveliable")
-                    node.sendDropped(stackRecord.packet.envelope)
+                    node.sendDropped(nil, packet: stackRecord.packet)
                 }
                 
             }
@@ -344,12 +344,15 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
             {
                 log(7, "R: \(node.txt) cannot find a peer for a new packet, refreshing")
                 
+                let currentPeersCount = node.peers.count
                 
                 node.refreshPeers()
                 
-              //  sleep(1)
+                sleep(1)
                 
-                if node.peers.count > 1
+                
+                
+                if node.peers.count > currentPeersCount // this must be done better, by checking if anything in peer changed in active
                 {
                     log(7, "R: \(node.txt) refreshing peers worked somehow, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(interface,packet)")
 
@@ -490,16 +493,6 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol {
         
     }
     
-    
-    
-    func allPeerIndexes() -> [Int]
-    {
-        var result = [Int]()
-        for (index, _) in enumerate(node.peers){
-            result.append(index)
-        }
-        return result
-    }
     
     // communication functions
     

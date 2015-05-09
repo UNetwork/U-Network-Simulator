@@ -20,8 +20,9 @@ var defaultStoreSearchDepth:UInt32 = 32
 
 var logLevel:Int=3
 
-var delayInPacketResend:Int = 2
+var delayInPacketResend:Int = 5
 
+var sendDroppedPackets = false
 
 
 // Simulation - to be elimineted

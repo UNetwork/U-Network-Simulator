@@ -46,6 +46,10 @@ class UNode {
     let nodeStats = UNAppNodeStats()
     let nodeCurrentState = UNAppNodeCurrentState()
     
+    // for multithread 
+    let queue = dispatch_queue_create("Serial Queue", DISPATCH_QUEUE_SERIAL)
+
+    
 
     //  Init
     
@@ -213,20 +217,30 @@ class UNode {
             switch packet.packetCargo
             {
             case .Dropped(let _): log(5, "N: \(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification \(packet.txt)")
-            default: sendDropped(packet.envelope)
+            default: sendDropped(interface, packet:packet)
             }
             
         }
     }
     
-    func sendDropped(envelope:UPacketEnvelope)
+    func sendDropped(interface:UNetworkInterfaceProtocol?, packet:UPacket)
     {
        self.nodeStats.addNodeStatsEvent(StatsEvents.PacketDropped)
         // create dropped packet and send to the originator (if dropped packet type is not dropped - to check ealier)
-        let dropCargo = UPacketDropped(serial: envelope.serial)
+        let dropCargo = UPacketDropped(serial: packet.envelope.serial)
         let drop=UPacketType.Dropped(dropCargo)
-        let dropEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
+        let dropEnvelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.envelope.orginatedByUID, toAddress: packet.envelope.originAddress)
+        
+        if interface != nil
+        {
+        router.sendPacketDeliveryConfirmation(interface!, packet: packet, rejected: false)
+        }
+       
+        if sendDroppedPackets
+        {
         router.getPacketToRouteFromNode(dropEnvelope, cargo: drop)
+        }
+        
         
     }
     
@@ -261,19 +275,24 @@ class UNode {
         
         
         
+        dispatch_async(queue, {
+          
+            if let peerRecord = self.peers[packet.header.transmitedByUID]
+            {
+                self.peers[packet.header.transmitedByUID]?.active = true
+            }
+            else
+            {
+                let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
+                self.peers[packet.header.transmitedByUID] = newPeerRecord
+                log(3,"\(self.userName) added a peer")
+                
+            }
         
         
-        if let peerRecord = peers[packet.header.transmitedByUID]
-        {
-            peers[packet.header.transmitedByUID]?.active = true
-        }
-        else
-        {
-            let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
-            self.peers[packet.header.transmitedByUID] = newPeerRecord
-            log(3,"\(self.userName) added a peer")
-            
-        }
+        })
+        
+ 
         
     }
     
@@ -480,13 +499,18 @@ class UNode {
     func refreshPeers()
     {
         lastPeerRefresh = nodeTime
-        for peer in peers
-        {
-          
-                peers[peer.0]?.active = false
-            
-            
-        }
+        
+        
+        dispatch_async(queue, {
+
+        
+            for peer in self.peers
+            {
+                self.peers[peer.0]?.active = false
+            }
+
+        })
+   
         
         
         
