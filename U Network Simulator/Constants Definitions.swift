@@ -12,7 +12,7 @@ import Foundation
 
 var uIDlengh:Int=2
 
-var standardPacketLifeTime:UInt32 = 512
+var standardPacketLifeTime:UInt32 = 2048
 
 var maxDiscoveryBroadcastDeepth:Int = 5
 
@@ -20,7 +20,7 @@ var defaultStoreSearchDepth:UInt32 = 32
 
 var logLevel:Int=3
 
-var delayInPacketResend:Int = 5
+var delayInPacketResend:Int = 2
 
 var sendDroppedPackets = false
 

@@ -150,6 +150,24 @@
 		FEFA0FFD1AD66FBC007DD801 /* VisualisationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */; };
 		FEFA0FFF1AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */; };
 		FEFA10001AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */; };
+		FEFDEE931B00B934003C8EFF /* NodeMemoryWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDEE921B00B934003C8EFF /* NodeMemoryWindow.xib */; };
+		FEFDEE951B00B984003C8EFF /* NodeRouterStackWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDEE941B00B984003C8EFF /* NodeRouterStackWindow.xib */; };
+		FEFDEE971B00B9AA003C8EFF /* NodeMemoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE961B00B9AA003C8EFF /* NodeMemoryWindowController.swift */; };
+		FEFDEE991B00B9F0003C8EFF /* NodeRouterStackWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE981B00B9F0003C8EFF /* NodeRouterStackWindowController.swift */; };
+		FEFDEE9A1B00C57A003C8EFF /* VisualisationWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */; };
+		FEFDEE9B1B00C57A003C8EFF /* ConsoleWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */; };
+		FEFDEE9C1B00C57A003C8EFF /* NodeMemoryWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE921B00B934003C8EFF /* NodeMemoryWindow.xib */; };
+		FEFDEE9D1B00C57A003C8EFF /* NodeMemoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE961B00B9AA003C8EFF /* NodeMemoryWindowController.swift */; };
+		FEFDEE9E1B00C57A003C8EFF /* NodeRouterStackWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE941B00B984003C8EFF /* NodeRouterStackWindow.xib */; };
+		FEFDEE9F1B00C57A003C8EFF /* NodeRouterStackWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEE981B00B9F0003C8EFF /* NodeRouterStackWindowController.swift */; };
+		FEFDEEA01B00C57A003C8EFF /* NodeWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */; };
+		FEFDEEA11B00C57A003C8EFF /* StatsWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B5141ACFB2BA002B8AD1 /* StatsWindow.xib */; };
+		FEFDEEA21B00C57A003C8EFF /* AddNodesWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B5121ACFB207002B8AD1 /* AddNodesWindow.xib */; };
+		FEFDEEA31B00C57A003C8EFF /* SettingsWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = FEC6B5181ACFD1FF002B8AD1 /* SettingsWindow.xib */; };
+		FEFDEEA51B0118ED003C8EFF /* ChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDEEA41B0118ED003C8EFF /* ChatWindow.xib */; };
+		FEFDEEA61B0118ED003C8EFF /* ChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDEEA41B0118ED003C8EFF /* ChatWindow.xib */; };
+		FEFDEEA81B011934003C8EFF /* ChatWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEEA71B011934003C8EFF /* ChatWindowController.swift */; };
+		FEFDEEA91B011934003C8EFF /* ChatWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDEEA71B011934003C8EFF /* ChatWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +266,12 @@
 		FEED38381AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPacketReplyForNetworkLookupRequest.swift; path = "U Network Simulator/UPacketReplyForNetworkLookupRequest.swift"; sourceTree = "<group>"; };
 		FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualisationWindow.xib; sourceTree = "<group>"; };
 		FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualisationWindowController.swift; sourceTree = "<group>"; };
+		FEFDEE921B00B934003C8EFF /* NodeMemoryWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeMemoryWindow.xib; sourceTree = "<group>"; };
+		FEFDEE941B00B984003C8EFF /* NodeRouterStackWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeRouterStackWindow.xib; sourceTree = "<group>"; };
+		FEFDEE961B00B9AA003C8EFF /* NodeMemoryWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeMemoryWindowController.swift; sourceTree = "<group>"; };
+		FEFDEE981B00B9F0003C8EFF /* NodeRouterStackWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeRouterStackWindowController.swift; sourceTree = "<group>"; };
+		FEFDEEA41B0118ED003C8EFF /* ChatWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatWindow.xib; sourceTree = "<group>"; };
+		FEFDEEA71B011934003C8EFF /* ChatWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,7 +397,6 @@
 				FEACA9B11AA06E24001524FB /* Simulator.swift */,
 				FEC6B51B1ACFD53F002B8AD1 /* UI */,
 				FE45B7DE1A93445C00B82E5E /* Simulation Objects */,
-				FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */,
 				FEB5E3F11A89E05B00A459E6 /* Images.xcassets */,
 				FEB5E3ED1A89E05B00A459E6 /* Supporting Files */,
 			);
@@ -412,12 +435,19 @@
 		FEC6B51B1ACFD53F002B8AD1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FEB5E3EF1A89E05B00A459E6 /* AppDelegate.swift */,
 				FEB5E3F31A89E05B00A459E6 /* MainMenu.xib */,
 				FEFA0FFB1AD66FBC007DD801 /* VisualisationWindow.xib */,
 				FEFA0FFE1AD66FD5007DD801 /* VisualisationWindowController.swift */,
 				FE2D0EF01AE6159C00E892B6 /* VisualisationLayers.swift */,
 				FEC6B50E1ACFB11E002B8AD1 /* ConsoleWindow.xib */,
 				FEC6B51C1ACFD56D002B8AD1 /* ConsoleWindowController.swift */,
+				FEFDEE921B00B934003C8EFF /* NodeMemoryWindow.xib */,
+				FEFDEE961B00B9AA003C8EFF /* NodeMemoryWindowController.swift */,
+				FEFDEE941B00B984003C8EFF /* NodeRouterStackWindow.xib */,
+				FEFDEEA41B0118ED003C8EFF /* ChatWindow.xib */,
+				FEFDEEA71B011934003C8EFF /* ChatWindowController.swift */,
+				FEFDEE981B00B9F0003C8EFF /* NodeRouterStackWindowController.swift */,
 				FEC6B5161ACFD1BD002B8AD1 /* NodeWindow.xib */,
 				FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */,
 				FEC6B5141ACFB2BA002B8AD1 /* StatsWindow.xib */,
@@ -571,9 +601,12 @@
 				FEC6B5191ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */,
 				FEB5E3F21A89E05B00A459E6 /* Images.xcassets in Resources */,
 				FEFA0FFC1AD66FBC007DD801 /* VisualisationWindow.xib in Resources */,
+				FEFDEE951B00B984003C8EFF /* NodeRouterStackWindow.xib in Resources */,
 				FEC6B5131ACFB207002B8AD1 /* AddNodesWindow.xib in Resources */,
 				FEC6B5171ACFD1BD002B8AD1 /* NodeWindow.xib in Resources */,
+				FEFDEE931B00B934003C8EFF /* NodeMemoryWindow.xib in Resources */,
 				FEB5E3F51A89E05B00A459E6 /* MainMenu.xib in Resources */,
+				FEFDEEA51B0118ED003C8EFF /* ChatWindow.xib in Resources */,
 				FEC6B50F1ACFB11E002B8AD1 /* ConsoleWindow.xib in Resources */,
 				FEC6B5151ACFB2BA002B8AD1 /* StatsWindow.xib in Resources */,
 			);
@@ -585,6 +618,7 @@
 			files = (
 				FEFA0FFD1AD66FBC007DD801 /* VisualisationWindow.xib in Resources */,
 				FEC6B51A1ACFD1FF002B8AD1 /* SettingsWindow.xib in Resources */,
+				FEFDEEA61B0118ED003C8EFF /* ChatWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +646,7 @@
 				FE4D6A8D1AA59223008B3B4E /* UAppProtocol.swift in Sources */,
 				FEED382F1AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
 				FEED381F1AA2497800BB3C26 /* UPacketData.swift in Sources */,
+				FEFDEEA81B011934003C8EFF /* ChatWindowController.swift in Sources */,
 				FEE899601A98778F0057ACD7 /* UPacketDiscoveryBroadcast.swift in Sources */,
 				FEED382B1AA2497800BB3C26 /* UPacketReceptionConfirmation.swift in Sources */,
 				FEED38391AA24F9000BB3C26 /* UPacketReplyForNetworkLookupRequest.swift in Sources */,
@@ -623,6 +658,7 @@
 				FE6E57B51A94B5A200F8F0D5 /* U Coordinate System Functions.swift in Sources */,
 				FEED38351AA2497800BB3C26 /* Global Objects.swift in Sources */,
 				FEED38211AA2497800BB3C26 /* UPacketReplyForAddressSearch.swift in Sources */,
+				FEFDEE991B00B9F0003C8EFF /* NodeRouterStackWindowController.swift in Sources */,
 				FEED38271AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
 				FE7F52491ADFEF42001D3FA1 /* UIMisc.swift in Sources */,
 				FE45B7E71A939A5600B82E5E /* U Coordinate System Structures.swift in Sources */,
@@ -647,6 +683,7 @@
 				FEFA0FFF1AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */,
 				FEE899661A9880610057ACD7 /* UPacketyReplyForDiscovery.swift in Sources */,
 				FEBFCDC81AAF7CFA00E09666 /* URouter_SimpleDirection.swift in Sources */,
+				FEFDEE971B00B9AA003C8EFF /* NodeMemoryWindowController.swift in Sources */,
 				FEED38331AA2497800BB3C26 /* UNetworkInterface_SimulationInternet.swift in Sources */,
 				FEC6B51D1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */,
 				FEED38231AA2497800BB3C26 /* UPacketSearchAddressForID.swift in Sources */,
@@ -663,6 +700,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEFDEE9A1B00C57A003C8EFF /* VisualisationWindow.xib in Sources */,
+				FEFDEE9B1B00C57A003C8EFF /* ConsoleWindow.xib in Sources */,
+				FEFDEE9C1B00C57A003C8EFF /* NodeMemoryWindow.xib in Sources */,
+				FEFDEE9D1B00C57A003C8EFF /* NodeMemoryWindowController.swift in Sources */,
+				FEFDEE9E1B00C57A003C8EFF /* NodeRouterStackWindow.xib in Sources */,
+				FEFDEE9F1B00C57A003C8EFF /* NodeRouterStackWindowController.swift in Sources */,
+				FEFDEEA01B00C57A003C8EFF /* NodeWindow.xib in Sources */,
+				FEFDEEA11B00C57A003C8EFF /* StatsWindow.xib in Sources */,
+				FEFDEEA21B00C57A003C8EFF /* AddNodesWindow.xib in Sources */,
+				FEFDEEA31B00C57A003C8EFF /* SettingsWindow.xib in Sources */,
 				FEA94DD11AB1EC230048DFD3 /* UPacketStoreNameReplay.swift in Sources */,
 				FEE8997B1A98D6260057ACD7 /* Simulation Constants and Global Objects.swift in Sources */,
 				FEFA10001AD66FD5007DD801 /* VisualisationWindowController.swift in Sources */,
@@ -691,6 +738,7 @@
 				FEA0072A1A9D97F20047E3B5 /* MediumProtocol.swift in Sources */,
 				FEED382A1AA2497800BB3C26 /* UPacketPong.swift in Sources */,
 				FE6E57BE1A94B6F900F8F0D5 /* U_Coordinate_SystemTests.swift in Sources */,
+				FEFDEEA91B011934003C8EFF /* ChatWindowController.swift in Sources */,
 				FE5BC8101A971D5C0040F7BD /* USimulationRealLocationTests.swift in Sources */,
 				FEA94DDA1AB452C70048DFD3 /* UPacketDropped.swift in Sources */,
 				FE60F03A1ACFF5A30049DA76 /* SettingsWindowController.swift in Sources */,

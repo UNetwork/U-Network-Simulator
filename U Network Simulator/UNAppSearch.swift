@@ -50,11 +50,13 @@ class UNAppSearch
 
             record.appId.getIdSearchResults(record.name, id: packetCargo.foundId)
             
+            idSearches[packetCargo.searchRequestSerial] = nil
+            
             
         }
         else
         {
-            log(6,"No serial for id search")
+            log(6,"No serial for id search, propably found ealier")
         }
     }
     
@@ -82,6 +84,7 @@ class UNAppSearch
             node.nodeStats.addNodeStatsEvent(StatsEvents.SearchForAddressSucess)
 
             searchRecord.appId.getAddressSearchResults(searchRecord.id, address: packetCargo.address)
+            addressSearches[packetCargo.searchRequestSerial] = nil
             
           
             

@@ -7,14 +7,48 @@
 
 import Foundation
 
-class UNAppDataTransfer
+class UNAppDataTransfer:UAppProtocol
 {
     let node:UNode
-    var nodeAppsPacketStack = [UInt64:DataStackRecord]()    // 
+    // var nodeAppsPacketStack = [UInt64:DataStackRecord]()    //
+    
+    var stack = [String:[UInt64:DataStackRecord]]()
+    
+    
+    
+    var appID:UInt64=0x0101010101
+    
+    var nodeAPI:UNodeAPI?
+    
+
+    
+  
+    func getUNetworkError(error:UNetworkAPIError)
+    {
+        
+    }
+    
+    func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
+    {
+        
+    }
+    
+    
     
     init(node:UNode)
     {
         self.node=node
+    }
+    
+    func recieveDataPacketFromNetwork(name:String, dataCargo:UPacketData, envelope:UPacketEnvelope)
+    {
+        if  let app = node.appsAPI.apps[dataCargo.appID]
+
+       {
+
+        app.getDataPacket(name, envelope: envelope, data: dataCargo.load)
+        
+        }
     }
     
     func deliverData(name:String, data:[UInt64], appID:UInt64)
@@ -45,14 +79,48 @@ class UNAppDataTransfer
                 
                 stackRecord.status = UDataTransferStatus.transmitted
                 
-                nodeAppsPacketStack[packetSerial] = stackRecord
+                if let stackForName = stack[name]
+                {
+                    var stackForNameMutable = stackForName
+                    stackForNameMutable[packetSerial] = stackRecord
+                    stack[name]=stackForNameMutable
+                }
+                else
+                {
+                    var emptyStackForName = [UInt64:DataStackRecord]()
+                    emptyStackForName[packetSerial] = stackRecord
+                    stack[name]=emptyStackForName
+                }
+                
                 
             }
             else
             {
+                
+                
+                
+                
                 // no address
-                nodeAppsPacketStack[packetSerial] = stackRecord
-              //  node.searchApp.findAddressForId(destinationIDRecord.id, serial: packetSerial)
+                
+                if let stackForName = stack[name]
+                {
+                    var stackForNameMutable = stackForName
+                    stackForNameMutable[packetSerial] = stackRecord
+                    stack[name]=stackForNameMutable
+                }
+                else
+                {
+                    var emptyStackForName = [UInt64:DataStackRecord]()
+                    emptyStackForName[packetSerial] = stackRecord
+                    stack[name]=emptyStackForName
+                }
+
+                
+                
+                
+                
+                
+                node.searchApp.findAddressForId(destinationIDRecord.id, app: self)
                 
             }
             
@@ -60,8 +128,20 @@ class UNAppDataTransfer
         else
         {
             // no ID
-            nodeAppsPacketStack[packetSerial] = stackRecord
-          //  node.searchApp.findIdForName(name, serial: packetSerial)
+            if let stackForName = stack[name]
+            {
+                var stackForNameMutable = stackForName
+                stackForNameMutable[packetSerial] = stackRecord
+                stack[name]=stackForNameMutable
+            }
+            else
+            {
+                var emptyStackForName = [UInt64:DataStackRecord]()
+                emptyStackForName[packetSerial] = stackRecord
+                stack[name]=emptyStackForName
+            }
+
+            node.searchApp.findIdForName(name, app: self)
             
         }
         
@@ -71,55 +151,98 @@ class UNAppDataTransfer
     
     func recieveDataTransferConfirmation (cargo:UPacketDataDeliveryConfirmation)
     {
-        nodeAppsPacketStack[cargo.deliveredPacketSerial] = nil      //delete from stack
-    }
-    
-    func recieveIdSearchResults (searchResult:UPacketReplyForIdSearch)
-    {
-        if var stackRecord = nodeAppsPacketStack[searchResult.searchRequestSerial]
-        {
-            
-            stackRecord.destinationID = searchResult.foundId
-            stackRecord.status = UDataTransferStatus.waitingForAddress
-            nodeAppsPacketStack[searchResult.searchRequestSerial] = stackRecord
-        //    node.searchApp.findAddressForId(searchResult.foundId, serial:searchResult.searchRequestSerial)
-            
-        }
-        else
-        {
-            log(5, "no serial found for id search replay")
-        }
         
         
     }
     
-    func recieveAddressSearchResults (searchResult:UPacketReplyForAddressSearch)
+    func getIdSearchResults(name:String, id:UNodeID)
     {
-        
-        if var stackRecord = nodeAppsPacketStack[searchResult.searchRequestSerial]
+        log(6,"searching id")
+
+        if let stackForName = stack[name]
         {
+            var stackForNameMuteble = stackForName
             
+            for aStackRecord in stackForName
+            {
+                if aStackRecord.1.status == UDataTransferStatus.waitingForID
+                {
+                    var changedRecord = aStackRecord
+                    
+                    changedRecord.1.destinationID = id
+                    changedRecord.1.status = UDataTransferStatus.waitingForAddress
+                    
+                    stackForNameMuteble[aStackRecord.0] = changedRecord.1
+                }
+            }
+            stack[name] = stackForNameMuteble
             
-            stackRecord.destinationAddress = searchResult.address
-            stackRecord.status = UDataTransferStatus.readyToTransmit
+            node.searchApp.findAddressForId(id, app: self)
             
-            var envelope = UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: stackRecord.destinationID!, toAddress:stackRecord.destinationAddress!)
+        }
+        else
+        {
+            log(6, "No name found for id search replay")
+        }
+        
+        
+    }
+    
+    func getAddressSearchResults(id:UNodeID, address:UNodeAddress)
+    {
+
+        
+        var name = ""
+        
+        for record in node.knownIDs
+        {
+            if record.1.id.isEqual(id)
+            {
+                name = record.0
+                break
+            }
+        }
+        log(6,"searching address for name: \(name) \(id.txt)")
+
+        if name != ""
+        {
+        
+        if let stackForName = stack[name]
+        {
+            var stackForNameMuteble = stackForName
             
-            envelope.serial = searchResult.searchRequestSerial
-            
-            node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.Data(stackRecord.dataCargo))
-            
-            stackRecord.status = UDataTransferStatus.transmitted
-            
-            nodeAppsPacketStack[searchResult.searchRequestSerial] = stackRecord
+            for aStackRecord in stackForName
+            {
+                if aStackRecord.1.status == UDataTransferStatus.waitingForAddress
+                {
+                    var changedRecord = aStackRecord
+                    
+                    changedRecord.1.destinationAddress = address
+                    changedRecord.1.status = UDataTransferStatus.readyToTransmit
+                    
+                    var envelope = UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: changedRecord.1.destinationID!, toAddress:changedRecord.1.destinationAddress!)
+                    
+                    log(6,"collected data sending packets")
+                    node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.Data(changedRecord.1.dataCargo))
+                    
+                     changedRecord.1.status = UDataTransferStatus.transmitted
+
+
+                    
+                    stackForNameMuteble[aStackRecord.0] = changedRecord.1
+                }
+            }
+            stack[name] = stackForNameMuteble
             
             
         }
         else
         {
-            log(5, "no serial found for address search replay")
+            log(6, "No name found for address search replay")
         }
+
         
+        }
         
         
     }

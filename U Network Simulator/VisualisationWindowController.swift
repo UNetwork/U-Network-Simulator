@@ -19,6 +19,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
 {
     var nodeViews = [UNodeID:NodeLayer]()
     var connectionViews = [UInt64:ConnectionLayer]()
+    var nodeInfoWindows = [UNodeID:NodeWindowController]()
     
     
     
@@ -92,6 +93,13 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
                 if aLayer is NodeLayer{
                     if let hitlayer = (aLayer as! NodeLayer).hitTest(CGPoint(x: theEvent.locationInWindow.x, y: theEvent.locationInWindow.y))
                     {
+                        
+                        var newWindow=NodeWindowController(windowNibName: "NodeWindow")
+                        newWindow.window?.makeKeyWindow()
+                        newWindow.showNode((hitlayer as! NodeLayer).forNode)
+
+                        nodeInfoWindows[(hitlayer as! NodeLayer).forNode]=newWindow
+                        
                         (hitlayer as! NodeLayer).getClick()
                         
                         break

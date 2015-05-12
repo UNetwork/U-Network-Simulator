@@ -8,7 +8,7 @@
 import Foundation
 import Cocoa
 
-var processingMode = ProcessingType.Serial
+var processingMode = ProcessingType.Paralel
 
 var useCache = true
 

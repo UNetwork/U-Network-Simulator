@@ -44,18 +44,8 @@ class NodeLayer:CAShapeLayer
     {
         if clicked {clicked = false}else{clicked = true}
         
-        if let clickedNode = simulator.simulationNodes[forNode]
-        {
-            log(6, "clicked name: \(clickedNode.node.userName)")
-            
-            let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
-            
-            if let nodeWindow = appdel.nodeWindow
-            {
-                nodeWindow.showNode(clickedNode.node.id)
-            }
-        }
-        self.backgroundColor = clicked ? packetColors[6] : packetColors[0]
+        
+        self.backgroundColor = clicked ? packetColors[12] : packetColors[0]
     }
 }
 

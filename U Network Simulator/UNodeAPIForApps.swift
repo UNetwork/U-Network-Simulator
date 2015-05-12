@@ -30,8 +30,7 @@ class UNodeAPI
     {
         
 
-        // push to data app
-        
+node.dataApp.deliverData(name, data: data, appID: app.appID)
     }
     
     func searchForID(aName:String, app:UAppProtocol)

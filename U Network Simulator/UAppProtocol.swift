@@ -16,13 +16,14 @@ protocol UAppProtocol
     
     var nodeAPI:UNodeAPI? {get set}
     
-   // func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
-    
     func getIdSearchResults(name:String, id:UNodeID)
     
     func getAddressSearchResults(id:UNodeID, address:UNodeAddress)
     
-  //  func getUNetworkError(error:UNetworkAPIError)
+    func getUNetworkError(error:UNetworkAPIError)
+    
+    func getDataPacket(name:String, envelope:UPacketEnvelope, data:[UInt64])
+
     
 }
 

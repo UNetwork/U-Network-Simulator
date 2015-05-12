@@ -26,7 +26,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var consoleWindow:ConsoleWindowController?
     var addNodesWindow:AddNodesWindowController?
     var statsWindow:StatsWindowController?
-    var nodeWindow:NodeWindowController?
     var settingsWindow:SettingsWindowController?
     var visualisationWindow:VisualisationWindowController?
     
@@ -106,21 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    @IBAction func showNodeInspectorWindow(sender: AnyObject)
-    {
-        if  let win = nodeWindow
-        {
-            nodeWindow!.showWindow(nil)
-            nodeWindow!.window?.makeKeyWindow()
-        }
-        else
-        {
-            let newWindow=NodeWindowController(windowNibName: "NodeWindow")
-            nodeWindow = newWindow
-            nodeWindow!.window?.makeKeyWindow()
-        }
 
-    }
     
     
     @IBAction func showStats(sender: AnyObject)

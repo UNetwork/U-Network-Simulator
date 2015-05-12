@@ -184,7 +184,7 @@ class UNode {
                 
                 case .Pong(let pongCargo): processPong(packet.envelope, pong: pongCargo); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
-                case .Data(let _): processData(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
+                case .Data(let dataCargo): processData(dataCargo, envelope: packet.envelope); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                 
                 case .DataDeliveryConfirmation(let _): processDataDeliveryConfirmation(packet); self.router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                     
@@ -477,9 +477,21 @@ class UNode {
         pingApp.recievedPong(pong.serialOfPing)
     }
     
-    func processData(packet:UPacket)
+    func processData(dataCargo:UPacketData, envelope:UPacketEnvelope)
     {
         nodeStats.addNodeStatsEvent(StatsEvents.DataRecieved)
+        var name = ""
+        
+        for knownID in knownIDs
+        {
+            if knownID.1.id.isEqual(envelope.orginatedByUID)
+            {
+                name = knownID.0
+            }
+        }
+        
+        self.dataApp.recieveDataPacketFromNetwork(name, dataCargo: dataCargo, envelope: envelope)
+        
     }
     
     func processDataDeliveryConfirmation(packet:UPacket)
