@@ -96,7 +96,7 @@ class UNAppSearch
         for (_, address) in enumerate(searchStoreAddresses)
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
-            let storeCargo=UPacketStoreIdForName(name: node.userName, id:node.id)
+            let storeCargo=UPacketStoreIdForName(name: node.ownerName, id:node.id)
             
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.StoreIdForName(storeCargo))
         }

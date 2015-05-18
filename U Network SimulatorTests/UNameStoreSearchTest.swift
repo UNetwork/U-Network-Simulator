@@ -73,8 +73,8 @@ class UNameStoreSearchTest: XCTestCase {
         
         sleep(1)
         
-   //     firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-     //   lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+   //     firstNode.searchApp.findIdForName(firstNode.ownerName, serial:random64())
+     //   lastNode.searchApp.findIdForName(firstNode.ownerName, serial:random64())
         
         sleep(1)
         
@@ -107,8 +107,8 @@ class UNameStoreSearchTest: XCTestCase {
   //      let lastNode=simulator.simulationNodes[simulator.simulationNodes.count - 1].node
         
         
-   //     firstNode.searchApp.findIdForName(firstNode.userName, serial:random64())
-  //      lastNode.searchApp.findIdForName(firstNode.userName, serial:random64())
+   //     firstNode.searchApp.findIdForName(firstNode.ownerName, serial:random64())
+  //      lastNode.searchApp.findIdForName(firstNode.ownerName, serial:random64())
         
         sleep(160)
         

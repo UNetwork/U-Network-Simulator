@@ -11,12 +11,5 @@ import Foundation
 
 protocol MediumProtocol
 {
-    
-    
-    
     func getPacketFromInterface (interface:UNetworkInterfaceProtocol, packet:UPacket)
-    
-    // find nodes in range
-    // deliver
-    
 }

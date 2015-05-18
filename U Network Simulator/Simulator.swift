@@ -295,7 +295,7 @@ class UNetworkSimulator:NSObject
         
         for aNode in self.simulationNodes.values
         {
-            if(aNode.node.userName == name)
+            if(aNode.node.ownerName == name)
             {
                 result = aNode.node
                 break
@@ -311,7 +311,7 @@ class UNetworkSimulator:NSObject
         {
             if(aNode.node.id.isEqual(id))
             {
-                return aNode.node.userName
+                return aNode.node.ownerName
             }
         }
         return "Unknown!"

@@ -23,6 +23,7 @@ protocol URouterProtocol
     
     func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
 
+    // This function is called by Node to process the tresspassing packet
     func getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol, packet:UPacket)
     
     func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)

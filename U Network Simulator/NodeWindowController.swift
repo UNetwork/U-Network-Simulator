@@ -385,7 +385,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
             
             
             var info = "Name: "
-            info += simNode.node.userName
+            info += simNode.node.ownerName
             info += ", "
             info += "\(simNode.node.id.txt) "
             info += "Lat: \(simNode.node.address.latitude), "

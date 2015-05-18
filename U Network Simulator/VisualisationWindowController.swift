@@ -21,8 +21,6 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     var connectionViews = [UInt64:ConnectionLayer]()
     var nodeInfoWindows = [UNodeID:NodeWindowController]()
     
-    
-    
     override func windowDidLoad()
     {
         super.windowDidLoad()
@@ -35,8 +33,6 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     
     override func  mouseDown(theEvent: NSEvent)
     {
-        
-        
         switch currentModeOfOperationForVisualisationVindow
         {
         case 0: processAddNode(theEvent)
@@ -44,9 +40,6 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
         case 2: processSelectMove(theEvent)
         default: log(7,"Please NO")
         }
-        
-        
-        
     }
     
     
@@ -70,18 +63,15 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
         
     }
     
+    
     func processAddNode(theEvent:NSEvent)
     {
         let simLatDelta = Float64 (simulator.maxLat - simulator.minLat)
         let simLongDelta = Float64(simulator.maxLong - simulator.minLong)
-        
         let newLat = Float64(simulator.minLat) + simLatDelta * Float64(((theEvent.locationInWindow.x - nodeLayerSize/2) / (theEvent.window!.contentView.frame.width - nodeLayerSize)))
         let newLong = Float64(simulator.minLong) + simLongDelta * Float64(((theEvent.locationInWindow.y - nodeLayerSize/2) / (theEvent.window!.contentView.frame.height - nodeLayerSize)))
-        
         let newAlt = simulator.maxAlt
-        
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: UInt64(newLat), inputLongitude: UInt64(newLong), inputAltitude: UInt64(newAlt)))
-        
     }
     
     func processSelectMove(theEvent:NSEvent)
@@ -107,13 +97,11 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
                 }
             }
         }
-        
-        
-        
     }
     
-    override func mouseDragged(theEvent: NSEvent) {
-        
+    
+    override func mouseDragged(theEvent: NSEvent)
+    {
         var selectedNodes = Set<NodeLayer>()
         
         if let sublayers = self.window!.contentView.layer!!.sublayers
@@ -123,10 +111,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
                 if aLayer is NodeLayer{
                     if ((aLayer as! NodeLayer).clicked)
                     {
-                        
                         selectedNodes.insert(aLayer as! NodeLayer)
-                        
-                        
                     }
                 }
             }
