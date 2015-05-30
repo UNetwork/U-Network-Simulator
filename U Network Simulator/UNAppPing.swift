@@ -33,7 +33,7 @@ class UNAppPing
         node.router.getPacketToRouteFromNode(pingEnvelope, cargo: pingPacketCargo)
     }
     
-    func recievedPong(serial:UInt64)
+    func receivedPong(serial:UInt64)
     {
         log(4, "------------ Ping From Ping App gots PONG \(node.txt)")
 

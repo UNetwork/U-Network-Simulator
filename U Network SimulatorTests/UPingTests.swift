@@ -28,13 +28,13 @@ class UPingTests: XCTestCase {
         println(stats.text)
         
         let pingSent = stats.values[StatsEvents.PingSent.rawValue]
-        let pingRecieved = stats.values[StatsEvents.PingRecieved.rawValue]
-        let pongRecieved = stats.values[StatsEvents.PongRecieved.rawValue]
+        let pingReceived = stats.values[StatsEvents.PingReceived.rawValue]
+        let pongReceived = stats.values[StatsEvents.PongReceived.rawValue]
         let returned = stats.values[StatsEvents.PacketReturnedToSender.rawValue]
         let dropped = stats.values[StatsEvents.PacketDropped.rawValue]
 
 
-        XCTAssert(pingRecieved == pongRecieved, "ping or pong lost")
+        XCTAssert(pingReceived == pongReceived, "ping or pong lost")
 
         
         

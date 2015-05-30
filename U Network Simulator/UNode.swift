@@ -48,7 +48,7 @@ class UNode {
     Router (protocol URouterProtocol)
     
     Router is responsible for:
-    - processsing all packets recieved by Node, but not addressed to it.
+    - processsing all packets received by Node, but not addressed to it.
     - keeping and managing the pocket stack.
     - selecting for each packet one of currently connected UNodes on all interfaces to transmit the packet to.
     - transmition confirmation send/recieve for each packet
@@ -181,7 +181,7 @@ class UNode {
     */
     
     // This function is called every time any of UNodes interface recieves any packet from the medium.
-    // The arguments are the interface which recieved the packet and the packet itself.
+    // The arguments are the interface which received the packet and the packet itself.
     func getPacketFromInterface(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         // First we check if packet address is broadcast type in packet's header
@@ -200,7 +200,7 @@ class UNode {
             {
                 switch packet.packetCargo
                 {
-                    // ReceptionConfirmation packet is send when the packet is sucessfully recieved by other node.
+                    // ReceptionConfirmation packet is send when the packet is sucessfully received by other node.
                 case .ReceptionConfirmation(let _): router.getReceptionConfirmation(interface, packet: packet)
                     
                     // ReplyForDiscovery packet is the anwser for the DiscoveryBroadcast packet
@@ -312,7 +312,7 @@ class UNode {
         interface.sendPacketToNetwork(replyPacket)
     }
     
-    // When node is sending Discovery Broadcast packet the reply, if recieved, is processed here
+    // When node is sending Discovery Broadcast packet the reply, if received, is processed here
     func processDiscoveryBroadcastreply(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
         // Check if replaying node is already on peers list, add to memoty table if not
@@ -442,7 +442,7 @@ class UNode {
         }
     }
     
-    // Here we store in memory recieved data from address store request
+    // Here we store in memory received data from address store request
     func processStoreAddressForId(interface:UNetworkInterfaceProtocol, header:UPacketHeader, envelope:UPacketEnvelope, request:UPacketStoreAddressForId)
     {
         // Stats
@@ -473,14 +473,14 @@ class UNode {
     // This function passes the obtained ID for Name search result to the node's searchApp
     func processIdSearchResults(envelope:UPacketEnvelope, searchResult:UPacketReplyForIdSearch)
     {
-        nodeStats.addNodeStatsEvent(StatsEvents.IdSearchResultRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.IdSearchResultReceived)
         self.searchApp.idFound(searchResult)
     }
     
     // This function passes the obtained address for ID search result to the node's searchApp
     func processAddressSearchResults(envelope:UPacketEnvelope, searchResult:UPacketReplyForAddressSearch)
     {
-        nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.AddressSearchResultReceived)
         self.searchApp.addressFound(searchResult)
     }
     
@@ -488,7 +488,7 @@ class UNode {
     func processPing(envelope:UPacketEnvelope, ping:UPacketPing)
     {
         // Stats
-        nodeStats.addNodeStatsEvent(StatsEvents.PingRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.PingReceived)
         
         // Pong envelope and cargo creation
         let newEnvelope = UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: envelope.orginatedByUID, toAddress: envelope.originAddress)
@@ -505,17 +505,17 @@ class UNode {
     func processPong(envelope:UPacketEnvelope, pong:UPacketPong)
     {
         //Stats
-        nodeStats.addNodeStatsEvent(StatsEvents.PongRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.PongReceived)
         
         // This is ping app task
-        pingApp.recievedPong(pong.serialOfPing)
+        pingApp.receivedPong(pong.serialOfPing)
     }
     
-    // The recieved Data packet is processed here
+    // The received Data packet is processed here
     func processData(dataCargo:UPacketData, envelope:UPacketEnvelope)
     {
         // Stats
-        nodeStats.addNodeStatsEvent(StatsEvents.DataRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.DataReceived)
         var name = ""
         
         // Lets Check if we have a name for the ID
@@ -536,7 +536,7 @@ class UNode {
     // Data delivery confirmation processing
     func processDataDeliveryConfirmation(packet:UPacket)
     {
-        nodeStats.addNodeStatsEvent(StatsEvents.DataConfirmationRecieved)
+        nodeStats.addNodeStatsEvent(StatsEvents.DataConfirmationReceived)
     }
     
     // Dropped packet processing
