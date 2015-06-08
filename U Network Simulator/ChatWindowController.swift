@@ -34,9 +34,11 @@ class ChatWindowController:NSWindowController, NSTableViewDataSource, NSTableVie
     
     override func windowDidLoad()
     {
+        super.windowDidLoad()
         avaliableNamesTable.setDataSource(self)
         avaliableNamesTable.setDelegate(self)
         nodeAPI!.launchApp(self)
+        self.window?.title = "Chat: " + nodeAPI!.node.ownerName
     }
 
     

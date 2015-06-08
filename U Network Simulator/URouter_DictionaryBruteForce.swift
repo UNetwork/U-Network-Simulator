@@ -189,7 +189,6 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             }
         }
     }
-
     
     // This function is called peridicaly to allow stack maintenance and packet resend.
     func maintenanceLoop()
@@ -557,6 +556,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         var corrLong = node.address.longitude
         var corrAlt = node.address.altitude
 
+        // Some lazy magic here - todo - improve to avoid overflows on bondaries
         if (address.latitude == maxLatitude)
         {
             corrLat = corrLat + (2 * wirelessInterfaceRange)
