@@ -265,6 +265,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     {
         super.windowDidLoad()
         theTabView.delegate = self
+        self.window?.title = currentNodeId.txt
 
  
         
@@ -349,13 +350,6 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     }
     
     
-    
-
-    
-    
-    
-    
-    
     func refreshCurrentViewTab()
     {
         let nameOfTab = theTabView.selectedTabViewItem!.label
@@ -380,13 +374,10 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
         if let simNode = simulator.simulationNodes[nodeId]
         {
             currentNodeId=nodeId
+            self.window?.title = simNode.node.ownerName
             nodeAPI=simNode.node.appsAPI
             
-            
-            
-            var info = "Name: "
-            info += simNode.node.ownerName
-            info += ", "
+            var info = ""
             info += "\(simNode.node.id.txt) "
             info += "Lat: \(simNode.node.address.latitude), "
             info += "Long: \(simNode.node.address.longitude), "
