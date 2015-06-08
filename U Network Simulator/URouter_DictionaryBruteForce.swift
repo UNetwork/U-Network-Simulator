@@ -121,7 +121,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             
             log(2,"R: \(node.txt) Received new packet")
             
-            // Create an excluded from selection peers array and add the sender of the packet to it
+            // Create an excluded peer list from selection peers array and add the sender of the packet to it
             var oneElementArray=[UNodeID]()
             oneElementArray.append(packet.header.transmitedByUID)
             
@@ -399,7 +399,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         }
         else
         {
-            // No peer found for the new packet - seems node has no peers
+            // No peer found for the new packet - seems node has no peers or error            
             log(2,"R: \(node.txt) Lonely node tried to send a packet, trying to refresh peers")
             
             // Find peers
