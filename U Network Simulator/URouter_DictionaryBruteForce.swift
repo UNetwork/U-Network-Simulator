@@ -483,7 +483,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         }
         else
         {
-            log(7,"The PeerDI provided to forwardPacketToPeer was not found")
+            log(7,"The PeerID provided to forwardPacketToPeer was not found")
         }
     }
     

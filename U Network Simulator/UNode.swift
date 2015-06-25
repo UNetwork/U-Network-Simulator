@@ -193,11 +193,21 @@ class UNode {
         }
         else
         {
-            // If packet is not broadcast it must has an ID in envelope.
+            // If packet is not broadcast it must have an ID in envelope.
             // We check if it is nodes own ID and if so, the packet is diassembled and processed to proper processing function.
             // Envelope address may be also brodcast type, but here it is used to distribute or search information in the network.
             if(packet.envelope.destinationUID.isEqual(self.id) || packet.envelope.destinationUID.isBroadcast())
             {
+                if (packet.lookUpRequest != nil)
+                {
+                    // Replay with Replay for NetworkLookup Request
+                    let response=UPacketReplyForNetworkLookupRequest(replayerID:self.id, replayerAddress:self.address, serial:packet.envelope.serial)
+                    let envelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: packet.lookUpRequest!.requester, toAddress: packet.lookUpRequest!.requesterAddress)
+                    let cargo=UPacketType.ReplyForNetworkLookupRequest(response)
+                    
+                    router.getPacketToRouteFromNode(envelope, cargo: cargo)
+
+                }
                 switch packet.packetCargo
                 {
                     // ReceptionConfirmation packet is send when the packet is sucessfully received by other node.
@@ -266,14 +276,45 @@ class UNode {
     // Trespassing packet processing
     func processTrespassingPacket(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
+        
         // Check if packet lifetime is not exeeded
         if(packet.header.lifeCounterAndFlags.lifeCounter > 0)
         {
             // This is call to add an event in node stats by the nodeStats app
             nodeStats.addNodeStatsEvent(StatsEvents.TrespassingPacketProcessedByNode)  // STATS
             
-            // The rest of the staff with tresspassing packet is done in router object. See the URouterProtocol for the details
-            router.getPacketToRouteFromNode(interface, packet:packet)
+            
+            // Check for Network Lookup request attached to the packet header
+            if(packet.lookUpRequest != nil)
+            {
+                nodeStats.addNodeStatsEvent(StatsEvents.LookupRequestProcessed)
+                
+                var modifiedPacket = packet
+                modifiedPacket.lookUpRequest!.counter.data--
+                if (modifiedPacket.lookUpRequest!.counter.data == 0)
+                {
+                    // Replay with Replay for NetworkLookup Request
+                    let response=UPacketReplyForNetworkLookupRequest(replayerID:self.id, replayerAddress:self.address, serial:packet.envelope.serial)
+                    let envelope=UPacketEnvelope(fromId: self.id, fromAddress: self.address, toId: modifiedPacket.lookUpRequest!.requester, toAddress: modifiedPacket.lookUpRequest!.requesterAddress)
+                    let cargo=UPacketType.ReplyForNetworkLookupRequest(response)
+                    
+                    router.getPacketToRouteFromNode(envelope, cargo: cargo)
+                    
+                    // delete request from the packet
+                    modifiedPacket.lookUpRequest=nil
+                    
+                    router.getPacketToRouteFromNode(interface, packet:modifiedPacket)
+                }
+                else
+                {
+                    router.getPacketToRouteFromNode(interface, packet:modifiedPacket)
+                }
+            }
+            else
+            {
+                // The rest of the staff with tresspassing packet is done in router object. See the URouterProtocol for the details
+                router.getPacketToRouteFromNode(interface, packet:packet)
+            }
         }
         else
         {

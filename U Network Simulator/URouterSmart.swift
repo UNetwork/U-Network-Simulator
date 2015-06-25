@@ -7,9 +7,49 @@
 
 import Foundation
 
+let numberOfDistanceRanges = UInt64(8)
+
 class URouterSmart: URouterSimpleDirection
 {
-    var smartRouterMemory = [UNodeID:SmartRouterRecord]()
+    
+    var sentNetworkLookupRequests = [UInt64:SentNetworkLookupRequestRecord]()
+    var replysForNetworkLookupRequest = [ReplyForNetworkLookupRequestRecord]()
+    
+    var bestPeersForDirectionAndDistance = [[UNodeID]]()
+    
+     override init(node:UNode)
+    {
+        
+        // Init arrays and sets BUT peers are not known yet?
+        
+        
+        super.init(node: node)
+    }
+    
+    override func selectPeerFromIndexListAfterExclusions(toAddress:UNodeAddress, peerIDs:[UNodeID]) -> UNodeID?
+    {
+        
+        var peersIDsSet = Set <UNodeID>()
+        
+        for anId in peerIDs{
+            peersIDsSet.insert(anId)
+        }
+        
+        var targetArray = bestPeersForDirectionAndDistance[(findDirectionFromAddress(node.address, toAddress).rawValue * 8) + Int(findDistanceRangeFromAddresses(node.address, toAddress))]
+        
+        var targetSet = Set <UNodeID>()
+        
+        for anId in targetArray{
+            targetSet.insert(anId)
+        }
+        
+        
+        var resultSet = targetSet.intersect(peersIDsSet)
+        
+        
+        
+        return resultSet.first
+    }
     
     override func   getPacketToRouteFromNode(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
@@ -27,18 +67,16 @@ class URouterSmart: URouterSimpleDirection
         
         super.getReceptionConfirmation(interface, packet: packet)
     }
+    
+    
 
     
-    override func selectPeerFromIndexListAfterExclusions(toAddress:UNodeAddress, peerIDs:[UNodeID]) -> UNodeID?
+    override func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
     {
-        var result:UNodeID?
-
         
-        
-        return result
     }
 
-
+    
     
 }
 
@@ -99,11 +137,11 @@ func findDirectionFromAddress (fromAddress:UNodeAddress, toAddress:UNodeAddress)
             {
                 result = NetworkDirection.NW
             }
-
+            
         }
         
     }
-        else
+    else
     {
         if deltaX >> 1  < deltaY
         {
@@ -132,16 +170,74 @@ func findDirectionFromAddress (fromAddress:UNodeAddress, toAddress:UNodeAddress)
             }
             
         }
-
+        
     }
     log(1, "the direction from \(fromAddress.txt) to \(toAddress.txt) is \(result.rawValue)")
     return result
 }
 
-struct SmartRouterRecord
+func findDistanceRangeFromAddresses(fromAddress:UNodeAddress, toAddress:UNodeAddress) -> UInt64
 {
-    var direction:NetworkDirection
-    var distance:UInt64
+    var deltaX = UInt64(0)
+    var deltaY = UInt64(0)
+    
+    if fromAddress.latitude > toAddress.latitude
+    {
+        deltaX = fromAddress.latitude - toAddress.latitude
+    }
+    else
+    {
+        deltaX = toAddress.latitude - fromAddress.latitude
+    }
+    
+    if fromAddress.longitude > toAddress.longitude
+    {
+        deltaY = fromAddress.longitude - toAddress.longitude
+    }
+    else
+    {
+        deltaY = toAddress.longitude - fromAddress.longitude
+    }
+    
+    
+    let distance = (deltaX + deltaY)/(2*wirelessInterfaceRange)
+    
+    
+    
+    var result = UInt64(0)
+    
+    for  i in 1...numberOfDistanceRanges
+    {
+        if ( (distance >> i) > 0 )
+        {
+            result = i
+        }
+        
+    }
+    
+    return result
+
+}
+
+
+struct SentNetworkLookupRequestRecord
+{
+    var serial:UInt64
+    var peerID:UNodeID
+    var toID:UNodeID
+    var toAddress:UNodeAddress
+    var requestedHoops:UInt64
+    var timer = UInt64(0)
+}
+
+struct ReplyForNetworkLookupRequestRecord
+{
+    var peerID:UNodeID
+    var toID:UNodeID
+    var toAddress:UNodeAddress
+    var requestedHoops:UInt64
+    var replayFromID:UNodeID
+    var replayFromAddress:UNodeAddress
 }
 
 enum NetworkDirection:Int
@@ -154,5 +250,5 @@ enum NetworkDirection:Int
     case SW
     case W
     case NW
-    
 }
+
