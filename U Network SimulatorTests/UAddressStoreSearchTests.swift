@@ -23,10 +23,10 @@ class UAddressStoreSearchTests: XCTestCase {
     {
         super.tearDown()
         
-        println(AppDelegate.sharedInstance.logText)
+        print(AppDelegate.sharedInstance.logText)
         let stats=simulationStats()
         
-        println(stats.text)
+        print(stats.text)
         
     }
 

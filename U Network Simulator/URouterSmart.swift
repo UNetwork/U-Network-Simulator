@@ -35,7 +35,7 @@ class URouterSmart: URouterSimpleDirection
             peersIDsSet.insert(anId)
         }
         
-        var targetArray = bestPeersForDirectionAndDistance[(findDirectionFromAddress(node.address, toAddress).rawValue * 8) + Int(findDistanceRangeFromAddresses(node.address, toAddress))]
+        var targetArray = bestPeersForDirectionAndDistance[(findDirectionFromAddress(node.address, toAddress: toAddress).rawValue * 8) + Int(findDistanceRangeFromAddresses(node.address, toAddress: toAddress))]
         
         var targetSet = Set <UNodeID>()
         
@@ -172,7 +172,7 @@ func findDirectionFromAddress (fromAddress:UNodeAddress, toAddress:UNodeAddress)
         }
         
     }
-    log(1, "the direction from \(fromAddress.txt) to \(toAddress.txt) is \(result.rawValue)")
+    log(1, text: "the direction from \(fromAddress.txt) to \(toAddress.txt) is \(result.rawValue)")
     return result
 }
 

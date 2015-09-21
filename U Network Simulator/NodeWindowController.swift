@@ -49,13 +49,13 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     
     @IBAction func pingAllSelectedNodes(sender: AnyObject)
     {
-        var pingToData = [UNodeID, UNodeAddress]()
+        var pingToData = [(UNodeID, UNodeAddress)]()
         let appdel = NSApplication.sharedApplication().delegate as! AppDelegate
         
         if let visWin = appdel.visualisationWindow
         {
             
-            for aView in visWin.window!.contentView.layer!!.sublayers
+            for aView in visWin.window!.contentView!.layer!.sublayers!
             {
                 if aView is NodeLayer
                 {
@@ -71,7 +71,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
                 }
             }
             
-            for (_, (id, address)) in enumerate(pingToData)
+            for (_, (id, address)) in pingToData.enumerate()
             {
                 if let nodeToPing = simulator.simulationNodes[currentNodeId]
                 {
@@ -149,7 +149,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
             }
         }
     
-        var id = UNodeID(lenght: idData.count)
+        let id = UNodeID(lenght: idData.count)
         
         id.data = idData
         
@@ -188,7 +188,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
             }
         }
         
-        var id = UNodeID(lenght: idData.count)
+        let id = UNodeID(lenght: idData.count)
         
         id.data = idData
         
@@ -286,7 +286,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
         case "Stats" : refreshNodeStatsView()
         case "Interfaces" : refreshNodeInterfacesView()
             
-        default : log(7,"Nope")
+        default : log(7,text: "Nope")
         }
         
         
@@ -328,7 +328,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
     
     func refreshNodeStatsView()
     {
-        log(7,"refreshing node stats view")
+        log(7,text: "refreshing node stats view")
         
         var result = ""
         
@@ -364,7 +364,7 @@ class NodeWindowController:NSWindowController, NSTabViewDelegate, NSTableViewDat
         case "Stats" : refreshNodeStatsView()
         case "Interfaces" : refreshNodeInterfacesView()
             
-        default : log(7,"Nope")
+        default : log(7,text: "Nope")
         }
 
     }

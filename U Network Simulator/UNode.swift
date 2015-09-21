@@ -127,7 +127,7 @@ class UNode {
         // address property initilised with special address considered as unknown address
         address = unknownNodeAddress
         
-        log(0,"UNode for owner: \(ownerName) created")
+        log(0,text: "UNode for owner: \(ownerName) created")
     }
     
     
@@ -149,7 +149,7 @@ class UNode {
         
         // Find address (location) from avaliable interfaces.
         // Some interfaces has it (wirelless) if found is taken as current node address
-        for (_, interface) in enumerate(self.interfaces)
+        for (_, interface) in self.interfaces.enumerate()
         {
             if let interfacePosition=interface.location
             {
@@ -170,7 +170,7 @@ class UNode {
         // Add own address data to knownAddresses table
         knownAddresses[self.id] = UMemoryIdAddressRecord(anAddress: self.address, aTime: self.nodeTime)
         
-        log(0,"UNode for owner: \(ownerName) initilised with address: \(address.txt)")
+        log(0,text: "UNode for owner: \(ownerName) initilised with address: \(address.txt)")
     }
     
     /*
@@ -256,7 +256,7 @@ class UNode {
                 case .Dropped(let droppedCargo): processDrop(packet.envelope, droppedPacket:droppedCargo); router.sendPacketDeliveryConfirmation(interface, packet: packet, rejected: false)
                     
                     // This should never happen
-                default: log(7, "Unknown packet type in UNode packet dispatch")
+                default: log(7, text: "Unknown packet type in UNode packet dispatch")
                     
                     // Note that router.sendPacketDeliveryConfirmation is called to confirm packet delivery. For the tresspassing packets this is done by router.
                 }
@@ -321,7 +321,7 @@ class UNode {
             // Packet liftime exeeded, we need to send dropped packet unless the packet is dropped type itself
             switch packet.packetCargo
             {
-            case .Dropped(let _): log(5, "N: \(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification to origin \(packet.txt)")
+            case .Dropped(let _): log(5, text: "N: \(self.txt) lifetime of dropped packet excedded - dropping dropped with no notification to origin \(packet.txt)")
             default: sendDropped(interface, packet:packet)
             }
         }
@@ -347,7 +347,7 @@ class UNode {
         // This is call to add an event in node stats by the nodeStats app
         nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastPacketProcessed)
         
-        log(2, "N: \(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
+        log(2, text: "N: \(self.txt) replyed for \(packet.txt) with \(replyPacket.txt) ")
         
         // Finaly we send the replay packet to the interface the discovery broadcast came from
         interface.sendPacketToNetwork(replyPacket)
@@ -368,7 +368,7 @@ class UNode {
                 // New peer discovered, adding to memory
                 let newPeerRecord=UPeerDataRecord(nodeId:packet.header.transmitedByUID, address:packet.envelope.originAddress, interface:interface)
                 self.peers[packet.header.transmitedByUID] = newPeerRecord
-                log(3,"\(self.ownerName) added a peer")
+                log(3,text: "\(self.ownerName) added a peer")
             }
         })
     }
@@ -378,7 +378,7 @@ class UNode {
     {
         // Stats
         nodeStats.addNodeStatsEvent(StatsEvents.SearchIdForNameProcessed)
-        log(2, "\(self.txt) Searching Id for name: \(request.name)")
+        log(2, text: "\(self.txt) Searching Id for name: \(request.name)")
         
         // Check if we have the ID for requested name in memory
         if let foundId=knownIDs[request.name]
@@ -678,7 +678,7 @@ class UNode {
         let broadcastDiscoveryPacket=UPacket(inputHeader: discoveryBroadcastPacketHeader, inputEnvelope: discoveryBroadcastPacketEnvelope, inputCargo: broadcastDiscovetyCargo)
         
         // Deliver the packet to all node's interfaces
-        for(_, interface) in enumerate(self.interfaces)
+        for(_, interface) in self.interfaces.enumerate()
         {
             self.nodeStats.addNodeStatsEvent(StatsEvents.DiscoveryBroadcastSent)
             interface.sendPacketToNetwork(broadcastDiscoveryPacket)
@@ -706,7 +706,7 @@ class UNode {
             var longitudeSum:UInt64 = 0
             var altitudeSum:UInt64 = 0
             
-            for (_, peer) in enumerate(self.peers.values)
+            for (_, peer) in self.peers.values.enumerate()
             {
                 latitudeSum+=peer.address.latitude
                 longitudeSum+=peer.address.longitude

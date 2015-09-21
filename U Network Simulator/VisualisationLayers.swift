@@ -16,7 +16,7 @@ let minNodeLayerSize = CGFloat(5)
 extension UNode {
     func visualistaionLayer(forLayer:CALayer) -> NodeLayer
     {
-        var result = NodeLayer()
+        let result = NodeLayer()
         
         result.forNode = self.id
         
@@ -60,7 +60,7 @@ class ConnectionLayer:CAShapeLayer
 
 func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, packet:UPacket) -> ConnectionLayer
 {
-    var result = ConnectionLayer()
+    let result = ConnectionLayer()
     
     
     var fX = Float64(0)
@@ -93,7 +93,7 @@ func createConnectionLayer(nodes fromId:UNodeID, toId:UNodeID, packet:UPacket) -
     var viewX=Float64(0)
     var viewY=Float64(0)
     
-    var aPath = CGPathCreateMutable()
+    let aPath = CGPathCreateMutable()
 
     if (fX < tX)
     {
@@ -185,7 +185,7 @@ func packetTypeInInt (packet:UPacket) -> Int
     case .DataDeliveryConfirmation(let _): result = 15
     case .Dropped(let _): result = 16
         
-    default: log(7, "Unknown packet type???")
+    default: log(7, text: "Unknown packet type???")
     }
     return result
 }

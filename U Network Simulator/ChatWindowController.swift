@@ -82,7 +82,7 @@ class ChatWindowController:NSWindowController, NSTableViewDataSource, NSTableVie
     
     func tableView(tableView: NSTableView, viewForTableColumn: NSTableColumn?, row: Int) -> NSView?
     {
-        let chatNames = chats.keys.array
+        let chatNames = Array(chats.keys)
         var aCell:NSTableCellView?
         aCell = avaliableNamesTable.makeViewWithIdentifier(viewForTableColumn!.title, owner: self) as! NSTableCellView
         

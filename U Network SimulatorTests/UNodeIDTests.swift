@@ -15,18 +15,18 @@ class UNodeIDTests: XCTestCase {
     
     func testUNodeID()
     {
-        var testVariable1=UNodeID(lenght: 1)
-        var testVariable1a=UNodeID(lenght: 1)
-        var testVariable1c=testVariable1
+        let testVariable1=UNodeID(lenght: 1)
+        let testVariable1a=UNodeID(lenght: 1)
+        let testVariable1c=testVariable1
         
-        var testVariable2=UNodeID(lenght: 2)
-        var testVariable2a=UNodeID(lenght: 2)
-        var testVariable2c=testVariable2
+        let testVariable2=UNodeID(lenght: 2)
+        let testVariable2a=UNodeID(lenght: 2)
+        let testVariable2c=testVariable2
         
         
-        var testVariable3=UNodeID(lenght: 3)
-        var testVariable3a=UNodeID(lenght: 3)
-        var testVariable3c=testVariable3
+        let testVariable3=UNodeID(lenght: 3)
+        let testVariable3a=UNodeID(lenght: 3)
+        let testVariable3c=testVariable3
         
         //FALSE
         XCTAssert(!testVariable1.isEqual(testVariable1a), "Equal function error")
@@ -43,7 +43,7 @@ class UNodeIDTests: XCTestCase {
         XCTAssert(testVariable3.isEqual(testVariable3c), "Equal function error")
         
         // broadcast id testing
-        var broadcatPacketId=UNodeID()
+        let broadcatPacketId=UNodeID()
 
         XCTAssert(broadcatPacketId.isBroadcast(), "Broadcast not detected")
         XCTAssert(!testVariable1.isBroadcast(), "Broadcast false positive")

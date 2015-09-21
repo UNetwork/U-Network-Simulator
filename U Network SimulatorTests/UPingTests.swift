@@ -22,10 +22,10 @@ class UPingTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
-        println(AppDelegate.sharedInstance.logText)
+        print(AppDelegate.sharedInstance.logText)
         let stats=simulationStats()
         
-        println(stats.text)
+        print(stats.text)
         
         let pingSent = stats.values[StatsEvents.PingSent.rawValue]
         let pingReceived = stats.values[StatsEvents.PingReceived.rawValue]
@@ -91,10 +91,10 @@ class UPingTests: XCTestCase {
         let delay = k*i*j/80
         
    //     createNodeMesh(k, i, j, distance, exampleNodeAddress, true)
-        log(5, "entering  \(delay) nap during initialisation ")
+        log(5, text: "entering  \(delay) nap during initialisation ")
 
        // sleep(delay)
-        log(5, "slepinig while netwoek setup in ping testing FINISHED")
+        log(5, text: "slepinig while netwoek setup in ping testing FINISHED")
         logLevel = 4
   
         let numberOfNodes=simulator.simulationNodes.count
@@ -111,7 +111,7 @@ class UPingTests: XCTestCase {
                    }
         
         
-log(5,"loop finished entering nap")
+log(5,text: "loop finished entering nap")
         
         sleep(25) // this must be adjusted to pass test on brute force routing to about k*i*j/12
         

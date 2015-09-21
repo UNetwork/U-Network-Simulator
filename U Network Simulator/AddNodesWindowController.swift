@@ -63,7 +63,7 @@ class AddNodesWindowController:NSWindowController
         let toLongValue = ULongitudeFloat(input: Float64(toLong.stringValue.floatValue))
         let toAltValue = UAltitudeFloat(input: Float64(toAlt.stringValue.floatValue))
         
-        let numberValue = number.stringValue.toInt()
+        let numberValue = Int(number.stringValue)
         
         let position = CoordinatesFloatDegreesAndAltitude(inputLatitude: fromLatValue, inputLongitude: fromLongValue, inputAltitude: fromAltValue)
         let convertedPosition = convertFlotingPointCoordinatesToUInt64(position)
@@ -71,9 +71,9 @@ class AddNodesWindowController:NSWindowController
         let deltaPosition = CoordinatesFloatDegreesAndAltitude(inputLatitude: toLatValue, inputLongitude: toLongValue, inputAltitude: toAltValue)
         let convertedDeltaPosition = convertFlotingPointCoordinatesToUInt64(deltaPosition)
         
-        let deltaLat = unsignedDifference(convertedPosition.latitude, convertedDeltaPosition.latitude)
-        let deltaLong = unsignedDifference(convertedPosition.longitude, convertedDeltaPosition.longitude)
-        let deltaAlt = unsignedDifference(convertedPosition.altitude, convertedDeltaPosition.altitude)
+        let deltaLat = unsignedDifference(convertedPosition.latitude, b: convertedDeltaPosition.latitude)
+        let deltaLong = unsignedDifference(convertedPosition.longitude, b: convertedDeltaPosition.longitude)
+        let deltaAlt = unsignedDifference(convertedPosition.altitude, b: convertedDeltaPosition.altitude)
 
         if let repetitions = numberValue
         {

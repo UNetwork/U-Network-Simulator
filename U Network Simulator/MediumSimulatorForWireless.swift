@@ -29,7 +29,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         // deliver stright
         func deliverStright(){
-            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            for (_, interfaceForDelivery) in interfacesForDelivery.enumerate()
             {
                 
                 if let visWindowController = appdel.visualisationWindow
@@ -44,7 +44,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         // deliver serial
         func deliverSerial(){
-            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            for (_, interfaceForDelivery) in interfacesForDelivery.enumerate()
             {
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -74,7 +74,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         // deliver paralel;
         func deliverpParalel(){
-            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            for (_, interfaceForDelivery) in interfacesForDelivery.enumerate()
             {
                 if let visWindowController = appdel.visualisationWindow
                 {
@@ -102,14 +102,14 @@ class MediumSimulatorForWireless:MediumProtocol
         
         
         
-        log(2, ">> \(packet.txt)")
+        log(2, text: ">> \(packet.txt)")
         
         
  
         
         if(packet.header.transmitedToUID.isBroadcast())
         {
-            for (_, interfaceForDelivery) in enumerate(interfacesForDelivery)
+            for (_, interfaceForDelivery) in interfacesForDelivery.enumerate()
             {
                 interfaceForDelivery.getPacketFromNetwork(packet)
             }
@@ -121,7 +121,7 @@ class MediumSimulatorForWireless:MediumProtocol
             case .Serial: deliverSerial()
             case .Stright: deliverStright()
             case .Paralel: deliverpParalel()
-            default: log(7, "Wrong processing type")
+            default: log(7, text: "Wrong processing type")
             }
             
         }
@@ -160,7 +160,7 @@ class MediumSimulatorForWireless:MediumProtocol
         
         for  simulationNode in simulator.simulationNodes.values
         {
-            for (_, interfaceToCheck) in enumerate(simulationNode.node.interfaces)
+            for (_, interfaceToCheck) in simulationNode.node.interfaces.enumerate()
             {
                 if let wirelessInterfaceToCheck = interfaceToCheck as? UNetworkInterfaceSimulationWireless
                 {
@@ -191,9 +191,9 @@ class MediumSimulatorForWireless:MediumProtocol
         let location1=interface1.realLocation
         let location2=interface2.realLocation
         
-        let latitudeDelta=unsignedDifference(location1.latitude, location2.latitude)
-        let longitudeDelta=unsignedDifference(location1.longitude, location2.longitude)
-        let altitudeDelta=unsignedDifference(location1.altitude, location2.altitude)
+        let latitudeDelta=unsignedDifference(location1.latitude, b: location2.latitude)
+        let longitudeDelta=unsignedDifference(location1.longitude, b: location2.longitude)
+        let altitudeDelta=unsignedDifference(location1.altitude, b: location2.altitude)
         
         
         // the "distance" check function :)

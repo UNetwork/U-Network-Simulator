@@ -50,7 +50,7 @@ struct UPacketEnvelope {
     
     func replyEnvelope() -> UPacketEnvelope
     {
-        var result=UPacketEnvelope(fromId: self.destinationUID, fromAddress: destinationAddress, toId: orginatedByUID, toAddress: originAddress)
+        let result=UPacketEnvelope(fromId: self.destinationUID, fromAddress: destinationAddress, toId: orginatedByUID, toAddress: originAddress)
         return result
     }
 }

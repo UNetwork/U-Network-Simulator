@@ -24,12 +24,12 @@ struct USimulationRealLocation
         privateAltitude=inputAltitude
         
         
-        log(0, "A URealLocation has been created with three UInt64s as argument. The data is:  \(self.privateLatitude) \(self.privateLongitude) \(self.privateAltitude)")
+        log(0, text: "A URealLocation has been created with three UInt64s as argument. The data is:  \(self.privateLatitude) \(self.privateLongitude) \(self.privateAltitude)")
         
         if(!(inputLatitude < 1 << 48 && inputLongitude < 1 << 48 && inputAltitude < 1 << 32))
             
         {
-            log(7,"URealLocation tree UInt64s init data correction occured")
+            log(7,text: "URealLocation tree UInt64s init data correction occured")
             
             if(inputLatitude >= 1 << 48)
             {

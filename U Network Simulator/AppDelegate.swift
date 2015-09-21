@@ -182,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let visWin = self.visualisationWindow?.window
         {
-            for aView in visWin.contentView.layer!!.sublayers
+            for aView in visWin.contentView!.layer!.sublayers!
             {
            
                if aView is NodeLayer

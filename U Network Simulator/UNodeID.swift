@@ -35,7 +35,7 @@ class UNodeID:Hashable
         }
         else
         {
-            var random=random64()
+            let random=random64()
             self.data.append(random)
             // Shortest id if wrong data
         }
@@ -54,7 +54,7 @@ class UNodeID:Hashable
         }
         else
         {
-            for (counter, datachunk) in enumerate(self.data)
+            for (counter, datachunk) in self.data.enumerate()
             {
                 if (to.data[counter] != datachunk)
                 {

@@ -16,7 +16,7 @@ class NodeMemoryWindowController:NSWindowController, NSTableViewDataSource, NSTa
     
     
     var dataForNameIdTable = [UNodeID:NameIdTableRecord]()
-    var memoryArrayToDisplay = [String, String, String]()
+    var memoryArrayToDisplay = [(String, String, String)]()
     
     
     struct NameIdTableRecord
@@ -47,7 +47,7 @@ class NodeMemoryWindowController:NSWindowController, NSTableViewDataSource, NSTa
         case "Name": aCell!.textField!.stringValue = record.0
         case "Id" :aCell!.textField!.stringValue = record.1
         case "Address": aCell!.textField!.stringValue = record.2
-        default: log(7,"FTW 55")
+        default: log(7,text: "FTW 55")
         }
         return aCell
 
@@ -90,7 +90,7 @@ class NodeMemoryWindowController:NSWindowController, NSTableViewDataSource, NSTa
                 
             }
             
-            memoryArrayToDisplay = [String, String, String]()
+            memoryArrayToDisplay = [(String, String, String)]()
             
             for data in dataForNameIdTable
             {

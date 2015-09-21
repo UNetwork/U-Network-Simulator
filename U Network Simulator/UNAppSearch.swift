@@ -33,7 +33,7 @@ class UNAppSearch
         idSearches[searchCargo.searchSerial] = newIdSearchEntry
         
 
-        for (_, address) in enumerate(searchStoreAddresses)
+        for (_, address) in searchStoreAddresses.enumerate()
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.SearchIdForName(searchCargo))
@@ -56,7 +56,7 @@ class UNAppSearch
         }
         else
         {
-            log(6,"No serial for id search, propably found ealier")
+            log(6,text: "No serial for id search, propably found ealier")
         }
     }
     
@@ -69,7 +69,7 @@ class UNAppSearch
         
         addressSearches[cargo.searchSerial] = newSearchForAddressRecord
      
-        for (_, address) in enumerate(searchStoreAddresses)
+        for (_, address) in searchStoreAddresses.enumerate()
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
             node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.SearchAddressForID(cargo))
@@ -93,7 +93,7 @@ class UNAppSearch
     
     func storeName()
     {
-        for (_, address) in enumerate(searchStoreAddresses)
+        for (_, address) in searchStoreAddresses.enumerate()
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
             let storeCargo=UPacketStoreIdForName(name: node.ownerName, id:node.id)
@@ -105,7 +105,7 @@ class UNAppSearch
     func storeAddress()
     {
         
-        for (_, address) in enumerate(searchStoreAddresses)
+        for (_, address) in searchStoreAddresses.enumerate()
         {
             let envelope=UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: UNodeID(), toAddress: address)
             let storeCargo=UPacketStoreAddressForId(anID: node.id, anAddress: node.address, aTime: node.timeCounter)

@@ -28,14 +28,14 @@ class UNAppPing
         self.sentPingSerialTable.append(pingCargo.serial)
         node.nodeStats.addNodeStatsEvent(StatsEvents.PingSent)
         
-        log(4, "------------ New Ping From Ping App \(node.txt)")
+        log(4, text: "------------ New Ping From Ping App \(node.txt)")
         
         node.router.getPacketToRouteFromNode(pingEnvelope, cargo: pingPacketCargo)
     }
     
     func receivedPong(serial:UInt64)
     {
-        log(4, "------------ Ping From Ping App gots PONG \(node.txt)")
+        log(4, text: "------------ Ping From Ping App gots PONG \(node.txt)")
 
         if(findSerialInSentPingTable(serial))
         {
@@ -52,7 +52,7 @@ class UNAppPing
     
     func findSerialInSentPingTable(serial:UInt64) -> Bool
     {
-        for(_, serialFromTable) in enumerate(sentPingSerialTable)
+        for(_, serialFromTable) in sentPingSerialTable.enumerate()
         {
             if(serialFromTable == serial)
             {

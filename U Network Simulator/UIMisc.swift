@@ -22,7 +22,7 @@ class ColorBox:NSButton {
     }
     
     override func drawRect(dirtyRect: NSRect) {
-        var bPath:NSBezierPath = NSBezierPath()
+        let bPath:NSBezierPath = NSBezierPath()
         bPath.appendBezierPathWithRoundedRect(self.bounds, xRadius: 10.0, yRadius: 10.0)
         
         color!.set()
