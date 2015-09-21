@@ -13,7 +13,7 @@ class UNodeAddressTests: XCTestCase {
     
     func testUNodeAddress(){
         
-        var a1=UNodeAddress(inputLatitude: 3, inputLongitude: 4, inputAltitude: 5)
+        let a1=UNodeAddress(inputLatitude: 3, inputLongitude: 4, inputAltitude: 5)
         
         XCTAssert( a1.latitude == 3 && a1.longitude == 4 && a1.altitude == 5, "345 not OK")
         
@@ -32,9 +32,9 @@ class UNodeAddressTests: XCTestCase {
         XCTAssert(testVariable.longitude == 2, "Data OK fail")
         XCTAssert(testVariable.altitude == 3, "Data OK fail")
         
-        var testVariable2=UNodeAddress(address: testVariable)
+        let testVariable2=UNodeAddress(address: testVariable)
         
-        var test = (testVariable.latitude == testVariable2.latitude) && (testVariable.longitude == testVariable2.longitude ) && (testVariable.altitude == testVariable2.altitude)
+        let test = (testVariable.latitude == testVariable2.latitude) && (testVariable.longitude == testVariable2.longitude ) && (testVariable.altitude == testVariable2.altitude)
         
         XCTAssert(test, "Copy failed" )
         

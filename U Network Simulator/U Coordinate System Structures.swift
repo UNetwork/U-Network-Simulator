@@ -24,7 +24,7 @@ struct ULatitudeFloat
         }
         else
         {
-            log(7,"ULattitudeFloat input out of range: \(input) of -90...90. Closest value taken.")
+            log(7,text: "ULattitudeFloat input out of range: \(input) of -90...90. Closest value taken.")
             if(input < -90.0)
             {
                 self.privateValue = -90.0
@@ -56,7 +56,7 @@ struct ULongitudeFloat
         }
         else
         {
-            log(7,"ULongitudeFloat input out of range: \(input) of -180...180. Value adjusted")
+            log(7,text: "ULongitudeFloat input out of range: \(input) of -180...180. Value adjusted")
             if(input < -180.0)
             {
                 self.privateValue = (input % 180.0) + 180.0
@@ -88,7 +88,7 @@ struct UAltitudeFloat
         }
         else
         {
-            log(7,"UAltitudeFloat input out of range: \(input) of -100,000.00...400,000,000. Closest value taken.")
+            log(7,text: "UAltitudeFloat input out of range: \(input) of -100,000.00...400,000,000. Closest value taken.")
             if(input < -100000.0)
             {
                 self.privateValue = -100000.0
@@ -135,7 +135,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude latitudeMM input out of range: \(inputLatitudeMM) of 0...59. Zero value taken.")
+            log(7,text: "CoordinatesDDMMSSAndAltitude latitudeMM input out of range: \(inputLatitudeMM) of 0...59. Zero value taken.")
             self.privateLatitudeMM = 0
         }
         
@@ -145,7 +145,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude latitudeSS input out of range: \(inputLatitudeSS) of 0.00..<60.0 Zero value taken.")
+            log(7,text: "CoordinatesDDMMSSAndAltitude latitudeSS input out of range: \(inputLatitudeSS) of 0.00..<60.0 Zero value taken.")
             self.privateLatitudeSS=0
             
         }
@@ -157,7 +157,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude latitudeDD input out of range: \(inputLatitudeDD) of -90...90. Closest value taken.")
+            log(7,text: "CoordinatesDDMMSSAndAltitude latitudeDD input out of range: \(inputLatitudeDD) of -90...90. Closest value taken.")
             if(inputLatitudeDD <= -90)
             {
                 self.privateLatitudeDD = -90
@@ -179,7 +179,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude LongitudeMM input out of range: \(inputLongitudeMM) of 0...59. Zero value taken.")
+            log(7,text: "CoordinatesDDMMSSAndAltitude LongitudeMM input out of range: \(inputLongitudeMM) of 0...59. Zero value taken.")
             self.privateLongitudeMM = 0
         }
         
@@ -189,7 +189,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude longitudeSS input out of range: \(inputLongitudeSS) of 0.00..<60.0 Zero value taken.")
+            log(7,text: "CoordinatesDDMMSSAndAltitude longitudeSS input out of range: \(inputLongitudeSS) of 0.00..<60.0 Zero value taken.")
             self.privateLongitudeSS=0
             
         }
@@ -202,7 +202,7 @@ struct CoordinatesDDMMSSAndAltitude
         }
         else
         {
-            log(7,"CoordinatesDDMMSSAndAltitude LongitudeDD input out of range: \(inputLongitudeDD) of -180...180. Value adjusted")
+            log(7,text: "CoordinatesDDMMSSAndAltitude LongitudeDD input out of range: \(inputLongitudeDD) of -180...180. Value adjusted")
             if(inputLongitudeDD <= -180)
             {
                 self.privateLongitudeDD = (inputLongitudeDD % 180) + 180

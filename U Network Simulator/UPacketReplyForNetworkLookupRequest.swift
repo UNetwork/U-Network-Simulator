@@ -9,5 +9,10 @@
 import Foundation
 
 struct UPacketReplyForNetworkLookupRequest {
-
+    
+    var replayerID:UNodeID
+    var replayerAddress:UNodeAddress
+    var serial:UInt64
+    
+    
 }

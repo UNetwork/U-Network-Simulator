@@ -34,7 +34,7 @@ class NodeRouterStackWindowController:NSWindowController,  NSTableViewDataSource
         case "wait": aCell!.textField!.stringValue = record.3
             
         case "packet": aCell!.textField!.stringValue = record.4
-        default: log(7,"FTW ddd300")
+        default: log(7,text: "FTW ddd300")
             
             
             

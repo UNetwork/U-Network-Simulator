@@ -48,7 +48,7 @@ func simulationStats() -> (text:String, values:[Int])
     
     for  simNode in simulator.simulationNodes.values
     {
-        for(i, value)in enumerate(simNode.node.nodeStats.nodeStats)
+        for(i, value)in simNode.node.nodeStats.nodeStats.enumerate()
         {
             globalStats[i]+=value
         }
@@ -111,15 +111,15 @@ func simulationStats() -> (text:String, values:[Int])
     result+="Number of nodes: \(numberOfNodes)\n"
     result+="Average peers: \(avgPeers) names: \(avgNames) addresses: \(avgAddresses)\n"
     
-    let minCoordinates=convertUInt64CoordinatesToFlotingPoint(minLat, minLong, minAlt)
-    let maxCoordinates=convertUInt64CoordinatesToFlotingPoint(maxLat, maxLong, maxAlt)
+    let minCoordinates=convertUInt64CoordinatesToFlotingPoint(minLat, inputLongitude: minLong, inputAltitude: minAlt)
+    let maxCoordinates=convertUInt64CoordinatesToFlotingPoint(maxLat, inputLongitude: maxLong, inputAltitude: maxAlt)
     
     result += "lat: \(minCoordinates.latitude.value) -  \(maxCoordinates.latitude.value)\n"
     result += "long: \(minCoordinates.longitude.value) - \(maxCoordinates.longitude.value)  \n"
     result += "alt: \(minCoordinates.altitude.value) - \(maxCoordinates.altitude.value) \n"
     
     result+="\nNumber of peers distribution:\n"
-    for (index, data) in enumerate(numberOfPeersDistribution)
+    for (index, data) in numberOfPeersDistribution.enumerate()
     {
         result+="\(index) : \(data)\n"
     }

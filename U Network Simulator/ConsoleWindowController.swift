@@ -40,7 +40,7 @@ class ConsoleWindowController:NSWindowController
         super.windowDidLoad()
         
         consoleTextView.editable = false
-        log(0,"console window loaded sucessfuly")
+        log(0,text: "console window loaded sucessfuly")
 
     }
 }

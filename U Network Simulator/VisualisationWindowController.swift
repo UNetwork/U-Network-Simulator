@@ -25,7 +25,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     {
         super.windowDidLoad()
         self.window?.delegate = self
-        var cv = self.window!.contentView as! NSView
+        var cv = self.window!.contentView!
         cv.wantsLayer = true
         refreshEverything()
     }
@@ -38,14 +38,14 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
         case 0: processAddNode(theEvent)
         case 1: processDeleteNodeclick(theEvent)
         case 2: processSelectMove(theEvent)
-        default: log(7,"Please NO")
+        default: log(7,text: "Please NO")
         }
     }
     
     
     func processDeleteNodeclick(theEvent:NSEvent)
     {
-        if let sublayers = self.window!.contentView.layer!!.sublayers
+        if let sublayers = self.window!.contentView!.layer!.sublayers
         {
             for aLayer in sublayers
             {
@@ -68,15 +68,15 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     {
         let simLatDelta = Float64 (simulator.maxLat - simulator.minLat)
         let simLongDelta = Float64(simulator.maxLong - simulator.minLong)
-        let newLat = Float64(simulator.minLat) + simLatDelta * Float64(((theEvent.locationInWindow.x - nodeLayerSize/2) / (theEvent.window!.contentView.frame.width - nodeLayerSize)))
-        let newLong = Float64(simulator.minLong) + simLongDelta * Float64(((theEvent.locationInWindow.y - nodeLayerSize/2) / (theEvent.window!.contentView.frame.height - nodeLayerSize)))
+        let newLat = Float64(simulator.minLat) + simLatDelta * Float64(((theEvent.locationInWindow.x - nodeLayerSize/2) / (theEvent.window!.contentView!.frame.width - nodeLayerSize)))
+        let newLong = Float64(simulator.minLong) + simLongDelta * Float64(((theEvent.locationInWindow.y - nodeLayerSize/2) / (theEvent.window!.contentView!.frame.height - nodeLayerSize)))
         let newAlt = simulator.maxAlt
         simulator.addWirelessNode(USimulationRealLocation(inputLatitude: UInt64(newLat), inputLongitude: UInt64(newLong), inputAltitude: UInt64(newAlt)))
     }
     
     func processSelectMove(theEvent:NSEvent)
     {
-        if let sublayers = self.window!.contentView.layer!!.sublayers
+        if let sublayers = self.window!.contentView!.layer!.sublayers
         {
             for aLayer in sublayers
             {
@@ -104,7 +104,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     {
         var selectedNodes = Set<NodeLayer>()
         
-        if let sublayers = self.window!.contentView.layer!!.sublayers
+        if let sublayers = self.window!.contentView!.layer!.sublayers
         {
             for aLayer in sublayers
             {
@@ -161,8 +161,8 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
                 {
                     
                     
-                    let newLat = Float64(simulator.minLat) + simLatDelta * Float64(((layerToMove.position.x - nodeLayerSize/2) / (theEvent.window!.contentView.frame.width - nodeLayerSize)))
-                    let newLong = Float64(simulator.minLong) + simLongDelta * Float64(((layerToMove.position.y - nodeLayerSize/2) / (theEvent.window!.contentView.frame.height - nodeLayerSize)))
+                    let newLat = Float64(simulator.minLat) + simLatDelta * Float64(((layerToMove.position.x - nodeLayerSize/2) / (theEvent.window!.contentView!.frame.width - nodeLayerSize)))
+                    let newLong = Float64(simulator.minLong) + simLongDelta * Float64(((layerToMove.position.y - nodeLayerSize/2) / (theEvent.window!.contentView!.frame.height - nodeLayerSize)))
                     
                     let newAlt = simulator.maxAlt   // take previous value
                     
@@ -214,7 +214,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     func addNodeLayer(aNodeLayer:NodeLayer)
     {
         self.nodeViews[aNodeLayer.forNode] = aNodeLayer
-        self.window?.contentView.layer!!.addSublayer(aNodeLayer)
+        self.window?.contentView!.layer!.addSublayer(aNodeLayer)
     }
     
     
@@ -223,7 +223,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
         let packetColor = packetTypeInInt(packet)
         if visiblePackets[packetColor]
         {
-            let rootLayer = self.window?.contentView.layer!!
+            let rootLayer = self.window?.contentView!.layer!
             let fadeAnimation = CABasicAnimation(keyPath: "opacity")
             
             fadeAnimation.fromValue = NSNumber(float: 1.0)
@@ -240,7 +240,7 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
             }
             else
             {
-                var newConnectionView = createConnectionLayer(nodes: fromId, toId, packet)
+                var newConnectionView = createConnectionLayer(nodes: fromId, toId: toId, packet: packet)
                 connectionViews[connectionViewHash] = newConnectionView
                 newConnectionView.opacity = 0
                 newConnectionView.addAnimation(fadeAnimation, forKey: "")
@@ -252,21 +252,21 @@ class VisualisationWindowController:NSWindowController, NSWindowDelegate
     
     func refreshEverything()
     {
-        if let visWinContentLayer = self.window?.contentView.layer
+        if let visWinContentLayer = self.window?.contentView!.layer
             
         {
             if simulator.simulationNodes.count > 1
             {
-                updateScaleForLayer(visWinContentLayer!)
+                updateScaleForLayer(visWinContentLayer)
             }
             
-            visWinContentLayer?.sublayers = nil
+            visWinContentLayer.sublayers = nil
             self.connectionViews = [UInt64:ConnectionLayer]()
             self.nodeViews = [UNodeID:NodeLayer]()
             
             for aSimulationNode in simulator.simulationNodes.values
             {
-                self.addNodeLayer(aSimulationNode.node.visualistaionLayer(visWinContentLayer!))
+                self.addNodeLayer(aSimulationNode.node.visualistaionLayer(visWinContentLayer))
             }
             
         }

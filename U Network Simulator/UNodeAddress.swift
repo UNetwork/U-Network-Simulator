@@ -50,11 +50,11 @@ struct UNodeAddress
         {
             self.low64Bits=((0xFFFF & inputAltitude)<<48 ) | inputLatitude
             self.high64Bits=((0xFFFF0000 & inputAltitude)<<32 ) | inputLongitude
-            log(0, "A UNodeAddress has been created with three UInt64s as argument. The data is:  \(self.latitude) \(self.longitude) \(self.altitude)")
+            log(0, text: "A UNodeAddress has been created with three UInt64s as argument. The data is:  \(self.latitude) \(self.longitude) \(self.altitude)")
         }
         else
         {
-            log(7,"UNodeAddress tree UInt64s init data correction occured")
+            log(7,text: "UNodeAddress tree UInt64s init data correction occured")
             var fixedLatitude = inputLatitude
             var fixedLongitude = inputLongitude
             var fixedAltitude = inputAltitude
@@ -89,7 +89,7 @@ struct UNodeAddress
     {
         self.low64Bits=address.low64Bits
         self.high64Bits=address.high64Bits
-        log(0, "A UNodeAddress has been created with UNodeAddress as argument. The data is:  \(self.latitude) \(self.longitude) \(self.altitude)")
+        log(0, text: "A UNodeAddress has been created with UNodeAddress as argument. The data is:  \(self.latitude) \(self.longitude) \(self.altitude)")
     }
     
      
@@ -127,9 +127,9 @@ struct UNodeAddress
     
     func positionToAddress(address:UNodeAddress) -> (deltaLat:Int64, deltaLong:Int64, deltaAlt:Int64)
     {
-        var deltaLat = positionDifference(self.latitude, to: address.latitude)
-        var deltaLong = positionDifference(self.longitude, to: address.longitude)
-        var deltaAlt:Int64 = positionDifference(self.altitude, to: address.altitude)
+        let deltaLat = positionDifference(self.latitude, to: address.latitude)
+        let deltaLong = positionDifference(self.longitude, to: address.longitude)
+        let deltaAlt:Int64 = positionDifference(self.altitude, to: address.altitude)
         
         return(deltaLat, deltaLong, deltaAlt)
     }
@@ -155,7 +155,7 @@ struct UNodeAddress
     var txt:String
     {
         var result=""
-        var coordinates=convertUInt64CoordinatesToFlotingPoint(self.latitude, self.longitude, self.altitude)
+        var coordinates=convertUInt64CoordinatesToFlotingPoint(self.latitude, inputLongitude: self.longitude, inputAltitude: self.altitude)
         result += "\(coordinates.latitude.value) \(coordinates.longitude.value) \(coordinates.altitude.value)"
         
         

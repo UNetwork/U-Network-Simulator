@@ -55,7 +55,7 @@ class UNodeCreationAndCommunicationTests: XCTestCase {
         sleep(10)
   //      XCTAssert(simulator.simulationNodes[0].node.nodeStats.nodeStats[StatsEvents.PingHadAPongWithProperSerial.rawValue] == 1, "no pong")
         
-        println(simulationStats())
+        print(simulationStats())
 
         
         

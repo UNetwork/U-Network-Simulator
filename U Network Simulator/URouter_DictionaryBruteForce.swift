@@ -40,7 +40,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             {
                 // The sender is rejecting the packet, we need to send the packet to other peer
                 
-                log(2, "R: \(node.txt) Processed packet with give up flag")
+                log(2, text: "R: \(node.txt) Processed packet with give up flag")
                 
                 // Stats
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketWithGiveUpFlagReceived)
@@ -51,7 +51,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                 // Try to find a peer the packet hasn't been sent before
                 if let peerIDToSendPacket = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIDs: peersIDs)
                 {
-                    log(2,"R: \(node.txt) Selected getPacketToRouteFromNode \(peerIDToSendPacket.txt)")
+                    log(2,text: "R: \(node.txt) Selected getPacketToRouteFromNode \(peerIDToSendPacket.txt)")
                     
                     // Update the packet's stack record by adding the chosen node
                     var updatedPacketRecord = packetRecord
@@ -73,7 +73,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                     if(packet.envelope.orginatedByUID.isEqual(node.id))
                     {
                         // This is our packet that cannot be send
-                        log(6,"\(node.txt) received back own packet and dont have any peer to forward it")
+                        log(6,text: "\(node.txt) received back own packet and dont have any peer to forward it")
                         node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
                     }
                     else
@@ -90,7 +90,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                         // Set up the giveup flag in the header
                         updatedPacket.header.lifeCounterAndFlags.setGiveUpFlag(true)
                         
-                        log(2,"R: \(node.txt) Returned TO: \(originID.txt) at \(node.peers[originID]?.address.txt)")
+                        log(2,text: "R: \(node.txt) Returned TO: \(originID.txt) at \(node.peers[originID]?.address.txt)")
                         
                         // Packet is sent to the peer it was received from first
                         forwardPacketToPeer(interface, packet: updatedPacket, peerID: originID)
@@ -103,7 +103,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                 // We already served this packet, and sender has other peers to send it, so the negative packet delivery (rejected) is send
                 
                 // Log & Stats
-                log(2,"R: \(node.txt) Rejected \(packet.txt) ")
+                log(2,text: "R: \(node.txt) Rejected \(packet.txt) ")
                 node.nodeStats.addNodeStatsEvent(StatsEvents.PacketRejected)
                 
                 // We add to packets's sent history peer we received the packet from
@@ -119,9 +119,9 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         {
             // The packet is a new packet - the serial number was not found in stack dictionary
             
-            log(2,"R: \(node.txt) Received new packet")
+            log(2,text: "R: \(node.txt) Received new packet")
             
-            // Create an excluded from selection peers array and add the sender of the packet to it
+            // Create an excluded peer list from selection peers array and add the sender of the packet to it
             var oneElementArray=[UNodeID]()
             oneElementArray.append(packet.header.transmitedByUID)
             
@@ -132,7 +132,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             if let peerToSendPacketID = selectPeerFromIndexListAfterExclusions(packet.envelope.destinationAddress, peerIDs: peersOtherThanSender)
             {
                 // Peer to send sucessfully selected
-                log(2,"R: \(node.txt) Selected getPacketToRouteFromNode \(node.peers[peerToSendPacketID]!.id.txt) ")
+                log(2,text: "R: \(node.txt) Selected getPacketToRouteFromNode \(node.peers[peerToSendPacketID]!.id.txt) ")
                 
                 // This is new packet so add it to packet's stack
                 // First create empty array on nodes the packet was sent
@@ -154,7 +154,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             else
             {
                 // The peer was not found - try to refresh th peers and if the number of peers changed try to select
-                log(2, "R: \(node.txt) cannot find a peer for a new packet, refreshing peers")
+                log(2, text: "R: \(node.txt) cannot find a peer for a new packet, refreshing peers")
                 
                 // Save current number of peers
                 let currentPeersCount = node.peers.count
@@ -174,14 +174,14 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                 if node.peers.count > currentPeersCount // this must be done better, by checking if anything peer changed in any peer, especialy the active property
                 {
                     // Refreshing peers changed the peers dictionary
-                    log(2, "R: \(node.txt) refreshing peers worked somehow, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(interface,packet)")
+                    log(2, text: "R: \(node.txt) refreshing peers worked somehow, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(interface,packet)")
                     
                     // So start the function again with entry parameters
                     getPacketToRouteFromNode(interface,packet: packet)
                 }
                 else
                 {
-                    log(2, "R: \(node.txt) cannot find a peer for a new packet, refreshing peers faild, rejecting")
+                    log(2, text: "R: \(node.txt) cannot find a peer for a new packet, refreshing peers faild, rejecting")
                     
                     // No change in peers dictionary, reject (rejected: true) the packet to the node send it here
                     sendPacketDeliveryConfirmation(interface, packet: packet, rejected: true)
@@ -239,7 +239,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         switch packet.packetCargo
         {
         case .ReceptionConfirmation(let recptionConfirmation): returningPacketSerial = recptionConfirmation.serial
-        default: log(6, "Packet type error in getReceptionConfirmation")
+        default: log(6, text: "Packet type error in getReceptionConfirmation")
         }
         
         // Find the packet the reception confirmation is about
@@ -280,7 +280,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         {
             // Delivery confirmation packet serial not found on packet stack - this happends sometimes
             // I dont know why
-            log(6,"R: \(node.txt) delivery confirmation packet serial: \(returningPacketSerial) not found on packet stack ")
+            log(6,text: "R: \(node.txt) delivery confirmation packet serial: \(returningPacketSerial) not found on packet stack ")
         }
         
     }
@@ -301,7 +301,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             // Find peer to send to
             if let peerToSend = selectPeerFromIndexListAfterExclusions(stackRecord.packet.envelope.destinationAddress, peerIDs:selectPeersExcluding(stackRecord.sentToNodes ))
             {
-                log(2,"R: \(node.txt) Selected getPacketToRouteFromStack  \(peerToSend.txt)")
+                log(2,text: "R: \(node.txt) Selected getPacketToRouteFromStack  \(peerToSend.txt)")
                 
                 var updatedStackRecord = stackRecord
                 updatedStackRecord.sentToNodes.append(peerToSend)
@@ -320,13 +320,13 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                 if(stackRecord.receivedFrom.isEqual(node.id))
                 {
                     // Packet returned to tge originator without possibilities to send it
-                    log(6, "R: \(node.txt) Returned after checking all possibilities")
+                    log(6, text: "R: \(node.txt) Returned after checking all possibilities")
                     node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
                 }
                 else
                 {
                     // No peers to send packet to - resending to the peer which sent it to the node
-                    log(2, "R: \(node.txt) Resending packet from stack to the peer that sent it to node")
+                    log(2, text: "R: \(node.txt) Resending packet from stack to the peer that sent it to node")
                     
                     // Unwrap the data
                     var packetToResend=stackRecord.packet
@@ -347,7 +347,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
                     else
                     {
                         // We cant do anything but send the dropped packet to the originator of the packet
-                        log(6, "R: \(node.txt) Packet lost - no geniue peer aveliable")
+                        log(6, text: "R: \(node.txt) Packet lost - no geniue peer aveliable")
                         node.sendDropped(nil, packet: stackRecord.packet)
                     }
                     
@@ -358,7 +358,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         else
         {
             // The packet with requested serial was not found on the stack - deleted too early
-            log(6, "R: \(node.txt) No packet found on stack for resend")
+            log(6, text: "R: \(node.txt) No packet found on stack for resend")
         }
     }
     
@@ -366,13 +366,13 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
     func getPacketToRouteFromNode(envelope:UPacketEnvelope, cargo:UPacketType)
     {
         // Stats
-        log(2,"R: \(node.txt) Created packet from envelope and cargo")
+        log(2,text: "R: \(node.txt) Created packet from envelope and cargo")
         
         // Depending of packet type select proper liftime
         let packetLiftime = (envelope.destinationUID.isBroadcast() ? defaultStoreSearchDepth : standardPacketLifeTime)
         
         // Find a peer to send from all peers
-        if let peerToSendID = selectPeerFromIndexListAfterExclusions(envelope.destinationAddress, peerIDs: node.peers.keys.array)
+        if let peerToSendID = selectPeerFromIndexListAfterExclusions(envelope.destinationAddress, peerIDs: Array(node.peers.keys))
         {
             // Create packet's header
             var header=UPacketHeader(from: node.id, to: peerToSendID, lifeTime: packetLiftime)
@@ -380,7 +380,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             // Assemble the packet
             let packet=UPacket(inputHeader: header, inputEnvelope: envelope, inputCargo: cargo)
             
-            log(2,"R: \(node.txt) Selected getPacketToRouteFromNode (E&C) \(peerToSendID.txt)")
+            log(2,text: "R: \(node.txt) Selected getPacketToRouteFromNode (E&C) \(peerToSendID.txt)")
             
             // Create empty array for peers that the packet was dent to
             var sentArray=[UNodeID]()
@@ -399,8 +399,8 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         }
         else
         {
-            // No peer found for the new packet - seems node has no peers
-            log(2,"R: \(node.txt) Lonely node tried to send a packet, trying to refresh peers")
+            // No peer found for the new packet - seems node has no peers or error            
+            log(2,text: "R: \(node.txt) Lonely node tried to send a packet, trying to refresh peers")
             
             // Find peers
             node.refreshPeers()
@@ -411,14 +411,14 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             // If we have some peers, resend the packet
             if node.peers.count > 0
             {
-                log(2,"R: \(node.txt) refreshing peers helped, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(envelope, cargo)")
+                log(2,text: "R: \(node.txt) refreshing peers helped, we have \(node.peers.count) peers, reentering getPacketToRouteFromNode(envelope, cargo)")
                 
                 // Reenter function
                 getPacketToRouteFromNode(envelope, cargo: cargo)
             }
             else
             {
-                log(6,"R: \(node.txt) Lonely node tried to send a packet, refreshing peers didnt help")
+                log(6,text: "R: \(node.txt) Lonely node tried to send a packet, refreshing peers didnt help")
                 
             }
             node.nodeStats.addNodeStatsEvent(StatsEvents.PacketReturnedToSender)
@@ -483,7 +483,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
         }
         else
         {
-            log(7,"The PeerDI provided to forwardPacketToPeer was not found")
+            log(7,text: "The PeerID provided to forwardPacketToPeer was not found")
         }
     }
     
@@ -500,7 +500,7 @@ class URouter_DictionaryBruteForceRouting:URouterProtocol
             var addCurrentPeer=true
             if node.peers[peerID]?.active == true
             {
-                for (_, excudedId) in enumerate(excludedNodeIDs)
+                for (_, excudedId) in excludedNodeIDs.enumerate()
                 {
                     if(peerID.isEqual(excudedId))
                     {

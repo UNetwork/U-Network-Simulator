@@ -47,31 +47,31 @@ class UNetworkSimulator:NSObject
     func addNodes(configurations:[SimulationNodeConfiguration])
     {
         
-        for (index, configurationData) in enumerate(configurations)
+        for (_, configurationData) in configurations.enumerate()
         {
-            var node=UNode()
+            let node=UNode()
             
-            for (index, wirelessInterfaceConfiguration) in enumerate(configurationData.simulationWirelessInterfeces)
+            for (_, wirelessInterfaceConfiguration) in configurationData.simulationWirelessInterfeces.enumerate()
             {
-                var wirelessInterface=UNetworkInterfaceSimulationWireless(node: node, location: wirelessInterfaceConfiguration.location)
+                let wirelessInterface=UNetworkInterfaceSimulationWireless(node: node, location: wirelessInterfaceConfiguration.location)
                 node.interfaces.append(wirelessInterface)
             }
             
-            for (index, internetInterfaceConfiguration) in enumerate(configurationData.simulationInternetInterfaces)
+            for (_, internetInterfaceConfiguration) in configurationData.simulationInternetInterfaces.enumerate()
             {
-                var internetInterface=UNetworkInterfaceSimulationInternet(node: node, tCPAddress: internetInterfaceConfiguration.tCPIPAddress)
+                let internetInterface=UNetworkInterfaceSimulationInternet(node: node, tCPAddress: internetInterfaceConfiguration.tCPIPAddress)
                 node.interfaces.append(internetInterface)
             }
             
-            for (index, ethernetInterfaceConfiguration) in enumerate(configurationData.simulationEthernetInterfaces)
+            for (_, ethernetInterfaceConfiguration) in configurationData.simulationEthernetInterfaces.enumerate()
             {
-                var ethernetInterface=UNetworkInterfaceSimulationEthernet(node: node, hub: ethernetInterfaceConfiguration.hubNumber)
+                let ethernetInterface=UNetworkInterfaceSimulationEthernet(node: node, hub: ethernetInterfaceConfiguration.hubNumber)
                 node.interfaces.append(ethernetInterface)
             }
             
-            for (index, bridgeInterfaceConfiguration) in enumerate(configurationData.simulationBridgeInterfaces)
+            for (_, bridgeInterfaceConfiguration) in configurationData.simulationBridgeInterfaces.enumerate()
             {
-                var bridgeInterface=UNetworkInterfaceSimulationBridge(node: node, bridge: bridgeInterfaceConfiguration.bridgeNumber)
+                let bridgeInterface=UNetworkInterfaceSimulationBridge(node: node, bridge: bridgeInterfaceConfiguration.bridgeNumber)
                 node.interfaces.append(bridgeInterface)
             }
             
@@ -121,7 +121,7 @@ class UNetworkSimulator:NSObject
                 }
                 else
                 {
-                    visWin.addNodeLayer(node.visualistaionLayer(visWin.window!.contentView.layer!!))
+                    visWin.addNodeLayer(node.visualistaionLayer(visWin.window!.contentView!.layer!))
                 }
             }
             
@@ -160,16 +160,16 @@ class UNetworkSimulator:NSObject
     func openNodeMap()
     {
         
-        var panel=NSOpenPanel()
+        let panel=NSOpenPanel()
         
-        var panelhandler = panel.runModal()
+        let panelhandler = panel.runModal()
         
         if (panelhandler==NSModalResponseOK)
         {
             
             let fileContent=NSArray(contentsOfURL: panel.URL!)
 
-            log(7,"wireless in file: \(fileContent![0].count)")
+            log(7,text: "wireless in file: \(fileContent![0].count)")
             
             for index in 0 ..< fileContent![0].count
             {
@@ -202,8 +202,8 @@ class UNetworkSimulator:NSObject
     {
         var dataForSave = [AnyObject]()
 
-        var panel = NSSavePanel()
-        var panelHandler = panel.runModal()
+        let panel = NSSavePanel()
+        let panelHandler = panel.runModal()
         if (panelHandler == NSModalResponseOK)
         {
             var wireless = [[NSNumber]]()
@@ -222,7 +222,7 @@ class UNetworkSimulator:NSObject
                 
                 
                 
-                for (index, wirelessInterfaceConfiguration) in enumerate(configurationToSave.simulationWirelessInterfeces)
+                for (_, wirelessInterfaceConfiguration) in configurationToSave.simulationWirelessInterfeces.enumerate()
                 {
                     
                     var nsposition = [NSNumber]()
@@ -239,18 +239,18 @@ class UNetworkSimulator:NSObject
                     
                 }
                 
-                for (index, internetInterfaceConfiguration) in enumerate(configurationToSave.simulationInternetInterfaces)
+                for (_, internetInterfaceConfiguration) in configurationToSave.simulationInternetInterfaces.enumerate()
                 {
                     internets.append(NSNumber(unsignedInt: internetInterfaceConfiguration.tCPIPAddress))
                 }
                 
-                for (index, ethernetInterfaceConfiguration) in enumerate(configurationToSave.simulationEthernetInterfaces)
+                for (_, ethernetInterfaceConfiguration) in configurationToSave.simulationEthernetInterfaces.enumerate()
                 {
                     ethernets.append(NSNumber(unsignedLong: ethernetInterfaceConfiguration.hubNumber))
                     
                 }
                 
-                for (index, bridgeInterfaceConfiguration) in enumerate(configurationToSave.simulationBridgeInterfaces)
+                for (_, bridgeInterfaceConfiguration) in configurationToSave.simulationBridgeInterfaces.enumerate()
                 {
                     bridges.append(NSNumber(unsignedLong: bridgeInterfaceConfiguration.bridgeNumber))
                 }
@@ -268,14 +268,14 @@ class UNetworkSimulator:NSObject
             
             
             
-            var plist = NSPropertyListSerialization.dataFromPropertyList(dataForSave, format:NSPropertyListFormat.XMLFormat_v1_0, errorDescription: &error)
+            let plist = NSPropertyListSerialization.dataFromPropertyList(dataForSave, format:NSPropertyListFormat.XMLFormat_v1_0, errorDescription: &error)
             
             
             plist?.writeToURL(panel.URL!, atomically: true)
             
             //  currentFilePath=panel.URL
         }
-        else if (panelHandler == NSCancelButton)
+        else if (panelHandler == NSModalResponseCancel)
         {
             return
         }

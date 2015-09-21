@@ -157,7 +157,7 @@ class UNAppDataTransfer:UAppProtocol
     
     func getIdSearchResults(name:String, id:UNodeID)
     {
-        log(6,"searching id")
+        log(6,text: "searching id")
 
         if let stackForName = stack[name]
         {
@@ -182,7 +182,7 @@ class UNAppDataTransfer:UAppProtocol
         }
         else
         {
-            log(6, "No name found for id search replay")
+            log(6, text: "No name found for id search replay")
         }
         
         
@@ -202,7 +202,7 @@ class UNAppDataTransfer:UAppProtocol
                 break
             }
         }
-        log(6,"searching address for name: \(name) \(id.txt)")
+        log(6,text: "searching address for name: \(name) \(id.txt)")
 
         if name != ""
         {
@@ -222,7 +222,7 @@ class UNAppDataTransfer:UAppProtocol
                     
                     var envelope = UPacketEnvelope(fromId: node.id, fromAddress: node.address, toId: changedRecord.1.destinationID!, toAddress:changedRecord.1.destinationAddress!)
                     
-                    log(6,"collected data sending packets")
+                    log(6,text: "collected data sending packets")
                     node.router.getPacketToRouteFromNode(envelope, cargo: UPacketType.Data(changedRecord.1.dataCargo))
                     
                      changedRecord.1.status = UDataTransferStatus.transmitted
@@ -238,7 +238,7 @@ class UNAppDataTransfer:UAppProtocol
         }
         else
         {
-            log(6, "No name found for address search replay")
+            log(6, text: "No name found for address search replay")
         }
 
         

@@ -23,7 +23,7 @@ protocol URouterProtocol
     // This function is called when confirmation of the packet reception is received by node
     func getReceptionConfirmation(interface:UNetworkInterfaceProtocol, packet:UPacket)
     
-    // This function processes the anwser for NetworkLookupRequwst attached to an tresspasing packet
+    // This function processes the anwser for NetworkLookupRequest attached to an tresspasing packet
     func getReplyForNetworkLookupRequest(interface:UNetworkInterfaceProtocol, packet:UPacket)
 
     // This function is called by Node to process the tresspassing packet

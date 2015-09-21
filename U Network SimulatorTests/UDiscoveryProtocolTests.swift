@@ -21,8 +21,8 @@ class UDiscoveryProtocolTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
-        println(simulationStats())
-        println(AppDelegate.sharedInstance.logText)
+        print(simulationStats())
+        print(AppDelegate.sharedInstance.logText)
     }
     
     func testBroadcastSimple()

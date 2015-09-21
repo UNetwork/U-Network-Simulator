@@ -144,7 +144,7 @@ class SettingsWindowController:NSWindowController
         case 0: processingMode = ProcessingType.Stright
         case 1: processingMode = ProcessingType.Serial
         case 2: processingMode = ProcessingType.Paralel
-        default: log(7,"Unknown processing type selected")
+        default: log(7,text: "Unknown processing type selected")
         }
     }
     

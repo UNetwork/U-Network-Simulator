@@ -31,7 +31,7 @@ func log(level:Int, text:String)
 {
     if (logLevel <= level)
     {
-        println(text)
+        print(text)
         AppDelegate.sharedInstance.logText+=text+"\n"
         AppDelegate.sharedInstance.logChanged=true
     }
@@ -63,11 +63,11 @@ func randomUserName (len : Int) -> String {
     
     let letters : NSString = "aaaaaabbbccccddddeeeeeffghhhiiiiiijjjkkkkklllmmmnnnooooopppqrrrrssstttuuuuuvwwxyyzz"
     
-    var randomString : NSMutableString = NSMutableString(capacity: len)
+    let randomString : NSMutableString = NSMutableString(capacity: len)
     
     for (var i=0; i < len; i++){
-        var length = UInt32 (letters.length)
-        var rand = arc4random_uniform(length)
+        let length = UInt32 (letters.length)
+        let rand = arc4random_uniform(length)
         randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
     }
     

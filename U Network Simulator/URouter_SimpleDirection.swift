@@ -33,9 +33,9 @@ class URouterSimpleDirection: URouter_DictionaryBruteForceRouting
         {
             for anID in peerIDs
             {
-                let dlat=unsignedDifference(address.latitude, node.peers[anID]!.address.latitude)
-                let dlong=unsignedDifference(address.longitude, node.peers[anID]!.address.longitude)
-                let dalt=unsignedDifference(address.altitude, node.peers[anID]!.address.altitude)
+                let dlat=unsignedDifference(address.latitude, b: node.peers[anID]!.address.latitude)
+                let dlong=unsignedDifference(address.longitude, b: node.peers[anID]!.address.longitude)
+                let dalt=unsignedDifference(address.altitude, b: node.peers[anID]!.address.altitude)
                 
                 if ( dlat + dlong + dalt < smallestDifferenceToAddress)
                 {

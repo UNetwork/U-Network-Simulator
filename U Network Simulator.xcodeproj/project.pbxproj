@@ -32,6 +32,8 @@
 		FE5BC8131A9738F80040F7BD /* UNodeAPIForApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */; };
 		FE5BC8151A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
 		FE5BC8161A9739650040F7BD /* Constants Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BC8141A9739650040F7BD /* Constants Definitions.swift */; };
+		FE5F3EBA1B25718D00B55FED /* URouterSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5F3EB91B25718D00B55FED /* URouterSmart.swift */; };
+		FE5F3EBB1B25718D00B55FED /* URouterSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5F3EB91B25718D00B55FED /* URouterSmart.swift */; };
 		FE60F0301ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */; };
 		FE60F0311ACFE0D80049DA76 /* AddNodesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */; };
 		FE60F0331ACFF1FE0049DA76 /* NodeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */; };
@@ -193,6 +195,7 @@
 		FE5BC80F1A971D5C0040F7BD /* USimulationRealLocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = USimulationRealLocationTests.swift; path = "U Network SimulatorTests/USimulationRealLocationTests.swift"; sourceTree = "<group>"; };
 		FE5BC8111A9738F80040F7BD /* UNodeAPIForApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNodeAPIForApps.swift; path = "U Network Simulator/UNodeAPIForApps.swift"; sourceTree = "<group>"; };
 		FE5BC8141A9739650040F7BD /* Constants Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Constants Definitions.swift"; path = "U Network Simulator/Constants Definitions.swift"; sourceTree = "<group>"; };
+		FE5F3EB91B25718D00B55FED /* URouterSmart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URouterSmart.swift; path = "U Network Simulator/URouterSmart.swift"; sourceTree = "<group>"; };
 		FE60F02F1ACFE0D80049DA76 /* AddNodesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNodesWindowController.swift; sourceTree = "<group>"; };
 		FE60F0321ACFF1FE0049DA76 /* NodeWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeWindowController.swift; sourceTree = "<group>"; };
 		FE60F0351ACFF50A0049DA76 /* StatsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
@@ -479,6 +482,7 @@
 			children = (
 				FE2ED2101AF2307600E8F9E4 /* URouter_DictionaryBruteForce.swift */,
 				FEBFCDC71AAF7CFA00E09666 /* URouter_SimpleDirection.swift */,
+				FE5F3EB91B25718D00B55FED /* URouterSmart.swift */,
 			);
 			name = "U Routing";
 			sourceTree = "<group>";
@@ -562,6 +566,8 @@
 		FEB5E3E21A89E05B00A459E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = U;
 				TargetAttributes = {
@@ -643,6 +649,7 @@
 				FEE899811A99E5B90057ACD7 /* UNetworkInterfaceProtocol.swift in Sources */,
 				FEA0072C1A9DCCB00047E3B5 /* MediumSimulatorForInternet.swift in Sources */,
 				FEA94DD01AB1EC230048DFD3 /* UPacketStoreNameReplay.swift in Sources */,
+				FE5F3EBA1B25718D00B55FED /* URouterSmart.swift in Sources */,
 				FE4D6A8D1AA59223008B3B4E /* UAppProtocol.swift in Sources */,
 				FEED382F1AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
 				FEED381F1AA2497800BB3C26 /* UPacketData.swift in Sources */,
@@ -778,6 +785,7 @@
 				FE45B7E31A93492200B82E5E /* USimulationRealLocation.swift in Sources */,
 				FEED38361AA2497800BB3C26 /* Global Objects.swift in Sources */,
 				FEED38281AA2497800BB3C26 /* UPacketSearchIdForName.swift in Sources */,
+				FE5F3EBB1B25718D00B55FED /* URouterSmart.swift in Sources */,
 				FEED38301AA2497800BB3C26 /* UNetworkInterface_SimulationBridge.swift in Sources */,
 				FE45B7E41A93492200B82E5E /* AppDelegate.swift in Sources */,
 				FEC6B51E1ACFD56D002B8AD1 /* ConsoleWindowController.swift in Sources */,

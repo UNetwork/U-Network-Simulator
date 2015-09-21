@@ -93,5 +93,98 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "U Network Simulator/NodeMemoryWindowController.swift"
+            timestampString = "464190928.526999"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "NodeMemoryWindowController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_Simulator.NodeMemoryWindowController.memoryArrayToDisplay.getter : Swift.Array&lt;(Swift.String, Swift.String, Swift.String)&gt;"
+                  moduleName = "U Network Simulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20Simulator/NodeMemoryWindowController.swift"
+                  timestampString = "464516753.526097"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_Simulator.NodeMemoryWindowController.memoryArrayToDisplay.setter : Swift.Array&lt;(Swift.String, Swift.String, Swift.String)&gt;"
+                  moduleName = "U Network Simulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20Simulator/NodeMemoryWindowController.swift"
+                  timestampString = "464516753.526292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_Simulator.NodeMemoryWindowController.memoryArrayToDisplay.materializeForSet : Swift.Array&lt;(Swift.String, Swift.String, Swift.String)&gt;"
+                  moduleName = "U Network Simulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20Simulator/NodeMemoryWindowController.swift"
+                  timestampString = "464516753.526464"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_Simulator.NodeMemoryWindowController.init (U_Network_Simulator.NodeMemoryWindowController.Type)(window : Swift.Optional&lt;ObjectiveC.NSWindow&gt;) -&gt; U_Network_Simulator.NodeMemoryWindowController"
+                  moduleName = "U Network Simulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20Simulator/NodeMemoryWindowController.swift"
+                  timestampString = "464516753.526611"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "U_Network_Simulator.NodeMemoryWindowController.init (U_Network_Simulator.NodeMemoryWindowController.Type)(coder : ObjectiveC.NSCoder) -&gt; Swift.Optional&lt;U_Network_Simulator.NodeMemoryWindowController&gt;"
+                  moduleName = "U Network Simulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrzej/Desktop/U%20Project/U%20Network%20Simulator/U%20Network%20Simulator/NodeMemoryWindowController.swift"
+                  timestampString = "464516753.526771"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

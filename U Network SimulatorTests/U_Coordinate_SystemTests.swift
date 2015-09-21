@@ -78,25 +78,25 @@ class U_Coordinate_SystemTests: XCTestCase {
         
         var testVariable2=CoordinatesFloatDegreesAndAltitude(coordinates: testVariable)
         
-        var treeInts = convertFlotingPointCoordinatesToUInt64(testVariable2)
+        let treeInts = convertFlotingPointCoordinatesToUInt64(testVariable2)
         
         XCTAssert(testVariable2.latitude.value == 0, "Initalistaion with proper data failed")
         XCTAssert(testVariable2.longitude.value == 0, "Initalistaion with proper data failed")
         XCTAssert(testVariable2.altitude.value == 0, "Initalistaion with proper data failed")
         
         
-        var properLatitudeFloat:Float64 = pow(2,47)
-        var properLatitudeInt64:UInt64 = UInt64(properLatitudeFloat)
+        let properLatitudeFloat:Float64 = pow(2,47)
+        let properLatitudeInt64:UInt64 = UInt64(properLatitudeFloat)
         
         XCTAssert(treeInts.latitude == properLatitudeInt64, "conversion of latitude to UInt64 failed")
         
-        var properLongitudeFloat:Float64 = pow(2,47)
-        var properLongitudeInt64 = UInt64(properLongitudeFloat)
+        let properLongitudeFloat:Float64 = pow(2,47)
+        let properLongitudeInt64 = UInt64(properLongitudeFloat)
         XCTAssert(treeInts.longitude == properLongitudeInt64, "conversion of longitude to UInt64 failed")
         
         
-        var properAltitudeFloat:Float64 = pow(2,32)*(100000/400100000)
-        var properAltitudeInt64 = UInt64(properAltitudeFloat)
+        let properAltitudeFloat:Float64 = pow(2,32)*(100000/400100000)
+        let properAltitudeInt64 = UInt64(properAltitudeFloat)
         XCTAssert(treeInts.altitude == properAltitudeInt64, "conversion of altitude to UInt64 failed")
         
         
@@ -205,14 +205,14 @@ class U_Coordinate_SystemTests: XCTestCase {
             altint = random64() &  0x00000000ffffffff
             
             
-            var  converted = convertUInt64CoordinatesToFlotingPoint(latint, longint, altint)
+            var  converted = convertUInt64CoordinatesToFlotingPoint(latint, inputLongitude: longint, inputAltitude: altint)
             var reconverted=convertFlotingPointCoordinatesToUInt64(converted)
             XCTAssert(reconverted.latitude > latint - 2 && reconverted.latitude < latint + 2, "Latitude reconversion failed")
             
             XCTAssert(reconverted.longitude > longint - 2   && reconverted.longitude < longint + 2, "Longitude reconversion failed")
             XCTAssert(reconverted.altitude > altint - 2 && reconverted.altitude < altint + 2, "Altitude reconversion failed")
             
-            var converted2=convertUInt64CoordinatesToFlotingPoint(reconverted.latitude, reconverted.longitude, reconverted.altitude)
+            var converted2=convertUInt64CoordinatesToFlotingPoint(reconverted.latitude, inputLongitude: reconverted.longitude, inputAltitude: reconverted.altitude)
             var reconverted2=convertFlotingPointCoordinatesToUInt64(converted2)
             XCTAssert(reconverted2.latitude > latint - 2 && reconverted.latitude < latint + 2, "Latitude reconversion failed")
             XCTAssert(reconverted2.longitude > longint - 2   && reconverted.longitude < longint + 2, "Longitude reconversion failed")
